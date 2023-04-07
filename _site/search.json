@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "Ben J. Brintz\nben.brintz@hsc.utah.edu\nEDUCATION\nPhD in Statistics, Oregon State, Corvallis, OR, March 2018\n- Dissertation: A Normal Approximation to N-Mixture Models with Applications in Large Abundance Estimation and Disease Surveillance\nMS in Statistics, Oregon State, Corvallis, OR, June 2014\n- Conducted Unit/Sub-unit sample size study on second growth forest tree harvest effect on the Oregon Slender Salamander\n- Used simulation and Just Another Gibbs Sampler in R to implement multilevel logistic regression model for estimation and precision analysis across various settings\nBA in Mathematics/Statistics, Grinnell College, Grinnell, IA, May 2010"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "QuartoR enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org.\n\n1 + 1\n\n[1] 2"
+  }
+]
