@@ -1,0 +1,6 @@
+[build]
+command = "npm install -g quarto-cli && quarto render --to=_site"
+publish = "_site"
+
+[build.environment]
+NODE_VERSION = "16"
