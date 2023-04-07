@@ -4,7 +4,7 @@ title: "Ben Brintz"
 
 ## Quarto
 
-QuartoR enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+QuartoRtst enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 ```{r}
 1 + 1
