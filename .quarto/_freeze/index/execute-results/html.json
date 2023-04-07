@@ -1,0 +1,14 @@
+{
+  "hash": "ccdd4fa3ac6948efb7328aca2d03076d",
+  "result": {
+    "markdown": "---\ntitle: \"Ben Brintz\"\n---\n\n\n## Quarto\n\nQuartoR enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
