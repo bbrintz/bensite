@@ -9,4 +9,3 @@ QuartoR enables you to weave together content and executable code into a finishe
 ```{r}
 1 + 1
 ```
-tst
