@@ -4,6 +4,8 @@ project:
 website:
   title: "Ben Brintz"
   navbar:
+    logo: "logo.png"
+    background: "#50C878" 
     left:
       - href: index.qmd
         text: Home
@@ -11,9 +13,10 @@ website:
         text: Publications
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: "sandstone"
+    linkcolor: "#50C878"
     toc: true
+
     
 execute:
   freeze: auto
