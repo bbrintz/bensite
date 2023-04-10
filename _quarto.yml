@@ -7,8 +7,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: cv.qmd
-        text: CV
+      - href: https://scholar.google.com/citations?user=nYA8PAsAAAAJ&hl=en
+        text: Publications
 format:
   html:
     theme: cosmo
