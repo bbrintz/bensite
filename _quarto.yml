@@ -15,7 +15,8 @@ format:
   html:
     theme: "sandstone"
     toc: true
-    css: custom-layout.css
+    css: 
+      - custom-layout.css
     
 
     
