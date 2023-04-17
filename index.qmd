@@ -1,7 +1,10 @@
+
+
 ---
 title: "Welcome!"
 ---
-
+<div class="row">
+  <div class="column">
 ## About Me
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
@@ -12,3 +15,10 @@ Quarto enables you to weave together content and executable code into a finished
 
 ## Section 2
 
+</div>
+
+  <div class="column">
+    ## Column 2
+    This is the content in the second column.
+  </div>
+</div>

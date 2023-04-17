@@ -14,8 +14,9 @@ website:
 format:
   html:
     theme: "sandstone"
-    linkcolor: "#50C878"
     toc: true
+    css: custom-layout.css
+    
 
     
 execute:

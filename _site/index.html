@@ -123,6 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
+<link rel="stylesheet" href="custom-layout.css">
 </head>
 
 <body class="nav-fixed">
@@ -163,14 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#about-me" id="toc-about-me" class="nav-link active" data-scroll-target="#about-me">About Me</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">Section 2</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -192,6 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<div class="row">
+<div class="column">
 <section id="about-me" class="level2">
 <h2 class="anchored" data-anchor-id="about-me">About Me</h2>
 <p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
@@ -204,11 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">Section 2</h2>
-<iframe src="https://brintz.shinyapps.io/app-1/" width="100%" height="600" frameborder="0" scrolling="no">
-</iframe>
-
-
 </section>
+</div>
+<div class="column">
+<pre><code>## Column 2
+This is the content in the second column.</code></pre>
+</div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
