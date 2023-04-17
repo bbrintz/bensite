@@ -4,7 +4,7 @@ project:
 website:
   title: "Ben Brintz"
   navbar:
-    logo: "logo.png"
+    logo: "logo2.png"
     background: "#50C878" 
     left:
       - href: index.qmd
