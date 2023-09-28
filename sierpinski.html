@@ -10,7 +10,7 @@
 <svg id="sierpinski" width="600" height="600" style="border:1px solid black;"></svg>
 
 <script>
-  function drawTriangle(svg, x1, y1, x2, y2, x3, y3, depth) {
+function drawTriangle(svg, x1, y1, x2, y2, x3, y3, depth) {
     if(depth === 0) {
       var triangle = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
       triangle.setAttribute("points", `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
@@ -35,16 +35,37 @@
   var svg = document.getElementById('sierpinski');
   drawTriangle(svg, 50, 550, 550, 550, 300, 50, 5);
 
+  var viewBox = { x: 0, y: 0, width: 600, height: 600 };
+
   svg.addEventListener('wheel', function(e) {
     e.preventDefault();
+    
     var zoomFactor = 1.1;
     var scale = e.deltaY < 0 ? zoomFactor : 1 / zoomFactor;
+    
+    // Get the position of the mouse within the SVG
     var rect = svg.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    svg.setAttribute("viewBox", `${(x - x * scale)} ${(y - y * scale)} ${svg.width.baseVal.value * scale} ${svg.height.baseVal.value * scale}`);
+
+    // Convert mouse position from screen coordinates to viewBox coordinates
+    var svgPoint = svg.createSVGPoint();
+    svgPoint.x = x;
+    svgPoint.y = y;
+    var cursorPoint = svgPoint.matrixTransform(svg.getScreenCTM().inverse());
+    
+    // Update the viewBox values based on the zoom factor and cursor position
+    viewBox.width /= scale;
+    viewBox.height /= scale;
+    viewBox.x = cursorPoint.x - (cursorPoint.x - viewBox.x) / scale;
+    viewBox.y = cursorPoint.y - (cursorPoint.y - viewBox.y) / scale;
+    
+    svg.setAttribute("viewBox", `${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`);
   });
+
 </script>
 
 </body>
 </html>
+
+  
