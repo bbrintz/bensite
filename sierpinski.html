@@ -28,9 +28,9 @@
     var centroidX = (x1 + x2 + x3) / 3;
     var centroidY = (y1 + y2 + y3) / 3;
 
-    // Compute font size based on triangle area
-    var area = getArea(x1, y1, x2, y2, x3, y3);
-    var fontSize = Math.sqrt(area) * 0.05;  // Adjust multiplier to scale font size
+    // Compute the length of one side of the triangle to determine the font size
+    var sideLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    var fontSize = sideLength * 0.095;  // Adjust multiplier to scale font size
 
     // Create a text element to display the triangle number
     var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -41,7 +41,9 @@
     text.setAttribute("dominant-baseline", "middle");
     text.textContent = counter++;  // Increment the counter for the next triangle
     svg.appendChild(text);
-  }
+}
+
+
   var svg = document.getElementById('sierpinski');
   var queue = [{ x1: 50, y1: 550, x2: 550, y2: 550, x3: 300, y3: 50, depth: 5 }];
 
