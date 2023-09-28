@@ -1,9 +1,8 @@
 ---
 ---
 
-## About Me
+## About Me tst
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-```{r, echo=FALSE}
 htmltools::includeHTML("sierpinski.html")
 ```
