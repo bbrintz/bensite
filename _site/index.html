@@ -127,6 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interactive Sierpinski Triangle</title>
+<script src="https://unpkg.com/svg-pan-zoom@3/dist/svg-pan-zoom.min.js"></script>
 
 
 
@@ -158,40 +159,18 @@ function drawTriangle(svg, x1, y1, x2, y2, x3, y3, depth) {
   var svg = document.getElementById('sierpinski');
   drawTriangle(svg, 50, 550, 550, 550, 300, 50, 5);
 
-  var viewBox = { x: 0, y: 0, width: 600, height: 600 };
-
-  svg.addEventListener('wheel', function(e) {
-    e.preventDefault();
-    
-    var zoomFactor = 1.1;
-    var scale = e.deltaY < 0 ? zoomFactor : 1 / zoomFactor;
-    
-    // Get the position of the mouse within the SVG
-    var rect = svg.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
-
-    // Convert mouse position from screen coordinates to viewBox coordinates
-    var svgPoint = svg.createSVGPoint();
-    svgPoint.x = x;
-    svgPoint.y = y;
-    var cursorPoint = svgPoint.matrixTransform(svg.getScreenCTM().inverse());
-    
-    // Update the viewBox values based on the zoom factor and cursor position
-    viewBox.width /= scale;
-    viewBox.height /= scale;
-    viewBox.x = cursorPoint.x - (cursorPoint.x - viewBox.x) / scale;
-    viewBox.y = cursorPoint.y - (cursorPoint.y - viewBox.y) / scale;
-    
-    svg.setAttribute("viewBox", `${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`);
+  // Enable zoom and pan with svg-pan-zoom
+  svgPanZoom('#sierpinski', {
+    zoomEnabled: true,
+    controlIconsEnabled: true,
+    fit: true,
+    center: true,
   });
 
 </script>
 
 
 
-
-  
 </div>
 </div>
 
