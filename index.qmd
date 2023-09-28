@@ -3,35 +3,42 @@
 
 ## About Me
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(grid)
-library(gridExtra)
 
-# Function to draw a triangle
-draw_triangle <- function(x, y, size) {
-  grid.polygon(
-    x = unit(c(x, x + size, x + size/2), "npc"),
-    y = unit(c(y, y, y + size * sqrt(3)/2), "npc"),
-    gp = gpar(fill = "blue")
-  )
-}
-
-# Function to draw a row of triangles
-draw_row <- function(row_num, triangle_size) {
-  num_triangles = row_num * 2 - 1
-  y_offset = row_num * triangle_size * sqrt(3)/2
-  for (i in seq(1, num_triangles)) {
-    x_offset = (i - (num_triangles + 1) / 2) * triangle_size
-    draw_triangle(0.5 + x_offset, y_offset, triangle_size)
+sierpinski <- function(x1, y1, x2, y2, x3, y3, depth) {
+  if(depth == 0) {
+    grid.polygon(x = unit(c(x1, x2, x3), "npc"), 
+                 y = unit(c(y1, y2, y3), "npc"),
+                 gp = gpar(col = "black"))
+    return()
   }
+  
+  # Calculate the midpoints of the sides of the triangle
+  xm1 <- (x1 + x2) / 2
+  ym1 <- (y1 + y2) / 2
+  xm2 <- (x2 + x3) / 2
+  ym2 <- (y2 + y3) / 2
+  xm3 <- (x1 + x3) / 2
+  ym3 <- (y1 + y3) / 2
+  
+  # Recursively draw the three outer triangles
+  sierpinski(x1, y1, xm1, ym1, xm3, ym3, depth - 1)
+  sierpinski(x2, y2, xm1, ym1, xm2, ym2, depth - 1)
+  sierpinski(x3, y3, xm2, ym2, xm3, ym3, depth - 1)
 }
 
-# Define the size of each triangle and the number of rows
-triangle_size = 0.05
-num_rows = 10
+# Define the vertices of the main triangle
+x1 <- 0.05
+y1 <- 0.05
+x2 <- 0.95
+y2 <- 0.05
+x3 <- 0.5
+y3 <- 0.95
 
-# Draw all rows of triangles
-for (row_num in seq(1, num_rows)) {
-  draw_row(row_num, triangle_size)
-}
+# Define the depth of recursion (number of iterations)
+depth <- 10
+
+# Call the function to draw the Sierpinski Triangle
+sierpinski(x1, y1, x2, y2, x3, y3, depth)
 ```
