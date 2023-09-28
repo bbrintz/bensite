@@ -1,10 +1,8 @@
 {
-  "hash": "5321f469cc0821e3755eaf5690c33fbb",
+  "hash": "3d3e21070df6f9c40493cbe0d4368030",
   "result": {
-    "markdown": "---\ntitle: \"Welcometst!\"\n---\n\n<div class=\"row\">\n  <div class=\"column\">\n## About Me\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n\n\n## Section 2\n\n</div>\n\n  <div class=\"column\">\n    ## Column 2\n    This is the content in the second column.\n  </div>\n</div>",
-    "supporting": [
-      "index_files"
-    ],
+    "markdown": "---\ntitle: \"Welcometst2!\"\n---\n\n<div class=\"row\">\n  <div class=\"column\">\n## About Me\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n\n\n## Section 2\n\n</div>\n\n  <div class=\"column\">\n    ## Column 2\n    This is the content in the second column.\n  </div>\n</div>",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
