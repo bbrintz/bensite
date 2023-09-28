@@ -119,20 +119,11 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="about-me" class="level2">
 <h2 class="anchored" data-anchor-id="about-me">About Me</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
-<p>library(ggplot2)</p>
-<p>create_triangle &lt;- function(row) { x &lt;- c(0, 1, 0.5) y &lt;- c(0, 0, sqrt(3)/2)</p>
-<p>df &lt;- data.frame(x, y) gg &lt;- ggplot(df, aes(x, y)) + geom_polygon(fill = “blue”) + coord_fixed() + theme_void() + xlim(c(-0.1, 1.1)) + ylim(c(-0.1, 1.1))</p>
-<p>for(i in seq(1, row-1)) { x_offset &lt;- i/2 y_offset &lt;- i * sqrt(3)/2</p>
-<pre><code>df_upper &lt;- data.frame(x + x_offset, y + y_offset)
-df_lower &lt;- data.frame(x - x_offset, y + y_offset)
-
-gg &lt;- gg + 
-  geom_polygon(data = df_upper, aes(x, y), fill = "blue") +
-  geom_polygon(data = df_lower, aes(x, y), fill = "blue")</code></pre>
-<p>}</p>
-<p>return(gg) }</p>
-<p>create_triangle(10)</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>
