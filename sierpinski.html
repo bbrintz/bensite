@@ -11,47 +11,50 @@
 <svg id="sierpinski" width="600" height="600" style="border:1px solid black;"></svg>
 
 <script>
-  var counter = 1;  // Global counter to keep track of triangle numbers
+  var counter = 1;
 
-  function drawTriangle(svg, x1, y1, x2, y2, x3, y3, depth) {
-    if(depth === 0) {
-      var triangle = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
-      triangle.setAttribute("points", `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
-      triangle.setAttribute("stroke", "black");
-      triangle.setAttribute("fill", "none");
-      svg.appendChild(triangle);
+  function drawTriangle(svg, x1, y1, x2, y2, x3, y3) {
+    var triangle = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
+    triangle.setAttribute("points", `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
+    triangle.setAttribute("stroke", "black");
+    triangle.setAttribute("fill", "none");
+    svg.appendChild(triangle);
 
-      // Compute the centroid of the triangle to position the text
-      var centroidX = (x1 + x2 + x3) / 3;
-      var centroidY = (y1 + y2 + y3) / 3;
+    // Compute the centroid of the triangle to position the text
+    var centroidX = (x1 + x2 + x3) / 3;
+    var centroidY = (y1 + y2 + y3) / 3;
 
-      // Create a text element to display the triangle number
-      var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-      text.setAttribute("x", centroidX);
-      text.setAttribute("y", centroidY);
-      text.setAttribute("font-size", "5");  // Adjusted font size to 5
-      text.setAttribute("text-anchor", "middle");
-      text.setAttribute("dominant-baseline", "middle");
-      text.textContent = counter++;  // Increment the counter for the next triangle
-      svg.appendChild(text);
-      
-      return;
-    }
-
-    var xm1 = (x1 + x2) / 2;
-    var ym1 = (y1 + y2) / 2;
-    var xm2 = (x2 + x3) / 2;
-    var ym2 = (y2 + y3) / 2;
-    var xm3 = (x1 + x3) / 2;
-    var ym3 = (y1 + y3) / 2;
-
-    drawTriangle(svg, x1, y1, xm1, ym1, xm3, ym3, depth - 1);
-    drawTriangle(svg, x2, y2, xm1, ym1, xm2, ym2, depth - 1);
-    drawTriangle(svg, x3, y3, xm2, ym2, xm3, ym3, depth - 1);
+    // Create a text element to display the triangle number
+    var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+    text.setAttribute("x", centroidX);
+    text.setAttribute("y", centroidY);
+    text.setAttribute("font-size", "5");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("dominant-baseline", "middle");
+    text.textContent = counter++;  // Increment the counter for the next triangle
+    svg.appendChild(text);
   }
 
   var svg = document.getElementById('sierpinski');
-  drawTriangle(svg, 50, 550, 550, 550, 300, 50, 5);
+  var queue = [{ x1: 50, y1: 550, x2: 550, y2: 550, x3: 300, y3: 50, depth: 5 }];
+
+  while(queue.length > 0) {
+    var { x1, y1, x2, y2, x3, y3, depth } = queue.shift();
+    drawTriangle(svg, x1, y1, x2, y2, x3, y3);
+
+    if(depth > 0) {
+      var xm1 = (x1 + x2) / 2;
+      var ym1 = (y1 + y2) / 2;
+      var xm2 = (x2 + x3) / 2;
+      var ym2 = (y2 + y3) / 2;
+      var xm3 = (x1 + x3) / 2;
+      var ym3 = (y1 + y3) / 2;
+
+      queue.push({ x1, y1, x2: xm1, y2: ym1, x3: xm3, y3: ym3, depth: depth - 1 });
+      queue.push({ x1: xm1, y1: ym1, x2, y2, x3: xm2, y3: ym2, depth: depth - 1 });
+      queue.push({ x1: xm3, y1: ym3, x2: xm2, y2: ym2, x3, y3, depth: depth - 1 });
+    }
+  }
 
   // Enable zoom and pan with svg-pan-zoom
   svgPanZoom('#sierpinski', {
