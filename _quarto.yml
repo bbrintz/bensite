@@ -5,7 +5,7 @@ website:
   title: "Ben Brintz"
   navbar:
     logo: "logo_Dalle.png"
-    background: "#50C878" 
+    background: "#f2f0ea" #"#50C878" 
     left:
       - href: index.qmd
         text: Home
