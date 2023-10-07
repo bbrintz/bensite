@@ -3,4 +3,4 @@
 
 ## About Me
 
-![My Image](BB_pic.png)
+![](BB_pic.png)
