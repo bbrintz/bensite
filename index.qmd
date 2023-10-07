@@ -3,6 +3,4 @@
 
 ## About Me
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-htmltools::includeHTML("sierpinski.html")
-```
+![My Image](BB_pic.png)

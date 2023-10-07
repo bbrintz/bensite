@@ -1,0 +1,4 @@
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+htmltools::includeHTML("sierpinski.html")
+```

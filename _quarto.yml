@@ -4,14 +4,14 @@ project:
 website:
   title: "Ben Brintz"
   navbar:
-    logo: "logo_Dalle.png"
-    background: "#f2f0ea" #"#50C878" 
+    logo: "logo2.png"
+    background: "#50C878" 
     left:
       - href: index.qmd
         text: Home
       - href: https://scholar.google.com/citations?user=nYA8PAsAAAAJ&hl=en
         text: Publications
-      - href: index.qmd
+      - href: sierpinski.qmd
         text: Sierpinski Triangle
 format:
   html:
