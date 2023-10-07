@@ -7,3 +7,9 @@
   padding: 10px;
 }
 
+body {
+  background-image: url('gen_art.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
