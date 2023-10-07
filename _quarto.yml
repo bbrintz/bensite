@@ -16,7 +16,7 @@ website:
 format:
   html:
     theme: "sandstone"
-    toc: true
+    toc: false
     css: 
       - custom-layout.css
     
@@ -24,3 +24,5 @@ format:
     
 execute:
   freeze: auto
+
+  #quarto render --to all
