@@ -1,5 +1,13 @@
 ---
+format: html
 ---
 
+<style>
+  body {
+  background-image: url("gen_art.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+</style>
 ## About Me
 
