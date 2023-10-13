@@ -4,8 +4,12 @@ project:
 website:
   title: "Ben Brintz"
   navbar:
-    logo: "logo2.png"
-    background: "#50C878" 
+    background-color: "#383838"  # A dark muted gray that will let the artwork shine
+    font:
+      family: "Arial, sans-serif"  # A neutral font that will be easy to read against the dark background
+      color: "#F0F0F0"  # A light gray for good contrast against the dark navbar
+      size: "16px"
+      hover-color: "#DAA520" 
     left:
       - href: index.qmd
         text: Home
@@ -13,6 +17,9 @@ website:
         text: Publications
       - href: sierpinski.qmd
         text: Sierpinski Triangle
+        
+ # A golden color, inspired by some tones in the image
+
 format:
   html:
     theme: "sandstone"

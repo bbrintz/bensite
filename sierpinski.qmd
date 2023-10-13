@@ -1,4 +1,4 @@
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-htmltools::includeHTML("sierpinski.html")
+htmltools::includeHTML("sierpinski_code.html")
 ```

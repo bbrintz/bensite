@@ -7,3 +7,12 @@
   padding: 10px;
 }
 
+.navbar {
+  font-size: 30px;  /* Adjust font size */
+  padding: 30px 0;  /* Adjust padding */
+}
+
+.navbar-brand img {
+    width: auto;   /* Maintain aspect ratio */
+    height: 500px; /* Set to desired height */
+}
