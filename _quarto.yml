@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Ben Brintz"
+  title: "Ben Brintz_tst"
   navbar:
     background-color: "#383838"  # A dark muted gray that will let the artwork shine
     font:
