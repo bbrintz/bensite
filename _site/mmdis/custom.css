@@ -40,3 +40,21 @@
 .reveal .slides .r-hstack {
     margin-bottom: -40px; /* Adjust this value to your liking */
 }
+
+@keyframes zoomInToRightHalf {
+  0% {
+    transform: scale(2) translate(0, 0); /* Start with full image */
+  }
+  30% {
+    transform: scale(2) translate(0, 0); /* Hold full image for 3 seconds */
+  }
+  100% {
+    transform: scale(2.5) translate(0%, 0); /* Zoom to the right half and stop */
+  }
+}
+
+.zoom-effect {
+  animation: zoomInToRightHalf 15s ease-in-out forwards;
+  transform-origin: center;
+  animation-fill-mode: forwards; /* Ensures the animation stops at the last frame */
+}

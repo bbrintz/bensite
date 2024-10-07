@@ -86,3 +86,6 @@ The developer can choose to emphasize one metric over another
 And the choice of metric could be predictive performance or fairness 
 :::
 
+## Full Image with Auto Zoom
+
+<img src="fair_diagram.png" class="zoom-effect" width="100%">
