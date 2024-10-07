@@ -17,7 +17,7 @@ website:
         text: Publications
       - href: sierpinski.qmd
         text: Sierpinski Triangle
-      - href: mmdis.qmd
+      - href: mmdis/mmdis.qmd
         text: PresExample
         
  # A golden color, inspired by some tones in the image
