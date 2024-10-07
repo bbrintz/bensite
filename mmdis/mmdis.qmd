@@ -78,3 +78,11 @@ ylab("Sensitivity") + xlab("Specificity") + theme(aspect.ratio=.75) +
 scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=rev(c(0,.25,.5,.75,1)))
 
 ```
+::: {.fragment .fade-in-then-semi-out}
+The developer can choose to emphasize one metric over another 
+:::
+
+::: {.fragment .fade-right}
+And the choice of metric could be predictive performance or fairness 
+:::
+
