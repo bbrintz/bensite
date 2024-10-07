@@ -43,10 +43,10 @@
 
 @keyframes zoomInToRightHalf {
   0% {
-    transform: scale(2) translate(0, 0); /* Start with full image */
+    transform: scale(1.5) translate(0, 0); /* Start with full image */
   }
-  30% {
-    transform: scale(2) translate(0, 0); /* Hold full image for 3 seconds */
+  50% {
+    transform: scale(1.5) translate(0%, 0); /* Zoom to the right half and stop */
   }
   100% {
     transform: scale(2.5) translate(0%, 0); /* Zoom to the right half and stop */
@@ -54,7 +54,7 @@
 }
 
 .zoom-effect {
-  animation: zoomInToRightHalf 15s ease-in-out forwards;
+  animation: zoomInToRightHalf 10s ease-in-out forwards;
   transform-origin: center;
   animation-fill-mode: forwards; /* Ensures the animation stops at the last frame */
 }
