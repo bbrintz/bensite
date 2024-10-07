@@ -35,3 +35,8 @@
 .reveal .slides section.nopadding {
     padding-top: 0 !important;
   }
+
+
+.reveal .slides .r-hstack {
+    margin-bottom: -30px; /* Adjust this value to your liking */
+}
