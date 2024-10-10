@@ -17,7 +17,7 @@ website:
         text: Publications
       - href: sierpinski.qmd
         text: Sierpinski Triangle
-      - href: mmdis/mmdis.qmd
+      - href: Presentations/Presentations.qmd
         text: Presentations
         
  # A golden color, inspired by some tones in the image
