@@ -16,14 +16,16 @@ format:
 
 
 
-## eGFR Controversy {auto-animate=true auto-animate-easing="ease-in-out"}
+## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out"}
+
+
 ::: {.r-hstack}
   <img src="egfr1.gif" alt="GIF 1" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr2.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr3.gif" alt="GIF 3" style="height:160px; width:auto; object-fit:contain;">
 :::
 
-## eGFR Controversy {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
+## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {.r-hstack}
   <img src="egfr1.gif" alt="GIF 1" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr2.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;">
@@ -35,7 +37,7 @@ format:
   <img src="egfr6.gif" alt="GIF 3" style="height:160px; width:auto; object-fit:contain;">
 :::
 
-## eGFR Controversy {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
+## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {.r-hstack}
   <img src="egfr1.gif" alt="GIF 1" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr2.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;">
