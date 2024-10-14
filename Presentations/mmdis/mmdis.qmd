@@ -91,3 +91,26 @@ And the choice of metric could be predictive performance or fairness
 ## Fairness Diagram of Metrics
 
 <img src="fair_diagram.png" class="zoom-effect" width="100%">
+
+## Some fairness metrics are more well known than others
+
+::: {.fragment  .highlight-current-blue}
+\begin{align*}
+\text{Statistical Parity} &= P(\widehat{Y}=1|A=a) \\
+&= P(\widehat{Y}=1|A=b)
+\end{align*}
+:::
+
+::: {.fragment .highlight-current-blue}
+\begin{align*}
+\text{Equalized Odds} &= P(\widehat{Y}=1|A=a,Y=1) \\
+&= P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}
+:::
+
+::: {.fragment .highlight-current-blue}
+\begin{align*}
+\text{Predictive Parity} &= P(Y=1|\widehat{Y}=1,A=a) \\
+&= P(Y=1|\widehat{Y}=1,A=b)
+\end{align*}
+:::

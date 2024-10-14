@@ -1,6 +1,8 @@
 ---
-title: "Presentations"
+title: "Presentations"   
 format: html
+theme: default
 ---
+
 
 - [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/mmdis.qmd)

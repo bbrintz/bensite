@@ -400,8 +400,29 @@ Performance metrics are a trade-off
 <section id="fairness-diagram-of-metrics" class="slide level2">
 <h2>Fairness Diagram of Metrics</h2>
 
+<img src="fair_diagram.png" class="zoom-effect r-stretch" width="100%"></section>
+<section id="some-fairness-metrics-are-more-well-known-than-others" class="slide level2">
+<h2>Some fairness metrics are more well known than others</h2>
+<div class="fragment highlight-current-blue">
+<p><span class="math display">\[\begin{align*}
+\text{Statistical Parity} &amp;= P(\widehat{Y}=1|A=a) \\
+&amp;= P(\widehat{Y}=1|A=b)
+\end{align*}\]</span></p>
+</div>
+<div class="fragment highlight-current-blue">
+<p><span class="math display">\[\begin{align*}
+\text{Equalized Odds} &amp;= P(\widehat{Y}=1|A=a,Y=1) \\
+&amp;= P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}\]</span></p>
+</div>
+<div class="fragment highlight-current-blue">
+<p><span class="math display">\[\begin{align*}
+\text{Predictive Parity} &amp;= P(Y=1|\widehat{Y}=1,A=a) \\
+&amp;= P(Y=1|\widehat{Y}=1,A=b)
+\end{align*}\]</span></p>
+</div>
 
-<img src="fair_diagram.png" class="zoom-effect r-stretch" width="100%"><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

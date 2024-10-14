@@ -63,6 +63,13 @@
     "text": "Fairness Diagram of Metrics"
   },
   {
+    "objectID": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
+    "href": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "Some fairness metrics are more well known than others",
+    "text": "Some fairness metrics are more well known than others\n\n\\[\\begin{align*}\n\\text{Statistical Parity} &= P(\\widehat{Y}=1|A=a) \\\\\n&= P(\\widehat{Y}=1|A=b)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Equalized Odds} &= P(\\widehat{Y}=1|A=a,Y=1) \\\\\n&= P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Predictive Parity} &= P(Y=1|\\widehat{Y}=1,A=a) \\\\\n&= P(Y=1|\\widehat{Y}=1,A=b)\n\\end{align*}\\]"
+  },
+  {
     "objectID": "cv.html",
     "href": "cv.html",
     "title": "Ben Brintz",
