@@ -43,14 +43,12 @@
 
 @keyframes zoomInToRightHalf {
   0% {
-    transform: scale(1.5) translate(0, 0); /* Start with full image */
-  }
-  50% {
-    transform: scale(1.5) translate(0%, 0); /* Zoom to the right half and stop */
+    transform: scale(1) translate(0,0); /* Start with full image */
   }
   100% {
-    transform: scale(2.5) translate(0%, 0); /* Zoom to the right half and stop */
+    transform: scale(1.55) translate(-15%,-5%); /* Zoom to the right half and stop */
   }
+
 }
 
 .zoom-effect {

@@ -88,12 +88,22 @@ The developer can choose to emphasize one metric over another
 And the choice of metric could be predictive performance or fairness 
 :::
 
-## Fairness Diagram of Metrics
 
+## 
+![](fair_diagram.png)
+
+## 
 <img src="fair_diagram.png" class="zoom-effect" width="100%">
 
-## Some fairness metrics are more well known than others
 
+
+## Some fairness metrics are more well known than others
+<style>
+.math {
+  margin-left: -25px;
+  transform: scale(1);
+}
+</style>
 ::: {.fragment  .highlight-current-blue}
 \begin{align*}
 \text{Statistical Parity} &= P(\widehat{Y}=1|A=a) \\
@@ -112,5 +122,11 @@ And the choice of metric could be predictive performance or fairness
 \begin{align*}
 \text{Predictive Parity} &= P(Y=1|\widehat{Y}=1,A=a) \\
 &= P(Y=1|\widehat{Y}=1,A=b)
+\end{align*}
+:::
+
+::: {.fragment .highlight-current-blue}
+\begin{align*}
+\text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\ &=E(S|Y=1,A=b)
 \end{align*}
 :::
