@@ -81,7 +81,7 @@ scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=rev(c(0,.25,.5,.75,1)))
 
 ```
 ::: {.fragment .fade-in-then-semi-out}
-The developer can choose to emphasize one metric over another 
+The developer of a tool can choose to emphasize one metric over another 
 :::
 
 ::: {.fragment .fade-right}
@@ -89,7 +89,7 @@ And the choice of metric could be predictive performance or fairness
 :::
 
 
-## Some fairness metrics are more well known than others
+## Some fairness metrics are more well known than others {.smaller .scrollable}
 <style>
 .reveal .fragment {
   margin-bottom: 5px; /* Adjust this value to reduce space between fragments */
@@ -130,7 +130,7 @@ library(fairness)
 head(compas)
 ```
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" visibility="uncounted"}
+## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" visibility="uncounted" .scrollable}
 ```{r, include=T}
 library(fairness)
 library(tidyverse)
@@ -140,7 +140,7 @@ head(compas) %>% knitr::kable() %>% kableExtra::kable_styling(full_width = F) #%
   #kableExtra::row_spec(1:6,font_size='medium')
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true"}
+## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable}
 ```r
 a=compas %>% group_by(Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -151,7 +151,7 @@ c=compas %>% filter(predicted==1) %>% group_by(Female) %>% summarize('Predictive
 d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize('Balance for the Positive Class'=mean(probability))
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true"}
+## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable}
 ```{r,include=T,echo=T}
 a=compas %>% group_by(Sex=Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -167,5 +167,5 @@ cbind(a,b,c,d) %>% knitr::kable()
 ## But choosing a metric is hard {auto-animate="true"}
 ![](fair_diagram.png)
 
-## But choosing a metric is hard {auto-animate="true" visibility="uncounted"}
+## {auto-animate="true" visibility="uncounted"}
 <img src="fair_diagram.png" class="zoom-effect" width="100%">
