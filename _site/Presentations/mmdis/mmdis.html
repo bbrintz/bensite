@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
@@ -321,6 +386,8 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -397,20 +464,11 @@ Performance metrics are a trade-off
 <p>And the choice of metric could be predictive performance or fairness</p>
 </div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-
-<img data-src="fair_diagram.png" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-
-<img src="fair_diagram.png" class="zoom-effect r-stretch" width="100%"></section>
 <section id="some-fairness-metrics-are-more-well-known-than-others" class="slide level2">
 <h2>Some fairness metrics are more well known than others</h2>
 <style>
-.math {
-  margin-left: -25px;
-  transform: scale(1);
+.reveal .fragment {
+  margin-bottom: 5px; /* Adjust this value to reduce space between fragments */
 }
 </style>
 <div class="fragment highlight-current-blue">
@@ -436,8 +494,183 @@ Performance metrics are a trade-off
 \text{Balance for the Positive Class} &amp;= E(S|Y=1,A=a) \\ &amp;=E(S|Y=1,A=b)
 \end{align*}\]</span></p>
 </div>
+</section>
+<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a></a><span class="fu">library</span>(fairness)</span>
+<span id="cb1-2" class="hljs-ln-code"><a></a></span>
+<span id="cb1-3" class="hljs-ln-code"><a></a><span class="fu">head</span>(compas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-1" class="slide level2" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table class="table" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Two_yr_Recidivism</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Number_of_Priors</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Age_Above_FourtyFive</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Age_Below_TwentyFive</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Female</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Misdemeanor</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">ethnicity</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">probability</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">predicted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">-0.6843578</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">0.3151557</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: right;">2.2668817</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Caucasian</td>
+<td style="text-align: right;">0.8854616</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">-0.6843578</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">Caucasian</td>
+<td style="text-align: right;">0.2552680</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">-0.6843578</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">African_American</td>
+<td style="text-align: right;">0.4173908</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">-0.6843578</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">Hispanic</td>
+<td style="text-align: right;">0.3200982</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">-0.6843578</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">0.3151557</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 
-<div class="quarto-auto-generated-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="if-you-can-code-measuring-fairness-is-easy" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb2-2" class="hljs-ln-code"><a></a></span>
+<span id="cb2-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb2-4" class="hljs-ln-code"><a></a></span>
+<span id="cb2-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))</span>
+<span id="cb2-6" class="hljs-ln-code"><a></a></span>
+<span id="cb2-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="if-you-can-code-measuring-fairness-is-easy-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Sex=</span>Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb3-2" class="hljs-ln-code"><a></a></span>
+<span id="cb3-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb3-4" class="hljs-ln-code"><a></a></span>
+<span id="cb3-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb3-6" class="hljs-ln-code"><a></a></span>
+<span id="cb3-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb3-8" class="hljs-ln-code"><a></a></span>
+<span id="cb3-9" class="hljs-ln-code"><a></a><span class="fu">cbind</span>(a,b,c,d) <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="width:100%;">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 21%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sex</th>
+<th style="text-align: right;">Statistical Parity</th>
+<th style="text-align: right;">Equalized Odds</th>
+<th style="text-align: right;">Predictive Parity</th>
+<th style="text-align: right;">Balance for the Positive Class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0.5069041</td>
+<td style="text-align: right;">0.6794658</td>
+<td style="text-align: right;">0.6427161</td>
+<td style="text-align: right;">0.5902647</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">0.2221277</td>
+<td style="text-align: right;">0.3753027</td>
+<td style="text-align: right;">0.5938697</td>
+<td style="text-align: right;">0.4567142</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="but-choosing-a-metric-is-hard" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">But choosing a metric is hard</h2>
+
+<img data-src="fair_diagram.png" class="r-stretch"></section>
+<section id="but-choosing-a-metric-is-hard-1" class="slide level2" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">But choosing a metric is hard</h2>
+
+
+<img src="fair_diagram.png" class="zoom-effect r-stretch" width="100%"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

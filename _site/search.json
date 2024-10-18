@@ -63,6 +63,48 @@
     "text": "Some fairness metrics are more well known than others\n\n\n\\[\\begin{align*}\n\\text{Statistical Parity} &= P(\\widehat{Y}=1|A=a) \\\\\n&= P(\\widehat{Y}=1|A=b)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Equalized Odds} &= P(\\widehat{Y}=1|A=a,Y=1) \\\\\n&= P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Predictive Parity} &= P(Y=1|\\widehat{Y}=1,A=a) \\\\\n&= P(Y=1|\\widehat{Y}=1,A=b)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\\\ &=E(S|Y=1,A=b)\n\\end{align*}\\]"
   },
   {
+    "objectID": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction",
+    "href": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction",
+    "text": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction\nlibrary(fairness)\n\nhead(compas)"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-1",
+    "href": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-1",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction",
+    "text": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction\n\n\n\n\n\n\n\nTwo_yr_Recidivism\nNumber_of_Priors\nAge_Above_FourtyFive\nAge_Below_TwentyFive\nFemale\nMisdemeanor\nethnicity\nprobability\npredicted\n\n\n\n\n4\nno\n-0.6843578\nno\nno\nMale\nyes\nOther\n0.3151557\n0\n\n\n5\nyes\n2.2668817\nno\nno\nMale\nno\nCaucasian\n0.8854616\n1\n\n\n7\nno\n-0.6843578\nno\nno\nFemale\nyes\nCaucasian\n0.2552680\n0\n\n\n11\nno\n-0.6843578\nno\nno\nMale\nno\nAfrican_American\n0.4173908\n0\n\n\n14\nno\n-0.6843578\nno\nno\nMale\nyes\nHispanic\n0.3200982\n0\n\n\n24\nno\n-0.6843578\nno\nno\nMale\nyes\nOther\n0.3151557\n0"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy",
+    "href": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "If you can code, measuring fairness is easy",
+    "text": "If you can code, measuring fairness is easy\na=compas %&gt;% group_by(Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted))\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy-1",
+    "href": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy-1",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "If you can code, measuring fairness is easy",
+    "text": "If you can code, measuring fairness is easy\n\na=compas %&gt;% group_by(Sex=Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted)) %&gt;% select(-Female)\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))%&gt;% select(-Female)\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))%&gt;% select(-Female)\n\ncbind(a,b,c,d) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\nSex\nStatistical Parity\nEqualized Odds\nPredictive Parity\nBalance for the Positive Class\n\n\n\n\nMale\n0.5069041\n0.6794658\n0.6427161\n0.5902647\n\n\nFemale\n0.2221277\n0.3753027\n0.5938697\n0.4567142"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-is-hard",
+    "href": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-is-hard",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "But choosing a metric is hard",
+    "text": "But choosing a metric is hard"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-is-hard-1",
+    "href": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-is-hard-1",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "But choosing a metric is hard",
+    "text": "But choosing a metric is hard"
+  },
+  {
     "objectID": "cv.html",
     "href": "cv.html",
     "title": "Ben Brintz",

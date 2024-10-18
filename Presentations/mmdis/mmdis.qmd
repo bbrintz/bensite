@@ -89,21 +89,13 @@ And the choice of metric could be predictive performance or fairness
 :::
 
 
-## 
-![](fair_diagram.png)
-
-## 
-<img src="fair_diagram.png" class="zoom-effect" width="100%">
-
-
-
 ## Some fairness metrics are more well known than others
 <style>
-.math {
-  margin-left: -25px;
-  transform: scale(1);
+.reveal .fragment {
+  margin-bottom: 5px; /* Adjust this value to reduce space between fragments */
 }
 </style>
+
 ::: {.fragment  .highlight-current-blue}
 \begin{align*}
 \text{Statistical Parity} &= P(\widehat{Y}=1|A=a) \\
@@ -130,3 +122,50 @@ And the choice of metric could be predictive performance or fairness
 \text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\ &=E(S|Y=1,A=b)
 \end{align*}
 :::
+
+## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true"}
+```r
+library(fairness)
+
+head(compas)
+```
+
+## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" visibility="uncounted"}
+```{r, include=T}
+library(fairness)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+head(compas) %>% knitr::kable() %>% kableExtra::kable_styling(full_width = F) #%>% 
+  #kableExtra::row_spec(1:6,font_size='medium')
+```
+
+## If you can code, measuring fairness is easy {auto-animate="true"}
+```r
+a=compas %>% group_by(Female) %>% summarize(`Statistical Parity`=mean(predicted))
+
+b=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize(`Equalized Odds`=mean(predicted))
+
+c=compas %>% filter(predicted==1) %>% group_by(Female) %>% summarize('Predictive Parity'=mean(Two_yr_Recidivism=="yes"))
+
+d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize('Balance for the Positive Class'=mean(probability))
+```
+
+## If you can code, measuring fairness is easy {auto-animate="true"}
+```{r,include=T,echo=T}
+a=compas %>% group_by(Sex=Female) %>% summarize(`Statistical Parity`=mean(predicted))
+
+b=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize(`Equalized Odds`=mean(predicted)) %>% select(-Female)
+
+c=compas %>% filter(predicted==1) %>% group_by(Female) %>% summarize('Predictive Parity'=mean(Two_yr_Recidivism=="yes"))%>% select(-Female)
+
+d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize('Balance for the Positive Class'=mean(probability))%>% select(-Female)
+
+cbind(a,b,c,d) %>% knitr::kable() 
+```
+
+## But choosing a metric is hard {auto-animate="true"}
+![](fair_diagram.png)
+
+## But choosing a metric is hard {auto-animate="true" visibility="uncounted"}
+<img src="fair_diagram.png" class="zoom-effect" width="100%">
