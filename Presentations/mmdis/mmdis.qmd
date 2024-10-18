@@ -54,7 +54,8 @@ format:
   <img src="egfr9.gif" alt="GIF 3" style="height:160px; width:auto; object-fit:contain;">
 :::
 
-## The NKF and ASN have since recommended removal of race from the equation
+##
+### The NKF and ASN have since recommended removal of race from the equation
 ::: {.incremental}
 
 - Acknowledged race is a social concept 
@@ -88,8 +89,8 @@ The developer of a tool can choose to emphasize one metric over another
 And the choice of metric could be predictive performance or fairness 
 :::
 
-
-## Some fairness metrics are more well known than others {.smaller .scrollable}
+##
+### Some fairness metrics are more well known than others {.smaller .scrollable}
 <style>
 .reveal .fragment {
   margin-bottom: 5px; /* Adjust this value to reduce space between fragments */
@@ -123,14 +124,15 @@ And the choice of metric could be predictive performance or fairness
 \end{align*}
 :::
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true"}
+## {auto-animate="true"}
+### The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction 
 ```r
 library(fairness)
 
 head(compas)
 ```
-
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" visibility="uncounted" .scrollable}
+##{auto-animate="true" visibility="uncounted" .scrollable}
+### The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction 
 ```{r, include=T}
 library(fairness)
 library(tidyverse)
