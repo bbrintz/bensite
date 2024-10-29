@@ -116,21 +116,21 @@
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover\n(lambda = 0.50)"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover\n(lambda = 0.80)"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover\n(lambda = 1.00)"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",

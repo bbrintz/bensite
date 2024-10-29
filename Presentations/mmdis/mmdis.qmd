@@ -202,7 +202,7 @@ N=1000
 data=data.frame(Sex=factor(rbinom(N,1,.5))) %>% mutate(Age=rnorm(N,mean=50+as.numeric(Sex==1)*10,sd=5 + 1*as.numeric(Sex==1)))
 data %>%
 ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()
+theme_bw() + ggtitle("Before Disparate Impact Remover") + scale_fill_viridis_d(begin=.25,end=.75)
 
 ```
 :::
@@ -214,14 +214,12 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover 
 
-(lambda = 0.50)
-
 ::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
 features_to_transform="Age",lambda=.5) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()
+theme_bw()+ ggtitle("lambda=0.5")+ scale_fill_viridis_d(begin=.25,end=.75)
 
 ```
 :::
@@ -233,15 +231,13 @@ Pre-Processing
 This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
-
-(lambda = 0.80)
 
 ::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
 features_to_transform="Age",lambda=.8) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()
+theme_bw()+ ggtitle("lambda=0.8")+ scale_fill_viridis_d(begin=.25,end=.75)
 
 ```
 :::
@@ -254,14 +250,12 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-(lambda = 1.00)
-
 ::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
 features_to_transform="Age",lambda=1) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()
+theme_bw()+ ggtitle("lambda=1")+ scale_fill_viridis_d(begin=.25,end=.75)
 
 ```
 :::
