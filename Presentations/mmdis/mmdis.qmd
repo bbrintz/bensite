@@ -194,7 +194,7 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: 250px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 ```{r,include=T,echo=F}
 library(fairmodels)
 
@@ -216,7 +216,7 @@ One example is using the Disparate Impact Remover
 
 (lambda = 0.50)
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: 250px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -236,7 +236,7 @@ One example is using the Disparate Impact Remover
 
 (lambda = 0.80)
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: 250px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -256,7 +256,7 @@ One example is using the Disparate Impact Remover
 
 (lambda = 1.00)
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: 250px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
