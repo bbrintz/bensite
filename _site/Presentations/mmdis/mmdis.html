@@ -386,8 +386,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -471,159 +469,79 @@ Performance metrics are a trade-off
   margin-bottom: 5px; /* Adjust this value to reduce space between fragments */
 }
 </style>
-<div class="fragment highlight-current-blue">
+<div class="fragment" data-fragment-index="1">
 <p><span class="math display">\[\begin{align*}
 \text{Statistical Parity} &amp;= P(\widehat{Y}=1|A=a) \\
 &amp;= P(\widehat{Y}=1|A=b)
 \end{align*}\]</span></p>
 </div>
-<div class="fragment highlight-current-blue">
+<div class="fragment" data-fragment-index="2">
 <p><span class="math display">\[\begin{align*}
 \text{Equalized Odds} &amp;= P(\widehat{Y}=1|A=a,Y=1) \\
 &amp;= P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
 </div>
-<div class="fragment highlight-current-blue">
+<div class="fragment" data-fragment-index="3">
 <p><span class="math display">\[\begin{align*}
 \text{Predictive Parity} &amp;= P(Y=1|\widehat{Y}=1,A=a) \\
 &amp;= P(Y=1|\widehat{Y}=1,A=b)
 \end{align*}\]</span></p>
 </div>
-<div class="fragment highlight-current-blue">
+<div class="fragment" data-fragment-index="4">
 <p><span class="math display">\[\begin{align*}
 \text{Balance for the Positive Class} &amp;= E(S|Y=1,A=a) \\ &amp;=E(S|Y=1,A=b)
 \end{align*}\]</span></p>
 </div>
 </section>
-<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction" class="slide level2 scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction</h2>
+<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a></a><span class="fu">library</span>(fairness)</span>
 <span id="cb1-2" class="hljs-ln-code"><a></a></span>
 <span id="cb1-3" class="hljs-ln-code"><a></a><span class="fu">head</span>(compas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-1" class="slide level2 scrollable" data-auto-animate="true" data-visibility="uncounted">
-<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction</h2>
+<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm-1" class="slide level2 scrollable" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<table class="table" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Two_yr_Recidivism</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Number_of_Priors</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Age_Above_FourtyFive</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Age_Below_TwentyFive</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Female</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Misdemeanor</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">ethnicity</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">probability</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">predicted</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: right;">-0.6843578</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Male</td>
-<td style="text-align: left;">yes</td>
-<td style="text-align: left;">Other</td>
-<td style="text-align: right;">0.3151557</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">yes</td>
-<td style="text-align: right;">2.2668817</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Male</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Caucasian</td>
-<td style="text-align: right;">0.8854616</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: right;">-0.6843578</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Female</td>
-<td style="text-align: left;">yes</td>
-<td style="text-align: left;">Caucasian</td>
-<td style="text-align: right;">0.2552680</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">11</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: right;">-0.6843578</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Male</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">African_American</td>
-<td style="text-align: right;">0.4173908</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">14</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: right;">-0.6843578</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Male</td>
-<td style="text-align: left;">yes</td>
-<td style="text-align: left;">Hispanic</td>
-<td style="text-align: right;">0.3200982</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: right;">-0.6843578</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">no</td>
-<td style="text-align: left;">Male</td>
-<td style="text-align: left;">yes</td>
-<td style="text-align: left;">Other</td>
-<td style="text-align: right;">0.3151557</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Two_yr_Recidivism Number_of_Priors Age_Above_FourtyFive Age_Below_TwentyFive
+4                 no       -0.6843578                   no                   no
+5                yes        2.2668817                   no                   no
+7                 no       -0.6843578                   no                   no
+11                no       -0.6843578                   no                   no
+14                no       -0.6843578                   no                   no
+24                no       -0.6843578                   no                   no
+   Female Misdemeanor        ethnicity probability predicted
+4    Male         yes            Other   0.3151557         0
+5    Male          no        Caucasian   0.8854616         1
+7  Female         yes        Caucasian   0.2552680         0
+11   Male          no African_American   0.4173908         0
+14   Male         yes         Hispanic   0.3200982         0
+24   Male         yes            Other   0.3151557         0</code></pre>
 </div>
 </div>
 </section>
 <section id="if-you-can-code-measuring-fairness-is-easy" class="slide level2 smaller scrollable" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
-<span id="cb2-2" class="hljs-ln-code"><a></a></span>
-<span id="cb2-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
-<span id="cb2-4" class="hljs-ln-code"><a></a></span>
-<span id="cb2-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))</span>
-<span id="cb2-6" class="hljs-ln-code"><a></a></span>
-<span id="cb2-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb3-2" class="hljs-ln-code"><a></a></span>
+<span id="cb3-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb3-4" class="hljs-ln-code"><a></a></span>
+<span id="cb3-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))</span>
+<span id="cb3-6" class="hljs-ln-code"><a></a></span>
+<span id="cb3-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="if-you-can-code-measuring-fairness-is-easy-1" class="slide level2 smaller scrollable" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Sex=</span>Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
-<span id="cb3-2" class="hljs-ln-code"><a></a></span>
-<span id="cb3-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
-<span id="cb3-4" class="hljs-ln-code"><a></a></span>
-<span id="cb3-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
-<span id="cb3-6" class="hljs-ln-code"><a></a></span>
-<span id="cb3-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
-<span id="cb3-8" class="hljs-ln-code"><a></a></span>
-<span id="cb3-9" class="hljs-ln-code"><a></a><span class="fu">cbind</span>(a,b,c,d) <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Sex=</span>Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
+<span id="cb4-2" class="hljs-ln-code"><a></a></span>
+<span id="cb4-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb4-4" class="hljs-ln-code"><a></a></span>
+<span id="cb4-5" class="hljs-ln-code"><a></a>c<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(predicted<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Predictive Parity'</span><span class="ot">=</span><span class="fu">mean</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb4-6" class="hljs-ln-code"><a></a></span>
+<span id="cb4-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Female)</span>
+<span id="cb4-8" class="hljs-ln-code"><a></a></span>
+<span id="cb4-9" class="hljs-ln-code"><a></a><span class="fu">cbind</span>(a,b,c,d) <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table style="width:100%;">
 <colgroup>
@@ -662,15 +580,180 @@ Performance metrics are a trade-off
 </div>
 </div>
 </section>
-<section id="but-choosing-a-metric-is-hard" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">But choosing a metric is hard</h2>
+<section id="but-choosing-a-metric-can-be-complicated" class="slide level2">
+<h2>But choosing a metric can be complicated</h2>
 
 <img data-src="fair_diagram.png" class="r-stretch"></section>
-<section id="section" class="slide level2" data-auto-animate="true" data-visibility="uncounted">
-<h2 data-id="quarto-animate-title"></h2>
 
+<section id="many-sources-of-bias-can-cause-the-disparate-impact-observed-by-these-metrics" class="slide level2 smaller scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Many sources of bias can cause the disparate impact observed by these metrics</h2>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 28%">
+<col style="width: 25%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Data Bias</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Main Cause</strong></th>
+<th><strong>Impact on AI</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span style="color:red"><strong>Selection Bias</strong></span></td>
+<td>Certain groups are over/under-represented</td>
+<td>Biased data collection process</td>
+<td>AI models may not be representative, leading to biased decisions</td>
+</tr>
+<tr class="even">
+<td><span style="color:red"><strong>Sampling Bias</strong></span></td>
+<td>Data are not a random sample</td>
+<td>Incomplete or biased sampling</td>
+<td>Poor generalization to new data, biased predictions</td>
+</tr>
+<tr class="odd">
+<td><strong>Labeling Bias</strong></td>
+<td>Errors in data labeling</td>
+<td>Annotators’ biases or societal stereotypes</td>
+<td>AI models learn and perpetuate biased labels</td>
+</tr>
+<tr class="even">
+<td><strong>Temporal Bias</strong></td>
+<td>Historical societal biases</td>
+<td>Outdated data reflecting past biases</td>
+<td>AI models may reinforce outdated biases</td>
+</tr>
+<tr class="odd">
+<td><strong>Aggregation Bias</strong></td>
+<td>Data combined from multiple sources</td>
+<td>Differing biases in individual sources</td>
+<td>AI models may produce skewed outcomes due to biased data</td>
+</tr>
+<tr class="even">
+<td><span style="color:red"><strong>Historical Bias</strong></span></td>
+<td>Training data reflect past societal biases</td>
+<td>Biases inherited from historical societal discrimination</td>
+<td>Model may perpetuate historical biases and reinforce inequalities</td>
+</tr>
+<tr class="odd">
+<td><strong>Measurement Bias</strong></td>
+<td>Errors or inaccuracies in data collection</td>
+<td>Data collection process introduces measurement errors</td>
+<td>Model learns from flawed data, leading to inaccurate predictions</td>
+</tr>
+<tr class="even">
+<td><strong>Confirmation Bias</strong></td>
+<td>Focus on specific patterns or attributes</td>
+<td>Data collection or algorithmic bias towards specific features</td>
+<td>Model may overlook relevant information and reinforce existing biases</td>
+</tr>
+<tr class="odd">
+<td><strong>Proxy Bias</strong></td>
+<td>Indirect reliance on sensitive attributes</td>
+<td>Use of correlated proxy variables instead of sensitive attributes</td>
+<td>Model indirectly relies on sensitive information, leading to biased outcomes</td>
+</tr>
+<tr class="even">
+<td><strong>Cultural Bias</strong></td>
+<td>Data reflect cultural norms and values</td>
+<td>Cultural influences in data collection or annotation</td>
+<td>Model predictions may be biased for individuals from different cultural backgrounds</td>
+</tr>
+<tr class="odd">
+<td><strong>Under-representation Bias</strong></td>
+<td>Certain groups are significantly underrepresented</td>
+<td>Low representation of certain groups in the training data</td>
+<td>Model performance is poorer for underrepresented groups</td>
+</tr>
+<tr class="even">
+<td><strong>Homophily Bias</strong></td>
+<td>Predictions based on similarity between instances</td>
+<td>Tendency of models to make predictions based on similarity</td>
+<td>Model may reinforce existing patterns and exacerbate biases</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<p>Pre-Processing</p>
+<p>This is done by modifying your training data before model training</p>
+<p>One example is using the Disparate Impact Remover</p>
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0" style="background: #00000; width: 750px; height: 500px; margin: 10px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<p>Pre-Processing</p>
+<p>This is done by modifying your training data before model training</p>
+<p>One example is using the Disparate Impact Remover</p>
+<p>(lambda = 0.50)</p>
+<div data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<p>Pre-Processing</p>
+<p>This is done by modifying your training data before model training</p>
+<p>One example is using the Disparate Impact Remover</p>
+<p>(lambda = 0.80)</p>
+<div data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<p>Pre-Processing</p>
+<p>This is done by modifying your training data before model training</p>
+<p>One example is using the Disparate Impact Remover</p>
+<p>(lambda = 1.00)</p>
+<div data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<p>Post-Processing</p>
 
-<img src="fair_diagram.png" class="zoom-effect r-stretch" width="100%"><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

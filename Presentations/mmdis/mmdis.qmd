@@ -5,7 +5,6 @@ institute: "Division of Epidemiology"
 format: 
   revealjs:
     revealjs-plugins: 
-        -plugin
     theme: white
     incremental: true
     slideNumber: true  # Slide numbers (optional)
@@ -96,47 +95,48 @@ And the choice of metric could be predictive performance or fairness
 }
 </style>
 
-::: {.fragment  .highlight-current-blue}
+
+::: {.fragment  fragment-index=1}
 \begin{align*}
 \text{Statistical Parity} &= P(\widehat{Y}=1|A=a) \\
 &= P(\widehat{Y}=1|A=b)
 \end{align*}
 :::
 
-::: {.fragment .highlight-current-blue}
+::: {.fragment fragment-index=2}
 \begin{align*}
 \text{Equalized Odds} &= P(\widehat{Y}=1|A=a,Y=1) \\
 &= P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
 :::
 
-::: {.fragment .highlight-current-blue}
+::: {.fragment fragment-index=3}
 \begin{align*}
 \text{Predictive Parity} &= P(Y=1|\widehat{Y}=1,A=a) \\
 &= P(Y=1|\widehat{Y}=1,A=b)
 \end{align*}
 :::
 
-::: {.fragment .highlight-current-blue}
+::: {.fragment fragment-index=4}
 \begin{align*}
 \text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\ &=E(S|Y=1,A=b)
 \end{align*}
 :::
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" .scrollable}
+## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm) {auto-animate="true" .scrollable}
 ```r
 library(fairness)
 
 head(compas)
 ```
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction {auto-animate="true" visibility="uncounted" .scrollable}
+## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm) {auto-animate="true" visibility="uncounted" .scrollable}
 ```{r, include=T}
 library(fairness)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
-head(compas) %>% knitr::kable() %>% kableExtra::kable_styling(full_width = F) #%>% 
+head(compas) #%>% knitr::kable()# %>% kableExtra::kable_styling(full_width = F) #%>% 
   #kableExtra::row_spec(1:6,font_size='medium')
 ```
 
@@ -164,8 +164,104 @@ d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize
 cbind(a,b,c,d) %>% knitr::kable() 
 ```
 
-## But choosing a metric is hard {auto-animate="true"}
+## But choosing a metric can be complicated 
 ![](fair_diagram.png)
 
-## {auto-animate="true" visibility="uncounted"}
+## {auto-animate="true" visibility="hidden"}
 <img src="fair_diagram.png" class="zoom-effect" width="100%">
+
+## Many sources of bias can cause the disparate impact observed by these metrics   {auto-animate="true" .smaller .scrollable}
+| **Data Bias**            | **Definition**                                                   | **Main Cause**                                           | **Impact on AI**                                                                 |
+|--------------------------|------------------------------------------------------------------|----------------------------------------------------------|----------------------------------------------------------------------------------|
+| <span style="color:red">**Selection Bias**</span>       | Certain groups are over/under-represented                        | Biased data collection process                           | AI models may not be representative, leading to biased decisions                 |
+| <span style="color:red">**Sampling Bias**</span>       | Data are not a random sample                                     | Incomplete or biased sampling                            | Poor generalization to new data, biased predictions                              |
+| **Labeling Bias**        | Errors in data labeling                                         | Annotators' biases or societal stereotypes               | AI models learn and perpetuate biased labels                                     |
+| **Temporal Bias**        | Historical societal biases                                      | Outdated data reflecting past biases                     | AI models may reinforce outdated biases                                          |
+| **Aggregation Bias**     | Data combined from multiple sources                             | Differing biases in individual sources                   | AI models may produce skewed outcomes due to biased data                         |
+| <span style="color:red">**Historical Bias**</span>      | Training data reflect past societal biases                      | Biases inherited from historical societal discrimination | Model may perpetuate historical biases and reinforce inequalities                |
+| **Measurement Bias**     | Errors or inaccuracies in data collection                       | Data collection process introduces measurement errors    | Model learns from flawed data, leading to inaccurate predictions                 |
+| **Confirmation Bias**    | Focus on specific patterns or attributes                        | Data collection or algorithmic bias towards specific features | Model may overlook relevant information and reinforce existing biases       |
+| **Proxy Bias**           | Indirect reliance on sensitive attributes                       | Use of correlated proxy variables instead of sensitive attributes | Model indirectly relies on sensitive information, leading to biased outcomes |
+| **Cultural Bias**        | Data reflect cultural norms and values                          | Cultural influences in data collection or annotation     | Model predictions may be biased for individuals from different cultural backgrounds |
+| **Under-representation Bias** | Certain groups are significantly underrepresented         | Low representation of certain groups in the training data | Model performance is poorer for underrepresented groups                        |
+| **Homophily Bias**       | Predictions based on similarity between instances               | Tendency of models to make predictions based on similarity | Model may reinforce existing patterns and exacerbate biases                   |
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+Pre-Processing
+
+This is done by modifying your training data before model training
+
+One example is using the Disparate Impact Remover
+
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 750px; height: 500px; margin: 10px;"}
+```{r,include=T,echo=F}
+library(fairmodels)
+
+N=1000
+data=data.frame(Sex=factor(rbinom(N,1,.5))) %>% mutate(Age=rnorm(N,mean=50+as.numeric(Sex==1)*10,sd=5 + 1*as.numeric(Sex==1)))
+data %>%
+ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
+theme_bw()
+
+```
+:::
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+Pre-Processing
+
+This is done by modifying your training data before model training
+
+One example is using the Disparate Impact Remover 
+
+(lambda = 0.50)
+
+::: {data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;"}
+
+```{r,include=T,echo=F}
+disparate_impact_remover(data=data,protected=data$Sex,
+features_to_transform="Age",lambda=.5) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
+theme_bw()
+
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+Pre-Processing
+
+This is done by modifying your training data before model training
+
+One example is using the Disparate Impact Remover
+
+(lambda = 0.80)
+
+::: {data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;"}
+
+```{r,include=T,echo=F}
+disparate_impact_remover(data=data,protected=data$Sex,
+features_to_transform="Age",lambda=.8) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
+theme_bw()
+
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+Pre-Processing
+
+This is done by modifying your training data before model training
+
+One example is using the Disparate Impact Remover
+
+(lambda = 1.00)
+
+::: {data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 500px; margin: 10px;"}
+
+```{r,include=T,echo=F}
+disparate_impact_remover(data=data,protected=data$Sex,
+features_to_transform="Age",lambda=1) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
+theme_bw()
+
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+Post-Processing
+
