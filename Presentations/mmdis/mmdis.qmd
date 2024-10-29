@@ -187,13 +187,14 @@ cbind(a,b,c,d) %>% knitr::kable()
 | **Homophily Bias**       | Predictions based on similarity between instances               | Tendency of models to make predictions based on similarity | Model may reinforce existing patterns and exacerbate biases                   |
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
 Pre-Processing
-
+:::
 This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 750px; height: 4500px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 750px; height: 450px; margin: 50px;"}
 ```{r,include=T,echo=F}
 library(fairmodels)
 
@@ -206,8 +207,9 @@ theme_bw()
 ```
 :::
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
 Pre-Processing
-
+:::
 This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover 
@@ -225,8 +227,9 @@ theme_bw()
 :::
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
 Pre-Processing
-
+:::
 This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
@@ -244,15 +247,16 @@ theme_bw()
 :::
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
 Pre-Processing
-
+:::
 This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
 (lambda = 1.00)
 
-::: {data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 4500px; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" style="background: #00000; width: 750px; height: 450px; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -263,5 +267,7 @@ theme_bw()
 :::
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
 Post-Processing
+:::
 
