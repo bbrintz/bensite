@@ -137,7 +137,14 @@
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nOther examples include methods such as reweighting or re-sampling.\nThese methods primarily address bias in the training data but could be used to target certain fairness metrics."
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
+    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "How can we mitigate the effect of biases on decision making tools?",
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nIn-Processing\n\n\nAdversarial Training and Debiasing Algorithms\nSimultaneously trains a classifier and an adversary model in parallel\nClassifier is trained to predict the task at hand\nAdversary is trained to exploit a bias.\nWhen trained against one another, one can develop a fair model that is simultaneously a strong classifier. \\[L = L_{\\text{task}} - \\lambda L_{\\text{adv}}\\]"
   },
   {
     "objectID": "cv.html",

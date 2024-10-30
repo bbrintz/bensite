@@ -685,7 +685,7 @@ Performance metrics are a trade-off
 </div>
 <p>This is done by modifying your training data before model training</p>
 <p>One example is using the Disparate Impact Remover</p>
-<div data-id="Disparate Impact Remover" data-auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;">
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -704,7 +704,7 @@ Performance metrics are a trade-off
 </div>
 <p>This is done by modifying your training data before model training</p>
 <p>One example is using the Disparate Impact Remover</p>
-<div data-id="Disparate Impact Remover" data-auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;">
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -723,7 +723,7 @@ Performance metrics are a trade-off
 </div>
 <p>This is done by modifying your training data before model training</p>
 <p>One example is using the Disparate Impact Remover</p>
-<div data-id="Disparate Impact Remover" data-auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;">
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -742,7 +742,7 @@ Performance metrics are a trade-off
 </div>
 <p>This is done by modifying your training data before model training</p>
 <p>One example is using the Disparate Impact Remover</p>
-<div data-id="Disparate Impact Remover" data-auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;">
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -757,8 +757,23 @@ Performance metrics are a trade-off
 <section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
-<p>Post-Processing</p>
+<p>Pre-Processing</p>
 </div>
+<p>Other examples include methods such as reweighting or re-sampling.</p>
+<p>These methods primarily address bias in the training data but could be used to target certain fairness metrics.</p>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>In-Processing</p>
+</div>
+<ul>
+<li class="fragment">Adversarial Training and Debiasing Algorithms</li>
+<li class="fragment">Simultaneously trains a classifier and an adversary model in parallel</li>
+<li class="fragment">Classifier is trained to predict the task at hand</li>
+<li class="fragment">Adversary is trained to exploit a bias.</li>
+<li class="fragment">When trained against one another, one can develop a fair model that is simultaneously a strong classifier. <span class="math display">\[L = L_{\text{task}} - \lambda L_{\text{adv}}\]</span></li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

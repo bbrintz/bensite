@@ -194,7 +194,7 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 ```{r,include=T,echo=F}
 library(fairmodels)
 
@@ -214,7 +214,7 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover 
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -232,7 +232,7 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -250,7 +250,7 @@ This is done by modifying your training data before model training
 
 One example is using the Disparate Impact Remover
 
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
+::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
 disparate_impact_remover(data=data,protected=data$Sex,
@@ -262,6 +262,19 @@ theme_bw()+ ggtitle("lambda=1")+ scale_fill_viridis_d(begin=.25,end=.75)
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
 ::: {style="text-decoration: underline;"}
-Post-Processing
+Pre-Processing
 :::
+Other examples include methods such as reweighting or re-sampling. 
 
+These methods primarily address bias in the training data but could be used to target certain fairness metrics. 
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
+In-Processing
+:::
+- Adversarial Training and Debiasing Algorithms
+- Simultaneously trains a classifier and an adversary model in parallel
+- Classifier is trained to predict the task at hand
+- Adversary is trained to exploit a bias. 
+- When trained against one another, one can develop a fair model that is simultaneously a strong classifier. 
+$$L = L_{\text{task}} - \lambda L_{\text{adv}}$$
