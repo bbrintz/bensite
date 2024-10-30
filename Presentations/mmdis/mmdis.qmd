@@ -272,9 +272,13 @@ These methods primarily address bias in the training data but could be used to t
 ::: {style="text-decoration: underline;"}
 In-Processing
 :::
-- Adversarial Training and Debiasing Algorithms
-- Simultaneously trains a classifier and an adversary model in parallel
+- Adversarial Training trains a classifier and an adversary model in parallel
 - Classifier is trained to predict the task at hand
 - Adversary is trained to exploit a bias. 
 - When trained against one another, one can develop a fair model that is simultaneously a strong classifier. 
 $$L = L_{\text{task}} - \lambda L_{\text{adv}}$$
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
+Post-Processing
+:::
