@@ -435,7 +435,6 @@ Ben Brintz
 </section>
 <section id="the-nkf-and-asn-have-since-recommended-removal-of-race-from-the-equation" class="slide level2">
 <h2>The NKF and ASN have since recommended removal of race from the equation</h2>
-<div>
 <ul>
 <li class="fragment">Acknowledged race is a social concept
 <ul>
@@ -444,7 +443,6 @@ Ben Brintz
 </ul></li>
 <li class="fragment">Does removal of race reduce performance of the decision-making tool?</li>
 </ul>
-</div>
 <div class="fragment fade-up">
 <p>It depends on how you’re measuring performance</p>
 </div>
@@ -530,7 +528,7 @@ Performance metrics are a trade-off
 <span id="cb3-6" class="hljs-ln-code"><a></a></span>
 <span id="cb3-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="if-you-can-code-measuring-fairness-is-easy-1" class="slide level2 smaller scrollable" data-auto-animate="true">
+<section id="if-you-can-code-measuring-fairness-is-easy-1" class="slide level2 smaller scrollable" data-auto-animate="true" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Sex=</span>Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
@@ -690,25 +688,6 @@ Performance metrics are a trade-off
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
-<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
-<div style="text-decoration: underline;">
-<p>Pre-Processing</p>
-</div>
-<p>This is done by modifying your training data before model training</p>
-<p>One example is using the Disparate Impact Remover</p>
-<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </figure>
 </div>
@@ -716,7 +695,7 @@ Performance metrics are a trade-off
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
@@ -735,7 +714,7 @@ Performance metrics are a trade-off
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
@@ -754,16 +733,35 @@ Performance metrics are a trade-off
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>Pre-Processing</p>
+</div>
+<p>This is done by modifying your training data before model training</p>
+<p>One example is using the Disparate Impact Remover</p>
+<div data-id="Disparate Impact Remover" data-auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2">
+<h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
 </div>
 <p>Other examples include methods such as reweighting or re-sampling.</p>
 <p>These methods primarily address bias in the training data but could be used to target certain fairness metrics.</p>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
-<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5" class="slide level2">
+<h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>In-Processing</p>
 </div>
@@ -774,11 +772,77 @@ Performance metrics are a trade-off
 <li class="fragment">When trained against one another, one can develop a fair model that is simultaneously a strong classifier. <span class="math display">\[L = L_{\text{task}} - \lambda L_{\text{adv}}\]</span></li>
 </ul>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6" class="slide level2" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Post-Processing</p>
 </div>
+<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}\]</span></p>
+<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7" class="slide level2" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>Post-Processing</p>
+</div>
+<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}\]</span></p>
+<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>Post-Processing</p>
+</div>
+<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}\]</span></p>
+<div data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="mmdis_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>Post-Processing</p>
+</div>
+<p>And other approaches:</p>
+<ul>
+<li class="fragment">Calibration Post-Processing</li>
+<li class="fragment">Reject Option Classification (abstain in high fairness concern cases)</li>
+<li class="fragment">Equalized Odds Post-Processing (Adjust model predictions to ensure EO)</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

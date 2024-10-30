@@ -18,6 +18,10 @@
   font-size: 1.5em; /* Adjust this value to your desired size */
 }
 
+.reveal .slides section {
+  --auto-animate-duration: 2s; /* Adjust this value to control the animation duration */
+}
+
 /* Adjust author and affiliation font */
 .reveal .author, .reveal .institute {
   font-family: 'Arial', sans-serif;

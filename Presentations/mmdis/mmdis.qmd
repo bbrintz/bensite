@@ -54,13 +54,13 @@ format:
 :::
 
 ## The NKF and ASN have since recommended removal of race from the equation
-::: {.incremental}
+
 
 - Acknowledged race is a social concept 
     - i.e., it's a system to classify individuals rather than reflect biology
     - I have heard the biology is more regional than racial 
 -  Does removal of race reduce performance of the decision-making tool?
-:::
+
 
 
 ::: {.fragment .fade-up}
@@ -140,7 +140,16 @@ head(compas) #%>% knitr::kable()# %>% kableExtra::kable_styling(full_width = F) 
   #kableExtra::row_spec(1:6,font_size='medium')
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable}
+```{r, include=F}
+library(fairness)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+c2=compas #%>% knitr::kable()# %>% kableExtra::kable_styling(full_width = F) #%>% 
+  #kableExtra::row_spec(1:6,font_size='medium')
+```
+
+## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable }
 ```r
 a=compas %>% group_by(Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -151,7 +160,7 @@ c=compas %>% filter(predicted==1) %>% group_by(Female) %>% summarize('Predictive
 d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize('Balance for the Positive Class'=mean(probability))
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable}
+## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable visibility="uncounted"}
 ```{r,include=T,echo=T}
 a=compas %>% group_by(Sex=Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -206,7 +215,7 @@ theme_bw() + ggtitle("Before Disparate Impact Remover") + scale_fill_viridis_d(b
 
 ```
 :::
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {style="text-decoration: underline;"}
 Pre-Processing
 :::
@@ -224,7 +233,7 @@ theme_bw()+ ggtitle("lambda=0.5")+ scale_fill_viridis_d(begin=.25,end=.75)
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {style="text-decoration: underline;"}
 Pre-Processing
 :::
@@ -242,7 +251,7 @@ theme_bw()+ ggtitle("lambda=0.8")+ scale_fill_viridis_d(begin=.25,end=.75)
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {style="text-decoration: underline;"}
 Pre-Processing
 :::
@@ -260,7 +269,7 @@ theme_bw()+ ggtitle("lambda=1")+ scale_fill_viridis_d(begin=.25,end=.75)
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? 
 ::: {style="text-decoration: underline;"}
 Pre-Processing
 :::
@@ -268,7 +277,7 @@ Other examples include methods such as reweighting or re-sampling.
 
 These methods primarily address bias in the training data but could be used to target certain fairness metrics. 
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? 
 ::: {style="text-decoration: underline;"}
 In-Processing
 :::
@@ -278,7 +287,178 @@ In-Processing
 - When trained against one another, one can develop a fair model that is simultaneously a strong classifier. 
 $$L = L_{\text{task}} - \lambda L_{\text{adv}}$$
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out"}
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
+Threshold Optimization for Equalized Odds
+\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}
+
+::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+
+```{r,include=T,echo=F,cache=TRUE}
+
+library(pROC)
+rocs=roc(c2$Two_yr_Recidivism,c2$probability)
+
+
+
+  data.frame(
+    Sp = rocs$specificities,
+    Y = rocs$sensitivities,
+    Threshold = rocs$thresholds
+  ) %>%
+  ggplot(aes(x = 1 - Sp, y = Y)) +
+  geom_line() +
+  geom_abline(color = "grey") +
+  theme_bw() +
+  ylab("Sensitivity") +
+  xlab("Specificity") +
+  theme(aspect.ratio = 0.75) +
+  scale_x_continuous(
+    breaks = c(0, 0.25, 0.5, 0.75, 1),
+    labels = rev(c(0, 0.25, 0.5, 0.75, 1))
+  ) +
+  geom_vline(
+    aes(xintercept = 1-.699),
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    aes(yintercept = .634),
+    linetype = "dashed"
+  ) +
+  scale_color_viridis_d(begin = 0.25, end = 0.75) + ggtitle("Threshold = 0.50")
+
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out" visibility="uncounted"}
+::: {style="text-decoration: underline;"}
+Post-Processing
+:::
+Threshold Optimization for Equalized Odds
+\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}
+
+::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+
+```{r,include=T,echo=F,cache=TRUE}
+
+library(pROC)
+rocs=c2 %>% split(.$Female) %>% purrr::map(function(x) roc(x$Two_yr_Recidivism,x$probability))  
+
+vline_data <- data.frame(
+  xintercept = c(1 - 0.679, 1 - 0.3753),
+  Sex = c("Male", "Female")
+)
+
+# Data frame for horizontal dashed lines
+hline_data <- data.frame(
+  yintercept = c(0.652, 0.85),
+  Sex = c("Male", "Female")
+)
+
+map2_df(rocs, c("Male", "Female"), function(x, y) {
+  data.frame(
+    Sp = x$specificities,
+    Y = x$sensitivities,
+    Sex = y,
+    Threshold = x$thresholds
+  )
+}) %>%
+  ggplot(aes(x = 1 - Sp, y = Y, color = Sex, group = Sex)) +
+  geom_line() +
+  geom_abline(color = "grey") +
+  theme_bw() +
+  ylab("Sensitivity") +
+  xlab("Specificity") +
+  theme(aspect.ratio = 0.75) +
+  scale_x_continuous(
+    breaks = c(0, 0.25, 0.5, 0.75, 1),
+    labels = rev(c(0, 0.25, 0.5, 0.75, 1))
+  ) +
+  geom_vline(
+    data = vline_data,
+    aes(xintercept = xintercept, color = Sex),
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    data = hline_data,
+    aes(yintercept = yintercept, color = Sex),
+    linetype = "dashed"
+  ) +
+  scale_color_viridis_d(begin = 0.25, end = 0.75) + ggtitle("Threshold = 0.50")
+
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true  auto-animate-easing="ease-in-out" visibility="uncounted"}
+::: {style="text-decoration: underline;"}
+Post-Processing
+:::
+Threshold Optimization for Equalized Odds
+\begin{align*}
+P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
+\end{align*}
+
+::: {data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+```{r,include=T,echo=F,cache=TRUE}
+library(pROC)
+rocs=c2 %>% split(.$Female) %>% purrr::map(function(x) roc(x$Two_yr_Recidivism,x$probability))  
+
+vline_data <- data.frame(
+  xintercept = c(1 - 0.391, 1 - 0.3753),
+  Sex = c("Male", "Female")
+)
+
+# Data frame for horizontal dashed lines
+hline_data <- data.frame(
+  yintercept = c(0.851, 0.85),
+  Sex = c("Male", "Female")
+)
+
+map2_df(rocs, c("Male", "Female"), function(x, y) {
+  data.frame(
+    Sp = x$specificities,
+    Y = x$sensitivities,
+    Sex = y,
+    Threshold = x$thresholds
+  )
+}) %>%
+  ggplot(aes(x = 1 - Sp, y = Y, color = Sex, group = Sex)) +
+  geom_line() +
+  geom_abline(color = "grey") +
+  theme_bw() +
+  ylab("Sensitivity") +
+  xlab("Specificity") +
+  theme(aspect.ratio = 0.75) +
+  scale_x_continuous(
+    breaks = c(0, 0.25, 0.5, 0.75, 1),
+    labels = rev(c(0, 0.25, 0.5, 0.75, 1))
+  ) +
+  geom_vline(
+    data = vline_data,
+    aes(xintercept = xintercept, color = Sex),
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    data = hline_data,
+    aes(yintercept = yintercept, color = Sex),
+    linetype = "dashed"
+  ) +
+  scale_color_viridis_d(begin = 0.25, end = 0.75) + ggtitle("Female Threshold = 0.50, Male Threshold = 0.40")
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true  auto-animate-easing="ease-in-out"}
+::: {style="text-decoration: underline;"}
+Post-Processing
+:::
+And other approaches: 
+
+- Calibration Post-Processing
+- Reject Option Classification (abstain in high fairness concern cases)
+- Equalized Odds Post-Processing (Adjust model predictions to ensure EO)
