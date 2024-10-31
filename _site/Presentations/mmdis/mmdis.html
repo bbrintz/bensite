@@ -780,7 +780,7 @@ Performance metrics are a trade-off
 <p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
-<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -800,7 +800,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
-<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -820,7 +820,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
-<div data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 5px;">
+<div data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 1px;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -843,6 +843,51 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <li class="fragment">Reject Option Classification (abstain in high fairness concern cases)</li>
 <li class="fragment">Equalized Odds Post-Processing (Adjust model predictions to ensure EO)</li>
 </ul>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10" class="slide level2">
+<h2>How can we mitigate the effect of biases on decision making tools?</h2>
+<div style="text-decoration: underline;">
+<p>Regularization-Based</p>
+</div>
+<div class="fragment" width="450" height="300" data-index="1">
+<ul>
+<li class="fragment">Tries to minimize the negative log likelihood of the model</li>
+<li class="fragment">But also includes a penalty enforcing a concept of fairness</li>
+</ul>
+</div>
+<div class="fragment" width="450" height="300" data-index="2">
+<p>E.g. take a logistic regression model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>log_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, X, Y) {</span>
+<span id="cb5-2"><a></a>  logit <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(X) <span class="sc">%*%</span> beta</span>
+<span id="cb5-3"><a></a>  p <span class="ot">&lt;-</span> <span class="fu">plogis</span>(logit)</span>
+<span id="cb5-4"><a></a>  logLL<span class="ot">=</span><span class="sc">-</span>(<span class="fu">sum</span>(Y <span class="sc">*</span> <span class="fu">log</span>(p) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> Y) <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p)))</span>
+<span id="cb5-5"><a></a>  logLL</span>
+<span id="cb5-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-.no-incremental-.visibilityuncounted" class="slide level2">
+<h2>How can we mitigate the effect of biases on decision making tools? {.no-incremental .visibility=“uncounted”}</h2>
+<div style="text-decoration: underline;">
+<p>Regularization-Based</p>
+</div>
+<ul>
+<li class="fragment">Tries to minimize the negative log likelihood of the model</li>
+<li class="fragment">But also includes a penalty enforcing a concept of fairness</li>
+</ul>
+<p>E.g. take a logistic regression model and add a penalty term</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>log_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, X, Y,A,<span class="at">lam1=</span><span class="dv">1</span>) {</span>
+<span id="cb6-2"><a></a>  logit <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(X) <span class="sc">%*%</span> beta</span>
+<span id="cb6-3"><a></a>  p <span class="ot">&lt;-</span> <span class="fu">plogis</span>(logit)</span>
+<span id="cb6-4"><a></a>  pA1<span class="ot">=</span>p[<span class="fu">which</span>(A<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> Y<span class="sc">==</span><span class="dv">1</span>)]</span>
+<span id="cb6-5"><a></a>  pA0<span class="ot">=</span>p[<span class="fu">which</span>(A<span class="sc">==</span><span class="dv">0</span> <span class="sc">&amp;</span> Y<span class="sc">==</span><span class="dv">1</span>)]</span>
+<span id="cb6-6"><a></a>  pen1<span class="ot">=</span><span class="fu">abs</span>(<span class="fu">mean</span>(pA1)<span class="sc">-</span><span class="fu">mean</span>(pA0))</span>
+<span id="cb6-7"><a></a>  logLL<span class="ot">=</span><span class="sc">-</span>(<span class="fu">sum</span>(Y <span class="sc">*</span> <span class="fu">log</span>(p) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> Y) <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p))) <span class="sc">+</span> lam1<span class="sc">*</span><span class="fu">log</span>(pen1)</span>
+<span id="cb6-8"><a></a>  logLL</span>
+<span id="cb6-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -877,9 +922,9 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease",
-'autoAnimateDuration': 1,
-'autoAnimateUnmatched': true,
+'autoAnimateEasing': "ease-in-out",
+'autoAnimateDuration': 2,
+'autoAnimateUnmatched': false,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  

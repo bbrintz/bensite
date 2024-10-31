@@ -4,6 +4,9 @@ author: "Ben Brintz"
 institute: "Division of Epidemiology"
 format: 
   revealjs:
+    auto-animate-easing: ease-in-out
+    auto-animate-unmatched: false
+    auto-animate-duration: 2
     revealjs-plugins: 
     theme: white
     incremental: true
@@ -76,8 +79,8 @@ out=aSAH %>% filter(gender=="Female") %>% roc(outcome,s100b,plot=F,smooth=T)
 data.frame(x=out$specificities,y=out$sensitivities) %>%
 ggplot(aes(x=1-x,y=y)) + geom_line() + geom_abline(color="grey") + theme_bw() +
 ylab("Sensitivity") + xlab("Specificity") + theme(aspect.ratio=.75) +
-scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=rev(c(0,.25,.5,.75,1)))
-
+scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=rev(c(0,.25,.5,.75,1))) + 
+ggtitle("ROC Curve")
 ```
 ::: {.fragment .fade-in-then-semi-out}
 The developer of a tool can choose to emphasize one metric over another 
@@ -296,7 +299,7 @@ Threshold Optimization for Equalized Odds
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
 
-::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;"}
 
 ```{r,include=T,echo=F,cache=TRUE}
 
@@ -343,7 +346,7 @@ Threshold Optimization for Equalized Odds
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
 
-::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+::: {data-id="ROC" auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;"}
 
 ```{r,include=T,echo=F,cache=TRUE}
 
@@ -404,7 +407,7 @@ Threshold Optimization for Equalized Odds
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
 
-::: {data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 5px;"}
+::: {data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 1px;"}
 ```{r,include=T,echo=F,cache=TRUE}
 library(pROC)
 rocs=c2 %>% split(.$Female) %>% purrr::map(function(x) roc(x$Two_yr_Recidivism,x$probability))  
@@ -462,3 +465,46 @@ And other approaches:
 - Calibration Post-Processing
 - Reject Option Classification (abstain in high fairness concern cases)
 - Equalized Odds Post-Processing (Adjust model predictions to ensure EO)
+
+## How can we mitigate the effect of biases on decision making tools? 
+::: {style="text-decoration: underline;"}
+Regularization-Based
+:::
+::: {.fragment width="450" height="300" index="1"}
+- Tries to minimize the negative log likelihood of the model 
+- But also includes a penalty enforcing a concept of fairness 
+:::
+::: {.fragment width="450" height="300" index="2"}
+
+E.g. take a logistic regression model
+
+```{r, include=T,echo=T}
+log_likelihood <- function(beta, X, Y) {
+  logit <- as.matrix(X) %*% beta
+  p <- plogis(logit)
+  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p)))
+  logLL
+}
+```
+:::
+
+## How can we mitigate the effect of biases on decision making tools? {.no-incremental .visibility="uncounted"}
+::: {style="text-decoration: underline;"}
+Regularization-Based
+:::
+- Tries to minimize the negative log likelihood of the model 
+- But also includes a penalty enforcing a concept of fairness 
+
+E.g. take a logistic regression model and add a penalty term 
+
+```{r, include=T,echo=T}
+log_likelihood <- function(beta, X, Y,A,lam1=1) {
+  logit <- as.matrix(X) %*% beta
+  p <- plogis(logit)
+  pA1=p[which(A==1 & Y==1)]
+  pA0=p[which(A==0 & Y==1)]
+  pen1=abs(mean(pA1)-mean(pA0))
+  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1)
+  logLL
+}
+```
