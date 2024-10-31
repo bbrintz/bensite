@@ -182,11 +182,18 @@
     "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\n\n\nE.g. take a logistic regression model\n\nlog_likelihood &lt;- function(beta, X, Y) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p)))\n  logLL\n}"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-.no-incremental-.visibilityuncounted",
-    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-.no-incremental-.visibilityuncounted",
+    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-11",
+    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-11",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "How can we mitigate the effect of biases on decision making tools? {.no-incremental .visibility=“uncounted”}",
-    "text": "How can we mitigate the effect of biases on decision making tools? {.no-incremental .visibility=“uncounted”}\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==1 & Y==1)]\n  pA0=p[which(A==0 & Y==1)]\n  pen1=abs(mean(pA1)-mean(pA0))\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1)\n  logLL\n}"
+    "section": "How can we mitigate the effect of biases on decision making tools?",
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==1 & Y==1)]\n  pA0=p[which(A==0 & Y==1)]\n  pen1=abs(mean(pA1)-mean(pA0))\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1)\n  logLL\n}"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#section-1",
+    "href": "Presentations/mmdis/mmdis.html#section-1",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "",
+    "text": "Questions?"
   },
   {
     "objectID": "cv.html",

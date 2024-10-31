@@ -488,7 +488,7 @@ log_likelihood <- function(beta, X, Y) {
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {.no-incremental .visibility="uncounted"}
+## How can we mitigate the effect of biases on decision making tools? {visibility="uncounted"}
 ::: {style="text-decoration: underline;"}
 Regularization-Based
 :::
@@ -508,3 +508,8 @@ log_likelihood <- function(beta, X, Y,A,lam1=1) {
   logLL
 }
 ```
+
+## {auto-animate="true"}
+::: {.fragment .fade-up .highlight-current-red}
+Questions?
+:::
