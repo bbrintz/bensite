@@ -840,14 +840,14 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 </ul>
 <p>E.g. take a logistic regression model and add a penalty term</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>log_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, X, Y,A,<span class="at">lam1=</span><span class="dv">1</span>) {</span>
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="|4,5,6,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>log_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, X, Y,A,<span class="at">lam1=</span><span class="dv">1</span>) {</span>
 <span id="cb6-2"><a></a>  logit <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(X) <span class="sc">%*%</span> beta</span>
 <span id="cb6-3"><a></a>  p <span class="ot">&lt;-</span> <span class="fu">plogis</span>(logit)</span>
 <span id="cb6-4"><a></a>  pA1<span class="ot">=</span>p[<span class="fu">which</span>(A<span class="sc">==</span><span class="st">"F"</span> <span class="sc">&amp;</span> Y<span class="sc">==</span><span class="dv">1</span>)] <span class="co"># probability of being positive given A="F"</span></span>
 <span id="cb6-5"><a></a>  pA0<span class="ot">=</span>p[<span class="fu">which</span>(A<span class="sc">==</span><span class="st">"M"</span> <span class="sc">&amp;</span> Y<span class="sc">==</span><span class="dv">1</span>)] <span class="co"># probability of being positive given A="M"</span></span>
 <span id="cb6-6"><a></a>  pen1<span class="ot">=</span><span class="fu">abs</span>(<span class="fu">mean</span>(pA1)<span class="sc">-</span><span class="fu">mean</span>(pA0)) <span class="co"># How different are the probabilities on average? </span></span>
-<span id="cb6-7"><a></a>  logLL<span class="ot">=</span><span class="sc">-</span>(<span class="fu">sum</span>(Y <span class="sc">*</span> <span class="fu">log</span>(p) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> Y) <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p))) <span class="sc">+</span> lam1<span class="sc">*</span><span class="fu">log</span>(pen1) <span class="co"># Add the penalty term</span></span>
-<span id="cb6-8"><a></a>  logLL</span>
+<span id="cb6-7"><a></a>  logLL<span class="ot">=</span><span class="sc">-</span>(<span class="fu">sum</span>(Y <span class="sc">*</span> <span class="fu">log</span>(p) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> Y) <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p))) <span class="co"># Add the penalty term</span></span>
+<span id="cb6-8"><a></a>  logLL <span class="sc">+</span> lam1<span class="sc">*</span><span class="fu">log</span>(pen1) </span>
 <span id="cb6-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>

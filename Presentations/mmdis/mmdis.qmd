@@ -464,7 +464,11 @@ Regularization-Based
 
 E.g. take a logistic regression model
 
-```{r, include=T,echo=T}
+```{r}
+#| label: negll1
+#| echo: true
+#| cache: true
+
 log_likelihood <- function(beta, X, Y) {
   logit <- as.matrix(X) %*% beta
   p <- plogis(logit)
@@ -483,15 +487,19 @@ Regularization-Based
 
 E.g. take a logistic regression model and add a penalty term 
 
-```{r, include=T,echo=T}
+```{r}
+#| label: negll2
+#| echo: true
+#| cache: true
+#| code-line-numbers: "|4,5,6,8"
 log_likelihood <- function(beta, X, Y,A,lam1=1) {
   logit <- as.matrix(X) %*% beta
   p <- plogis(logit)
   pA1=p[which(A=="F" & Y==1)] # probability of being positive given A="F"
   pA0=p[which(A=="M" & Y==1)] # probability of being positive given A="M"
   pen1=abs(mean(pA1)-mean(pA0)) # How different are the probabilities on average? 
-  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1) # Add the penalty term
-  logLL
+  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Add the penalty term
+  logLL + lam1*log(pen1) 
 }
 ```
 
