@@ -211,7 +211,7 @@ One example is using the Disparate Impact Remover
 library(fairmodels)
 
 N=1000
-data=data.frame(Sex=factor(rbinom(N,1,.5))) %>% mutate(Age=rnorm(N,mean=50+as.numeric(Sex==1)*10,sd=5 + 1*as.numeric(Sex==1)))
+data=data.frame(Sex=factor(rbinom(N,1,.5))) %>% mutate(Age=rnorm(N,mean=50+as.numeric(Sex==1)*10,sd=5 + 1*as.numeric(Sex==1)),Time=1)
 data %>%
 ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
 theme_bw() + ggtitle("Before Disparate Impact Remover") + scale_fill_viridis_d(begin=.25,end=.75)
@@ -229,48 +229,26 @@ One example is using the Disparate Impact Remover
 ::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
 
 ```{r,include=T,echo=F}
+library(gganimate)
+data2=rbind(data %>% mutate(lambda=0),disparate_impact_remover(data=data,protected=data$Sex,
+features_to_transform="Age",lambda=.5) %>% mutate(Time=2,lambda=.5),
 disparate_impact_remover(data=data,protected=data$Sex,
-features_to_transform="Age",lambda=.5) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()+ ggtitle("lambda=0.5")+ scale_fill_viridis_d(begin=.25,end=.75)
+features_to_transform="Age",lambda=.8) %>% mutate(Time=3,lambda=.8),
+disparate_impact_remover(data=data,protected=data$Sex,
+features_to_transform="Age",lambda=1) %>% mutate(Time=4,lambda=1))
 
+p=data2 %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
+geom_text(aes(x=42,y=.075,label=paste0("lambda: ",round(lambda,2))),size=10) +
+theme_bw()+  scale_fill_viridis_d(begin=.25,end=.75) + 
+transition_states(Time,transition_length=4, state_length=1)
+
+anim=animate(p,nframes = 100, fps = 10)
+#animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
+
+anim
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
-::: {style="text-decoration: underline;"}
-Pre-Processing
-:::
-This is done by modifying your training data before model training
-
-One example is using the Disparate Impact Remover
-
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
-
-```{r,include=T,echo=F}
-disparate_impact_remover(data=data,protected=data$Sex,
-features_to_transform="Age",lambda=.8) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()+ ggtitle("lambda=0.8")+ scale_fill_viridis_d(begin=.25,end=.75)
-
-```
-:::
-
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
-::: {style="text-decoration: underline;"}
-Pre-Processing
-:::
-This is done by modifying your training data before model training
-
-One example is using the Disparate Impact Remover
-
-::: {data-id="Disparate Impact Remover" auto-animate-delay="0.5" style="background: #00000; width: 500px; height: auto; margin: 50px;"}
-
-```{r,include=T,echo=F}
-disparate_impact_remover(data=data,protected=data$Sex,
-features_to_transform="Age",lambda=1) %>% ggplot(aes(x=Age,group=Sex,fill=Sex)) + geom_density(alpha=.25) + 
-theme_bw()+ ggtitle("lambda=1")+ scale_fill_viridis_d(begin=.25,end=.75)
-
-```
-:::
 
 ## How can we mitigate the effect of biases on decision making tools? 
 ::: {style="text-decoration: underline;"}
@@ -290,7 +268,7 @@ In-Processing
 - When trained against one another, one can develop a fair model that is simultaneously a strong classifier. 
 $$L = L_{\text{task}} - \lambda L_{\text{adv}}$$
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out" .smaller}
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
@@ -337,7 +315,7 @@ rocs=roc(c2$Two_yr_Recidivism,c2$probability)
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out" visibility="uncounted"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-duration="3" auto-animate-easing="ease-in-out" visibility="uncounted" .smaller}
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
@@ -398,7 +376,7 @@ map2_df(rocs, c("Male", "Female"), function(x, y) {
 ```
 :::
 
-## How can we mitigate the effect of biases on decision making tools? {auto-animate=true  auto-animate-easing="ease-in-out" visibility="uncounted"}
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true  auto-animate-easing="ease-in-out" visibility="uncounted" .smaller}
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
@@ -413,17 +391,18 @@ library(pROC)
 rocs=c2 %>% split(.$Female) %>% purrr::map(function(x) roc(x$Two_yr_Recidivism,x$probability))  
 
 vline_data <- data.frame(
-  xintercept = c(1 - 0.391, 1 - 0.3753),
-  Sex = c("Male", "Female")
+  xintercept =  c(1 - 0.679, 1 - 0.3753,1 - 0.391, 1 - 0.3753),
+  Sex = c("Male", "Female","Male","Female"),
+  Time = c(1,1,2,2)
 )
 
 # Data frame for horizontal dashed lines
 hline_data <- data.frame(
-  yintercept = c(0.851, 0.85),
-  Sex = c("Male", "Female")
+  yintercept = c(0.652, 0.85,0.851, 0.85),
+  Sex = c("Male", "Female","Male","Female"),
+  Time = c(1,1,2,2)
 )
-
-map2_df(rocs, c("Male", "Female"), function(x, y) {
+p=map2_df(rocs, c("Male", "Female"), function(x, y) {
   data.frame(
     Sp = x$specificities,
     Y = x$sensitivities,
@@ -452,7 +431,14 @@ map2_df(rocs, c("Male", "Female"), function(x, y) {
     aes(yintercept = yintercept, color = Sex),
     linetype = "dashed"
   ) +
-  scale_color_viridis_d(begin = 0.25, end = 0.75) + ggtitle("Female Threshold = 0.50, Male Threshold = 0.40")
+  scale_color_viridis_d(begin = 0.25, end = 0.75) + ggtitle("Female Threshold = 0.50, Male Threshold = 0.40") +
+  transition_states(Time,transition_length=2, state_length=1)
+
+anim=animate(p,nframes = 100, fps = 10)
+#animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
+
+anim
+
 ```
 :::
 
@@ -482,7 +468,7 @@ E.g. take a logistic regression model
 log_likelihood <- function(beta, X, Y) {
   logit <- as.matrix(X) %*% beta
   p <- plogis(logit)
-  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p)))
+  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Negative Log-likehood
   logLL
 }
 ```
@@ -501,10 +487,10 @@ E.g. take a logistic regression model and add a penalty term
 log_likelihood <- function(beta, X, Y,A,lam1=1) {
   logit <- as.matrix(X) %*% beta
   p <- plogis(logit)
-  pA1=p[which(A==1 & Y==1)]
-  pA0=p[which(A==0 & Y==1)]
-  pen1=abs(mean(pA1)-mean(pA0))
-  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1)
+  pA1=p[which(A=="F" & Y==1)] # probability of being positive given A="F"
+  pA0=p[which(A=="M" & Y==1)] # probability of being positive given A="M"
+  pen1=abs(mean(pA1)-mean(pA0)) # How different are the probabilities on average? 
+  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1) # Add the penalty term
   logLL
 }
 ```

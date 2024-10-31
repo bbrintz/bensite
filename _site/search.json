@@ -123,28 +123,28 @@
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nOther examples include methods such as reweighting or re-sampling.\nThese methods primarily address bias in the training data but could be used to target certain fairness metrics."
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nIn-Processing\n\n\nAdversarial Training trains a classifier and an adversary model in parallel\nClassifier is trained to predict the task at hand\nAdversary is trained to exploit a bias.\nWhen trained against one another, one can develop a fair model that is simultaneously a strong classifier. \\[L = L_{\\text{task}} - \\lambda L_{\\text{adv}}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nOther examples include methods such as reweighting or re-sampling.\nThese methods primarily address bias in the training data but could be used to target certain fairness metrics."
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nIn-Processing\n\n\nAdversarial Training trains a classifier and an adversary model in parallel\nClassifier is trained to predict the task at hand\nAdversary is trained to exploit a bias.\nWhen trained against one another, one can develop a fair model that is simultaneously a strong classifier. \\[L = L_{\\text{task}} - \\lambda L_{\\text{adv}}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6",
@@ -158,35 +158,21 @@
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nAnd other approaches:\n\nCalibration Post-Processing\nReject Option Classification (abstain in high fairness concern cases)\nEqualized Odds Post-Processing (Adjust model predictions to ensure EO)"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\n\n\nE.g. take a logistic regression model\n\nlog_likelihood &lt;- function(beta, X, Y) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Negative Log-likehood\n  logLL\n}"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nAnd other approaches:\n\nCalibration Post-Processing\nReject Option Classification (abstain in high fairness concern cases)\nEqualized Odds Post-Processing (Adjust model predictions to ensure EO)"
-  },
-  {
-    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10",
-    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10",
-    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\n\n\nE.g. take a logistic regression model\n\nlog_likelihood &lt;- function(beta, X, Y) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p)))\n  logLL\n}"
-  },
-  {
-    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-11",
-    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-11",
-    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==1 & Y==1)]\n  pA0=p[which(A==0 & Y==1)]\n  pen1=abs(mean(pA1)-mean(pA0))\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1)\n  logLL\n}"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==\"F\" & Y==1)] # probability of being positive given A=\"F\"\n  pA0=p[which(A==\"M\" & Y==1)] # probability of being positive given A=\"M\"\n  pen1=abs(mean(pA1)-mean(pA0)) # How different are the probabilities on average? \n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) + lam1*log(pen1) # Add the penalty term\n  logLL\n}"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#section-1",
