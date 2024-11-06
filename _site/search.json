@@ -49,13 +49,6 @@
     "text": "There is some controversy surrounding the eGFR equation"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#the-nkf-and-asn-have-since-recommended-removal-of-race-from-the-equation",
-    "href": "Presentations/mmdis/mmdis.html#the-nkf-and-asn-have-since-recommended-removal-of-race-from-the-equation",
-    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "The NKF and ASN have since recommended removal of race from the equation",
-    "text": "The NKF and ASN have since recommended removal of race from the equation\n\nAcknowledged race is a social concept\n\ni.e., it’s a system to classify individuals rather than reflect biology\nI have heard the biology is more regional than racial\n\nDoes removal of race reduce performance of the decision-making tool?\n\n\nIt depends on how you’re measuring performance"
-  },
-  {
     "objectID": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
     "href": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
@@ -173,6 +166,13 @@
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
     "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==\"F\" & Y==1)] # probability of being positive given A=\"F\"\n  pA0=p[which(A==\"M\" & Y==1)] # probability of being positive given A=\"M\"\n  pen1=abs(mean(pA1)-mean(pA0)) # How different are the probabilities on average? \n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Add the penalty term\n  logLL + lam1*log(pen1) \n}"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#concluding-remarks",
+    "href": "Presentations/mmdis/mmdis.html#concluding-remarks",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "Concluding Remarks",
+    "text": "Concluding Remarks\n\nCross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters\nBut prospective External Validation is still necessary\nIt is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#section-1",

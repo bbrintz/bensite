@@ -406,6 +406,35 @@ Ben Brintz
 </div>
 
 </section>
+<section class="slide level2">
+
+<div style="font-size: 50px; text-align: center;">
+<p>What do I mean by decision-making tools?</p>
+</div>
+<ul>
+<li class="fragment">Any tool that helps make a decision
+<ul>
+<li class="fragment">Any system, algorithm, model, or process that automates or supplements decisions - side-effect: impact individuals or groups</li>
+</ul></li>
+<li class="fragment">Clinical prediction, finance, employment, and law enforcement</li>
+<li class="fragment">Output is most commonly a risk probability (0,1) or a score</li>
+</ul>
+<div class="fragment" title="Caution">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Disadvantaged/Sensitive groups are often included as features in models but ignored when assessing the performance of these tools</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="there-is-some-controversy-surrounding-the-egfr-equation" class="slide level2" style="font-size:.75em;" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">There is some controversy surrounding the eGFR equation</h2>
 <div class="r-hstack">
@@ -433,8 +462,11 @@ Ben Brintz
 <p><img src="egfr7.gif" alt="GIF 1" style="height:160px; width:auto; object-fit:contain;"> <img src="egfr8.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;"> <img src="egfr9.gif" alt="GIF 3" style="height:160px; width:auto; object-fit:contain;"></p>
 </div>
 </section>
-<section id="the-nkf-and-asn-have-since-recommended-removal-of-race-from-the-equation" class="slide level2">
-<h2>The NKF and ASN have since recommended removal of race from the equation</h2>
+<section class="slide level2">
+
+<div style="font-size: 50px; text-align: center;">
+The NKF and ASN have since recommended removal of race from the equation
+</div>
 <ul>
 <li class="fragment">Acknowledged race is a social concept
 <ul>
@@ -851,6 +883,14 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <span id="cb6-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="concluding-remarks" class="slide level2">
+<h2>Concluding Remarks</h2>
+<ul>
+<li class="fragment">Cross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters</li>
+<li class="fragment">But prospective External Validation is still necessary</li>
+<li class="fragment">It is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools</li>
+</ul>
+</section>
 <section id="section-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title"></h2>
 <div class="fragment fade-up highlight-current-red">
@@ -914,7 +954,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

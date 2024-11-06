@@ -18,6 +18,8 @@
   font-size: 1.5em; /* Adjust this value to your desired size */
 }
 
+
+
 .reveal .slides section {
   --auto-animate-duration: 2s; /* Adjust this value to control the animation duration */
 }

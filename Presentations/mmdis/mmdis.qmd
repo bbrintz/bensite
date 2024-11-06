@@ -10,13 +10,23 @@ format:
     revealjs-plugins: 
     theme: white
     incremental: true
-    slideNumber: true  # Slide numbers (optional)
+    slideNumber: false  # Slide numbers (optional)
     transition: fade   # Smooth slide transitions
     title-slide-background: "white" # Ensure title slide background matches your style
     css: custom.css    # Link to your custom CSS file
 ---
 
+<div style="font-size: 50px; text-align: center;">
+What do I mean by decision-making tools? 
+</div>
+- Any tool that helps make a decision
+  - Any system, algorithm, model, or process that automates or supplements decisions - side-effect: impact individuals or groups
+- Clinical prediction, finance, employment, and law enforcement
+- Output is most commonly a risk probability (0,1) or a score 
 
+::: {.callout-caution title="Caution" .fragment}
+Disadvantaged/Sensitive groups are often included as features in models but ignored when assessing the performance of these tools
+:::
 
 ## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out"}
 
@@ -55,8 +65,9 @@ format:
   <img src="egfr8.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr9.gif" alt="GIF 3" style="height:160px; width:auto; object-fit:contain;">
 :::
+---
 
-## The NKF and ASN have since recommended removal of race from the equation
+<div style="font-size: 50px; text-align: center;"> The NKF and ASN have since recommended removal of race from the equation</div>
 
 
 - Acknowledged race is a social concept 
@@ -125,6 +136,7 @@ And the choice of metric could be predictive performance or fairness
 \text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\ &=E(S|Y=1,A=b)
 \end{align*}
 :::
+
 
 ## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm) {auto-animate="true" .scrollable}
 ```r
@@ -502,6 +514,12 @@ log_likelihood <- function(beta, X, Y,A,lam1=1) {
   logLL + lam1*log(pen1) 
 }
 ```
+
+## Concluding Remarks 
+- Cross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters
+- But prospective External Validation is still necessary 
+- It is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools
+
 
 ## {auto-animate="true"}
 ::: {.fragment .fade-up .highlight-current-red}
