@@ -30,7 +30,7 @@ Disadvantaged/Sensitive groups are often included as features in models but igno
 
 ## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out"}
 
-
+## There is some controversy surrounding the eGFR equation {style="font-size:.75em;" auto-animate=true auto-animate-easing="ease-in-out" visibility="uncounted"}
 ::: {.r-hstack}
   <img src="egfr1.gif" alt="GIF 1" style="height:160px; width:auto; object-fit:contain;">
   <img src="egfr2.gif" alt="GIF 2" style="height:160px; width:auto; object-fit:contain;">
@@ -72,7 +72,6 @@ Disadvantaged/Sensitive groups are often included as features in models but igno
 
 - Acknowledged race is a social concept 
     - i.e., it's a system to classify individuals rather than reflect biology
-    - I have heard the biology is more regional than racial 
 -  Does removal of race reduce performance of the decision-making tool?
 
 
@@ -98,7 +97,7 @@ The developer of a tool can choose to emphasize one metric over another
 :::
 
 ::: {.fragment .fade-right}
-And the choice of metric could be predictive performance or fairness 
+And the choice of metric could be predictive performance or fairness or you could consider both
 :::
 
 
@@ -187,9 +186,10 @@ d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize
 
 cbind(a,b,c,d) %>% knitr::kable() 
 ```
+---
 
-## But choosing a metric can be complicated 
-![](fair_diagram.png)
+<div style="font-size: 45px; text-align: center; margin-bottom: 1px">  But choosing a metric can be complicated </div>
+<img src="fair_diagram.png" style="width: 100%; height: auto;">
 
 ## {auto-animate="true" visibility="hidden"}
 <img src="fair_diagram.png" class="zoom-effect" width="100%">

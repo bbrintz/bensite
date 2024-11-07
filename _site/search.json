@@ -49,6 +49,13 @@
     "text": "There is some controversy surrounding the eGFR equation"
   },
   {
+    "objectID": "Presentations/mmdis/mmdis.html#there-is-some-controversy-surrounding-the-egfr-equation-3",
+    "href": "Presentations/mmdis/mmdis.html#there-is-some-controversy-surrounding-the-egfr-equation-3",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "There is some controversy surrounding the eGFR equation",
+    "text": "There is some controversy surrounding the eGFR equation"
+  },
+  {
     "objectID": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
     "href": "Presentations/mmdis/mmdis.html#some-fairness-metrics-are-more-well-known-than-others",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
@@ -82,13 +89,6 @@
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "If you can code, measuring fairness is easy",
     "text": "If you can code, measuring fairness is easy\n\na=compas %&gt;% group_by(Sex=Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted)) %&gt;% select(-Female)\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))%&gt;% select(-Female)\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))%&gt;% select(-Female)\n\ncbind(a,b,c,d) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\nSex\nStatistical Parity\nEqualized Odds\nPredictive Parity\nBalance for the Positive Class\n\n\n\n\nMale\n0.5069041\n0.6794658\n0.6427161\n0.5902647\n\n\nFemale\n0.2221277\n0.3753027\n0.5938697\n0.4567142"
-  },
-  {
-    "objectID": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-can-be-complicated",
-    "href": "Presentations/mmdis/mmdis.html#but-choosing-a-metric-can-be-complicated",
-    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "But choosing a metric can be complicated",
-    "text": "But choosing a metric can be complicated"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#many-sources-of-bias-can-cause-the-disparate-impact-observed-by-these-metrics",
