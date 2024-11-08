@@ -63,46 +63,46 @@
     "text": "Some fairness metrics are more well known than others\n\n\n\\[\\begin{align*}\n\\text{Statistical Parity} &= P(\\widehat{Y}=1|A=a) \\\\\n&= P(\\widehat{Y}=1|A=b)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Equalized Odds} &= P(\\widehat{Y}=1|A=a,Y=1) \\\\\n&= P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Predictive Parity} &= P(Y=1|\\widehat{Y}=1,A=a) \\\\\n&= P(Y=1|\\widehat{Y}=1,A=b)\n\\end{align*}\\]\n\n\n\\[\\begin{align*}\n\\text{Balance for the Positive Class} &= E(S|Y=1,A=a) \\\\ &=E(S|Y=1,A=b)\n\\end{align*}\\]"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm",
-    "href": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm",
+    "objectID": "Presentations/mmdis/mmdis.html#im-going-to-apply-these-metrics-to-the-compas-data",
+    "href": "Presentations/mmdis/mmdis.html#im-going-to-apply-these-metrics-to-the-compas-data",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)",
-    "text": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)\nlibrary(fairness)\n\nhead(compas)"
+    "section": "I’m going to apply these metrics to the COMPAS data",
+    "text": "I’m going to apply these metrics to the COMPAS data\n\nA landmark dataset to study algorithmic fairness in recidivism prediction\nYou can access this data in R through the fairness package\n\n\nlibrary(fairness)\n\nhead(compas)"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm-1",
-    "href": "Presentations/mmdis/mmdis.html#the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm-1",
+    "objectID": "Presentations/mmdis/mmdis.html#im-going-to-apply-these-metrics-to-the-compas-data-1",
+    "href": "Presentations/mmdis/mmdis.html#im-going-to-apply-these-metrics-to-the-compas-data-1",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)",
-    "text": "The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)\n\n\n   Two_yr_Recidivism Number_of_Priors Age_Above_FourtyFive Age_Below_TwentyFive\n4                 no       -0.6843578                   no                   no\n5                yes        2.2668817                   no                   no\n7                 no       -0.6843578                   no                   no\n11                no       -0.6843578                   no                   no\n14                no       -0.6843578                   no                   no\n24                no       -0.6843578                   no                   no\n   Female Misdemeanor        ethnicity probability predicted\n4    Male         yes            Other   0.3151557         0\n5    Male          no        Caucasian   0.8854616         1\n7  Female         yes        Caucasian   0.2552680         0\n11   Male          no African_American   0.4173908         0\n14   Male         yes         Hispanic   0.3200982         0\n24   Male         yes            Other   0.3151557         0"
+    "section": "I’m going to apply these metrics to the COMPAS data",
+    "text": "I’m going to apply these metrics to the COMPAS data\n\n\n   Two_yr_Recidivism Number_of_Priors Age_Above_FourtyFive Age_Below_TwentyFive\n4                 no       -0.6843578                   no                   no\n5                yes        2.2668817                   no                   no\n7                 no       -0.6843578                   no                   no\n11                no       -0.6843578                   no                   no\n14                no       -0.6843578                   no                   no\n24                no       -0.6843578                   no                   no\n   Female Misdemeanor        ethnicity probability predicted\n4    Male         yes            Other   0.3151557         0\n5    Male          no        Caucasian   0.8854616         1\n7  Female         yes        Caucasian   0.2552680         0\n11   Male          no African_American   0.4173908         0\n14   Male         yes         Hispanic   0.3200982         0\n24   Male         yes            Other   0.3151557         0"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy",
-    "href": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy",
+    "objectID": "Presentations/mmdis/mmdis.html#measuring-fairness-can-take-just-a-few-lines-of-code",
+    "href": "Presentations/mmdis/mmdis.html#measuring-fairness-can-take-just-a-few-lines-of-code",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "If you can code, measuring fairness is easy",
-    "text": "If you can code, measuring fairness is easy\na=compas %&gt;% group_by(Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted))\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))"
+    "section": "Measuring fairness can take just a few lines of code",
+    "text": "Measuring fairness can take just a few lines of code\na=compas %&gt;% group_by(Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted))\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy-1",
-    "href": "Presentations/mmdis/mmdis.html#if-you-can-code-measuring-fairness-is-easy-1",
+    "objectID": "Presentations/mmdis/mmdis.html#measuring-fairness-can-take-just-a-few-lines-of-code-1",
+    "href": "Presentations/mmdis/mmdis.html#measuring-fairness-can-take-just-a-few-lines-of-code-1",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "If you can code, measuring fairness is easy",
-    "text": "If you can code, measuring fairness is easy\n\na=compas %&gt;% group_by(Sex=Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted)) %&gt;% select(-Female)\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))%&gt;% select(-Female)\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))%&gt;% select(-Female)\n\ncbind(a,b,c,d) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\nSex\nStatistical Parity\nEqualized Odds\nPredictive Parity\nBalance for the Positive Class\n\n\n\n\nMale\n0.5069041\n0.6794658\n0.6427161\n0.5902647\n\n\nFemale\n0.2221277\n0.3753027\n0.5938697\n0.4567142"
+    "section": "Measuring fairness can take just a few lines of code",
+    "text": "Measuring fairness can take just a few lines of code\n\na=compas %&gt;% group_by(Sex=Female) %&gt;% summarize(`Statistical Parity`=mean(predicted))\n\nb=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize(`Equalized Odds`=mean(predicted)) %&gt;% select(-Female)\n\nc=compas %&gt;% filter(predicted==1) %&gt;% group_by(Female) %&gt;% summarize('Predictive Parity'=mean(Two_yr_Recidivism==\"yes\"))%&gt;% select(-Female)\n\nd=compas %&gt;% filter(Two_yr_Recidivism==\"yes\") %&gt;% group_by(Female) %&gt;% summarize('Balance for the Positive Class'=mean(probability))%&gt;% select(-Female)\n\ncbind(a,b,c,d) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\nSex\nStatistical Parity\nEqualized Odds\nPredictive Parity\nBalance for the Positive Class\n\n\n\n\nMale\n0.5069041\n0.6794658\n0.6427161\n0.5902647\n\n\nFemale\n0.2221277\n0.3753027\n0.5938697\n0.4567142"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#many-sources-of-bias-can-cause-the-disparate-impact-observed-by-these-metrics",
     "href": "Presentations/mmdis/mmdis.html#many-sources-of-bias-can-cause-the-disparate-impact-observed-by-these-metrics",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "Many sources of bias can cause the disparate impact observed by these metrics",
-    "text": "Many sources of bias can cause the disparate impact observed by these metrics\n\n\n\n\n\n\n\n\n\nData Bias\nDefinition\nMain Cause\nImpact on AI\n\n\n\n\nSelection Bias\nCertain groups are over/under-represented\nBiased data collection process\nAI models may not be representative, leading to biased decisions\n\n\nSampling Bias\nData are not a random sample\nIncomplete or biased sampling\nPoor generalization to new data, biased predictions\n\n\nLabeling Bias\nErrors in data labeling\nAnnotators’ biases or societal stereotypes\nAI models learn and perpetuate biased labels\n\n\nTemporal Bias\nHistorical societal biases\nOutdated data reflecting past biases\nAI models may reinforce outdated biases\n\n\nAggregation Bias\nData combined from multiple sources\nDiffering biases in individual sources\nAI models may produce skewed outcomes due to biased data\n\n\nHistorical Bias\nTraining data reflect past societal biases\nBiases inherited from historical societal discrimination\nModel may perpetuate historical biases and reinforce inequalities\n\n\nMeasurement Bias\nErrors or inaccuracies in data collection\nData collection process introduces measurement errors\nModel learns from flawed data, leading to inaccurate predictions\n\n\nConfirmation Bias\nFocus on specific patterns or attributes\nData collection or algorithmic bias towards specific features\nModel may overlook relevant information and reinforce existing biases\n\n\nProxy Bias\nIndirect reliance on sensitive attributes\nUse of correlated proxy variables instead of sensitive attributes\nModel indirectly relies on sensitive information, leading to biased outcomes\n\n\nCultural Bias\nData reflect cultural norms and values\nCultural influences in data collection or annotation\nModel predictions may be biased for individuals from different cultural backgrounds\n\n\nUnder-representation Bias\nCertain groups are significantly underrepresented\nLow representation of certain groups in the training data\nModel performance is poorer for underrepresented groups\n\n\nHomophily Bias\nPredictions based on similarity between instances\nTendency of models to make predictions based on similarity\nModel may reinforce existing patterns and exacerbate biases"
+    "text": "Many sources of bias can cause the disparate impact observed by these metrics\n\n\n\n\n\n\n\n\n\nData Bias\nDefinition\nMain Cause\nImpact on AI\n\n\n\n\nSelection Bias\nCertain groups are over/under-represented\nBiased data collection process\nAI models may not be representative, leading to biased decisions\n\n\nSampling Bias\nData are not a random sample\nIncomplete or biased sampling\nPoor generalization to new data, biased predictions\n\n\nLabeling Bias\nErrors in data labeling\nAnnotators’ biases or societal stereotypes\nAI models learn and perpetuate biased labels\n\n\nTemporal Bias\nHistorical societal biases\nOutdated data reflecting past biases\nAI models may reinforce outdated biases\n\n\nAggregation Bias\nData combined from multiple sources\nDiffering biases in individual sources\nAI models may produce skewed outcomes due to biased data\n\n\nHistorical Bias\nTraining data reflect past societal biases\nBiases inherited from historical societal discrimination\nModel may perpetuate historical biases and reinforce inequalities\n\n\nMeasurement Bias\nErrors or inaccuracies in data collection\nData collection process introduces measurement errors\nModel learns from flawed data, leading to inaccurate predictions\n\n\nConfirmation Bias\nFocus on specific patterns or attributes\nData collection or algorithmic bias towards specific features\nModel may overlook relevant information and reinforce existing biases\n\n\nProxy Bias \nIndirect reliance on sensitive attributes\nUse of correlated proxy variables instead of sensitive attributes\nModel indirectly relies on sensitive information, leading to biased outcomes\n\n\nCultural Bias\nData reflect cultural norms and values\nCultural influences in data collection or annotation\nModel predictions may be biased for individuals from different cultural backgrounds\n\n\nUnder-representation Bias\nCertain groups are significantly underrepresented\nLow representation of certain groups in the training data\nModel performance is poorer for underrepresented groups\n\n\nHomophily Bias\nPredictions based on similarity between instances\nTendency of models to make predictions based on similarity\nModel may reinforce existing patterns and exacerbate biases"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing - modifying your training data\nIn-Processing - modifying the training process\nPost-Processing - modifying the output of the model\nRegularization-Based - modifying the model itself"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1",
@@ -116,63 +116,70 @@
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nOther examples include methods such as reweighting or re-sampling.\nThese methods primarily address bias in the training data but could be used to target certain fairness metrics."
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nThis is done by modifying your training data before model training\nOne example is using the Disparate Impact Remover"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nIn-Processing\n\n\nAdversarial Training trains a classifier and an adversary model in parallel\nClassifier is trained to predict the task at hand\nAdversary is trained to exploit a bias.\nWhen trained against one another, one can develop a fair model that is simultaneously a strong classifier. \\[L = L_{\\text{task}} - \\lambda L_{\\text{adv}}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPre-Processing\n\nOther examples include methods such as reweighting or re-sampling.\nThese methods primarily address bias in the training data but could be used to target certain fairness metrics."
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nIn-Processing\n\n\nAdversarial Training trains a classifier and an adversary model in parallel\nClassifier is trained to predict the task at hand\nAdversary is trained to exploit a bias.\nWhen trained against one another, one can develop a fair model that is simultaneously a strong classifier. \\[L = L_{\\text{task}} - \\lambda L_{\\text{adv}}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds (COMPAS) \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds (COMPAS) \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nAnd other approaches:\n\nCalibration Post-Processing\nReject Option Classification (abstain in high fairness concern cases)\nEqualized Odds Post-Processing (Adjust model predictions to ensure EO)"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nThreshold Optimization for Equalized Odds (COMPAS) \\[\\begin{align*}\nP(\\widehat{Y}=1|A=a,Y=1) = P(\\widehat{Y}=1|A=b,Y=1)\n\\end{align*}\\]"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
-    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\n\n\nE.g. take a logistic regression model\n\nlog_likelihood &lt;- function(beta, X, Y) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Negative Log-likehood\n  logLL\n}"
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nPost-Processing\n\nAnd other approaches:\n\nCalibration Post-Processing\nReject Option Classification (abstain in high fairness concern cases)\nEqualized Odds Post-Processing (Adjust model predictions to ensure EO)"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9",
     "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "How can we mitigate the effect of biases on decision making tools?",
+    "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\n\n\nE.g. take a logistic regression model\n\nlog_likelihood &lt;- function(beta, X, Y) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Negative Log-likehood\n  logLL\n}"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10",
+    "href": "Presentations/mmdis/mmdis.html#how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "How can we mitigate the effect of biases on decision making tools?",
     "text": "How can we mitigate the effect of biases on decision making tools?\n\nRegularization-Based\n\n\nTries to minimize the negative log likelihood of the model\nBut also includes a penalty enforcing a concept of fairness\n\nE.g. take a logistic regression model and add a penalty term\n\nlog_likelihood &lt;- function(beta, X, Y,A,lam1=1) {\n  logit &lt;- as.matrix(X) %*% beta\n  p &lt;- plogis(logit)\n  pA1=p[which(A==\"F\" & Y==1)] # probability of being positive given A=\"F\"\n  pA0=p[which(A==\"M\" & Y==1)] # probability of being positive given A=\"M\"\n  pen1=abs(mean(pA1)-mean(pA0)) # How different are the probabilities on average? \n  logLL=-(sum(Y * log(p) + (1 - Y) * log(1 - p))) # Add the penalty term\n  logLL + lam1*log(pen1) \n}"
   },
   {
-    "objectID": "Presentations/mmdis/mmdis.html#concluding-remarks",
-    "href": "Presentations/mmdis/mmdis.html#concluding-remarks",
+    "objectID": "Presentations/mmdis/mmdis.html#final-thoughts",
+    "href": "Presentations/mmdis/mmdis.html#final-thoughts",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
-    "section": "Concluding Remarks",
-    "text": "Concluding Remarks\n\nCross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters\nBut prospective External Validation is still necessary\nIt is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools"
+    "section": "Final Thoughts",
+    "text": "Final Thoughts\n\nCross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters\nBut prospective External Validation is still necessary\nIt is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools"
   },
   {
     "objectID": "Presentations/mmdis/mmdis.html#section-1",
@@ -180,6 +187,13 @@
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
     "section": "",
     "text": "Questions?"
+  },
+  {
+    "objectID": "Presentations/mmdis/mmdis.html#references",
+    "href": "Presentations/mmdis/mmdis.html#references",
+    "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
+    "section": "References",
+    "text": "References\n\nChen P, Wu L, Wang L. AI fairness in data management and analytics: A review on challenges, methodologies and applications. Applied Sciences. 2023 Sep 13;13(18):10258.\nMakhlouf K, Zhioua S, Palamidessi C. Machine learning fairness notions: Bridging the gap with real-world applications. Information Processing & Management. 2021 Sep 1;58(5):102642.\nYang J, Soltan AA, Eyre DW, Yang Y, Clifton DA. An adversarial training framework for mitigating algorithmic biases in clinical machine learning. NPJ digital medicine. 2023 Mar 29;6(1):55."
   },
   {
     "objectID": "cv.html",

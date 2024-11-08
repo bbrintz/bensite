@@ -412,12 +412,9 @@ Ben Brintz
 <p>What do I mean by decision-making tools?</p>
 </div>
 <ul>
-<li class="fragment">Any tool that helps make a decision
-<ul>
-<li class="fragment">Any system, algorithm, model, or process that automates or supplements decisions - side-effect: impact individuals or groups</li>
-</ul></li>
+<li class="fragment">Any system, algorithm, model, or process that automates or supplements decisions</li>
 <li class="fragment">Clinical prediction, finance, employment, and law enforcement</li>
-<li class="fragment">Output is most commonly a risk probability (0,1) or a score</li>
+<li class="fragment">Output is most commonly a risk probability (0,1) or a score (Decision?)</li>
 </ul>
 <div class="fragment" title="Caution">
 <div class="callout callout-caution callout-titled callout-style-default">
@@ -525,14 +522,20 @@ Performance metrics are a trade-off
 \end{align*}\]</span></p>
 </div>
 </section>
-<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm" class="slide level2 scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)</h2>
+<section id="im-going-to-apply-these-metrics-to-the-compas-data" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">I’m going to apply these metrics to the COMPAS data</h2>
+<ul>
+<li class="fragment">A landmark dataset to study algorithmic fairness in recidivism prediction</li>
+<li class="fragment">You can access this data in R through the fairness package</li>
+</ul>
+<div class="fragment fade-up" data-index="2">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a></a><span class="fu">library</span>(fairness)</span>
 <span id="cb1-2" class="hljs-ln-code"><a></a></span>
 <span id="cb1-3" class="hljs-ln-code"><a></a><span class="fu">head</span>(compas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="the-compas-data-is-a-landmark-dataset-to-study-algorithmic-fairness-in-recidivism-prediction-propietary-algorithm-1" class="slide level2 scrollable" data-auto-animate="true" data-visibility="uncounted">
-<h2 data-id="quarto-animate-title">The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm)</h2>
+<section id="im-going-to-apply-these-metrics-to-the-compas-data-1" class="slide level2 scrollable" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">I’m going to apply these metrics to the COMPAS data</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   Two_yr_Recidivism Number_of_Priors Age_Above_FourtyFive Age_Below_TwentyFive
@@ -552,8 +555,8 @@ Performance metrics are a trade-off
 </div>
 </div>
 </section>
-<section id="if-you-can-code-measuring-fairness-is-easy" class="slide level2 smaller scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
+<section id="measuring-fairness-can-take-just-a-few-lines-of-code" class="slide level2 smaller scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Measuring fairness can take just a few lines of code</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
 <span id="cb3-2" class="hljs-ln-code"><a></a></span>
 <span id="cb3-3" class="hljs-ln-code"><a></a>b<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Equalized Odds</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
@@ -562,8 +565,8 @@ Performance metrics are a trade-off
 <span id="cb3-6" class="hljs-ln-code"><a></a></span>
 <span id="cb3-7" class="hljs-ln-code"><a></a>d<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Two_yr_Recidivism<span class="sc">==</span><span class="st">"yes"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">'Balance for the Positive Class'</span><span class="ot">=</span><span class="fu">mean</span>(probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="if-you-can-code-measuring-fairness-is-easy-1" class="slide level2 smaller scrollable" data-auto-animate="true" data-visibility="uncounted">
-<h2 data-id="quarto-animate-title">If you can code, measuring fairness is easy</h2>
+<section id="measuring-fairness-can-take-just-a-few-lines-of-code-1" class="slide level2 smaller scrollable" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">Measuring fairness can take just a few lines of code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a></a>a<span class="ot">=</span>compas <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Sex=</span>Female) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">`</span><span class="at">Statistical Parity</span><span class="st">`</span><span class="ot">=</span><span class="fu">mean</span>(predicted))</span>
 <span id="cb4-2" class="hljs-ln-code"><a></a></span>
@@ -687,7 +690,7 @@ But choosing a metric can be complicated
 <td>Model may overlook relevant information and reinforce existing biases</td>
 </tr>
 <tr class="odd">
-<td><strong>Proxy Bias</strong></td>
+<td><span style="color:red"><strong>Proxy Bias</strong> </span></td>
 <td>Indirect reliance on sensitive attributes</td>
 <td>Use of correlated proxy variables instead of sensitive attributes</td>
 <td>Model indirectly relies on sensitive information, leading to biased outcomes</td>
@@ -715,6 +718,15 @@ But choosing a metric can be complicated
 </section>
 <section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
+<ul>
+<li class="fragment">Pre-Processing - modifying your training data</li>
+<li class="fragment">In-Processing - modifying the training process</li>
+<li class="fragment">Post-Processing - modifying the output of the model</li>
+<li class="fragment">Regularization-Based - modifying the model itself</li>
+</ul>
+</section>
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
 </div>
@@ -732,7 +744,7 @@ But choosing a metric can be complicated
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
@@ -751,7 +763,7 @@ But choosing a metric can be complicated
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-2" class="slide level2">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3" class="slide level2">
 <h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Pre-Processing</p>
@@ -759,7 +771,7 @@ But choosing a metric can be complicated
 <p>Other examples include methods such as reweighting or re-sampling.</p>
 <p>These methods primarily address bias in the training data but could be used to target certain fairness metrics.</p>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-3" class="slide level2">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2">
 <h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>In-Processing</p>
@@ -771,12 +783,12 @@ But choosing a metric can be complicated
 <li class="fragment">When trained against one another, one can develop a fair model that is simultaneously a strong classifier. <span class="math display">\[L = L_{\text{task}} - \lambda L_{\text{adv}}\]</span></li>
 </ul>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-4" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Post-Processing</p>
 </div>
-<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+<p>Threshold Optimization for Equalized Odds (COMPAS) <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
 <div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;">
@@ -791,12 +803,12 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-5" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-duration="3" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Post-Processing</p>
 </div>
-<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+<p>Threshold Optimization for Equalized Odds (COMPAS) <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
 <div data-id="ROC" data-auto-animate-delay="3" data-visibility="visible" style="background: #00000; width: 750px; height: auto; margin: 1px;">
@@ -811,12 +823,12 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-6" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7" class="slide level2 smaller" data-auto-animate="true" data-auto-animate-easing="ease-in-out" data-visibility="uncounted">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Post-Processing</p>
 </div>
-<p>Threshold Optimization for Equalized Odds <span class="math display">\[\begin{align*}
+<p>Threshold Optimization for Equalized Odds (COMPAS) <span class="math display">\[\begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}\]</span></p>
 <div data-id="ROC" style="background: #00000; width: 750px; height: auto; margin: 1px;">
@@ -831,7 +843,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-7" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in-out">
 <h2 data-id="quarto-animate-title">How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Post-Processing</p>
@@ -843,7 +855,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <li class="fragment">Equalized Odds Post-Processing (Adjust model predictions to ensure EO)</li>
 </ul>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-8" class="slide level2">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9" class="slide level2">
 <h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Regularization-Based</p>
@@ -866,7 +878,7 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 </div>
 </div>
 </section>
-<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-9" class="slide level2" data-visibility="uncounted">
+<section id="how-can-we-mitigate-the-effect-of-biases-on-decision-making-tools-10" class="slide level2" data-visibility="uncounted">
 <h2>How can we mitigate the effect of biases on decision making tools?</h2>
 <div style="text-decoration: underline;">
 <p>Regularization-Based</p>
@@ -888,8 +900,8 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <span id="cb6-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="concluding-remarks" class="slide level2">
-<h2>Concluding Remarks</h2>
+<section id="final-thoughts" class="slide level2">
+<h2>Final Thoughts</h2>
 <ul>
 <li class="fragment">Cross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters</li>
 <li class="fragment">But prospective External Validation is still necessary</li>
@@ -901,6 +913,14 @@ P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 <div class="fragment fade-up highlight-current-red">
 <p>Questions?</p>
 </div>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<ol type="1">
+<li class="fragment"><p>Chen P, Wu L, Wang L. AI fairness in data management and analytics: A review on challenges, methodologies and applications. Applied Sciences. 2023 Sep 13;13(18):10258.</p></li>
+<li class="fragment"><p>Makhlouf K, Zhioua S, Palamidessi C. Machine learning fairness notions: Bridging the gap with real-world applications. Information Processing &amp; Management. 2021 Sep 1;58(5):102642.</p></li>
+<li class="fragment"><p>Yang J, Soltan AA, Eyre DW, Yang Y, Clifton DA. An adversarial training framework for mitigating algorithmic biases in clinical machine learning. NPJ digital medicine. 2023 Mar 29;6(1):55.</p></li>
+</ol>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

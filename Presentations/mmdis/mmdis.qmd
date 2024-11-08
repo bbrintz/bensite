@@ -19,10 +19,9 @@ format:
 <div style="font-size: 50px; text-align: center;">
 What do I mean by decision-making tools? 
 </div>
-- Any tool that helps make a decision
-  - Any system, algorithm, model, or process that automates or supplements decisions - side-effect: impact individuals or groups
+- Any system, algorithm, model, or process that automates or supplements decisions 
 - Clinical prediction, finance, employment, and law enforcement
-- Output is most commonly a risk probability (0,1) or a score 
+- Output is most commonly a risk probability (0,1) or a score (Decision?) 
 
 ::: {.callout-caution title="Caution" .fragment}
 Disadvantaged/Sensitive groups are often included as features in models but ignored when assessing the performance of these tools
@@ -137,14 +136,20 @@ And the choice of metric could be predictive performance or fairness or you coul
 :::
 
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm) {auto-animate="true" .scrollable}
+## I'm going to apply these metrics to the COMPAS data {auto-animate="true" .scrollable}
+
+- A landmark dataset to study algorithmic fairness in recidivism prediction
+- You can access this data in R through the fairness package
+
+::: {.fragment .fade-up index=2}
 ```r
 library(fairness)
 
 head(compas)
 ```
+:::
 
-## The COMPAS data is a landmark dataset to study algorithmic fairness in recidivism prediction (propietary algorithm) {auto-animate="true" visibility="uncounted" .scrollable}
+## I'm going to apply these metrics to the COMPAS data {auto-animate="true" visibility="uncounted" .scrollable}
 ```{r, include=T}
 library(fairness)
 library(tidyverse)
@@ -163,7 +168,7 @@ c2=compas #%>% knitr::kable()# %>% kableExtra::kable_styling(full_width = F) #%>
   #kableExtra::row_spec(1:6,font_size='medium')
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable }
+## Measuring fairness can take just a few lines of code {auto-animate="true" .smaller .scrollable }
 ```r
 a=compas %>% group_by(Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -174,7 +179,7 @@ c=compas %>% filter(predicted==1) %>% group_by(Female) %>% summarize('Predictive
 d=compas %>% filter(Two_yr_Recidivism=="yes") %>% group_by(Female) %>% summarize('Balance for the Positive Class'=mean(probability))
 ```
 
-## If you can code, measuring fairness is easy {auto-animate="true" .smaller .scrollable visibility="uncounted"}
+## Measuring fairness can take just a few lines of code {auto-animate="true" .smaller .scrollable visibility="uncounted"}
 ```{r,include=T,echo=T}
 a=compas %>% group_by(Sex=Female) %>% summarize(`Statistical Parity`=mean(predicted))
 
@@ -205,10 +210,17 @@ cbind(a,b,c,d) %>% knitr::kable()
 | <span style="color:red">**Historical Bias**</span>      | Training data reflect past societal biases                      | Biases inherited from historical societal discrimination | Model may perpetuate historical biases and reinforce inequalities                |
 | **Measurement Bias**     | Errors or inaccuracies in data collection                       | Data collection process introduces measurement errors    | Model learns from flawed data, leading to inaccurate predictions                 |
 | **Confirmation Bias**    | Focus on specific patterns or attributes                        | Data collection or algorithmic bias towards specific features | Model may overlook relevant information and reinforce existing biases       |
-| **Proxy Bias**           | Indirect reliance on sensitive attributes                       | Use of correlated proxy variables instead of sensitive attributes | Model indirectly relies on sensitive information, leading to biased outcomes |
+| <span style="color:red">**Proxy Bias** </span>          | Indirect reliance on sensitive attributes                       | Use of correlated proxy variables instead of sensitive attributes | Model indirectly relies on sensitive information, leading to biased outcomes |
 | **Cultural Bias**        | Data reflect cultural norms and values                          | Cultural influences in data collection or annotation     | Model predictions may be biased for individuals from different cultural backgrounds |
 | **Under-representation Bias** | Certain groups are significantly underrepresented         | Low representation of certain groups in the training data | Model performance is poorer for underrepresented groups                        |
 | **Homophily Bias**       | Predictions based on similarity between instances               | Tendency of models to make predictions based on similarity | Model may reinforce existing patterns and exacerbate biases                   |
+
+## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
+
+- Pre-Processing - modifying your training data
+- In-Processing - modifying the training process
+- Post-Processing - modifying the output of the model
+- Regularization-Based - modifying the model itself
 
 ## How can we mitigate the effect of biases on decision making tools? {auto-animate=true auto-animate-easing="ease-in-out"}
 ::: {style="text-decoration: underline;"}
@@ -284,7 +296,7 @@ $$L = L_{\text{task}} - \lambda L_{\text{adv}}$$
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
-Threshold Optimization for Equalized Odds
+Threshold Optimization for Equalized Odds (COMPAS)
 \begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
@@ -331,7 +343,7 @@ rocs=roc(c2$Two_yr_Recidivism,c2$probability)
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
-Threshold Optimization for Equalized Odds
+Threshold Optimization for Equalized Odds (COMPAS)
 \begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
@@ -392,7 +404,7 @@ map2_df(rocs, c("Male", "Female"), function(x, y) {
 ::: {style="text-decoration: underline;"}
 Post-Processing
 :::
-Threshold Optimization for Equalized Odds
+Threshold Optimization for Equalized Odds (COMPAS)
 \begin{align*}
 P(\widehat{Y}=1|A=a,Y=1) = P(\widehat{Y}=1|A=b,Y=1)
 \end{align*}
@@ -515,7 +527,7 @@ log_likelihood <- function(beta, X, Y,A,lam1=1) {
 }
 ```
 
-## Concluding Remarks 
+## Final Thoughts  
 - Cross-validation is a great tool to assess the performance/fairness of a model and tune hyperparameters
 - But prospective External Validation is still necessary 
 - It is important to consider the effect on subgroups and consider the trade-offs between fairness and predictive performance in certain tools
@@ -524,4 +536,14 @@ log_likelihood <- function(beta, X, Y,A,lam1=1) {
 ## {auto-animate="true"}
 ::: {.fragment .fade-up .highlight-current-red}
 Questions?
+
+
 :::
+
+## References
+
+1. Chen P, Wu L, Wang L. AI fairness in data management and analytics: A review on challenges, methodologies and applications. Applied Sciences. 2023 Sep 13;13(18):10258.
+
+2. Makhlouf K, Zhioua S, Palamidessi C. Machine learning fairness notions: Bridging the gap with real-world applications. Information Processing & Management. 2021 Sep 1;58(5):102642.
+
+3. Yang J, Soltan AA, Eyre DW, Yang Y, Clifton DA. An adversarial training framework for mitigating algorithmic biases in clinical machine learning. NPJ digital medicine. 2023 Mar 29;6(1):55.
