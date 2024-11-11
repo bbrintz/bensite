@@ -507,7 +507,7 @@ log_likelihood <- function(beta, X, Y) {
 Regularization-Based
 :::
 - Tries to minimize the negative log likelihood of the model 
-- But also includes a penalty enforcing a concept of fairness 
+- But also includes a penalty enforcing a concept of fairness (BoPC)
 
 E.g. take a logistic regression model and add a penalty term 
 
