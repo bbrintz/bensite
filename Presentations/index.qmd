@@ -5,4 +5,4 @@ theme: default
 ---
 
 
-- [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/mmdis.qmd)
+- [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/)
