@@ -1,0 +1,28 @@
+---
+title: "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model"
+author: "Ben Brintz"
+institute: "Division of Epidemiology"
+format: 
+  revealjs:
+    auto-animate-easing: ease-in-out
+    auto-animate-unmatched: false
+    auto-animate-duration: 2
+    revealjs-plugins: 
+    theme: white
+    incremental: true
+    slideNumber: false  # Slide numbers (optional)
+    transition: fade   # Smooth slide transitions
+    title-slide-background: "white" # Ensure title slide background matches your style
+    css: custom.css    # Link to your custom CSS file
+---
+
+<div style="font-size: 50px; text-align: center;">
+What do I mean by decision-making tools? 
+</div>
+- Any system, algorithm, model, or process that automates or supplements decisions 
+- Clinical prediction, finance, employment, and law enforcement
+- Output is most commonly a risk probability (0,1) or a score (Decision?) 
+
+::: {.callout-caution title="Caution" .fragment}
+Disadvantaged/Sensitive groups are often included as features in models but ignored when assessing the performance of these tools
+:::

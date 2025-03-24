@@ -6,3 +6,4 @@ theme: default
 
 
 - [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/)
+- [SEIR N-mixture Model](/Presentations/seir-n-mixture/)
