@@ -30,9 +30,16 @@ trends among average Americans by surveying the participants of a marathon"
 - **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
 - **SEIR models** estimate the number of infections from observed cases and the distribution of the incubation period
 
-## Covid-19's incubation period requires an extension to the SIR model {auto-animate="true" .scrollable}
+## Covid-19's incubation period requires an extension to the SIR compartment model {auto-animate="true" .scrollable}
 
 - **SIR model** assumes that individuals
 transition directly from susceptible to infectious
 - **SEIR model** adds an exposed compartment to account for the incubation period
 - **SEIR models** don't directly account for imperfect detection
+
+## N-mixture models account for imperfect detection and have been applied to disease
+
+- **N-mixture models** are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption
+    - American Robin
+    - Oregon Slender Salamander 
+- Initial extensions of the **N-mixture model** allowed for survival and recruitment processes much like you would see in a compartment model

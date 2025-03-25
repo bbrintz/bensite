@@ -222,5 +222,26 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Covid-19’s incubation period requires an extension to the SIR model",
     "text": "Covid-19’s incubation period requires an extension to the SIR model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period\nSEIR models don’t directly account for imperfect detection"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#we-propose-the-seir-n-mixture-model-to-extend-the-seir-model-to-account-for-imperfect-detection",
+    "href": "Presentations/seir-n-mixture/index.html#we-propose-the-seir-n-mixture-model-to-extend-the-seir-model-to-account-for-imperfect-detection",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "We propose the SEIR N-mixture model to extend the SEIR model to account for imperfect detection",
+    "text": "We propose the SEIR N-mixture model to extend the SEIR model to account for imperfect detection\n\nN-mixture models are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption\n\nAmerican Robin\nOregon Slender Salamander\n\nInitial extensions of the N-mixture model allowed for survival and recruitment processes much like you would see in a compartmental model"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#n-mixture-models-account-for-imperfect-detection-and-have-been-applied-to-disease",
+    "href": "Presentations/seir-n-mixture/index.html#n-mixture-models-account-for-imperfect-detection-and-have-been-applied-to-disease",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "N-mixture models account for imperfect detection and have been applied to disease",
+    "text": "N-mixture models account for imperfect detection and have been applied to disease\n\nN-mixture models are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption\n\nAmerican Robin\nOregon Slender Salamander\n\nInitial extensions of the N-mixture model allowed for survival and recruitment processes much like you would see in a compartment model"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
+    "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Covid-19’s incubation period requires an extension to the SIR compartment model",
+    "text": "Covid-19’s incubation period requires an extension to the SIR compartment model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period\nSEIR models don’t directly account for imperfect detection"
   }
 ]
