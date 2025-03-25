@@ -341,31 +341,29 @@ Ben Brintz
 </div>
 
 </section>
-<section class="slide level2">
-
-<div style="font-size: 50px; text-align: center;">
-<p>What do I mean by decision-making tools?</p>
-</div>
+<section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance</h2>
 <ul>
-<li class="fragment">Any system, algorithm, model, or process that automates or supplements decisions</li>
-<li class="fragment">Clinical prediction, finance, employment, and law enforcement</li>
-<li class="fragment">Output is most commonly a risk probability (0,1) or a score (Decision?)</li>
+<li class="fragment">Case reports undercount true infections due to asymptomatic cases and lack of access to testing</li>
+<li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
+<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”</li>
 </ul>
-<div class="fragment" title="Caution">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Caution</strong></p>
-</div>
-<div class="callout-content">
-<p>Disadvantaged/Sensitive groups are often included as features in models but ignored when assessing the performance of these tools</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+<section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Various approaches have been developed to estimate clinical detection rates</h2>
+<ul>
+<li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
+<li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
+<li class="fragment"><strong>SEIR models</strong> estimate the number of infections from observed cases and the distribution of the incubation period</li>
+</ul>
+</section>
+<section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-model" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Covid-19’s incubation period requires an extension to the SIR model</h2>
+<ul>
+<li class="fragment"><strong>SIR model</strong> assumes that individuals transition directly from susceptible to infectious</li>
+<li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period</li>
+<li class="fragment"><strong>SEIR models</strong> don’t directly account for imperfect detection</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -201,5 +201,26 @@
     "title": "Ben Brintz",
     "section": "",
     "text": "Ben J. Brintz\nben.brintz@hsc.utah.edu\nEDUCATION\nPhD in Statistics, Oregon State, Corvallis, OR, March 2018\n- Dissertation: A Normal Approximation to N-Mixture Models with Applications in Large Abundance Estimation and Disease Surveillance\nMS in Statistics, Oregon State, Corvallis, OR, June 2014\n- Conducted Unit/Sub-unit sample size study on second growth forest tree harvest effect on the Oregon Slender Salamander\n- Used simulation and Just Another Gibbs Sampler in R to implement multilevel logistic regression model for estimation and precision analysis across various settings\nBA in Mathematics/Statistics, Grinnell College, Grinnell, IA, May 2010"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
+    "href": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance",
+    "text": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance\n\nCase reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
+    "href": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Various approaches have been developed to estimate clinical detection rates",
+    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nSEIR models estimate the number of infections from observed cases and the distribution of the incubation period"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
+    "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Covid-19’s incubation period requires an extension to the SIR model",
+    "text": "Covid-19’s incubation period requires an extension to the SIR model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period\nSEIR models don’t directly account for imperfect detection"
   }
 ]
