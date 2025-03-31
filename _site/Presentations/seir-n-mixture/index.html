@@ -245,6 +245,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -341,24 +342,24 @@ Ben Brintz
 </div>
 
 </section>
-<section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2 scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance</h2>
+<section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2">
+<h2>The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance</h2>
 <ul>
 <li class="fragment">Case reports undercount true infections due to asymptomatic cases and lack of access to testing</li>
 <li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
 <li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”</li>
 </ul>
 </section>
-<section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2 scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Various approaches have been developed to estimate clinical detection rates</h2>
+<section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2">
+<h2>Various approaches have been developed to estimate clinical detection rates</h2>
 <ul>
 <li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
 <li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
 <li class="fragment"><strong>SEIR models</strong> estimate the number of infections from observed cases and the distribution of the incubation period</li>
 </ul>
 </section>
-<section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2 scrollable" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Covid-19’s incubation period requires an extension to the SIR compartment model</h2>
+<section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2">
+<h2>Covid-19’s incubation period requires an extension to the SIR compartment model</h2>
 <ul>
 <li class="fragment"><strong>SIR model</strong> assumes that individuals transition directly from susceptible to infectious</li>
 <li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period</li>
@@ -433,7 +434,7 @@ Ben Brintz
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

@@ -9,14 +9,15 @@ format:
     auto-animate-duration: 2
     revealjs-plugins: 
     theme: white
+    scrollable: true
     incremental: true
-    slideNumber: false  # Slide numbers (optional)
+    slideNumber: true  # Slide numbers (optional)
     transition: fade   # Smooth slide transitions
     title-slide-background: "white" # Ensure title slide background matches your style
     css: custom.css    # Link to your custom CSS file
 ---
 
-## The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance {auto-animate="true" .scrollable}
+## The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance {}
 
 - Case reports undercount true infections due to asymptomatic cases and lack of access to testing
 - Only the sickest got diagnosed with Covid early in the pandemic 
@@ -24,13 +25,13 @@ format:
 from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise
 trends among average Americans by surveying the participants of a marathon"
 
-## Various approaches have been developed to estimate clinical detection rates {auto-animate="true" .scrollable}
+## Various approaches have been developed to estimate clinical detection rates {}
 
 - **Back-calculation methods** estimate the number of infections from hospitalizations and deaths
 - **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
 - **SEIR models** estimate the number of infections from observed cases and the distribution of the incubation period
 
-## Covid-19's incubation period requires an extension to the SIR compartment model {auto-animate="true" .scrollable}
+## Covid-19's incubation period requires an extension to the SIR compartment model {}
 
 - **SIR model** assumes that individuals
 transition directly from susceptible to infectious

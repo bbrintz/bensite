@@ -13,13 +13,13 @@
     margin: 0 auto 0 auto;
   }
 
-/* custom.css */
+/* In custom.css */
 .reveal .slides section h1 {
-  font-size: 1.5em; /* Adjust this value to your desired size */
+  font-size: 1em; /* Adjust this value to your desired size */
 }
-
-
-
+.reveal h2 {
+  font-size: 1.1em; /* Example: Reduce h2 font size to 1.6em */
+}
 .reveal .slides section {
   --auto-animate-duration: 2s; /* Adjust this value to control the animation duration */
 }
@@ -43,18 +43,5 @@
     margin-bottom: -40px; /* Adjust this value to your liking */
 }
 
-@keyframes zoomInToRightHalf {
-  0% {
-    transform: scale(1) translate(0,0); /* Start with full image */
-  }
-  100% {
-    transform: scale(1.55) translate(-15%,-5%); /* Zoom to the right half and stop */
-  }
 
-}
 
-.zoom-effect {
-  animation: zoomInToRightHalf 10s ease-in-out forwards;
-  transform-origin: center;
-  animation-fill-mode: forwards; /* Ensures the animation stops at the last frame */
-}
