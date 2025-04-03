@@ -93,7 +93,7 @@ p <- ggplot() +
   geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
               alpha = 0.25, fill = "blue") +
   # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
-  geom_point(data = betas_time %>% filter(time==1), aes(x = index, y = Val), color = "red", size = 2) +
+  geom_point(data = betas_time %>% filter(time==1), aes(x = index, y = Val), size = 2) +
   labs(x = "Week", y = "Beta (transmission)") +
   theme_bw() +
   ylim(0, 5) 
@@ -116,7 +116,7 @@ p <- ggplot() +
   geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
               alpha = 0.25, fill = "blue") +
   # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
-  geom_point(data = betas_time, aes(x = index, y = Val), color = "red", size = 2) +
+  geom_point(data = betas_time, aes(x = index, y = Val), size = 2) +
   labs(x = "Week", y = "Beta (transmission)") +
   theme_bw() +
   ylim(0, 5) +
