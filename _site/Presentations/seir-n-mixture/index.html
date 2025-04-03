@@ -385,46 +385,52 @@ Ben Brintz
 <li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases like a SEIR latent space model</li>
 </ul>
 </section>
-<section id="test" class="slide level2">
-<h2>Test</h2>
-<style>
-  .fragment.blur {
-    filter: blur(10px);
-  }
-  .fragment.blur.visible {
-    filter: none;
-  }
-</style>
-<section>
-<p class="fragment custom blur">
-One
-</p>
-<p class="fragment custom blur">
-Two
-</p>
-<p class="fragment custom blur">
-Three
-</p>
-</section>
-</section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
-<div class="fragment custom blur">
-<p>model estimation allows for different start times of infections across health-districts,</p>
+<ul>
+<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
+<li class="fragment"><span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span></li>
+<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
+<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
+</ul>
+</section>
+<section id="model-estimation-allows-for-different-start-times-of-infections-across-health-districts" class="slide level2">
+<h2>Model estimation allows for different start times of infections across health-districts</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Salt Lake Utah Davis Weber-Morgan Southwest Utah Bear River
+ [1,]         0    0     0            0              0          0
+ [2,]         0    0     0            0              0          0
+ [3,]         0    0     0            0              0          0
+ [4,]         0    0     0            0              0          0
+ [5,]         0    0     0            0              0          0
+ [6,]         0    0     4            1              0          0
+ [7,]        52    0    10            9              0          0
+ [8,]       413   38   103            7              0          5
+ [9,]      1435  237   296          173              0         18
+[10,]      2488  911   487          238              0         45
+[11,]      2880  896   420          213              0         20
+[12,]      3397  953   295          165            206        212</code></pre>
 </div>
-<div class="fragment custom blur">
-<p>estimating an evolving transmission rate using a hierarchical AR(1) process</p>
 </div>
 </section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
 <ul>
-<li class="fragment">model estimation allows for different start times of infections across health-districts,</li>
-<li class="fragment">estimating an evolving transmission rate using a hierarchical AR(1) process</li>
-<li class="fragment">estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
-<li class="fragment">a novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
+<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
+<li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
+<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
+<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
 </ul>
 </section>
+<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
+<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1" class="slide level2">
+<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"></section>
 <section id="model-formulation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
 <p><span class="math display">\[
@@ -494,11 +500,11 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
 <p>Appears last</p>
 </div>
 </section>
-<section id="test-1" class="slide level2">
+<section id="test" class="slide level2">
 <h2>Test</h2>
 
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

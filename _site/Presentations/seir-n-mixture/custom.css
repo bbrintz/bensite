@@ -44,3 +44,11 @@
 }
 
 
+.blur-text {
+  filter: blur(4.5px);
+  transition: filter 0s;
+}
+/* Remove blur when the unblur class is added */
+.blur-text.unblur {
+  filter: blur(0);
+}

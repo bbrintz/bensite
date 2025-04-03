@@ -263,7 +263,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nmodel estimation allows for different start times of infections across health-districts,\n\n\nestimating an evolving transmission rate using a hierarchical AR(1) process"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions \nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#sir-model-state-1",
@@ -312,7 +312,7 @@
     "href": "Presentations/seir-n-mixture/index.html#test",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Test",
-    "text": "Test\n\n\n\nOne\n\n\nTwo\n\n\nThree"
+    "text": "Test"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#model-formulation",
@@ -347,7 +347,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nmodel estimation allows for different start times of infections across health-districts,\nestimating an evolving transmission rate using a hierarchical AR(1) process\nestimating an evolving recovery rate and incubation using beta-binomial transitions\na novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions \nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#test-1",
@@ -355,5 +355,40 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Test",
     "text": "Test"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-.incrementalfalse",
+    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-.incrementalfalse",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Our study has a number of novelties in the imperfect detection space {.incremental=“false”}",
+    "text": "Our study has a number of novelties in the imperfect detection space {.incremental=“false”}\n\nmodel estimation allows for different start times of infections across health-districts,\nestimating an evolving transmission rate using a hierarchical AR(1) process\nestimating an evolving recovery rate and incubation using beta-binomial transitions \na novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-incremental-false",
+    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-incremental-false",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Our study has a number of novelties in the imperfect detection space {incremental: false}",
+    "text": "Our study has a number of novelties in the imperfect detection space {incremental: false}\n\nmodel estimation allows for different start times of infections across health-districts,\nestimating an evolving transmission rate using a hierarchical AR(1) process\nestimating an evolving recovery rate and incubation using beta-binomial transitions \na novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "href": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Model estimation allows for different start times of infections across health-districts",
+    "text": "Model estimation allows for different start times of infections across health-districts\n\n\n      Salt Lake Utah Davis Weber-Morgan Southwest Utah Bear River\n [1,]         0    0     0            0              0          0\n [2,]         0    0     0            0              0          0\n [3,]         0    0     0            0              0          0\n [4,]         0    0     0            0              0          0\n [5,]         0    0     0            0              0          0\n [6,]         0    0     4            1              0          0\n [7,]        52    0    10            9              0          0\n [8,]       413   38   103            7              0          5\n [9,]      1435  237   296          173              0         18\n[10,]      2488  911   487          238              0         45\n[11,]      2880  896   420          213              0         20\n[12,]      3397  953   295          165            206        212"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
+    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
+    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
+    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
   }
 ]
