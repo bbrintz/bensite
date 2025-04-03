@@ -376,8 +376,129 @@ Ben Brintz
 </ul></li>
 <li class="fragment">Initial extensions of the <strong>N-mixture model</strong> allowed for survival and recruitment processes much like you would see in a compartment model</li>
 </ul>
+</section>
+<section id="seir-n-mixture-model-extends-the-n-mixture-model-to-account-for-the-incubation-period-and-imperfect-detection-and-population-size" class="slide level2">
+<h2>SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size</h2>
+<ul>
+<li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
+<li class="fragment">Observed counts are a function of the number of infectious individuals and the clinical detection rate</li>
+<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases like a SEIR latent space model</li>
+</ul>
+</section>
+<section id="test" class="slide level2">
+<h2>Test</h2>
+<style>
+  .fragment.blur {
+    filter: blur(10px);
+  }
+  .fragment.blur.visible {
+    filter: none;
+  }
+</style>
+<section>
+<p class="fragment custom blur">
+One
+</p>
+<p class="fragment custom blur">
+Two
+</p>
+<p class="fragment custom blur">
+Three
+</p>
+</section>
+</section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
+<h2>Our study has a number of novelties in the imperfect detection space</h2>
+<div class="fragment custom blur">
+<p>model estimation allows for different start times of infections across health-districts,</p>
+</div>
+<div class="fragment custom blur">
+<p>estimating an evolving transmission rate using a hierarchical AR(1) process</p>
+</div>
+</section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1" class="slide level2">
+<h2>Our study has a number of novelties in the imperfect detection space</h2>
+<ul>
+<li class="fragment">model estimation allows for different start times of infections across health-districts,</li>
+<li class="fragment">estimating an evolving transmission rate using a hierarchical AR(1) process</li>
+<li class="fragment">estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
+<li class="fragment">a novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
+</ul>
+</section>
+<section id="model-formulation" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="model-formulation-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><strong>For (t &gt; f_{i}):</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="model-formulation-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &amp;=
+  \begin{cases}
+    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="my-slide-title" class="slide level2 no-incremental">
+<h2>My Slide Title</h2>
+<div class="fragment" data-fragment-type="replace" data-fragment-index="1">
+<p>Appears first</p>
+</div>
+<div class="fragment" data-fragment-type="replace" data-fragment-index="2">
+<p>Appears second</p>
+</div>
+<div class="fragment" data-fragment-type="replace" data-fragment-index="3">
+<p>Appears last</p>
+</div>
+</section>
+<section id="test-1" class="slide level2">
+<h2>Test</h2>
 
-<div class="quarto-auto-generated-content">
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
@@ -593,6 +714,44 @@ Ben Brintz
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

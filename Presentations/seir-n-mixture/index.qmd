@@ -15,7 +15,9 @@ format:
     transition: fade   # Smooth slide transitions
     title-slide-background: "white" # Ensure title slide background matches your style
     css: custom.css    # Link to your custom CSS file
+
 ---
+
 
 ## The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance {}
 
@@ -44,3 +46,213 @@ transition directly from susceptible to infectious
     - American Robin
     - Oregon Slender Salamander 
 - Initial extensions of the **N-mixture model** allowed for survival and recruitment processes much like you would see in a compartment model
+
+## SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size
+- Individuals transition from susceptible to exposed to infectious
+- Observed counts are a function of the number of infectious individuals and the clinical detection rate
+- Our formulation was inspired by N-
+mixture models, but we put imperfect detection on incidence cases instead
+of prevalent cases like a SEIR latent space model
+
+## Test 
+
+<style>
+  .fragment.blur {
+    filter: blur(10px);
+  }
+  .fragment.blur.visible {
+    filter: none;
+  }
+</style>
+<section>
+  <p class="fragment custom blur">One</p>
+  <p class="fragment custom blur">Two</p>
+  <p class="fragment custom blur">Three</p>
+</section>
+
+## Our study has a number of novelties in the imperfect detection space
+
+::: {.fragment .custom .blur}
+model estimation allows for different start times of infections across health-districts, 
+:::
+
+::: {.fragment .custom .blur}
+estimating an evolving transmission rate using a hierarchical AR(1) process
+:::
+
+## Our study has a number of novelties in the imperfect detection space
+- model estimation allows for different start times of infections across health-districts, 
+- estimating an evolving transmission rate using a hierarchical AR(1) process
+- estimating an evolving recovery rate and incubation using beta-binomial transitions 
+- a novel computational solution to estimating dynamics in a discrete
+transmission model using a continuous approximation in STAN
+
+## Model Formulation {auto-animate="true"}
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+
+## Model Formulation {auto-animate="true"}
+
+
+**For \(t > f_{i}\):**
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+## Model Formulation {auto-animate="true"}
+$$
+\begin{aligned}
+S_{it} &= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &= 
+  \begin{cases}
+    SE_{it}, & \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, & \text{if } t > f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+## My Slide Title {.no-incremental}
+
+::: {.fragment data-fragment-type="replace" data-fragment-index="1"}
+Appears first
+:::
+
+::: {.fragment data-fragment-type="replace" data-fragment-index="2"}
+Appears second
+:::
+
+::: {.fragment data-fragment-type="replace" data-fragment-index="3"}
+Appears last
+:::
+
+## Test
+```{r,include=T,echo=F}
+# Install packages if you haven't already
+# install.packages("deSolve")
+# install.packages("tidyverse")
+# install.packages("gganimate")  # for animation (optional)
+
+library(deSolve)
+library(ggplot2)
+library(tidyr)
+# Uncomment the next line if you want to create an animated plot
+# library(gganimate)
+
+# Define the SEIR model function
+seir_model <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    # SEIR differential equations
+    dS <- -beta * S * I / N
+    dE <- beta * S * I / N - sigma * E
+    dI <- sigma * E - gamma * I
+    dR <- gamma * I
+    list(c(dS, dE, dI, dR))
+  })
+}
+
+# Total population and initial conditions
+N <- 1e3          # total population
+init_state <- c(S = N - 1, E = 0, I = 1, R = 0)
+
+# Model parameters
+parameters <- c(
+  beta = 1,      # transmission rate
+  sigma = 1/5.2,   # rate of progression from exposed to infectious (incubation period ~5.2 days)
+  gamma = 1/2.9,   # recovery rate (infectious period ~2.9 days)
+  N = N
+)
+
+# Time vector (days)
+times <- seq(0, 160, by = 1)
+
+# Solve the differential equations
+seir_out <- ode(y = init_state, times = times, func = seir_model, parms = parameters)
+seir_df <- as.data.frame(seir_out)
+
+# Convert data to long format for ggplot2
+seir_long <- pivot_longer(seir_df, cols = c("S", "E", "I", "R"), 
+                          names_to = "Compartment", values_to = "Count")
+
+# Create a cool static plot using ggplot2
+p <- ggplot(seir_long, aes(x = time, y = Count, color = Compartment)) +
+  geom_line(size = 1.2) +
+  labs(
+    title = "SEIR Model Simulation",
+    subtitle = "Dynamics of Susceptible, Exposed, Infectious, and Recovered populations",
+    x = "Time (days)",
+    y = "Number of Individuals",
+    color = "Compartment"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 16, hjust = 0.5),
+    axis.title = element_text(face = "bold")
+  ) +
+  scale_color_manual(values = c("S" = "#2780e3", "E" = "#f39c12", "I" = "#e74c3c", "R" = "#27ae60"))
+
+# Print the static plot
+print(p)
+
+# --- Optional: Animated Plot using gganimate ---
+# Uncomment the following block if you want to create an animated plot.
+#
+# anim <- ggplot(seir_long, aes(x = time, y = Count, color = Compartment)) +
+#   geom_line(size = 1.2) +
+#   labs(
+#     title = 'SEIR Model Simulation: Day {frame_time}',
+#     x = 'Time (days)',
+#     y = 'Number of Individuals'
+#   ) +
+#   transition_reveal(time) +
+#   theme_minimal(base_size = 14) +
+#   theme(
+#     plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+#     axis.title = element_text(face = "bold")
+#   ) +
+#   scale_color_manual(values = c("S" = "#2780e3", "E" = "#f39c12", "I" = "#e74c3c", "R" = "#27ae60"))
+#
+# # To view the animation in RStudio
+# animate(anim, nframes = 160, fps = 10)
+#
+# # To save the animation as a GIF file
+# anim_save("SEIR_model_animation.gif", animation = anim)
+```
