@@ -119,7 +119,7 @@ p <- ggplot() +
   ylim(0, 5) +
   transition_time(time)
 
-anim=animate(p,nframes = 100, fps = 10)
+anim=animate(p,nframes = 100, fps = 20)
 #animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
 
 anim
