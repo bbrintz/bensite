@@ -61,12 +61,15 @@ of prevalent cases like a SEIR latent space model
 -   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
 
 ## Model estimation allows for different start times of infections across health-districts
-```{r}
-#| label: head
-#| echo: false
-#| include: true
 
-readRDS('head_dat.rds')[,1:6]
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+TT=30
+N_C=11
+dat=readRDS('raw_dat.rds')
+first=readRDS('first.rds')
+dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),first=rep(first,each=TT-1)) %>% 
+  ggplot(aes(x=date,y=Cases)) + geom_line() + geom_vline(aes(xintercept=first),color="red") + facet_wrap(~County,scales="free_y") + theme_bw() + ylab("New Cases") + xlab("Date")
 
 ```
 

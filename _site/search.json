@@ -375,7 +375,7 @@
     "href": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Model estimation allows for different start times of infections across health-districts",
-    "text": "Model estimation allows for different start times of infections across health-districts\n\n\n      Salt Lake Utah Davis Weber-Morgan Southwest Utah Bear River\n [1,]         0    0     0            0              0          0\n [2,]         0    0     0            0              0          0\n [3,]         0    0     0            0              0          0\n [4,]         0    0     0            0              0          0\n [5,]         0    0     0            0              0          0\n [6,]         0    0     4            1              0          0\n [7,]        52    0    10            9              0          0\n [8,]       413   38   103            7              0          5\n [9,]      1435  237   296          173              0         18\n[10,]      2488  911   487          238              0         45\n[11,]      2880  896   420          213              0         20\n[12,]      3397  953   295          165            206        212"
+    "text": "Model estimation allows for different start times of infections across health-districts"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
