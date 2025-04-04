@@ -214,7 +214,7 @@
     "href": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Various approaches have been developed to estimate clinical detection rates",
-    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nSEIR models estimate the number of infections from observed cases and the distribution of the incubation period"
+    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
@@ -411,5 +411,12 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "",
     "text": "Warning\n\n\nThis presentation will not include equations\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nYou will not have to learn notation\n\n\n\n\n\nUnless you really want to!"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3",
+    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Our study has a number of novelties in the imperfect detection space",
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
   }
 ]

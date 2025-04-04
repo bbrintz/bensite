@@ -391,7 +391,7 @@ Ben Brintz
 <ul>
 <li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
 <li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
-<li class="fragment"><strong>SEIR models</strong> estimate the number of infections from observed cases and the distribution of the incubation period</li>
+<li class="fragment"><strong>Compartment models</strong> estimate the number of infections from observed cases and the distribution of the incubation period</li>
 </ul>
 </section>
 <section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2">
@@ -464,6 +464,15 @@ Ben Brintz
 <h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3" class="slide level2">
+<h2>Our study has a number of novelties in the imperfect detection space</h2>
+<ul>
+<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
+<li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
+<li class="fragment">Estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
+<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
+</ul>
+</section>
 <section id="model-formulation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
 <p><span class="math display">\[

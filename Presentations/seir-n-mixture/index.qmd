@@ -45,9 +45,9 @@ trends among average Americans by surveying the participants of a marathon"
 
 - **Back-calculation methods** estimate the number of infections from hospitalizations and deaths
 - **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
-- **SEIR models** estimate the number of infections from observed cases and the distribution of the incubation period
+- **Compartment models** estimate the number of infections from observed cases and the distribution of the incubation period
 
-## Covid-19's incubation period requires an extension to the SIR compartment model {}
+## Covid-19's incubation period requires an extension to the SIR compartment model
 
 - **SIR model** assumes that individuals
 transition directly from susceptible to infectious
@@ -105,7 +105,7 @@ betas_time=readRDS("betas_time.rds")[[2]]
 p <- ggplot() +
   geom_line(data = log_betas_time, aes(x = index, y = exp(Val)), size = 1) +
   geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
-              alpha = 0.25, fill = "blue") +
+              alpha = 0.25, fill = "grey") +
   # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
   geom_point(data = betas_time %>% filter(time==1), aes(x = index, y = Val), size = 2) +
   labs(x = "Week", y = "Beta (transmission)") +
@@ -123,20 +123,24 @@ p
 library(tidyverse)
 library(gganimate)
 
+
+
 log_betas_time=readRDS("betas_time.rds")[[1]]
-betas_time=readRDS("betas_time.rds")[[2]]
+betas_time=readRDS("betas_time.rds")[[2]] %>% mutate(n2=as.factor(n2))
 p <- ggplot() +
   geom_line(data = log_betas_time, aes(x = index, y = exp(Val)), size = 1) +
   geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
-              alpha = 0.25, fill = "blue") +
+              alpha = 0.25, fill = "grey") +
   # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
-  geom_point(data = betas_time, aes(x = index, y = Val), size = 2) +
+  #geom_point(data = betas_time, aes(x = index, y = Val,group=n2,color=n2), size = 2) +
+  geom_line(data = betas_time %>% filter(n2 %in% 2:5), aes(x = index, y = Val,group=n2,color=n2)) + 
   labs(x = "Week", y = "Beta (transmission)") +
   theme_bw() +
-  ylim(0, 5) +
+  ylim(0, 5) + theme(legend.position = "none") +
+  scale_color_viridis_d(begin=.25,end=.75) +
   transition_time(time)
 
-anim=animate(p,nframes = 100, fps = 20)
+anim=animate(p,nframes = 200, fps = 20)
 #animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
 
 anim
@@ -171,6 +175,13 @@ anim <- animate(p, nframes = 100, fps = 5)
 
 anim
 ```
+
+## Our study has a number of novelties in the imperfect detection space 
+- Model estimation allows for different start times of infections across health-districts
+- Estimating an evolving transmission rate using a hierarchical AR(1) process
+- Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+- A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
+
 
 ## Model Formulation {auto-animate="true"}
 
