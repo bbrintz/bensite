@@ -141,16 +141,20 @@ library(tidyverse)
 library(gganimate)
 
 df <- readRDS("betabin_sim.rds")
+colnames(df)[2] = "Binomial Transition"
+colnames(df)[3] = "Beta-Binomial Transition"
 p <- df %>% 
-      mutate(Week = Time) %>% 
-      ggplot() +
-        geom_line(aes(x = Week, y = Fully_Binomial)) +
-        geom_line(aes(x = Week, y = Beta_Binomial)) +
+      mutate(Week = Time) %>% select(-Time) %>%
+      gather(Approach, Infections,-Week) %>%
+      ggplot(aes(x=Week,y=Infections,group=Approach,color=Approach)) +
+        geom_point() + geom_line() +
         labs(x = "Week", y = "Infections") +
-        theme_bw() +
-        transition_time(Week)
+        theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
+        theme(legend.position = "bottom") +
+        transition_reveal(Week)
 
-anim <- animate(p, nframes = 100, fps = 20)
+anim <- animate(p, nframes = 100, fps = 5)
+
 anim
 ```
 
