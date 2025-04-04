@@ -256,7 +256,7 @@
     "href": "Presentations/seir-n-mixture/index.html#seir-n-mixture-model-extends-the-n-mixture-model-to-account-for-the-incubation-period-and-imperfect-detection-and-population-size",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size",
-    "text": "SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size\n\nIndividuals transition from susceptible to exposed to infectious\nObserved counts are a function of the number of infectious individuals and the clinical detection rate\nOur formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases like a SEIR latent space model"
+    "text": "SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size\n\nIndividuals transition from susceptible to exposed to infectious\nObserved counts are a function of the number of infectious individuals and the clinical detection rate\nOur formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space",
@@ -390,5 +390,12 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
     "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
     "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2",
+    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
+    "section": "Our study has a number of novelties in the imperfect detection space",
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
   }
 ]

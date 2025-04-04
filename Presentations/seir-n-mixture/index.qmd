@@ -52,7 +52,7 @@ transition directly from susceptible to infectious
 - Observed counts are a function of the number of infectious individuals and the clinical detection rate
 - Our formulation was inspired by N-
 mixture models, but we put imperfect detection on incidence cases instead
-of prevalent cases like a SEIR latent space model
+of prevalent cases, similar to updatea SEIR latent space model
 
 ## Our study has a number of novelties in the imperfect detection space 
 - Model estimation allows for different start times of infections across health-districts
@@ -128,6 +128,13 @@ anim=animate(p,nframes = 100, fps = 20)
 anim
 ```
 
+## Our study has a number of novelties in the imperfect detection space 
+- Model estimation allows for different start times of infections across health-districts
+- Estimating an evolving transmission rate using a hierarchical AR(1) process
+- Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+-   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
+
+
 ## Model Formulation {auto-animate="true"}
 
 $$
@@ -137,6 +144,8 @@ EI_{if_i} &= I_{if_i},\\[6pt]
 S_{if_i} &= N_i - EI_{if_i}.
 \end{aligned}
 $$
+
+
 
 
 ## Model Formulation {auto-animate="true"}

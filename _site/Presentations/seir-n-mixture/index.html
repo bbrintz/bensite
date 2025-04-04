@@ -382,7 +382,7 @@ Ben Brintz
 <ul>
 <li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
 <li class="fragment">Observed counts are a function of the number of infectious individuals and the clinical detection rate</li>
-<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases like a SEIR latent space model</li>
+<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model</li>
 </ul>
 </section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
@@ -415,6 +415,15 @@ Ben Brintz
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"></section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2" class="slide level2">
+<h2>Our study has a number of novelties in the imperfect detection space</h2>
+<ul>
+<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
+<li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
+<li class="fragment">Estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
+<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
+</ul>
+</section>
 <section id="model-formulation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
 <p><span class="math display">\[
