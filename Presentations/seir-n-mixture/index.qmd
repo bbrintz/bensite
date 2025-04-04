@@ -135,6 +135,25 @@ anim
 -   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
 
 
+## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+df <- readRDS("betabin_sim.rds")
+p <- df %>% 
+      mutate(Week = Time) %>% 
+      ggplot() +
+        geom_line(aes(x = Week, y = Fully_Binomial)) +
+        geom_line(aes(x = Week, y = Beta_Binomial)) +
+        labs(x = "Week", y = "Infections") +
+        theme_bw() +
+        transition_time(Week)
+
+anim <- animate(p, nframes = 100, fps = 20)
+anim
+```
+
 ## Model Formulation {auto-animate="true"}
 
 $$

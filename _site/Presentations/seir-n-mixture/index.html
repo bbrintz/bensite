@@ -382,7 +382,7 @@ Ben Brintz
 <ul>
 <li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
 <li class="fragment">Observed counts are a function of the number of infectious individuals and the clinical detection rate</li>
-<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model</li>
+<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to updatea SEIR latent space model</li>
 </ul>
 </section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
@@ -424,6 +424,10 @@ Ben Brintz
 <li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
 </ul>
 </section>
+<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
+<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
 <section id="model-formulation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
 <p><span class="math display">\[
@@ -497,7 +501,7 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
 <h2>Test</h2>
 
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
