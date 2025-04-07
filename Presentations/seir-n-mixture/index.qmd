@@ -1,5 +1,5 @@
 ---
-title: "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model"
+title: "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR  Model"
 author: "Ben Brintz"
 institute: "Division of Epidemiology"
 format: 
@@ -25,13 +25,10 @@ This presentation will not include equations
 :::
 
 ::: {.callout-caution title="Warning" .fragment index="2"}
-You will not have to learn notation 
+You will not have to remember notation 
 :::
 
-::: {.fragment index="3" .fade-up}
 
-Unless you really want to!
-:::
 
 ## The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance {}
 
@@ -54,19 +51,13 @@ transition directly from susceptible to infectious
 - **SEIR model** adds an exposed compartment to account for the incubation period
 - **SEIR models** don't directly account for imperfect detection
 
-## N-mixture models account for imperfect detection and have been applied to disease
 
-- **N-mixture models** are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption
-    - American Robin
-    - Oregon Slender Salamander 
-- Initial extensions of the **N-mixture model** allowed for survival and recruitment processes much like you would see in a compartment model
-
-## SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size 
+## Our stochastic SEIR  model acounts for imperfect detection 
 - Individuals transition from susceptible to exposed to infectious
 - Observed counts are a function of the number of infectious individuals and the clinical detection rate
 - Our formulation was inspired by N-
 mixture models, but we put imperfect detection on incidence cases instead
-of prevalent cases, similar to updatea SEIR latent space model
+of prevalent cases, similar to a SEIR latent space model
 
 ## Our study has a number of novelties in the imperfect detection space 
 - Model estimation allows for different start times of infections across health-districts

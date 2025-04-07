@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Ben Brintz">
-  <title>Ben Brintz - Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model</title>
+  <title>Ben Brintz - Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -328,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model</h1>
+  <h1 class="title">Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -369,13 +369,10 @@ Ben Brintz
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>You will not have to learn notation</p>
+<p>You will not have to remember notation</p>
 </div>
 </div>
 </div>
-</div>
-<div class="fragment fade-up" data-index="3">
-<p>Unless you really want to!</p>
 </div>
 </section>
 <section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2">
@@ -402,23 +399,12 @@ Ben Brintz
 <li class="fragment"><strong>SEIR models</strong> don’t directly account for imperfect detection</li>
 </ul>
 </section>
-<section id="n-mixture-models-account-for-imperfect-detection-and-have-been-applied-to-disease" class="slide level2">
-<h2>N-mixture models account for imperfect detection and have been applied to disease</h2>
-<ul>
-<li class="fragment"><strong>N-mixture models</strong> are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption
-<ul>
-<li class="fragment">American Robin</li>
-<li class="fragment">Oregon Slender Salamander</li>
-</ul></li>
-<li class="fragment">Initial extensions of the <strong>N-mixture model</strong> allowed for survival and recruitment processes much like you would see in a compartment model</li>
-</ul>
-</section>
-<section id="seir-n-mixture-model-extends-the-n-mixture-model-to-account-for-the-incubation-period-and-imperfect-detection-and-population-size" class="slide level2">
-<h2>SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size</h2>
+<section id="our-stochastic-seir-model-acounts-for-imperfect-detection" class="slide level2">
+<h2>Our stochastic SEIR model acounts for imperfect detection</h2>
 <ul>
 <li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
 <li class="fragment">Observed counts are a function of the number of infectious individuals and the clinical detection rate</li>
-<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to updatea SEIR latent space model</li>
+<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model</li>
 </ul>
 </section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
