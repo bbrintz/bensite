@@ -1,6 +1,6 @@
 ---
 title: "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR  Model"
-author: "Ben Brintz"
+author: "Ben J. Brintz"
 institute: "Division of Epidemiology"
 format: 
   revealjs:
@@ -17,6 +17,7 @@ format:
     css: custom.css    # Link to your custom CSS file
 
 ---
+
 
 ## 
 
@@ -36,34 +37,104 @@ You will not have to remember notation
 - Only the sickest got diagnosed with Covid early in the pandemic 
 - "We must rely on data
 from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise
-trends among average Americans by surveying the participants of a marathon"
+trends among average Americans by surveying the participants of a marathon"  
+    - Utah Hero Project
+
 
 ## Various approaches have been developed to estimate clinical detection rates {}
 
 - **Back-calculation methods** estimate the number of infections from hospitalizations and deaths
 - **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
 - **Compartment models** estimate the number of infections from observed cases and the distribution of the incubation period
+    - E.g. SIR (Susceptible-Infectious-Recovered) models
+
 
 ## Covid-19's incubation period requires an extension to the SIR compartment model
 
 - **SIR model** assumes that individuals
 transition directly from susceptible to infectious
-- **SEIR model** adds an exposed compartment to account for the incubation period
+- **SEIR model** adds an exposed compartment to account for the incubation period (e.g. 5 days)
 - **SEIR models** don't directly account for imperfect detection
 
 
 ## Our stochastic SEIR  model acounts for imperfect detection 
 - Individuals transition from susceptible to exposed to infectious
-- Observed counts are a function of the number of infectious individuals and the clinical detection rate
-- Our formulation was inspired by N-
-mixture models, but we put imperfect detection on incidence cases instead
-of prevalent cases, similar to a SEIR latent space model
+- We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate
+- We assume incidence cases (E -> I, we call EI) are imperfectly detected 
 
 ## Our study has a number of novelties in the imperfect detection space 
+-   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
+- <span class="blur-text">Model estimation allows for different start times of infections across health-districts</span>
+-   <span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span>
+-   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
+
+## We approximate the binomial distribution with the inverse logit of a normal distribution
+- more efficient sampling and leverages the strength of gradient-based algorithms
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+library(patchwork)
+
+# Parameters
+n <- 200
+p <- 0.1
+nrep <- 1e4
+
+# Set up parameters for the inverse logit approach
+logit_mean <- log(p / (1 - p))
+logit_sd <- sqrt(1 / (n * p * (1 - p)))
+
+# Simulate samples
+set.seed(123)
+normal_samples <- rnorm(nrep, mean = logit_mean, sd = logit_sd)
+invlogit_samples <- plogis(normal_samples)
+binom_sim <- rbinom(nrep, size = n, prob = p)/n
+
+# Create a frame index so that we can build the densities gradually
+df_normal <- tibble(
+  sample = normal_samples,
+  frame = 1:nrep
+)
+df_invlogit <- tibble(
+  sample = invlogit_samples,
+  frame = 1:nrep
+)
+df_binom <- tibble(
+  sample = binom_sim,
+  frame = 1:nrep
+)
+
+# Left panel: density of normal samples (logit scale)
+p1 <- ggplot(df_normal, aes(x = sample)) +
+  geom_density(fill = "cornflowerblue", alpha = 0.5) +
+  labs(title = "Cumulative Density of Normal Samples (Logit Scale)",
+       x = "Logit Value", y = "Density") +
+  transition_time(frame) +
+  ease_aes('linear')
+
+# Right panel: density of inverse logit samples versus binomial density
+p2 <- ggplot() +
+  geom_density(data = df_invlogit, aes(x = sample), fill = "orange", alpha = 0.5) +
+  geom_density(data = df_binom, aes(x = sample), color = "black", size = 1, linetype = "dashed") +
+  labs(title = "Cumulative Density: Inverse Logit vs. Binom", 
+       x = "Proportion", y = "Density") +
+  transition_time(frame) +
+  ease_aes('linear')
+
+# Combine the two panels using patchwork:
+combined <- p1 + p2 + plot_layout(ncol = 2, widths = c(1, 1))
+
+# Animate
+anim <- animate(combined, nframes = 200, fps = 20)
+anim
+
+```
+
+## Our study has a number of novelties in the imperfect detection space 
+-   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
 - Model estimation allows for different start times of infections across health-districts
 -   <span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span>
 -   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
--   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
 
 ## Model estimation allows for different start times of infections across health-districts
 
@@ -78,12 +149,12 @@ dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),fir
 
 ```
 
+
 ## Our study has a number of novelties in the imperfect detection space 
+-   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
 - Model estimation allows for different start times of infections across health-districts
 -   Estimating an evolving transmission rate using a hierarchical AR(1) process
 -   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
--   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
-
 
 ## Estimating an evolving transmission rate using a hierarchical AR(1) process
 
@@ -107,6 +178,8 @@ p <- ggplot() +
 
 p
 ```
+
+
 
 ## Estimating an evolving transmission rate using a hierarchical AR(1) process
 
@@ -138,10 +211,10 @@ anim
 ```
 
 ## Our study has a number of novelties in the imperfect detection space 
+- A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
 - Model estimation allows for different start times of infections across health-districts
 - Estimating an evolving transmission rate using a hierarchical AR(1) process
 - Estimating an evolving recovery rate and incubation using beta-binomial transitions 
--   <span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span>
 
 
 ## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
@@ -167,11 +240,7 @@ anim <- animate(p, nframes = 100, fps = 5)
 anim
 ```
 
-## Our study has a number of novelties in the imperfect detection space 
-- Model estimation allows for different start times of infections across health-districts
-- Estimating an evolving transmission rate using a hierarchical AR(1) process
-- Estimating an evolving recovery rate and incubation using beta-binomial transitions 
-- A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
+
 
 
 ## Model Formulation {auto-animate="true"}

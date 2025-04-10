@@ -207,14 +207,14 @@
     "href": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance",
-    "text": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance\n\nCase reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”"
+    "text": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance\n\nCase reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”\n\nUtah Hero Project"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
     "href": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Various approaches have been developed to estimate clinical detection rates",
-    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period"
+    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period\n\nE.g. SIR (Susceptible-Infectious-Recovered) models"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
@@ -242,7 +242,7 @@
     "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Covid-19’s incubation period requires an extension to the SIR compartment model",
-    "text": "Covid-19’s incubation period requires an extension to the SIR compartment model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period\nSEIR models don’t directly account for imperfect detection"
+    "text": "Covid-19’s incubation period requires an extension to the SIR compartment model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period (e.g. 5 days)\nSEIR models don’t directly account for imperfect detection"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html",
@@ -263,7 +263,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions \nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#sir-model-state-1",
@@ -347,7 +347,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions \nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#test-1",
@@ -396,7 +396,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
@@ -417,13 +417,34 @@
     "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
     "href": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our stochastic SEIR model acounts for imperfect detection",
-    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nObserved counts are a function of the number of infectious individuals and the clinical detection rate\nOur formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model"
+    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-1",
+    "href": "Presentations/seir-n-mixture/index.html#section-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Warning\n\n\nThis presentation will not include equations\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nYou will not have to remember notation"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#the-team",
+    "href": "Presentations/seir-n-mixture/index.html#the-team",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "The Team",
+    "text": "The Team"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution",
+    "href": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "We approximate the binomial distribution with the inverse logit of a normal distribution",
+    "text": "We approximate the binomial distribution with the inverse logit of a normal distribution\n\nmore efficient sampling and leverages the strength of gradient-based algorithms"
   }
 ]

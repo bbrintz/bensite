@@ -10,7 +10,7 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.554">
 
-  <meta name="author" content="Ben Brintz">
+  <meta name="author" content="Ben J. Brintz">
   <title>Ben Brintz - Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -333,7 +333,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Ben Brintz 
+Ben J. Brintz 
 </div>
         <p class="quarto-title-affiliation">
             Division of Epidemiology
@@ -380,7 +380,10 @@ Ben Brintz
 <ul>
 <li class="fragment">Case reports undercount true infections due to asymptomatic cases and lack of access to testing</li>
 <li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
-<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”</li>
+<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”
+<ul>
+<li class="fragment">Utah Hero Project</li>
+</ul></li>
 </ul>
 </section>
 <section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2">
@@ -388,14 +391,17 @@ Ben Brintz
 <ul>
 <li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
 <li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
-<li class="fragment"><strong>Compartment models</strong> estimate the number of infections from observed cases and the distribution of the incubation period</li>
+<li class="fragment"><strong>Compartment models</strong> estimate the number of infections from observed cases and the distribution of the incubation period
+<ul>
+<li class="fragment">E.g. SIR (Susceptible-Infectious-Recovered) models</li>
+</ul></li>
 </ul>
 </section>
 <section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2">
 <h2>Covid-19’s incubation period requires an extension to the SIR compartment model</h2>
 <ul>
 <li class="fragment"><strong>SIR model</strong> assumes that individuals transition directly from susceptible to infectious</li>
-<li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period</li>
+<li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period (e.g.&nbsp;5 days)</li>
 <li class="fragment"><strong>SEIR models</strong> don’t directly account for imperfect detection</li>
 </ul>
 </section>
@@ -403,62 +409,69 @@ Ben Brintz
 <h2>Our stochastic SEIR model acounts for imperfect detection</h2>
 <ul>
 <li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
-<li class="fragment">Observed counts are a function of the number of infectious individuals and the clinical detection rate</li>
-<li class="fragment">Our formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to a SEIR latent space model</li>
+<li class="fragment">We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate</li>
+<li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected</li>
 </ul>
 </section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
 <ul>
+<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
+<li class="fragment"><span class="blur-text">Model estimation allows for different start times of infections across health-districts</span></li>
+<li class="fragment"><span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span></li>
+<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
+</ul>
+</section>
+<section id="we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution" class="slide level2">
+<h2>We approximate the binomial distribution with the inverse logit of a normal distribution</h2>
+<ul>
+<li class="fragment">more efficient sampling and leverages the strength of gradient-based algorithms</li>
+</ul>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1" class="slide level2">
+<h2>Our study has a number of novelties in the imperfect detection space</h2>
+<ul>
+<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
 <li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
 <li class="fragment"><span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span></li>
 <li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
-<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
 </ul>
 </section>
 <section id="model-estimation-allows-for-different-start-times-of-infections-across-health-districts" class="slide level2">
 <h2>Model estimation allows for different start times of infections across health-districts</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1" class="slide level2">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
 <ul>
+<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
 <li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
 <li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
 <li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
-<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
 </ul>
 </section>
 <section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1" class="slide level2">
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"></section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2" class="slide level2">
-<h2>Our study has a number of novelties in the imperfect detection space</h2>
-<ul>
-<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
-<li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
-<li class="fragment">Estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
-<li class="fragment"><span class="blur-text">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</span></li>
-</ul>
-</section>
-<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
-<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
 <section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
 <ul>
+<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
 <li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
 <li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
 <li class="fragment">Estimating an evolving recovery rate and incubation using beta-binomial transitions</li>
-<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
 </ul>
 </section>
+<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
+<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.gif" class="r-stretch"></section>
 <section id="model-formulation" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
 <p><span class="math display">\[
@@ -532,7 +545,7 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
 <h2>Test</h2>
 
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
