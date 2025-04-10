@@ -76,7 +76,7 @@ library(gganimate)
 library(patchwork)
 
 # Parameters
-n <- 200
+n <- 2000
 p <- 0.1
 nrep <- 1e4
 
@@ -92,43 +92,43 @@ binom_sim <- rbinom(nrep, size = n, prob = p)/n
 
 # Create a frame index so that we can build the densities gradually
 df_normal <- tibble(
-  sample = normal_samples,
-  frame = 1:nrep
+  sample = rep(normal_samples, each=10),
+  frame = rep(1:10, each=nrep)
 )
 df_invlogit <- tibble(
-  sample = invlogit_samples,
-  frame = 1:nrep
+  sample = rep(invlogit_samples, each=10),
+  frame = rep(11:20, each=nrep)
 )
 df_binom <- tibble(
-  sample = binom_sim,
-  frame = 1:nrep
+  sample = rep(binom_sim, each=10),
+  frame = rep(11:20, each=nrep)
 )
 
-# Left panel: density of normal samples (logit scale)
-p1 <- ggplot(df_normal, aes(x = sample)) +
-  geom_density(fill = "cornflowerblue", alpha = 0.5) +
-  labs(title = "Cumulative Density of Normal Samples (Logit Scale)",
-       x = "Logit Value", y = "Density") +
-  transition_time(frame) +
-  ease_aes('linear')
+
+
+
 
 # Right panel: density of inverse logit samples versus binomial density
 p2 <- ggplot() +
-  geom_density(data = df_invlogit, aes(x = sample), fill = "orange", alpha = 0.5) +
-  geom_density(data = df_binom, aes(x = sample), color = "black", size = 1, linetype = "dashed") +
+  geom_density(data = df_normal, aes(x = sample), fill = "orange", alpha = 0.5) +
+    geom_density(data = df_invlogit, aes(x = sample), fill = "orange", alpha = 0.5) +
+
+  geom_density(data = df_binom, aes(x = sample), color = "black", linewidth = 1, linetype = "dashed") +
   labs(title = "Cumulative Density: Inverse Logit vs. Binom", 
        x = "Proportion", y = "Density") +
-  transition_time(frame) +
+  transition_reveal(frame) +
   ease_aes('linear')
 
+
+
 # Combine the two panels using patchwork:
-combined <- p1 + p2 + plot_layout(ncol = 2, widths = c(1, 1))
+#combined <- p1 + p2 + plot_layout(ncol = 2, widths = c(1, 1))
 
 # Animate
-anim <- animate(combined, nframes = 200, fps = 20)
+anim <- animate(p2, nframes = 200, fps = 20)
 anim
-
 ```
+
 
 ## Our study has a number of novelties in the imperfect detection space 
 -   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
