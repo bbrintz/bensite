@@ -62,7 +62,14 @@ transition directly from susceptible to infectious
 - We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate
 - We assume incidence cases (E -> I, we call EI) are imperfectly detected 
 
-## Our study has a number of novelties in the stochastic SEIR model and imperfect detection space 
+## 
+:::{.fragment .grow .fade-in-then-out .top-right}
+Our study has a number of novelties in the stochastic SEIR model and imperfect detection space 
+:::
+
+:::{.fragment .fade-in .top-right}
+Novelty #1 
+:::
 
 ## A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN {auto-animate=true auto-animate-easing="ease-in"}
 
@@ -144,7 +151,10 @@ anim
 ```
 :::
 
-
+##
+:::{.fragment .fade-up .top-right}
+Novelty #2
+:::
 
 ## Model estimation allows for different start times of infections across health-districts
 
@@ -159,7 +169,10 @@ dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),fir
 
 ```
 
-
+##
+:::{.fragment .fade-right .top-right}
+Novelty #3
+:::
 
 ## Estimating an evolving transmission rate using a hierarchical AR(1) process
 
@@ -215,12 +228,10 @@ anim=animate(p,nframes = 200, fps = 20)
 anim
 ```
 
-## Our study has a number of novelties in the imperfect detection space 
-- A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
-- Model estimation allows for different start times of infections across health-districts
-- Estimating an evolving transmission rate using a hierarchical AR(1) process
-- Estimating an evolving recovery rate and incubation using beta-binomial transitions 
-
+##
+:::{.fragment .fade-down .top-right}
+Novelty #4
+:::
 
 ## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
 ```{r,include=T,echo=F,cache=TRUE}

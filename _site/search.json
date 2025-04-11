@@ -431,7 +431,7 @@
     "href": "Presentations/seir-n-mixture/index.html#section-1",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "",
-    "text": "Warning\n\n\nThis presentation will not include equations\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nYou will not have to remember notation"
+    "text": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space\n\n\nNovelty #1"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#the-team",
@@ -474,5 +474,26 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space",
     "text": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-2",
+    "href": "Presentations/seir-n-mixture/index.html#section-2",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #2"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-3",
+    "href": "Presentations/seir-n-mixture/index.html#section-3",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #3"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-4",
+    "href": "Presentations/seir-n-mixture/index.html#section-4",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #4"
   }
 ]

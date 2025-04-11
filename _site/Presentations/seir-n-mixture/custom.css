@@ -70,3 +70,9 @@
   filter: blur(0);
 }
 
+.reveal .slides section .top-right {
+  position: absolute;
+  top: 275px;
+  left: 150px;    
+  right: 150px;  
+}
