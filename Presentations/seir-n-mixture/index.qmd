@@ -6,7 +6,7 @@ format:
   revealjs:
     auto-animate-easing: ease-in-out
     auto-animate-unmatched: false
-    auto-animate-duration: 2
+    auto-animate-duration: 1
     revealjs-plugins: 
     theme: white
     incremental: true
@@ -62,13 +62,20 @@ transition directly from susceptible to infectious
 - We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate
 - We assume incidence cases (E -> I, we call EI) are imperfectly detected 
 
-## Our study has a number of novelties in the imperfect detection space 
--   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
-- <span class="blur-text">Model estimation allows for different start times of infections across health-districts</span>
--   <span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span>
--   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
+## Our study has a number of novelties in the stochastic SEIR model and imperfect detection space 
 
-## We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
+## A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN {auto-animate=true auto-animate-easing="ease-in"}
+
+:::{.fragment fragment-index=1}
+The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn't allow discrete priors 
+:::
+
+:::{.fragment fragment-index=2 data-id="box" auto-animate-delay="0.1" width="80%" height="80%"} 
+We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
+:::
+
+## A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN {auto-animate=true auto-animate-easing="ease-in"}
+:::{data-id="box" width="75%" height="75%"} 
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 library(gganimate)
@@ -116,7 +123,7 @@ df_binom <- data.frame(x=(947:1053)/n,y=dbinom(947:1053, size=n, prob=p)*n,plt="
 
 dat=rbind(df_normal, df_invlogit) %>% #filter(frame==500) %>%
  mutate(plt=factor(plt,levels=c("Inverse Logit of Normal","Normal Distribution"))) %>%
- filter(frame>15)
+ filter(frame>2)
 # Left panel: density of normal samples (logit scale)
 p1 <- ggplot(dat, aes(x = sample)) +
   geom_histogram(aes(y=..density..)) + facet_wrap(~plt,scale="free") + 
@@ -135,13 +142,9 @@ anim <- animate(p1, nframes = 200, fps = 5)
 anim
 
 ```
+:::
 
 
-## Our study has a number of novelties in the imperfect detection space 
--   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
-- Model estimation allows for different start times of infections across health-districts
--   <span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span>
--   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
 
 ## Model estimation allows for different start times of infections across health-districts
 
@@ -157,11 +160,6 @@ dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),fir
 ```
 
 
-## Our study has a number of novelties in the imperfect detection space 
--   A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN
-- Model estimation allows for different start times of infections across health-districts
--   Estimating an evolving transmission rate using a hierarchical AR(1) process
--   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
 
 ## Estimating an evolving transmission rate using a hierarchical AR(1) process
 

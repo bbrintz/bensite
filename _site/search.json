@@ -453,5 +453,26 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms",
     "text": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\n\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\n\n\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-stochastic-seir-model-and-imperfect-detection-space",
+    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-stochastic-seir-model-and-imperfect-detection-space",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space",
+    "text": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space"
   }
 ]

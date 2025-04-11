@@ -413,41 +413,36 @@ Ben J. Brintz
 <li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected</li>
 </ul>
 </section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
-<h2>Our study has a number of novelties in the imperfect detection space</h2>
-<ul>
-<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
-<li class="fragment"><span class="blur-text">Model estimation allows for different start times of infections across health-districts</span></li>
-<li class="fragment"><span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span></li>
-<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
-</ul>
+<section id="our-study-has-a-number-of-novelties-in-the-stochastic-seir-model-and-imperfect-detection-space" class="slide level2">
+<h2>Our study has a number of novelties in the stochastic SEIR model and imperfect detection space</h2>
 </section>
-<section id="we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution-to-sample-more-efficiently-and-leverage-the-strength-of-gradient-based-algorithms" class="slide level2">
-<h2>We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1" class="slide level2">
-<h2>Our study has a number of novelties in the imperfect detection space</h2>
-<ul>
-<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
-<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
-<li class="fragment"><span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span></li>
-<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
-</ul>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</h2>
+<div class="fragment" data-fragment-index="1">
+<p>The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</p>
+</div>
+<div class="fragment" data-fragment-index="2" data-id="box" data-auto-animate-delay="0.1" width="80%" height="80%">
+<p>We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</p>
+</div>
+</section>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</h2>
+<div data-id="box" width="75%" height="75%">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="model-estimation-allows-for-different-start-times-of-infections-across-health-districts" class="slide level2">
 <h2>Model estimation allows for different start times of infections across health-districts</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2" class="slide level2">
-<h2>Our study has a number of novelties in the imperfect detection space</h2>
-<ul>
-<li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
-<li class="fragment">Model estimation allows for different start times of infections across health-districts</li>
-<li class="fragment">Estimating an evolving transmission rate using a hierarchical AR(1) process</li>
-<li class="fragment"><span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span></li>
-</ul>
-</section>
 <section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
@@ -456,7 +451,7 @@ Ben J. Brintz
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
-<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3" class="slide level2">
+<section id="our-study-has-a-number-of-novelties-in-the-imperfect-detection-space" class="slide level2">
 <h2>Our study has a number of novelties in the imperfect detection space</h2>
 <ul>
 <li class="fragment">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</li>
@@ -576,7 +571,7 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease-in-out",
-'autoAnimateDuration': 2,
+'autoAnimateDuration': 1,
 'autoAnimateUnmatched': false,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
