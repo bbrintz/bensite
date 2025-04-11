@@ -446,5 +446,12 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "We approximate the binomial distribution with the inverse logit of a normal distribution",
     "text": "We approximate the binomial distribution with the inverse logit of a normal distribution\n\nmore efficient sampling and leverages the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution-to-sample-more-efficiently-and-leverage-the-strength-of-gradient-based-algorithms",
+    "href": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution-to-sample-more-efficiently-and-leverage-the-strength-of-gradient-based-algorithms",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms",
+    "text": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
   }
 ]

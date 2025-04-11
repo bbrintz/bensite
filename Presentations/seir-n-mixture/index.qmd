@@ -68,8 +68,7 @@ transition directly from susceptible to infectious
 -   <span class="blur-text">Estimating an evolving transmission rate using a hierarchical AR(1) process</span>
 -   <span class="blur-text">Estimating an evolving recovery rate and incubation using beta-binomial transitions </span>
 
-## We approximate the binomial distribution with the inverse logit of a normal distribution
-- more efficient sampling and leverages the strength of gradient-based algorithms
+## We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 library(gganimate)
@@ -77,8 +76,8 @@ library(patchwork)
 
 # Parameters
 n <- 2000
-p <- 0.1
-nrep <- 1e4
+p <- 0.5
+nrep <- 2000
 
 # Set up parameters for the inverse logit approach
 logit_mean <- log(p / (1 - p))
@@ -88,45 +87,53 @@ logit_sd <- sqrt(1 / (n * p * (1 - p)))
 set.seed(123)
 normal_samples <- rnorm(nrep, mean = logit_mean, sd = logit_sd)
 invlogit_samples <- plogis(normal_samples)
-binom_sim <- rbinom(nrep, size = n, prob = p)/n
+#binom_sim <- rbinom(nrep, size = n, prob = p)/n
 
 # Create a frame index so that we can build the densities gradually
 df_normal <- tibble(
-  sample = rep(normal_samples, each=10),
-  frame = rep(1:10, each=nrep)
+  sample = normal_samples
+
 )
 df_invlogit <- tibble(
-  sample = rep(invlogit_samples, each=10),
-  frame = rep(11:20, each=nrep)
-)
-df_binom <- tibble(
-  sample = rep(binom_sim, each=10),
-  frame = rep(11:20, each=nrep)
+  sample = invlogit_samples,
+
 )
 
 
+df_normal=df_normal %>% mutate(index=row_number()) %>%
+  split(.$index) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "frame") %>% 
+  mutate(frame = as.integer(frame), plt="Normal Distribution")
 
+df_invlogit=df_invlogit%>% mutate(index=row_number()) %>%
+  split(.$index) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "frame") %>% 
+  mutate(frame = as.integer(frame),plt="Inverse Logit of Normal")
 
+df_binom <- data.frame(x=(947:1053)/n,y=dbinom(947:1053, size=n, prob=p)*n,plt="Inverse Logit of Normal")
 
-# Right panel: density of inverse logit samples versus binomial density
-p2 <- ggplot() +
-  geom_density(data = df_normal, aes(x = sample), fill = "orange", alpha = 0.5) +
-    geom_density(data = df_invlogit, aes(x = sample), fill = "orange", alpha = 0.5) +
-
-  geom_density(data = df_binom, aes(x = sample), color = "black", linewidth = 1, linetype = "dashed") +
-  labs(title = "Cumulative Density: Inverse Logit vs. Binom", 
-       x = "Proportion", y = "Density") +
-  transition_reveal(frame) +
-  ease_aes('linear')
+dat=rbind(df_normal, df_invlogit) %>% #filter(frame==500) %>%
+ mutate(plt=factor(plt,levels=c("Inverse Logit of Normal","Normal Distribution"))) %>%
+ filter(frame>15)
+# Left panel: density of normal samples (logit scale)
+p1 <- ggplot(dat, aes(x = sample)) +
+  geom_histogram(aes(y=..density..)) + facet_wrap(~plt,scale="free") + 
+  geom_line(aes(x=x,y=y),data=df_binom, linetype="dashed") +
+   theme_bw() + scale_fill_viridis_d(begin=.4,end=.6) +
+   xlab("Sampled Value") + ylab("Density") +
+  transition_states(frame) + ease_aes('linear') 
 
 
 
 # Combine the two panels using patchwork:
-#combined <- p1 + p2 + plot_layout(ncol = 2, widths = c(1, 1))
 
+# Save the animation
+anim <- animate(p1, nframes = 200, fps = 5)
 # Animate
-anim <- animate(p2, nframes = 200, fps = 20)
 anim
+
 ```
 
 
