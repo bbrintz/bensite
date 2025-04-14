@@ -156,7 +156,7 @@ Novelty #2
 :::
 
 ## Model estimation allows for different start times of infections across health-districts
-
+:::{.fragment fragment-index=1 .fade-in} 
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 TT=30
@@ -167,7 +167,10 @@ dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),fir
   ggplot(aes(x=date,y=Cases)) + geom_line() + geom_vline(aes(xintercept=first),color="red") + facet_wrap(~County,scales="free_y") + theme_bw() + ylab("New Cases") + xlab("Date")
 
 ```
-
+:::
+::: {.fragment .callout-note .fade-in fragment-index=2}
+This observed data aren't smooth SEIR curves
+:::
 ##
 :::{.fragment .fade-right .top-right}
 Novelty #3
