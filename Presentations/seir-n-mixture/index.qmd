@@ -21,13 +21,12 @@ format:
 
 ## 
 
-::: {.callout-caution title="Warning" .fragment index="1"}
-This presentation will not include equations 
+::: {.callout-caution  collapse="true"}
+## This presentation will not include equations 
+
+Statisticians may feel unsettled by the lack of notation to remember 
 :::
 
-::: {.callout-caution title="Warning" .fragment index="2"}
-You will not have to remember notation 
-:::
 
 
 
@@ -256,10 +255,18 @@ anim <- animate(p, nframes = 100, fps = 5)
 anim
 ```
 
+## 
+:::{.fragment .grow .fade-in-then-out .top-right}
+Some Results 
+:::
 
-##
-![Estimates of Incident Cases](utah_020325_bb.png){width=75%,height=75%}
+:::{.fragment .grow .fade-in-then-out .top-right}
+![](utah_p_dens_020325.png){width=75%,height=75%}
+:::
 
+:::{.fragment .fade-in-then-out}
+![](utah_020325_bb.png){width=50%,height=50%}
+:::
 
 
 ## The Team
