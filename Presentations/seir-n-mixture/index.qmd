@@ -257,8 +257,23 @@ anim
 ```
 
 
+##
+![Estimates of Incident Cases](utah_020325_bb.png){width=75%,height=75%}
 
 
+
+## The Team
+:::{.fragment fragment-index=1}
+![](Lisa.jpg){.absolute top=200 left=0 width="300" height="300"}
+
+![](Claudio.jpg){.absolute top=50 right=430 width="250" height="325"}
+
+![](rob.jpg){.absolute bottom=0 right=50 width="300" height="300"}
+:::
+
+:::{.fragment fragment-index=2}
+![](till.png){.absolute top=0 right=100 width="300" height="300"}
+:::
 ## Model Formulation {auto-animate="true"}
 
 $$

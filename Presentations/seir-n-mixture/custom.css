@@ -17,15 +17,15 @@
 
 
 /* Add a second image (top right) on the title slide */
-.reveal .slides > section:first-child h1:first-child::after {
+/* .reveal .slides > section:first-child h1:first-child::after {
   content: "";
   position: absolute;
   bottom: 0px;    /* adjust vertical position */
-  right: 20px;  /* adjust horizontal position */
-  width: 150px; /* adjust size as needed */
-  height: 150px; /* adjust size as needed */
-  background-image: url('rip3.png'); /* update with your second image path */
-  background-size: contain;
+/*  right: 20px;  /* adjust horizontal position */
+/*  width: 150px; /* adjust size as needed */
+/*  height: 150px; /* adjust size as needed */
+/*  background-image: url('rip3.png'); /* update with your second image path */
+ /* background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
