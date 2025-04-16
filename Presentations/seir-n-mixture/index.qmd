@@ -59,28 +59,28 @@ transition directly from susceptible to infectious
 ## Our stochastic SEIR  model acounts for imperfect detection 
 - Individuals transition from susceptible to exposed to infectious
 - We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate
-- We assume incidence cases (E -> I, we call EI) are imperfectly detected 
+- We assume incidence cases (E -> I, we call EI) are imperfectly detected
+    - Currently assumed to be constant across time.
+
+  
 
 ## 
 :::{.fragment .grow .fade-in-then-out .top-right}
-Our study has a number of novelties in the stochastic SEIR model and imperfect detection space 
+Our study has a number of novelties in the stochastic SEIR model space 
 :::
 
 :::{.fragment .fade-in .top-right}
 Novelty #1 
 :::
 
-## A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN {auto-animate=true auto-animate-easing="ease-in"}
+## A novel computational solution to estimating dynamics in a discrete transmission model  {auto-animate=true auto-animate-easing="ease-in"}
 
-:::{.fragment fragment-index=1}
-The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn't allow discrete priors 
-:::
+- We used a continuous approximation in STAN with non-informative priors
+-  The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn't allow discrete priors 
+- We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
 
-:::{.fragment fragment-index=2 data-id="box" auto-animate-delay="0.1" width="80%" height="80%"} 
-We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
-:::
 
-## A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN {auto-animate=true auto-animate-easing="ease-in"}
+## A novel computational solution to estimating dynamics in a discrete transmission model  {auto-animate=true auto-animate-easing="ease-in"}
 :::{data-id="box" width="75%" height="75%"} 
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)

@@ -393,29 +393,31 @@ Ben J. Brintz
 <ul>
 <li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
 <li class="fragment">We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate</li>
-<li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected</li>
+<li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected
+<ul>
+<li class="fragment">Currently assumed to be constant across time.</li>
+</ul></li>
 </ul>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
 <div class="fragment grow fade-in-then-out top-right">
-<p>Our study has a number of novelties in the stochastic SEIR model and imperfect detection space</p>
+<p>Our study has a number of novelties in the stochastic SEIR model space</p>
 </div>
 <div class="fragment fade-in top-right">
 <p>Novelty #1</p>
 </div>
 </section>
-<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
-<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</h2>
-<div class="fragment" data-fragment-index="1">
-<p>The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</p>
-</div>
-<div class="fragment" data-fragment-index="2" data-id="box" data-auto-animate-delay="0.1" width="80%" height="80%">
-<p>We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</p>
-</div>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
+<ul>
+<li class="fragment">Used a continuous approximation in STAN with non-informative priors</li>
+<li class="fragment">The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</li>
+<li class="fragment">We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</li>
+</ul>
 </section>
-<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
-<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN</h2>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
 <div data-id="box" width="75%" height="75%">
 <div class="cell">
 <div class="cell-output-display">

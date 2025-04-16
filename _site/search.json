@@ -424,14 +424,14 @@
     "href": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our stochastic SEIR model acounts for imperfect detection",
-    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected"
+    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected\n\nCurrently assumed to be constant across time."
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#section-1",
     "href": "Presentations/seir-n-mixture/index.html#section-1",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "",
-    "text": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space\n\n\nNovelty #1"
+    "text": "Our study has a number of novelties in the stochastic SEIR model space\n\n\nNovelty #1"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#the-team",
@@ -459,7 +459,7 @@
     "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\n\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\n\n\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1",
@@ -523,5 +523,26 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Questions?",
     "text": "Questions?"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-with-non-informative-priors",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-with-non-informative-priors",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN with non-informative priors",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN with non-informative priors\n\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\n\n\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model\n\nUsed a continuous approximation in STAN with non-informative priors\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model"
   }
 ]
