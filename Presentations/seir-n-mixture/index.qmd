@@ -284,6 +284,9 @@ Some Results
 :::{.fragment fragment-index=2}
 ![](till.png){.absolute top=0 right=100 width="300" height="300"}
 :::
+
+## Questions? 
+
 ## Model Formulation {auto-animate="true"}
 
 $$
