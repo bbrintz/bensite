@@ -61,6 +61,7 @@ transition directly from susceptible to infectious
 - We fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate
 - We assume incidence cases (E -> I, we call EI) are imperfectly detected
     - Currently assumed to be constant across time.
+    - But it does allow all dynamics parameters to vary over time and space 
 
   
 

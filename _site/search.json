@@ -424,7 +424,7 @@
     "href": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Our stochastic SEIR model acounts for imperfect detection",
-    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected\n\nCurrently assumed to be constant across time."
+    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed counts which are a function of the number of infectious individuals and the clinical detection rate\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected\n\nCurrently assumed to be constant across time.\nBut it does allow all dynamics parameters to vary over time and space"
   },
   {
     "objectID": "Presentations/seir-n-mixture/index.html#section-1",
