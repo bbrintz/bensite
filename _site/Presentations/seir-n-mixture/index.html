@@ -412,7 +412,7 @@ Ben J. Brintz
 <section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
 <h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
 <ul>
-<li class="fragment">We used a continuous approximation in STAN with non-informative priors</li>
+<li class="fragment">We used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)</li>
 <li class="fragment">The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</li>
 <li class="fragment">We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</li>
 </ul>
@@ -575,6 +575,46 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
 </section>
 <section id="model-formulation-3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+    \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
+    B_{it} &amp;= \phi B_{i,t-1} + \sigma \epsilon_{it}, t&gt;1
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &amp;=
+  \begin{cases}
+    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="model-formulation-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it}, p \Bigr) \\
+\end{aligned}
+\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
     \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
