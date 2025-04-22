@@ -231,6 +231,7 @@ anim=animate(p,nframes = 200, fps = 20)
 anim
 ```
 
+
 ##
 :::{.fragment .fade-down .top-right}
 Novelty #4
@@ -391,8 +392,7 @@ $$
 
 ## Model Formulation {auto-animate="true"}
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it}, p \Bigr) \\
 \end{aligned}
 $$
