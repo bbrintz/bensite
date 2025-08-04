@@ -19,7 +19,10 @@ website:
         text: Sierpinski Triangle
       - href: Presentations/index.qmd
         text: Presentations
-        
+    tools:
+      - icon: github        # social icons appear on right
+        href: https://github.com/bbrintz
+
  # A golden color, inspired by some tones in the image
 
 format:

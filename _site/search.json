@@ -14,6 +14,167 @@
     "text": "Acknowledged race is a social concept\n\ni.e., it’s a system to classify individuals rather than reflect biology\nI have heard the biology is more regional than racial\n\nDoes removal of race reduce performance of the decision-making tool?\n\n\n\nIt depends on how you’re measuring performance"
   },
   {
+    "objectID": "Presentations/seir-n-mixture/index.html#section",
+    "href": "Presentations/seir-n-mixture/index.html#section",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "This presentation will not include equations\n\n\nStatisticians may feel unsettled by the lack of notation to remember"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
+    "href": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance",
+    "text": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance\n\nCase reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”\n\nUtah Hero Project"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
+    "href": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Various approaches have been developed to estimate clinical detection rates",
+    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period\n\nE.g. SIR (Susceptible-Infectious-Recovered) models"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
+    "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Covid-19’s incubation period requires an extension to the SIR compartment model",
+    "text": "Covid-19’s incubation period requires an extension to the SIR compartment model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period (e.g. 5 days)\nSEIR models don’t directly account for imperfect detection"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
+    "href": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Our stochastic SEIR model acounts for imperfect detection",
+    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed county-level counts of new cases\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected\n\nCurrently assumed to be constant across time.\nBut it does allow all dynamics parameters to vary over time and space"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-1",
+    "href": "Presentations/seir-n-mixture/index.html#section-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Our study has a number of novelties in the stochastic SEIR model space\n\n\nNovelty #1"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model\n\nWe used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
+    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
+    "text": "A novel computational solution to estimating dynamics in a discrete transmission model"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-2",
+    "href": "Presentations/seir-n-mixture/index.html#section-2",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #2"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "href": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model estimation allows for different start times of infections across health-districts",
+    "text": "Model estimation allows for different start times of infections across health-districts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis observed data aren’t smooth SEIR curves"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-3",
+    "href": "Presentations/seir-n-mixture/index.html#section-3",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #3"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
+    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
+    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
+    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-4",
+    "href": "Presentations/seir-n-mixture/index.html#section-4",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Novelty #4"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
+    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Estimating an evolving recovery rate and incubation using beta-binomial transitions",
+    "text": "Estimating an evolving recovery rate and incubation using beta-binomial transitions"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#section-5",
+    "href": "Presentations/seir-n-mixture/index.html#section-5",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "",
+    "text": "Some Results"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#the-team",
+    "href": "Presentations/seir-n-mixture/index.html#the-team",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "The Team",
+    "text": "The Team"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#questions",
+    "href": "Presentations/seir-n-mixture/index.html#questions",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Questions?",
+    "text": "Questions?"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation",
+    "href": "Presentations/seir-n-mixture/index.html#model-formulation",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model Formulation",
+    "text": "Model Formulation\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-1",
+    "href": "Presentations/seir-n-mixture/index.html#model-formulation-1",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model Formulation",
+    "text": "Model Formulation\nFor (t &gt; f_{i}):\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-2",
+    "href": "Presentations/seir-n-mixture/index.html#model-formulation-2",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model Formulation",
+    "text": "Model Formulation\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-3",
+    "href": "Presentations/seir-n-mixture/index.html#model-formulation-3",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model Formulation",
+    "text": "Model Formulation\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-4",
+    "href": "Presentations/seir-n-mixture/index.html#model-formulation-4",
+    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
+    "section": "Model Formulation",
+    "text": "Model Formulation\n\\[\\begin{aligned}\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it}, p \\Bigr) \\\\\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
+  },
+  {
     "objectID": "Presentations/mmdis/index.html#there-is-some-controversy-surrounding-the-egfr-equation",
     "href": "Presentations/mmdis/index.html#there-is-some-controversy-surrounding-the-egfr-equation",
     "title": "Measuring and Mitigating Disparity of Decision-Making Tools",
@@ -189,6 +350,13 @@
     "text": "Interactive Sierpinski Triangle"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\nCheck out my presentations\n",
+    "section": "",
+    "text": "Check out my presentations\n\nView Presentations"
+  },
+  {
     "objectID": "Presentations/index.html",
     "href": "Presentations/index.html",
     "title": "Presentations",
@@ -201,369 +369,5 @@
     "title": "Ben Brintz",
     "section": "",
     "text": "Ben J. Brintz\nben.brintz@hsc.utah.edu\nEDUCATION\nPhD in Statistics, Oregon State, Corvallis, OR, March 2018\n- Dissertation: A Normal Approximation to N-Mixture Models with Applications in Large Abundance Estimation and Disease Surveillance\nMS in Statistics, Oregon State, Corvallis, OR, June 2014\n- Conducted Unit/Sub-unit sample size study on second growth forest tree harvest effect on the Oregon Slender Salamander\n- Used simulation and Just Another Gibbs Sampler in R to implement multilevel logistic regression model for estimation and precision analysis across various settings\nBA in Mathematics/Statistics, Grinnell College, Grinnell, IA, May 2010"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
-    "href": "Presentations/seir-n-mixture/index.html#the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance",
-    "text": "The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance\n\nCase reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”\n\nUtah Hero Project"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
-    "href": "Presentations/seir-n-mixture/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Various approaches have been developed to estimate clinical detection rates",
-    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period\n\nE.g. SIR (Susceptible-Infectious-Recovered) models"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
-    "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-model",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "Covid-19’s incubation period requires an extension to the SIR model",
-    "text": "Covid-19’s incubation period requires an extension to the SIR model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period\nSEIR models don’t directly account for imperfect detection"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#we-propose-the-seir-n-mixture-model-to-extend-the-seir-model-to-account-for-imperfect-detection",
-    "href": "Presentations/seir-n-mixture/index.html#we-propose-the-seir-n-mixture-model-to-extend-the-seir-model-to-account-for-imperfect-detection",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "We propose the SEIR N-mixture model to extend the SEIR model to account for imperfect detection",
-    "text": "We propose the SEIR N-mixture model to extend the SEIR model to account for imperfect detection\n\nN-mixture models are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption\n\nAmerican Robin\nOregon Slender Salamander\n\nInitial extensions of the N-mixture model allowed for survival and recruitment processes much like you would see in a compartmental model"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#n-mixture-models-account-for-imperfect-detection-and-have-been-applied-to-disease",
-    "href": "Presentations/seir-n-mixture/index.html#n-mixture-models-account-for-imperfect-detection-and-have-been-applied-to-disease",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "N-mixture models account for imperfect detection and have been applied to disease",
-    "text": "N-mixture models account for imperfect detection and have been applied to disease\n\nN-mixture models are traditionally used in ecology to estimate the abundance of a species from counts under the imperfect detection assumption\n\nAmerican Robin\nOregon Slender Salamander\n\nInitial extensions of the N-mixture model allowed for survival and recruitment processes much like you would see in a compartment model"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
-    "href": "Presentations/seir-n-mixture/index.html#covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Covid-19’s incubation period requires an extension to the SIR compartment model",
-    "text": "Covid-19’s incubation period requires an extension to the SIR compartment model\n\nSIR model assumes that individuals transition directly from susceptible to infectious\nSEIR model adds an exposed compartment to account for the incubation period (e.g. 5 days)\nSEIR models don’t directly account for imperfect detection"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html",
-    "href": "Presentations/seir-n-mixture/index.html",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "",
-    "text": "Case reports undercount true infections due to asymptomatic cases and lack of access to testing\nOnly the sickest got diagnosed with Covid early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#seir-n-mixture-model-extends-the-n-mixture-model-to-account-for-the-incubation-period-and-imperfect-detection-and-population-size",
-    "href": "Presentations/seir-n-mixture/index.html#seir-n-mixture-model-extends-the-n-mixture-model-to-account-for-the-incubation-period-and-imperfect-detection-and-population-size",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size",
-    "text": "SEIR N-mixture model extends the N-mixture model to account for the incubation period and imperfect detection and population size\n\nIndividuals transition from susceptible to exposed to infectious\nObserved counts are a function of the number of infectious individuals and the clinical detection rate\nOur formulation was inspired by N- mixture models, but we put imperfect detection on incidence cases instead of prevalent cases, similar to updatea SEIR latent space model"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#sir-model-state-1",
-    "href": "Presentations/seir-n-mixture/index.html#sir-model-state-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "SIR Model State 1",
-    "text": "SIR Model State 1\nIn the initial state, the compartments are arranged horizontally.\n\n\nS: Susceptible\n\n\nI: Infectious\n\n\nR: Recovered\n\n\nClick (or use the arrow keys) to transition to the next state…"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#sir-model-state-2",
-    "href": "Presentations/seir-n-mixture/index.html#sir-model-state-2",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "SIR Model State 2",
-    "text": "SIR Model State 2\nNow the boxes move to new positions to illustrate, for example, a shift in the epidemic dynamics (e.g., decreasing susceptibles, peaking infectious, increasing recovered). Notice how the same elements smoothly change position!\n\n\nS: Susceptible\n\n\nI: Infectious\n\n\nR: Recovered"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#explanation",
-    "href": "Presentations/seir-n-mixture/index.html#explanation",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "Explanation",
-    "text": "Explanation\n\nSlide 1 (“State 1”) shows the initial configuration.\nSlide 2 (“State 2”) rearranges the same elements (using the same data-auto-animate-id values), and Reveal.js automatically animates the changes.\nYou can adjust positions, styling, and text to better fit your presentation narrative."
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#sir-model-initial-state",
-    "href": "Presentations/seir-n-mixture/index.html#sir-model-initial-state",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "SIR Model: Initial State",
-    "text": "SIR Model: Initial State\n\n\nSSusceptible ::: {data-id=“cell” style=“background: #ffffff; width: 50px; height: 50px; border-radius: 50%; margin-top: 20px; margin-left: 75px; text-align: center; line-height: 50px; color: black;”} x\n\n\n\nIInfectious\n\n\nRRecovered\n\n:::\nClick for the next state…"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#sir-model-infection-transition",
-    "href": "Presentations/seir-n-mixture/index.html#sir-model-infection-transition",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "SIR Model: Infection Transition",
-    "text": "SIR Model: Infection Transition\n\n\nSSusceptible\n\n\nIInfectious ::: {data-id=“cell” style=“background: #ffffff; width: 50px; height: 50px; border-radius: 50%; margin-top: 20px; margin-left: 75px; text-align: center; line-height: 50px; color: black;”} x\n\n\n\nRRecovered\n\n:::\nClick for the next state…"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#sir-model-recovery-transition",
-    "href": "Presentations/seir-n-mixture/index.html#sir-model-recovery-transition",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "SIR Model: Recovery Transition",
-    "text": "SIR Model: Recovery Transition\n\n\nS\n\n\nI\n\n\nR ::: {data-id=“cell” style=“background: #ffffff; width: 50px; height: 50px; border-radius: 50%; margin-top: 20px; margin-left: 75px; text-align: center; line-height: 50px; color: black;”} x"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#test",
-    "href": "Presentations/seir-n-mixture/index.html#test",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Test",
-    "text": "Test"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-1",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\nFor (t &gt; f_{i}):\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-2",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation-2",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#my-slide-title",
-    "href": "Presentations/seir-n-mixture/index.html#my-slide-title",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "My Slide Title",
-    "text": "My Slide Title\n\nAppears first\n\n\nAppears second\n\n\nAppears last"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#test-1",
-    "href": "Presentations/seir-n-mixture/index.html#test-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "Test",
-    "text": "Test"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-.incrementalfalse",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-.incrementalfalse",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "Our study has a number of novelties in the imperfect detection space {.incremental=“false”}",
-    "text": "Our study has a number of novelties in the imperfect detection space {.incremental=“false”}\n\nmodel estimation allows for different start times of infections across health-districts,\nestimating an evolving transmission rate using a hierarchical AR(1) process\nestimating an evolving recovery rate and incubation using beta-binomial transitions \na novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-incremental-false",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-incremental-false",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using the SEIR N-Mixture Model",
-    "section": "Our study has a number of novelties in the imperfect detection space {incremental: false}",
-    "text": "Our study has a number of novelties in the imperfect detection space {incremental: false}\n\nmodel estimation allows for different start times of infections across health-districts,\nestimating an evolving transmission rate using a hierarchical AR(1) process\nestimating an evolving recovery rate and incubation using beta-binomial transitions \na novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
-    "href": "Presentations/seir-n-mixture/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model estimation allows for different start times of infections across health-districts",
-    "text": "Model estimation allows for different start times of infections across health-districts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis observed data aren’t smooth SEIR curves"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
-    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
-    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
-    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
-    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-2",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
-    "href": "Presentations/seir-n-mixture/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Estimating an evolving recovery rate and incubation using beta-binomial transitions",
-    "text": "Estimating an evolving recovery rate and incubation using beta-binomial transitions"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section",
-    "href": "Presentations/seir-n-mixture/index.html#section",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "This presentation will not include equations\n\n\nStatisticians may feel unsettled by the lack of notation to remember"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-imperfect-detection-space-3",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our study has a number of novelties in the imperfect detection space",
-    "text": "Our study has a number of novelties in the imperfect detection space\n\nA novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN\nModel estimation allows for different start times of infections across health-districts\nEstimating an evolving transmission rate using a hierarchical AR(1) process\nEstimating an evolving recovery rate and incubation using beta-binomial transitions"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
-    "href": "Presentations/seir-n-mixture/index.html#our-stochastic-seir-model-acounts-for-imperfect-detection",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our stochastic SEIR model acounts for imperfect detection",
-    "text": "Our stochastic SEIR model acounts for imperfect detection\n\nIndividuals transition from susceptible to exposed to infectious\nWe fit a model to observed county-level counts of new cases\nWe assume incidence cases (E -&gt; I, we call EI) are imperfectly detected\n\nCurrently assumed to be constant across time.\nBut it does allow all dynamics parameters to vary over time and space"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-1",
-    "href": "Presentations/seir-n-mixture/index.html#section-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Our study has a number of novelties in the stochastic SEIR model space\n\n\nNovelty #1"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#the-team",
-    "href": "Presentations/seir-n-mixture/index.html#the-team",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "The Team",
-    "text": "The Team"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution",
-    "href": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "We approximate the binomial distribution with the inverse logit of a normal distribution",
-    "text": "We approximate the binomial distribution with the inverse logit of a normal distribution\n\nmore efficient sampling and leverages the strength of gradient-based algorithms"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution-to-sample-more-efficiently-and-leverage-the-strength-of-gradient-based-algorithms",
-    "href": "Presentations/seir-n-mixture/index.html#we-approximate-the-binomial-distribution-with-the-inverse-logit-of-a-normal-distribution-to-sample-more-efficiently-and-leverage-the-strength-of-gradient-based-algorithms",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms",
-    "text": "We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan",
-    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1",
-    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-stochastic-seir-model-and-imperfect-detection-space",
-    "href": "Presentations/seir-n-mixture/index.html#our-study-has-a-number-of-novelties-in-the-stochastic-seir-model-and-imperfect-detection-space",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space",
-    "text": "Our study has a number of novelties in the stochastic SEIR model and imperfect detection space"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-2",
-    "href": "Presentations/seir-n-mixture/index.html#section-2",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Novelty #2"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-3",
-    "href": "Presentations/seir-n-mixture/index.html#section-3",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Novelty #3"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-4",
-    "href": "Presentations/seir-n-mixture/index.html#section-4",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Novelty #4"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-5",
-    "href": "Presentations/seir-n-mixture/index.html#section-5",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Some Results"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#the-team-1",
-    "href": "Presentations/seir-n-mixture/index.html#the-team-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "The Team",
-    "text": "The Team"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#section-6",
-    "href": "Presentations/seir-n-mixture/index.html#section-6",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "",
-    "text": "Estimates of Incident Cases"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#questions",
-    "href": "Presentations/seir-n-mixture/index.html#questions",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Questions?",
-    "text": "Questions?"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-with-non-informative-priors",
-    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-using-a-continuous-approximation-in-stan-with-non-informative-priors",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN with non-informative priors",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model using a continuous approximation in STAN with non-informative priors\n\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\n\n\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
-    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model\n\nWe used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)\nThe binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors\nWe approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
-    "href": "Presentations/seir-n-mixture/index.html#a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "A novel computational solution to estimating dynamics in a discrete transmission model",
-    "text": "A novel computational solution to estimating dynamics in a discrete transmission model"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-3",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation-3",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-4",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation-4",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\n\\[\\begin{aligned}\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it}, p \\Bigr) \\\\\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/seir-n-mixture/index.html#model-formulation-5",
-    "href": "Presentations/seir-n-mixture/index.html#model-formulation-5",
-    "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
-    "section": "Model Formulation",
-    "text": "Model Formulation\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]\n\\[\nii_{it} ~ binomial(EI_{it}, p);\n\\]"
   }
 ]
