@@ -4,8 +4,14 @@ theme: default
 ---
 
 ::: columns
+::: column
+![](images/project1.png){width="90%"}  
 
-![](images/project1.png){width="50%"}  
+![](images/project2.png){width="90%"}  
+:::
+::: column
+![](images/project3.png){width="90%"}  
 
-
+![](images/project4.png){width="90%"}  
+:::
 :::
