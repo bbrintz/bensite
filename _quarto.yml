@@ -15,8 +15,8 @@ website:
         text: Home
       - href: https://scholar.google.com/citations?user=nYA8PAsAAAAJ&hl=en
         text: Publications
-      - href: sierpinski.qmd
-        text: Sierpinski Triangle
+      - href: woodworking.qmd
+        text: Woodworking
       - href: Presentations/index.qmd
         text: Presentations
     tools:

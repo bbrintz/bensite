@@ -46,3 +46,10 @@
 .navbar .navbar-nav .nav-item {
   margin: 0 1rem;
 }
+
+.gallery img,
+.columns img {
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
