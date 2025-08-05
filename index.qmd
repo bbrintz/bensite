@@ -53,7 +53,7 @@ format: html
 </style>
 
 <video autoplay muted loop playsinline id="bg-video">
-  <source src="quant_video.mp4" type="video/mp4">
+  <source src="quant_video3.mp4" type="video/mp4">
 </video>
 
 <div class="overlay-text">
