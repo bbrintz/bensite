@@ -53,10 +53,10 @@ format: html
 </style>
 
 <video autoplay muted loop playsinline id="bg-video">
-  <source src="quant_video.mp4" type="video/mp4">
+  <source src="quant_video2.mp4" type="video/mp4">
 </video>
 
 <div class="overlay-text">
-  <h1>Check out my presentations</h1>
+  <h1>Check it out</h1>
   <a class="cta-button" href="Presentations/index.qmd">View Presentations</a>
 </div>
