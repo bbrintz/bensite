@@ -5,13 +5,13 @@ theme: default
 
 ::: columns
 ::: column
-![](images/project1.png){width="90%"}  
+![](images/project1.jpg){width="90%" loading="lazy"}  
 
-![](images/project2.png){width="90%"}  
+![](images/project2.jpg){width="90%" loading="lazy"}  
 :::
 ::: column
-![](images/project3.png){width="90%"}  
+![](images/project3.jpg){width="90%" loading="lazy"}  
 
-![](images/project4.png){width="90%"}  
+![](images/project4.jpg){width="90%" loading="lazy"}  
 :::
 :::
