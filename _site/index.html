@@ -162,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
     background-color: #fff;
   }
 
-  #bg-video {
+#bg-video {
   position: fixed;
   top: 0;
   left: 0;
@@ -170,6 +170,10 @@ ul.task-list li input[type="checkbox"] {
   height: 100vh;
   object-fit: cover;
   z-index: -1;
+  filter: contrast(1.1) saturate(1.1);
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
 }
 </style>
 <video autoplay="" muted="" loop="" playsinline="" id="bg-video">
