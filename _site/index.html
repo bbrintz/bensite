@@ -170,6 +170,21 @@ ul.task-list li input[type="checkbox"] {
   object-fit: contain;       /* don’t crop or zoom—show the full frame */
   z-index: -1;
 }
+
+.bottom-text-box {
+  position: absolute;
+  top: 575px;       /* the “cut” point where the box meets the video */
+  bottom: 0;        /* hug the bottom of the viewport */
+  left: 0;
+  width: 100vw;     /* full‐width */
+  padding: 1rem 2rem;
+  background: #fff; /* solid white */
+  border-radius: 1rem 1rem 0 0; 
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+  overflow-y: auto; /* scroll if content is tall */
+}
+
+
 </style>
 <video autoplay="" muted="" loop="" playsinline="" id="bg-video">
 <source src="vidtest.mp4" type="video/mp4">
@@ -179,6 +194,11 @@ ul.task-list li input[type="checkbox"] {
 Welcome
 </h1>
 <p><a class="cta-button" href="./Presentations/index.html">View Presentations</a></p>
+</div>
+<div class="bottom-text-box">
+<p>
+Here’s some extra description or call-to-action text that sits at the bottom of the screen, in a white box with rounded corners.
+</p>
 </div>
 
 
