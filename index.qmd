@@ -42,17 +42,12 @@ format: html
   }
 
 #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
+  position: absolute;        /* or fixed if you truly want it behind everything */
+  top: 0; left: 0;
+  width: 100%;               /* fill the container’s width */
+  height: auto;              /* keep its aspect ratio */
+  object-fit: contain;       /* don’t crop or zoom—show the full frame */
   z-index: -1;
-  filter: contrast(1.1) saturate(1.1);
-  image-rendering: crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: pixelated;
 }
 </style>
 
