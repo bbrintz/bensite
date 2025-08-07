@@ -2,7 +2,13 @@
 format: html
 theme: default
 ---
-
+::: {=html}
+<style>
+body {
+  background-color: #32435C;
+}
+</style>
+:::
 ::: columns
 ::: column
 ![](images/project1.jpg){width="90%" loading="lazy"}  

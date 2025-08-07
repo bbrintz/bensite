@@ -1,8 +1,20 @@
 ---
-title: "Presentations"   
-format: html
-theme: default
+format: html 
 ---
+
+::: {=html}
+<style>
+body {
+  background-color: #32435C;
+}
+a, a:link, a:visited {
+  color: white;
+}
+a:hover, a:active {
+  color: #EEEEEE;
+}
+</style>
+:::
 
 
 - [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/)
