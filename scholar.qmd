@@ -16,6 +16,60 @@ a, a:link, a:visited {
 a:hover, a:active {
   color: #EEEEEE;
 }
+
+/* Force gt table to be transparent on dark backgrounds */
+.gt_table_container { background-color: transparent !important; }
+.gt_table,
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle,
+.gt_table .gt_col_headings,
+.gt_table .gt_table_body,
+.gt_table .gt_row,
+.gt_table .gt_group_heading,
+.gt_table .gt_sourcenotes,
+.gt_table .gt_footnotes,
+.gt_table .gt_stub,
+.gt_table .gt_stub_row_group,
+.gt_table .gt_column_spanner,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_empty_group_heading {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+/* Make gt table headers transparent */
+.gt_table .gt_col_heading,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_column_spanner {
+  background-color: transparent !important;
+}
+/* Force column heading text to white */
+.gt_table .gt_col_heading {
+  color: #ffffff !important;
+}
+/* Reaffirm transparent backgrounds for heading/title/subtitle */
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle {
+  background-color: transparent !important;
+}
+/* Remove zebra striping/gradients if present */
+.gt_table .gt_striped {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* Subtle borders that work on dark mode */
+.gt_table, .gt_table th, .gt_table td {
+  border-color: rgba(255,255,255,0.25) !important;
+}
+/* Links inside the table */
+.gt_table a, .gt_table a:link, .gt_table a:visited {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+.gt_table a:hover, .gt_table a:active {
+  color: #EEEEEE !important;
+}
 </style>
 :::
 ```{r, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}

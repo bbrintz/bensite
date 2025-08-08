@@ -134,28 +134,82 @@ a, a:link, a:visited {
 a:hover, a:active {
   color: #EEEEEE;
 }
+
+/* Force gt table to be transparent on dark backgrounds */
+.gt_table_container { background-color: transparent !important; }
+.gt_table,
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle,
+.gt_table .gt_col_headings,
+.gt_table .gt_table_body,
+.gt_table .gt_row,
+.gt_table .gt_group_heading,
+.gt_table .gt_sourcenotes,
+.gt_table .gt_footnotes,
+.gt_table .gt_stub,
+.gt_table .gt_stub_row_group,
+.gt_table .gt_column_spanner,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_empty_group_heading {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+/* Make gt table headers transparent */
+.gt_table .gt_col_heading,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_column_spanner {
+  background-color: transparent !important;
+}
+/* Force column heading text to white */
+.gt_table .gt_col_heading {
+  color: #ffffff !important;
+}
+/* Reaffirm transparent backgrounds for heading/title/subtitle */
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle {
+  background-color: transparent !important;
+}
+/* Remove zebra striping/gradients if present */
+.gt_table .gt_striped {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* Subtle borders that work on dark mode */
+.gt_table, .gt_table th, .gt_table td {
+  border-color: rgba(255,255,255,0.25) !important;
+}
+/* Links inside the table */
+.gt_table a, .gt_table a:link, .gt_table a:visited {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+.gt_table a:hover, .gt_table a:active {
+  color: #EEEEEE !important;
+}
 </style>
 </div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="mbmzspjate" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mbmzspjate table {
+<div id="zbxdeulrzr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zbxdeulrzr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mbmzspjate thead, #mbmzspjate tbody, #mbmzspjate tfoot, #mbmzspjate tr, #mbmzspjate td, #mbmzspjate th {
+#zbxdeulrzr thead, #zbxdeulrzr tbody, #zbxdeulrzr tfoot, #zbxdeulrzr tr, #zbxdeulrzr td, #zbxdeulrzr th {
   border-style: none;
 }
 
-#mbmzspjate p {
+#zbxdeulrzr p {
   margin: 0;
   padding: 0;
 }
 
-#mbmzspjate .gt_table {
+#zbxdeulrzr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -181,12 +235,12 @@ a:hover, a:active {
   border-left-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_caption {
+#zbxdeulrzr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mbmzspjate .gt_title {
+#zbxdeulrzr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -198,7 +252,7 @@ a:hover, a:active {
   border-bottom-width: 0;
 }
 
-#mbmzspjate .gt_subtitle {
+#zbxdeulrzr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -210,7 +264,7 @@ a:hover, a:active {
   border-top-width: 0;
 }
 
-#mbmzspjate .gt_heading {
+#zbxdeulrzr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -222,13 +276,13 @@ a:hover, a:active {
   border-right-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_bottom_border {
+#zbxdeulrzr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_col_headings {
+#zbxdeulrzr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -243,7 +297,7 @@ a:hover, a:active {
   border-right-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_col_heading {
+#zbxdeulrzr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -263,7 +317,7 @@ a:hover, a:active {
   overflow-x: hidden;
 }
 
-#mbmzspjate .gt_column_spanner_outer {
+#zbxdeulrzr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -275,15 +329,15 @@ a:hover, a:active {
   padding-right: 4px;
 }
 
-#mbmzspjate .gt_column_spanner_outer:first-child {
+#zbxdeulrzr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mbmzspjate .gt_column_spanner_outer:last-child {
+#zbxdeulrzr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mbmzspjate .gt_column_spanner {
+#zbxdeulrzr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -295,11 +349,11 @@ a:hover, a:active {
   width: 100%;
 }
 
-#mbmzspjate .gt_spanner_row {
+#zbxdeulrzr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mbmzspjate .gt_group_heading {
+#zbxdeulrzr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -325,7 +379,7 @@ a:hover, a:active {
   text-align: left;
 }
 
-#mbmzspjate .gt_empty_group_heading {
+#zbxdeulrzr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -340,15 +394,15 @@ a:hover, a:active {
   vertical-align: middle;
 }
 
-#mbmzspjate .gt_from_md > :first-child {
+#zbxdeulrzr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mbmzspjate .gt_from_md > :last-child {
+#zbxdeulrzr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mbmzspjate .gt_row {
+#zbxdeulrzr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -367,7 +421,7 @@ a:hover, a:active {
   overflow-x: hidden;
 }
 
-#mbmzspjate .gt_stub {
+#zbxdeulrzr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -380,7 +434,7 @@ a:hover, a:active {
   padding-right: 5px;
 }
 
-#mbmzspjate .gt_stub_row_group {
+#zbxdeulrzr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -394,15 +448,15 @@ a:hover, a:active {
   vertical-align: top;
 }
 
-#mbmzspjate .gt_row_group_first td {
+#zbxdeulrzr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mbmzspjate .gt_row_group_first th {
+#zbxdeulrzr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mbmzspjate .gt_summary_row {
+#zbxdeulrzr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -412,16 +466,16 @@ a:hover, a:active {
   padding-right: 5px;
 }
 
-#mbmzspjate .gt_first_summary_row {
+#zbxdeulrzr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_first_summary_row.thick {
+#zbxdeulrzr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mbmzspjate .gt_last_summary_row {
+#zbxdeulrzr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -431,7 +485,7 @@ a:hover, a:active {
   border-bottom-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_grand_summary_row {
+#zbxdeulrzr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -441,7 +495,7 @@ a:hover, a:active {
   padding-right: 5px;
 }
 
-#mbmzspjate .gt_first_grand_summary_row {
+#zbxdeulrzr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -451,7 +505,7 @@ a:hover, a:active {
   border-top-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_last_grand_summary_row_top {
+#zbxdeulrzr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -461,11 +515,11 @@ a:hover, a:active {
   border-bottom-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_striped {
+#zbxdeulrzr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mbmzspjate .gt_table_body {
+#zbxdeulrzr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -474,7 +528,7 @@ a:hover, a:active {
   border-bottom-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_footnotes {
+#zbxdeulrzr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -488,7 +542,7 @@ a:hover, a:active {
   border-right-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_footnote {
+#zbxdeulrzr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -497,7 +551,7 @@ a:hover, a:active {
   padding-right: 5px;
 }
 
-#mbmzspjate .gt_sourcenotes {
+#zbxdeulrzr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -511,7 +565,7 @@ a:hover, a:active {
   border-right-color: #D3D3D3;
 }
 
-#mbmzspjate .gt_sourcenote {
+#zbxdeulrzr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -519,72 +573,72 @@ a:hover, a:active {
   padding-right: 5px;
 }
 
-#mbmzspjate .gt_left {
+#zbxdeulrzr .gt_left {
   text-align: left;
 }
 
-#mbmzspjate .gt_center {
+#zbxdeulrzr .gt_center {
   text-align: center;
 }
 
-#mbmzspjate .gt_right {
+#zbxdeulrzr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mbmzspjate .gt_font_normal {
+#zbxdeulrzr .gt_font_normal {
   font-weight: normal;
 }
 
-#mbmzspjate .gt_font_bold {
+#zbxdeulrzr .gt_font_bold {
   font-weight: bold;
 }
 
-#mbmzspjate .gt_font_italic {
+#zbxdeulrzr .gt_font_italic {
   font-style: italic;
 }
 
-#mbmzspjate .gt_super {
+#zbxdeulrzr .gt_super {
   font-size: 65%;
 }
 
-#mbmzspjate .gt_footnote_marks {
+#zbxdeulrzr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mbmzspjate .gt_asterisk {
+#zbxdeulrzr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mbmzspjate .gt_indent_1 {
+#zbxdeulrzr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mbmzspjate .gt_indent_2 {
+#zbxdeulrzr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mbmzspjate .gt_indent_3 {
+#zbxdeulrzr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mbmzspjate .gt_indent_4 {
+#zbxdeulrzr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mbmzspjate .gt_indent_5 {
+#zbxdeulrzr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mbmzspjate .katex-display {
+#zbxdeulrzr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mbmzspjate div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zbxdeulrzr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
