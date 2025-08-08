@@ -5,7 +5,7 @@ theme: default
 ::: {=html}
 <style>
 body {
-  background-color: #32435C;
+  background-color: #040113ff;
 }
 </style>
 :::
