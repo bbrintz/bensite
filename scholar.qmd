@@ -1,0 +1,59 @@
+---
+format:
+  html:
+    toc: false
+    code-fold: false
+freeze: auto
+---
+::: {=html}
+<style>
+body {
+  background-color: #040113ff;
+}
+a, a:link, a:visited {
+  color: white;
+}
+a:hover, a:active {
+  color: #EEEEEE;
+}
+</style>
+:::
+```{r, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}
+# install.packages("scholar") # run once
+library(dplyr)
+library(glue)
+library(gt)
+library(scholar)
+
+id <- "nYA8PAsAAAAJ"  # Ben Brintz
+
+# pull publications & guard against failures
+pubs <- tryCatch(get_publications(id), error = function(e) NULL)
+
+if (is.null(pubs) || !nrow(pubs)) {
+  cat("⚠️ Could not retrieve publications from Google Scholar right now. Please re-render later.")
+} else {
+  top10 <- pubs |>
+    mutate(year = suppressWarnings(as.integer(year))) |>
+    arrange(desc(cites), desc(year)) |>
+    slice_head(n = 10) |>
+    mutate(
+      # Build a stable link to the Scholar record
+      link = glue(
+        "https://scholar.google.com/citations?view_op=view_citation&user={id}&citation_for_view={id}:{pubid}"
+      ),
+      Title = ifelse(is.na(year), title, glue("{title} ({year})"))
+    ) |>
+    transmute(
+      Title,
+      Venue = journal,
+      Citations = cites,
+      Link = glue("<a href='{link}'>Scholar</a>")
+    )
+
+  gt(top10) |>
+    fmt_markdown(columns = "Link") |>
+    tab_header(title = md("**Top 10 Cited Publications**")) |>
+    cols_label(Venue = "Journal")
+}
+```

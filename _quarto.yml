@@ -13,7 +13,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: https://scholar.google.com/citations?user=nYA8PAsAAAAJ&hl=en
+      - href: scholar.qmd
         text: Publications
       - href: woodworking.qmd
         text: Woodworking
