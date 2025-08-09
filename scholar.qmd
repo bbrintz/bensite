@@ -9,12 +9,21 @@ freeze: auto
 <style>
 body {
   background-color: #040113ff;
+
 }
 a, a:link, a:visited {
   color: white;
 }
 a:hover, a:active {
   color: #EEEEEE;
+}
+
+
+/* Ensure Link column doesn't wrap */
+.gt_table td:nth-last-child(1),
+.gt_table th:nth-last-child(1) {
+  white-space: nowrap;
+  min-width: 80px;
 }
 
 /* Force gt table to be transparent on dark backgrounds */
