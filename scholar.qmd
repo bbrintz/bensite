@@ -28,6 +28,7 @@ a:hover, a:active {
 
 /* Force gt table to be transparent on dark backgrounds */
 .gt_table_container { background-color: transparent !important; }
+/* Increase contrast and add text shadow for better readability */
 .gt_table,
 .gt_table .gt_heading,
 .gt_table .gt_title,
@@ -44,7 +45,8 @@ a:hover, a:active {
 .gt_table .gt_column_spanner_outer,
 .gt_table .gt_empty_group_heading {
   background-color: transparent !important;
-  color: #ffffff !important;
+  color: #d9d9d9 !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
 }
 /* Make gt table headers transparent */
 .gt_table .gt_col_heading,
@@ -52,9 +54,10 @@ a:hover, a:active {
 .gt_table .gt_column_spanner {
   background-color: transparent !important;
 }
-/* Force column heading text to white */
+/* Force column heading text to lighter color and add text shadow */
 .gt_table .gt_col_heading {
-  color: #ffffff !important;
+  color: #d9d9d9 !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
 }
 /* Reaffirm transparent backgrounds for heading/title/subtitle */
 .gt_table .gt_heading,
@@ -71,16 +74,34 @@ a:hover, a:active {
 .gt_table, .gt_table th, .gt_table td {
   border-color: rgba(255,255,255,0.25) !important;
 }
-/* Links inside the table */
+/* Style links in gt_table for higher contrast and readability */
 .gt_table a, .gt_table a:link, .gt_table a:visited {
-  color: #ffffff !important;
+  color: #d9d9d9 !important;
   text-decoration: underline;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
 }
 .gt_table a:hover, .gt_table a:active {
-  color: #EEEEEE !important;
+  color: #163D6B !important;
 }
+
+#bg-video {
+  position: absolute;        /* or fixed if you truly want it behind everything */
+  top: 0; left: 0;
+  width: 100%;               /* fill the container’s width */
+  height: 100%;              /* keep its aspect ratio */
+  object-fit: cover;       /* don’t crop or zoom—show the full frame */
+  z-index: -1;
+}
+
+
 </style>
 :::
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="scholar.mp4" type="video/mp4">
+</video>
+
+
+
 ```{r, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}
 # install.packages("scholar") # run once
 library(dplyr)
