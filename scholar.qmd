@@ -126,17 +126,11 @@ a:hover, a:active {
   transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 /* Slight quirky angles; snap to straight on hover */
-.pub-bubble:nth-child(6n+1) { transform: rotate(-4deg); }
-.pub-bubble:nth-child(6n+2) { transform: rotate(3deg); }
-.pub-bubble:nth-child(6n+3) { transform: rotate(-2deg); }
-.pub-bubble:nth-child(6n+4) { transform: rotate(4deg); }
-.pub-bubble:nth-child(6n+5) { transform: rotate(-3deg); }
-.pub-bubble:nth-child(6n+6) { transform: rotate(2deg); }
 
 .pub-title { font-weight: 600; line-height: 1.25; font-size: 0.95rem; }
 
 .pub-bubble:hover {
-  transform: rotate(0deg) scale(1.02);
+  transform: scale(1.02);
   background: rgba(255,255,255,0.12);
   box-shadow: 0 10px 28px rgba(0,0,0,0.45);
 }
