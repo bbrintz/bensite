@@ -112,8 +112,8 @@ a:hover, a:active {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 50%;
-  padding: 24px;
-  min-height: 180px;
+  padding: 18px;
+  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,7 +124,7 @@ a:hover, a:active {
 }
 /* Slight quirky angles; snap to straight on hover */
 
-.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.95rem; }
+.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.85rem; }
 
  .pub-bubble:hover {
    transform: scale(1.12);
