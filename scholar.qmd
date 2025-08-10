@@ -96,14 +96,7 @@ a:hover, a:active {
   transition: all 0.2s ease;
 }
 
-#bg-video {
-  position: absolute;        /* or fixed if you truly want it behind everything */
-  top: 0; left: 0;
-  width: 100%;               /* fill the container’s width */
-  height: 100%;              /* keep its aspect ratio */
-  object-fit: cover;       /* don’t crop or zoom—show the full frame */
-  z-index: -1;
-}
+
 
 
 /* --- Playful circular publication badges --- */
@@ -180,6 +173,16 @@ a:hover, a:active {
   .pub-bubble, .pub-detail { transition: none; }
   .pub-bubble { transform: none !important; }
 }
+
+#bg-video {
+  position: absolute;        /* or fixed if you truly want it behind everything */
+  top: 0; left: 0;
+  width: 100%;               /* fill the container’s width */
+  height: 100%;              /* keep its aspect ratio */
+  object-fit: cover;       /* don’t crop or zoom—show the full frame */
+  z-index: -1;
+}
+
 </style>
 :::
 <video autoplay muted loop playsinline id="bg-video">

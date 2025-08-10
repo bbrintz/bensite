@@ -13,8 +13,20 @@ a, a:link, a:visited {
 a:hover, a:active {
   color: #EEEEEE;
 }
+#bg-video {
+  position: absolute;        /* or fixed if you truly want it behind everything */
+  top: 0; left: 0;
+  width: 100%;               /* fill the container’s width */
+  height: 100%;              /* keep its aspect ratio */
+  object-fit: cover;       /* don’t crop or zoom—show the full frame */
+  z-index: -1;
+}
+
 </style>
 :::
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="scholar.mp4" type="video/mp4">
+</video>
 
 
 - [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/)
