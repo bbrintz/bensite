@@ -22,12 +22,27 @@ a:hover, a:active {
   z-index: -1;
 }
 
+  .presentations-list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .presentations-list a {
+    display: block;
+    margin: 1rem 0;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    max-width: 90vw;
+  }
 </style>
 :::
 <video autoplay muted loop playsinline id="bg-video">
   <source src="scholar.mp4" type="video/mp4">
 </video>
 
-
-- [Measuring and Mitigating Disparity of Decision-Making Tools](/Presentations/mmdis/)
-- [SEIR N-mixture Model](/Presentations/seir-n-mixture/)
+<div class="presentations-list">
+  <a href="/Presentations/mmdis/">Measuring and Mitigating Disparity of Decision-Making Tools</a><br>
+  <a href="/Presentations/seir-n-mixture/">SEIR N-mixture Model</a>
+</div>
