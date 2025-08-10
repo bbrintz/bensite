@@ -7,6 +7,9 @@ freeze: auto
 ---
 ::: {=html}
 <style>
+.pub-heading {
+  color: white;
+}
 body {
   background-color: #040113ff;
 
@@ -103,6 +106,7 @@ a:hover, a:active {
 }
 
 
+/* --- Playful circular publication badges --- */
 /* --- Playful circular publication badges --- */
 .pub-grid {
   display: grid;
@@ -218,7 +222,7 @@ if (is.null(pubs) || !nrow(pubs)) {
       LinkURL = link
     )
 
-  cat("<h2 class='pub-heading'>Top Cited Publications</h2>")
+  cat("<h2 class='pub-heading'>Top Publications</h2>")
   cat("<div class='pub-grid'>")
   for (i in seq_len(nrow(top10))) {
     title <- top10$Title[i]
