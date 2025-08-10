@@ -129,32 +129,42 @@ a:hover, a:active {
 
 .pub-title { font-weight: 600; line-height: 1.25; font-size: 0.95rem; }
 
-.pub-bubble:hover {
-  transform: scale(1.02);
-  background: rgba(255,255,255,0.12);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
-}
+ .pub-bubble:hover {
+   transform: scale(1.12);
+   background: rgba(255,255,255,0.12);
+   box-shadow: 0 16px 42px rgba(0,0,0,0.55);
+   z-index: 5;                   /* sit above neighbors while zoomed */
+   outline: 1px solid rgba(255,255,255,0.35);
+ }
 
-/* Hidden detail reveal */
-.pub-detail {
+ .pub-grid { perspective: 1000px; }
+ .pub-grid { overflow: visible; }
+ .pub-bubble { overflow: visible; }
+ .pub-bubble { will-change: transform; transform-origin: center; }
+ .pub-bubble { cursor: pointer; }
+ .pub-bubble .pub-title { pointer-events: none; }
+
+/* Lightweight JS-driven tooltip */
+.pub-tooltip {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  width: calc(100% - 32px);
+  z-index: 9999;
+  max-width: 320px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(0,0,0,0.55);
-  color: #e5e5e5;
-  font-size: 0.9rem;
-  line-height: 1.2;
+  background: rgba(0,0,0,0.70);
+  color: #f1f1f1;
+  font-size: 0.92rem;
+  line-height: 1.25;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  pointer-events: auto; /* allow hovering/clicking links */
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms ease, transform 180ms ease;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  z-index: 1;
+  transform: translateY(6px);
+  transition: opacity 120ms ease, transform 120ms ease;
 }
-.pub-bubble:hover .pub-detail { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+.pub-tooltip.show { opacity: 1; transform: translateY(0); }
+.pub-tooltip .tip-actions { margin-top: 8px; }
+.pub-tooltip a { color: #d9d9d9 !important; text-decoration: underline; }
+.pub-tooltip a:hover { color: #ffffff !important; }
 
 /* Link styling inside bubbles */
 .pub-actions { margin-top: 8px; font-size: 0.9rem; }
@@ -205,29 +215,27 @@ if (is.null(pubs) || !nrow(pubs)) {
       Title,
       Venue = journal,
       Citations = cites,
-      Link = glue("<a href='{link}'>Scholar</a>")
+      LinkURL = link
     )
 
   cat("<h2 class='pub-heading'>Top Cited Publications</h2>")
   cat("<div class='pub-grid'>")
-  apply(top10, 1, function(row) {
-    title <- row[["Title"]]
-    venue <- row[["Venue"]]
-    cites <- row[["Citations"]]
-    link  <- row[["Link"]]
-    # Build one bubble per pub
-    html <- paste0(
-      "<div class='pub-bubble'>\n",
-      "  <div class='pub-title'>", title, "</div>\n",
-      "  <div class='pub-detail'>\n",
-      "    <div><strong>Journal:</strong> ", venue, "</div>\n",
-      "    <div><strong>Citations:</strong> ", cites, "</div>\n",
-      "    <div class='pub-actions'>", link, "</div>\n",
-      "  </div>\n",
-      "</div>\n"
+  for (i in seq_len(nrow(top10))) {
+    title <- top10$Title[i]
+    venue <- top10$Venue[i]
+    cites <- top10$Citations[i]
+    link_url <- top10$LinkURL[i]
+    bubble <- htmltools::tags$div(
+      class = 'pub-bubble',
+      `data-venue` = venue,
+      `data-cites` = cites,
+      `data-link`  = link_url,
+      role = 'button', tabindex = 0,
+      htmltools::tags$div(class = 'pub-title', title)
     )
-    print(htmltools::HTML(html))
-  })
+    cat(htmltools::renderTags(bubble)$html)
+  }
   cat("</div>")
+  cat("<script>\n( function(){\n  const grid = document.querySelector('.pub-grid');\n  if(!grid) return;\n  let tip = document.createElement('div');\n  tip.className = 'pub-tooltip';\n  document.body.appendChild(tip);\n  let currentEl = null;\n\n  function showTip(el){\n    currentEl = el;\n    const venue = el.getAttribute('data-venue') || '';\n    const cites = el.getAttribute('data-cites') || '';\n    const link  = el.getAttribute('data-link')  || '#';\n    tip.innerHTML = `<div><strong>Journal:</strong> ${venue}</div>`+\n                    `<div><strong>Citations:</strong> ${cites}</div>`+\n                    `<div class=\"tip-actions\"><a href=\"${link}\" target=\"_blank\" rel=\"noopener\">Scholar</a></div>`;\n    positionTip(el);\n    tip.classList.add('show');\n  }\n\n  function positionTip(el){\n    const r = el.getBoundingClientRect();\n    const x = r.left + r.width/2; const y = r.top;\n    tip.style.left = Math.max(12, Math.min(window.innerWidth-12-320, x-160)) + 'px';\n    tip.style.top  = (window.scrollY + y - tip.offsetHeight - 12) + 'px';\n  }\n\n  grid.addEventListener('mouseover', e=>{\n    const el = e.target.closest('.pub-bubble');\n    if(!el) return; showTip(el);\n  });\n  grid.addEventListener('mousemove', e=>{\n    if(!tip.classList.contains('show')) return; \n    const el = e.target.closest('.pub-bubble') || currentEl;\n    if(!el) return; positionTip(el);\n  });\n  grid.addEventListener('mouseout', e=>{\n    const to = e.relatedTarget;\n    if(to && (to === tip || (to.closest && to.closest('.pub-tooltip')))) return; // stay visible when entering tooltip\n    const leavingBubble = e.target.closest && e.target.closest('.pub-bubble');\n    const toBubble = to && to.closest && to.closest('.pub-bubble');\n    if(leavingBubble && toBubble === leavingBubble) return; // moving inside same bubble\n    if(!toBubble) { currentEl = null; hideTip(); }\n  });\n  // Open Scholar on click/Enter\n  grid.addEventListener('click', e=>{\n    const el = e.target.closest('.pub-bubble');\n    if(!el) return; const link = el.getAttribute('data-link');\n    if(link) window.open(link, '_blank', 'noopener');\n  });\n  grid.addEventListener('keydown', e=>{\n    if(e.key === 'Enter' || e.key === ' ') {\n      const el = e.target.closest('.pub-bubble');\n      if(!el) return; const link = el.getAttribute('data-link');\n      if(link) window.open(link, '_blank', 'noopener');\n    }\n  });\n  tip.addEventListener('mouseleave', ()=>{ currentEl = null; hideTip(); });\n  tip.addEventListener('mouseenter', ()=>{ /* keep visible */ });\n\n  // Ensure clicks on links inside the tooltip always work\n  tip.addEventListener('click', (e)=>{\n    const a = e.target.closest('a[href]');\n    if(!a) return;\n    e.preventDefault();\n    try { window.open(a.href, '_blank', 'noopener'); }\n    catch(_) { location.href = a.href; }\n  });\n\n  function hideTip(){ tip.classList.remove('show'); }\n\n})();\n</script>\n")
 }
 ```
