@@ -202,6 +202,15 @@ a:hover, a:active {
   color: #163D6B !important;
 }
 
+/* Highlight table text on hover */
+.gt_table td:hover,
+.gt_table th:hover {
+  color: #ffffff !important; /* brighten text */
+  text-shadow: 0 0 6px rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.05) !important; /* subtle background highlight */
+  transition: all 0.2s ease;
+}
+
 #bg-video {
   position: absolute;        /* or fixed if you truly want it behind everything */
   top: 0; left: 0;
@@ -212,541 +221,172 @@ a:hover, a:active {
 }
 
 
+/* --- Playful circular publication badges --- */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 2rem 0 3rem 0;
+}
+.pub-bubble {
+  position: relative;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  padding: 24px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #d9d9d9;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+/* Slight quirky angles; snap to straight on hover */
+.pub-bubble:nth-child(6n+1) { transform: rotate(-4deg); }
+.pub-bubble:nth-child(6n+2) { transform: rotate(3deg); }
+.pub-bubble:nth-child(6n+3) { transform: rotate(-2deg); }
+.pub-bubble:nth-child(6n+4) { transform: rotate(4deg); }
+.pub-bubble:nth-child(6n+5) { transform: rotate(-3deg); }
+.pub-bubble:nth-child(6n+6) { transform: rotate(2deg); }
+
+.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.95rem; }
+
+.pub-bubble:hover {
+  transform: rotate(0deg) scale(1.02);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+}
+
+/* Hidden detail reveal */
+.pub-detail {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: calc(100% - 32px);
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.55);
+  color: #e5e5e5;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  z-index: 1;
+}
+.pub-bubble:hover .pub-detail { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* Link styling inside bubbles */
+.pub-actions { margin-top: 8px; font-size: 0.9rem; }
+.pub-actions a { color: #d9d9d9 !important; text-decoration: underline; }
+.pub-actions a:hover { color: #ffffff !important; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pub-bubble, .pub-detail { transition: none; }
+  .pub-bubble { transform: none !important; }
+}
 </style>
 </div>
 <video autoplay="" muted="" loop="" playsinline="" id="bg-video">
 <source src="scholar.mp4" type="video/mp4">
 </video>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div id="dpjaelbgdw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dpjaelbgdw table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#dpjaelbgdw thead, #dpjaelbgdw tbody, #dpjaelbgdw tfoot, #dpjaelbgdw tr, #dpjaelbgdw td, #dpjaelbgdw th {
-  border-style: none;
-}
-
-#dpjaelbgdw p {
-  margin: 0;
-  padding: 0;
-}
-
-#dpjaelbgdw .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#dpjaelbgdw .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#dpjaelbgdw .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#dpjaelbgdw .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#dpjaelbgdw .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#dpjaelbgdw .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#dpjaelbgdw .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#dpjaelbgdw .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#dpjaelbgdw .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#dpjaelbgdw .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#dpjaelbgdw .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dpjaelbgdw .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#dpjaelbgdw .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#dpjaelbgdw .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#dpjaelbgdw .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dpjaelbgdw .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#dpjaelbgdw .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#dpjaelbgdw .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#dpjaelbgdw .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dpjaelbgdw .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#dpjaelbgdw .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dpjaelbgdw .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#dpjaelbgdw .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dpjaelbgdw .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dpjaelbgdw .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dpjaelbgdw .gt_left {
-  text-align: left;
-}
-
-#dpjaelbgdw .gt_center {
-  text-align: center;
-}
-
-#dpjaelbgdw .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#dpjaelbgdw .gt_font_normal {
-  font-weight: normal;
-}
-
-#dpjaelbgdw .gt_font_bold {
-  font-weight: bold;
-}
-
-#dpjaelbgdw .gt_font_italic {
-  font-style: italic;
-}
-
-#dpjaelbgdw .gt_super {
-  font-size: 65%;
-}
-
-#dpjaelbgdw .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#dpjaelbgdw .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#dpjaelbgdw .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#dpjaelbgdw .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#dpjaelbgdw .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#dpjaelbgdw .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#dpjaelbgdw .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#dpjaelbgdw .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#dpjaelbgdw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_heading">
-<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Top 10 Cited Publications</strong></th>
-</tr>
-<tr class="odd gt_col_headings">
-<th id="Title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Title</th>
-<th id="Venue" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Journal</th>
-<th id="Citations" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Citations</th>
-<th id="Link" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Link</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Title">Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)</td>
-<td class="gt_row gt_left" headers="Venue">PLOS Neglected Tropical Diseases</td>
-<td class="gt_row gt_right" headers="Citations">31</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC">Scholar</a></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Title">External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)</td>
-<td class="gt_row gt_left" headers="Venue">Elife</td>
-<td class="gt_row gt_right" headers="Citations">20</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C">Scholar</a></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Title">Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)</td>
-<td class="gt_row gt_left" headers="Venue">Public Health Reports</td>
-<td class="gt_row gt_right" headers="Citations">19</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC">Scholar</a></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Title">Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)</td>
-<td class="gt_row gt_left" headers="Venue">Contraception</td>
-<td class="gt_row gt_right" headers="Citations">18</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C">Scholar</a></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Title">An asymptotic approximation to the N-mixture model for the estimation of disease prevalence (2018)</td>
-<td class="gt_row gt_left" headers="Venue">Biometrics</td>
-<td class="gt_row gt_right" headers="Citations">17</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UeHWp8X0CEIC">Scholar</a></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Title">Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)</td>
-<td class="gt_row gt_left" headers="Venue">Langenbeck's Archives of Surgery</td>
-<td class="gt_row gt_right" headers="Citations">16</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC">Scholar</a></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Title">Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)</td>
-<td class="gt_row gt_left" headers="Venue">Journal of Cataract &amp; Refractive Surgery</td>
-<td class="gt_row gt_right" headers="Citations">16</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C">Scholar</a></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Title">Evaluating multi-level models to test occupancy state responses of plethodontid salamanders (2015)</td>
-<td class="gt_row gt_left" headers="Venue">PLoS One</td>
-<td class="gt_row gt_right" headers="Citations">15</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:u5HHmVD_uO8C">Scholar</a></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Title">Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial (2022)</td>
-<td class="gt_row gt_left" headers="Venue">JAMA pediatrics</td>
-<td class="gt_row gt_right" headers="Citations">14</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC">Scholar</a></td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Title">Staphylococcal scalded skin syndrome: clinical features, ancillary testing, and patient management (2022)</td>
-<td class="gt_row gt_left" headers="Venue">Pediatric Dermatology</td>
-<td class="gt_row gt_right" headers="Citations">12</td>
-<td class="gt_row gt_center" headers="Link"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:_Qo2XoVZTnwC">Scholar</a></td>
-</tr>
-</tbody>
-</table>
-
+<h2 class="pub-heading anchored">
+Top Cited Publications
+</h2>
+<div class="pub-grid">
+<div class="pub-bubble">
+<div class="pub-title">
+Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)
 </div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; PLOS Neglected Tropical Diseases&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 31&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Elife&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 20&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Public Health Reports&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 19&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Contraception&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 18&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+An asymptotic approximation to the N-mixture model for the estimation of disease prevalence (2018)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Biometrics&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 17&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UeHWp8X0CEIC'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Langenbeck's Archives of Surgery&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 16&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; Journal of Cataract &amp; Refractive Surgery&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 16&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Evaluating multi-level models to test occupancy state responses of plethodontid salamanders (2015)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; PLoS One&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 15&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:u5HHmVD_uO8C'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="pub-bubble">
+<div class="pub-title">
+Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial (2022)
+</div>
+<div class="pub-detail">
+<pre><code>&lt;div&gt;&lt;strong&gt;Journal:&lt;/strong&gt; JAMA pediatrics&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Citations:&lt;/strong&gt; 14&lt;/div&gt;
+&lt;div class='pub-actions'&gt;&lt;a href='https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC'&gt;Scholar&lt;/a&gt;&lt;/div&gt;</code></pre>
 </div>
 </div>
 </div>

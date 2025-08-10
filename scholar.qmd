@@ -84,6 +84,15 @@ a:hover, a:active {
   color: #163D6B !important;
 }
 
+/* Highlight table text on hover */
+.gt_table td:hover,
+.gt_table th:hover {
+  color: #ffffff !important; /* brighten text */
+  text-shadow: 0 0 6px rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.05) !important; /* subtle background highlight */
+  transition: all 0.2s ease;
+}
+
 #bg-video {
   position: absolute;        /* or fixed if you truly want it behind everything */
   top: 0; left: 0;
@@ -94,6 +103,75 @@ a:hover, a:active {
 }
 
 
+/* --- Playful circular publication badges --- */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 2rem 0 3rem 0;
+}
+.pub-bubble {
+  position: relative;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  padding: 24px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #d9d9d9;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+/* Slight quirky angles; snap to straight on hover */
+.pub-bubble:nth-child(6n+1) { transform: rotate(-4deg); }
+.pub-bubble:nth-child(6n+2) { transform: rotate(3deg); }
+.pub-bubble:nth-child(6n+3) { transform: rotate(-2deg); }
+.pub-bubble:nth-child(6n+4) { transform: rotate(4deg); }
+.pub-bubble:nth-child(6n+5) { transform: rotate(-3deg); }
+.pub-bubble:nth-child(6n+6) { transform: rotate(2deg); }
+
+.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.95rem; }
+
+.pub-bubble:hover {
+  transform: rotate(0deg) scale(1.02);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+}
+
+/* Hidden detail reveal */
+.pub-detail {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: calc(100% - 32px);
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.55);
+  color: #e5e5e5;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  z-index: 1;
+}
+.pub-bubble:hover .pub-detail { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* Link styling inside bubbles */
+.pub-actions { margin-top: 8px; font-size: 0.9rem; }
+.pub-actions a { color: #d9d9d9 !important; text-decoration: underline; }
+.pub-actions a:hover { color: #ffffff !important; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pub-bubble, .pub-detail { transition: none; }
+  .pub-bubble { transform: none !important; }
+}
 </style>
 :::
 <video autoplay muted loop playsinline id="bg-video">
@@ -102,12 +180,13 @@ a:hover, a:active {
 
 
 
-```{r, include=TRUE, echo=FALSE,message=FALSE, warning=FALSE}
+```{r, include=TRUE, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 # install.packages("scholar") # run once
 library(dplyr)
 library(glue)
 library(gt)
 library(scholar)
+library(htmltools)
 
 id <- "nYA8PAsAAAAJ"  # Ben Brintz
 
@@ -120,7 +199,7 @@ if (is.null(pubs) || !nrow(pubs)) {
   top10 <- pubs |>
     mutate(year = suppressWarnings(as.integer(year))) |>
     arrange(desc(cites), desc(year)) |>
-    slice_head(n = 10) |>
+    slice_head(n = 9) |>
     mutate(
       # Build a stable link to the Scholar record
       link = glue(
@@ -135,9 +214,26 @@ if (is.null(pubs) || !nrow(pubs)) {
       Link = glue("<a href='{link}'>Scholar</a>")
     )
 
-  gt(top10) |>
-    fmt_markdown(columns = "Link") |>
-    tab_header(title = md("**Top 10 Cited Publications**")) |>
-    cols_label(Venue = "Journal")
+  cat("<h2 class='pub-heading'>Top Cited Publications</h2>")
+  cat("<div class='pub-grid'>")
+  apply(top10, 1, function(row) {
+    title <- row[["Title"]]
+    venue <- row[["Venue"]]
+    cites <- row[["Citations"]]
+    link  <- row[["Link"]]
+    # Build one bubble per pub
+    html <- paste0(
+      "<div class='pub-bubble'>\n",
+      "  <div class='pub-title'>", title, "</div>\n",
+      "  <div class='pub-detail'>\n",
+      "    <div><strong>Journal:</strong> ", venue, "</div>\n",
+      "    <div><strong>Citations:</strong> ", cites, "</div>\n",
+      "    <div class='pub-actions'>", link, "</div>\n",
+      "  </div>\n",
+      "</div>\n"
+    )
+    print(htmltools::HTML(html))
+  })
+  cat("</div>")
 }
 ```
