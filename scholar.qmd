@@ -196,6 +196,8 @@ a:hover, a:active {
   style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0;transition:opacity .35s ease"
 >
   <!-- Modern first, fallback second -->
+  <source src="scholar_mobile.webm" type="video/webm" media="(max-width: 600px)" />
+  <source src="scholar_mobile.mp4"  type="video/mp4"  media="(max-width: 600px)" />
   <source src="scholar.webm" type="video/webm" />
   <source src="scholar.mp4"  type="video/mp4" />
 </video>
