@@ -59,6 +59,6 @@ format: html
 
 <div class="overlay-text">
   <h1>Welcome</h1>
-  <a class="cta-button" href="Presentations/index.qmd">View Presentations</a>
+  <a class="cta-button" href="chain_link.qmd">Try ChainLink</a>
 </div>
 
