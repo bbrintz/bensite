@@ -371,7 +371,7 @@ Improving antibiotic stewardship for diarrheal disease with probability-based el
     const link  = el.getAttribute('data-link')  || '#';
     tip.innerHTML = `<div><strong>Journal:</strong> ${venue}</div>`+
                     `<div><strong>Citations:</strong> ${cites}</div>`+
-                    `<div class="tip-actions"><a href="${link}" target="_blank" rel="noopener">Scholar</a></div>`;
+                    `<div class="tip-actions"><a href="${link}" target="_blank" rel="noopener" aria-label="Open publication on Google Scholar">↗︎</a></div>`;
     positionTip(el);
     tip.classList.add('show');
   }
