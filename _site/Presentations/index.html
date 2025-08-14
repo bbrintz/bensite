@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="{=html}">
 <style>
 body {
-  background-color: #040113ff;
+  background-color: #0f172a;
 }
 a, a:link, a:visited {
   color: white;
@@ -134,14 +134,7 @@ a, a:link, a:visited {
 a:hover, a:active {
   color: #EEEEEE;
 }
-#bg-video {
-  position: absolute;        /* or fixed if you truly want it behind everything */
-  top: 0; left: 0;
-  width: 100%;               /* fill the container’s width */
-  height: 100%;              /* keep its aspect ratio */
-  object-fit: cover;       /* don’t crop or zoom—show the full frame */
-  z-index: -1;
-}
+
 
   .presentations-list {
     position: absolute;
@@ -159,21 +152,6 @@ a:hover, a:active {
   }
 </style>
 </div>
-<video id="bg-video" autoplay="" muted="" loop="" playsinline="" preload="metadata" poster="scholar_poster.avif" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0;transition:opacity .35s ease">
-<!-- Mobile first -->
-<source src="scholar_mobile.webm" type="video/webm" media="(max-width: 600px)">
-<source src="scholar_mobile.mp4" type="video/mp4" media="(max-width: 600px)">
-<!-- Desktop / fallback -->
-<source src="scholar.webm" type="video/webm">
-<source src="scholar.mp4" type="video/mp4">
-</video>
-<script>
-  (function(){
-    const v = document.getElementById('bg-video');
-    v.addEventListener('loadeddata', () => { v.style.opacity = 1; }, { once: true });
-    setTimeout(() => { if (!v.style.opacity || v.style.opacity === '0') v.style.opacity = 1; }, 1000);
-  })();
-</script>
 <div class="presentations-list">
 <p><a href="../Presentations/mmdis/">Measuring and Mitigating Disparity of Decision-Making Tools</a><br> <a href="../Presentations/seir-n-mixture/">SEIR N-mixture Model</a></p>
 </div>
