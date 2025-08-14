@@ -1,0 +1,56 @@
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+}
+
+/* make the navbar transparent */
+.navbar, 
+.navbar-light, 
+.navbar-default {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* keep links and brand text white */
+.navbar .navbar-nav .nav-link,
+.navbar .navbar-brand {
+  color: #fff !important;
+}
+
+/* hover state (match your navbar.hover-color) */
+.navbar .navbar-nav .nav-link:hover {
+  color: #DAA520 !important;
+}
+
+/* mobile “hamburger” icon styling */
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.5) !important;
+}
+.navbar-toggler-icon {
+  filter: invert(1) !important;
+}
+
+/* Center the navbar items */
+.navbar .navbar-nav {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+}
+
+/* Optional: add some spacing between items */
+.navbar .navbar-nav .nav-item {
+  margin: 0 1rem;
+}
+
+.gallery img,
+.columns img {
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 3px 7px rgba(0,0,0,0.15);
+}
+
