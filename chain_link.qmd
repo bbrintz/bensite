@@ -23,5 +23,5 @@ format: html
 
 <iframe
   id="fullpage"
-  src="cl2.html">
+  src="cl.html">
 </iframe>
