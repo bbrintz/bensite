@@ -80,7 +80,7 @@ format:
 
 </style>
 
-<video autoplay muted loop playsinline id="bg-video" poster="quant_image.png" preload="none">
+<video autoplay muted loop playsinline id="bg-video" preload="none">
   <source src="vidtest.mp4" type="video/mp4">
 </video>
 
