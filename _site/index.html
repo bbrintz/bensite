@@ -69,6 +69,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="custom-layout.css">
+<link rel="stylesheet" href="index.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -123,82 +124,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0;
-    position: relative;
-    min-height: 100svh;
-    /* background-image: url("quant_image.png"); /* Fallback image */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%);
-    color: #fff;
-  }
-
-  /* Styling for your name */
-  .overlay-text h1 {
-    font-size: 4rem;
-    font-weight: bold;
-    margin: 0 0 1rem 0;
-  }
-
-  /* Styling for the button */
-  .overlay-text .cta-button {
-    display: inline-block;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #000;
-    padding: 0.6rem 1.2rem;
-    font-size: 1.25rem;
-    border-radius: 2rem;
-    text-decoration: none;
-  }
-  .overlay-text .cta-button:hover {
-    background-color: #fff;
-  }
-
-#bg-video {
-  position: absolute;        /* or fixed if you truly want it behind everything */
-  top: 0; left: 0;
-  width: 100%;               /* fill the container’s width */
-  height: 100%;              /* keep its aspect ratio */
-  object-fit: cover;       /* fill the viewport; may crop to preserve aspect */
-  z-index: -1;
-}
-
-  /* Mobile tweaks */
-  @media (max-width: 600px) {
-    .overlay-text {
-      top: 55%;
-      left: 5%;
-      transform: translateY(-50%);
-      padding-right: 6%;
-    }
-    .overlay-text h1 {
-      font-size: 2.25rem; /* scale down heading on phones */
-      line-height: 1.15;
-    }
-    .overlay-text .cta-button {
-      display: inline-block;
-      padding: 0.8rem 1.2rem; /* larger tap target */
-      font-size: clamp(1.8rem, 4vw, 4rem);
-      min-height: 44px; /* accessibility target size */
-      border-radius: 1.5rem;
-    }
-  }
-
-  /* Respect reduced motion preferences: replace video with a static image */
-
-</style>
-<video autoplay="" muted="" loop="" playsinline="" id="bg-video" poster="quant_image.png" preload="none">
-<source src="vidtest.mp4" type="video/mp4">
+<video autoplay="" muted="" loop="" playsinline="" id="bg-video" preload="metadata">
+  <!-- lazy-load video poster and defer heavy video load -->
+  <source src="vidtest.mp4" type="video/mp4">
 </video>
 <div class="overlay-text">
 <h1>
