@@ -124,9 +124,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <style>
+  *, *::before, *::after { box-sizing: border-box; }
   body {
     margin: 0;
-    min-height: 80vh;
+    position: relative;
+    min-height: 100svh;
     /* background-image: url("quant_image.png"); /* Fallback image */
     background-size: cover;
     background-repeat: no-repeat;
@@ -167,13 +169,39 @@ ul.task-list li input[type="checkbox"] {
   top: 0; left: 0;
   width: 100%;               /* fill the container’s width */
   height: 100%;              /* keep its aspect ratio */
-  object-fit: cover;       /* don’t crop or zoom—show the full frame */
+  object-fit: cover;       /* fill the viewport; may crop to preserve aspect */
   z-index: -1;
 }
 
 
+  /* Mobile tweaks */
+  @media (max-width: 600px) {
+    .overlay-text {
+      top: 55%;
+      left: 5%;
+      transform: translateY(-50%);
+      padding-right: 6%;
+    }
+    .overlay-text h1 {
+      font-size: 2.25rem; /* scale down heading on phones */
+      line-height: 1.15;
+    }
+    .overlay-text .cta-button {
+      display: inline-block;
+      padding: 0.8rem 1.2rem; /* larger tap target */
+      font-size: clamp(1.8rem, 4vw, 4rem);
+      min-height: 44px; /* accessibility target size */
+      border-radius: 1.5rem;
+    }
+  }
+
+  /* Respect reduced motion preferences: replace video with a static image */
+  @media (prefers-reduced-motion: reduce) {
+    #bg-video { display: none; }
+    body { background-image: url("quant_image.png"); }
+  }
 </style>
-<video autoplay="" muted="" loop="" playsinline="" id="bg-video">
+<video autoplay="" muted="" loop="" playsinline="" id="bg-video" poster="quant_image.png" preload="none">
 <source src="vidtest.mp4" type="video/mp4">
 </video>
 <div class="overlay-text">
