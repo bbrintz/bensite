@@ -1,0 +1,3 @@
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+htmltools::includeHTML("mmdis.html")
+```
