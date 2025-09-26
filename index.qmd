@@ -7,13 +7,49 @@ format:
 ---
 
 ```{=html}
-<video autoplay muted loop playsinline id="bg-video" preload="metadata">
-  <!-- lazy-load video poster and defer heavy video load -->
-  <source src="vidtest.mp4" type="video/mp4">
-</video>
-```
-
-<div class="overlay-text">
-  <h1>Welcome</h1>
-  <a class="cta-button" href="chain_link.qmd">Try ChainLink</a>
+<div class="video-section">
+  <video autoplay muted loop playsinline id="bg-video" preload="metadata">
+    <!-- lazy-load video poster and defer heavy video load -->
+    <source src="vidtest.mp4" type="video/mp4">
+  </video>
+  
+  <div class="overlay-text">
+    <h1>Welcome</h1>
+    <a class="cta-button" href="chain_link.qmd">Try ChainLink</a>
+  </div>
 </div>
+
+<div class="content-section">
+  <h2>About Ben Brintz</h2>
+  
+  <p>Welcome to my personal website! I'm a researcher, data scientist, and educator passionate about using statistical methods and data analysis to solve real-world problems. This site showcases my academic work, publications, and various projects.</p>
+  
+  <p>Here you'll find information about my research in biostatistics, epidemiology, and machine learning applications in healthcare. I'm particularly interested in developing fair and equitable algorithms for medical decision-making and understanding health disparities through data-driven approaches.</p>
+  
+  <div class="content-grid">
+    <div class="content-card">
+      <h3>Research Focus</h3>
+      <p>My research centers on biostatistics, epidemiological modeling, and the development of fair algorithms for healthcare applications. I work on projects ranging from infectious disease modeling to bias detection in medical AI systems.</p>
+    </div>
+    
+    <div class="content-card">
+      <h3>Publications</h3>
+      <p>I've published research in various peer-reviewed journals covering topics in public health, statistics, and medical informatics. You can find my complete publication list in the Publications section.</p>
+    </div>
+    
+    <div class="content-card">
+      <h3>Teaching & Mentoring</h3>
+      <p>I'm passionate about education and mentoring the next generation of researchers. I regularly teach courses in statistics, data analysis, and research methods.</p>
+    </div>
+    
+    <div class="content-card">
+      <h3>Creative Projects</h3>
+      <p>Beyond research, I enjoy woodworking and creating things with my hands. You can see some of my woodworking projects in the dedicated section of this site.</p>
+    </div>
+  </div>
+  
+  <p style="margin-top: 3rem; text-align: center; font-style: italic;">
+    Feel free to explore the different sections of my website to learn more about my work, research, and interests. If you'd like to get in touch, you can find me on GitHub or through my academic affiliations.
+  </p>
+</div>
+```
