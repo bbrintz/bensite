@@ -22,7 +22,7 @@ body {
 }
 
 .overlay-text {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 10%;
   transform: translateY(-50%);
@@ -51,7 +51,7 @@ body {
 }
 
 #bg-video {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -64,9 +64,10 @@ body {
 .content-section {
   background: #fff;
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 4rem 0;
   position: relative;
   z-index: 3;
+  width: 100%;
 }
 
 .content-section h2 {
@@ -74,6 +75,7 @@ body {
   margin-bottom: 2rem;
   text-align: center;
   color: #333;
+  padding: 0 2rem;
 }
 
 .content-section p {
@@ -84,6 +86,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   color: #666;
+  padding: 0 2rem;
 }
 
 .content-section .content-grid {
@@ -93,6 +96,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 3rem;
+  padding: 0 2rem;
 }
 
 .content-section .content-card {
@@ -115,7 +119,6 @@ body {
 
 @media (max-width: 600px) {
   .overlay-text {
-    position: fixed;
     top: 55%;
     left: 5%;
     transform: translateY(-50%);
@@ -133,15 +136,21 @@ body {
   }
   
   .content-section {
-    padding: 2rem 1rem;
+    padding: 2rem 0;
   }
   
   .content-section h2 {
     font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .content-section p {
+    padding: 0 1rem;
   }
   
   .content-section .content-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    padding: 0 1rem;
   }
 }
