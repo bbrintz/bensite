@@ -1,0 +1,613 @@
+---
+title: "Understanding Hidden Patterns: Bayesian Models for Imperfect Detection and Spike Analysis"
+author: "Ben Brintz"
+institute: "Division of Epidemiology"
+format: 
+  revealjs:
+    auto-animate-easing: ease-in-out
+    auto-animate-unmatched: false
+    auto-animate-duration: 2
+    revealjs-plugins: 
+    theme: white
+    incremental: true
+    slideNumber: false  # Slide numbers (optional)
+    transition: fade   # Smooth slide transitions
+    title-slide-background: "white" # Ensure title slide background matches your style
+    css: custom.css    # Link to your custom CSS file
+---
+
+## About Me {.smaller}
+
+::: {.fragment fragment-index=1}
+**Research Interests:**
+:::
+
+::: {.fragment fragment-index=2}
+- Statistical modeling of infectious disease dynamics
+- Fairness and bias in clinical decision-making tools
+- Bayesian hierarchical models for complex surveillance data
+- Understanding what we *don't* see in public health data
+:::
+
+::: {.fragment fragment-index=3}
+**Current Focus:**
+:::
+
+::: {.fragment fragment-index=4}
+- Modeling imperfect detection in disease surveillance
+- Identifying unusual patterns (spikes) in health data
+- Making complex statistical methods accessible and useful
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Today's Question
+</div>
+
+::: {.fragment}
+How do we understand what's really happening when we can only see part of the picture?
+:::
+
+::: {.fragment}
+And how do we know when something unusual is truly happening?
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+The Challenge of Imperfect Detection
+</div>
+
+::: {.fragment}
+**In public health, we rarely see everything:**
+:::
+
+::: {.fragment}
+- Not everyone with disease gets tested
+- Not all cases are reported
+- Surveillance systems have gaps
+:::
+
+::: {.fragment .callout-important}
+This "imperfect detection" means our observed data undercount true cases
+:::
+
+## Real-World Example: Disease Surveillance {.smaller}
+
+::: {.fragment}
+Imagine a county reports 100 new COVID-19 cases
+:::
+
+::: {.fragment}
+**Questions we can't directly answer:**
+:::
+
+::: {.incremental}
+- How many people were *actually* infected?
+- Is this more than usual, or just better testing?
+- Are cases rising or falling?
+- What proportion of infections are we detecting?
+:::
+
+::: {.fragment .callout-note}
+Traditional methods struggle because they treat observed counts as if they're the whole truth
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Enter Bayesian Hierarchical Models
+</div>
+
+::: {.fragment}
+A framework that lets us model both:
+:::
+
+::: {.fragment}
+1. What we **observe** (reported cases)
+2. What we **don't observe** (true infections)
+:::
+
+::: {.fragment}
+And the connection between them
+:::
+
+## What Makes a Model "Hierarchical"? {.smaller}
+
+::: {.fragment}
+Think of it like a multi-story building with information flowing between floors
+:::
+
+::: {.fragment}
+**Floor 1: Individual observations**
+- Daily case counts in each county
+:::
+
+::: {.fragment}
+**Floor 2: Local patterns**
+- County-specific infection rates and detection probabilities
+:::
+
+::: {.fragment}
+**Floor 3: Shared structure**
+- Common patterns across all counties
+- Overall detection trends
+:::
+
+::: {.fragment .callout-tip}
+Information flows both up and down - local data informs the big picture, and the big picture helps us understand local anomalies
+:::
+
+## What Makes a Model "Bayesian"? {.smaller}
+
+::: {.fragment}
+Instead of single point estimates, we work with **probabilities**
+:::
+
+::: {.fragment}
+**The Bayesian Recipe:**
+:::
+
+::: {.incremental}
+1. **Start with prior knowledge**: "Based on similar diseases, detection is probably between 20-60%"
+2. **Update with observed data**: "We saw X reported cases"
+3. **Get posterior understanding**: "Given what we observed, detection is likely 35-45%, and true cases were probably Y"
+:::
+
+::: {.fragment .callout-note}
+This gives us not just estimates, but *uncertainty* around those estimates
+:::
+
+## A Simple Example {auto-animate="true" .smaller}
+
+::: {.fragment}
+**Observed:** 50 reported cases today
+:::
+
+::: {.fragment}
+**Hidden question:** How many true infections?
+:::
+
+## A Simple Example {auto-animate="true" .smaller visibility="uncounted"}
+
+**Observed:** 50 reported cases today
+
+**Hidden question:** How many true infections?
+
+::: {.fragment}
+**The model says:**
+:::
+
+::: {.incremental}
+- If detection probability is 50%, true infections ≈ 100
+- If detection probability is 25%, true infections ≈ 200
+- But we don't know detection probability!
+:::
+
+## A Simple Example {auto-animate="true" .smaller visibility="uncounted"}
+
+**Observed:** 50 reported cases today
+
+**Hidden question:** How many true infections?
+
+**The hierarchical Bayesian approach:**
+
+::: {.incremental}
+- Uses patterns from other locations and times
+- Estimates *both* true infections and detection probability
+- Provides uncertainty: "True infections are probably 120-180, and detection is probably 25-35%"
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Application: The SEIR Model
+</div>
+
+::: {.fragment}
+We applied this to COVID-19 surveillance using a disease transmission model
+:::
+
+::: {.fragment}
+**SEIR stands for:**
+:::
+
+::: {.incremental}
+- **S**usceptible (can get infected)
+- **E**xposed (infected but not yet infectious)
+- **I**nfectious (can spread disease)
+- **R**ecovered (no longer infectious)
+:::
+
+## Key Innovation {.smaller}
+
+::: {.fragment}
+We added an extra layer to account for imperfect detection:
+:::
+
+::: {.fragment}
+**True Process (Hidden):**
+Susceptible → Exposed → Infectious → Recovered
+:::
+
+::: {.fragment}
+**Observed Process:**
+Only a fraction of Exposed→Infectious transitions get reported
+:::
+
+::: {.fragment .callout-important}
+By modeling both layers together, we estimate:
+
+- True infection dynamics
+- How detection changes over time
+- Uncertainty in both
+:::
+
+---
+
+<div style="font-size: 45px; text-align: center;">
+Part 2: Detecting Spikes
+</div>
+
+::: {.fragment}
+Now we know how to account for imperfect detection...
+:::
+
+::: {.fragment}
+**But how do we know when something unusual is happening?**
+:::
+
+## The Spike Detection Problem {.smaller}
+
+::: {.fragment}
+**Scenario:** You're monitoring adverse events at hospitals
+:::
+
+::: {.fragment}
+**Challenge:** Some variation is normal
+:::
+
+::: {.incremental}
+- Random day-to-day fluctuations
+- Seasonal patterns
+- Known trends
+:::
+
+::: {.fragment .callout-caution}
+But occasionally there's a *real* spike - an outbreak, a quality issue, something requiring action
+:::
+
+::: {.fragment}
+**How do we distinguish signal from noise?**
+:::
+
+## Traditional Approaches Fall Short {.smaller}
+
+::: {.fragment}
+**Simple threshold:** "Alert if count > 10"
+:::
+
+::: {.incremental}
+- Doesn't account for baseline variation
+- Too many false alarms or missed events
+:::
+
+::: {.fragment}
+**Statistical control charts:** "Alert if count > mean + 2 SD"
+:::
+
+::: {.incremental}
+- Better, but assumes fixed detection
+- Doesn't borrow strength across locations
+- Hard to interpret: "2 SD from what?"
+:::
+
+## Bayesian Hierarchical Approach to Spikes {.smaller}
+
+::: {.fragment}
+**Key idea:** Model the spike itself as a random variable
+:::
+
+::: {.fragment}
+**The model has two parts:**
+:::
+
+::: {.fragment}
+**1. Baseline Process**
+- Normal day-to-day variation
+- Seasonal patterns
+- Detection probability
+:::
+
+::: {.fragment}
+**2. Spike Process**
+- Is there a spike? (Yes/No)
+- If yes, how big?
+- How certain are we?
+:::
+
+## What the Model Tells Us {.smaller}
+
+::: {.fragment}
+Instead of binary alerts, we get **probability statements**:
+:::
+
+::: {.incremental}
+- "There's a 15% chance this is a real spike" → Probably just noise
+- "There's a 85% chance this is a real spike" → Investigate!
+- "If it is a spike, the true excess is probably 20-40 cases"
+:::
+
+::: {.fragment .callout-tip}
+This lets decision-makers weigh evidence and uncertainty rather than relying on arbitrary thresholds
+:::
+
+## Combining Both Ideas {.smaller}
+
+::: {.fragment}
+The most powerful approach combines imperfect detection and spike detection:
+:::
+
+::: {.fragment}
+**Layer 1:** True underlying process (with potential spikes)
+:::
+
+::: {.fragment}
+**Layer 2:** Detection mechanism (which fraction we observe)
+:::
+
+::: {.fragment}
+**Layer 3:** Observed counts (what we actually see)
+:::
+
+::: {.fragment .callout-important}
+This accounts for both:
+
+- The fact that we don't see everything
+- The possibility that unusual events can occur
+:::
+
+## A Concrete Example {.smaller}
+
+::: {.fragment}
+**Week 1:** Observed 20 cases (baseline: ≈18-22)
+:::
+
+::: {.fragment}
+**Week 2:** Observed 35 cases
+:::
+
+::: {.fragment}
+**Simple model:** "35 is unusual! Alert!"
+:::
+
+::: {.fragment}
+**Our model considers:**
+:::
+
+::: {.incremental}
+- Maybe detection improved (more testing)
+- Maybe there's a real spike in infections
+- Maybe both
+- What does data from similar locations suggest?
+:::
+
+## Our Model's Output {.smaller visibility="uncounted"}
+
+::: {.fragment}
+**Probability of real spike:** 72%
+:::
+
+::: {.fragment}
+**If spike exists, estimated size:** 15-25 excess true infections
+:::
+
+::: {.fragment}
+**Estimated detection probability:**
+- Week 1: 40-50%
+- Week 2: 45-55% (slight increase, but not enough to explain all of the jump)
+:::
+
+::: {.fragment .callout-note}
+This nuanced view helps prioritize responses
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Why This Matters
+</div>
+
+## Practical Benefits {.smaller}
+
+::: {.fragment}
+**1. Better Situational Awareness**
+:::
+
+::: {.incremental}
+- Understand true burden, not just reported counts
+- Track how detection changes over time
+:::
+
+::: {.fragment}
+**2. Smarter Alerts**
+:::
+
+::: {.incremental}
+- Fewer false alarms
+- Probabilistic warnings instead of binary flags
+:::
+
+::: {.fragment}
+**3. Honest Uncertainty**
+:::
+
+::: {.incremental}
+- "We're 80% confident..." instead of false precision
+- Helps with resource allocation decisions
+:::
+
+## Current Applications {.smaller}
+
+::: {.fragment}
+**This approach is being used for:**
+:::
+
+::: {.incremental}
+- COVID-19 surveillance and outbreak detection
+- Hospital-acquired infection monitoring
+- Rare adverse event detection
+- Environmental health surveillance
+:::
+
+::: {.fragment .callout-tip}
+Any situation where:
+
+- We can't observe everything
+- We need to detect unusual patterns
+- Decisions have real consequences
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+The Big Picture
+</div>
+
+## What Makes This Different? {.smaller}
+
+::: {.fragment}
+**Traditional surveillance:**
+"We saw X cases, assume that's the truth"
+:::
+
+::: {.fragment}
+**Our approach:**
+"We saw X cases, but what does that tell us about reality?"
+:::
+
+::: {.fragment}
+**Traditional outbreak detection:**
+"Count exceeds threshold → Alert"
+:::
+
+::: {.fragment}
+**Our approach:**
+"Given everything we know, how likely is this a real outbreak?"
+:::
+
+## Challenges and Limitations {.smaller}
+
+::: {.fragment}
+**Computational complexity**
+:::
+
+::: {.incremental}
+- These models take time to run
+- Need specialized software and expertise
+:::
+
+::: {.fragment}
+**Data requirements**
+:::
+
+::: {.incremental}
+- Need sufficient historical data
+- Benefit from multiple locations/populations
+:::
+
+::: {.fragment}
+**Communication**
+:::
+
+::: {.incremental}
+- Probabilities can be hard to explain
+- "85% chance of spike" → what action to take?
+:::
+
+## Future Directions {.smaller}
+
+::: {.fragment}
+**We're working on:**
+:::
+
+::: {.incremental}
+- Faster computational methods for real-time use
+- Incorporating additional data sources (genomic data, mobility data)
+- Making tools more accessible to public health practitioners
+- Better visualization of uncertainty
+:::
+
+::: {.fragment .callout-note}
+The goal: Make sophisticated methods practical for everyday surveillance
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Key Takeaways
+</div>
+
+## Summary {.smaller}
+
+::: {.incremental}
+1. **Imperfect detection** is everywhere in public health - we rarely see the full picture
+
+2. **Hierarchical Bayesian models** let us estimate both what we observe and what we don't
+
+3. **Spike detection** becomes more principled when we explicitly model unusual events
+
+4. **Uncertainty quantification** helps make better decisions than point estimates
+
+5. These methods are becoming **practical** for real-world surveillance
+:::
+
+---
+
+<div style="font-size: 50px; text-align: center;">
+Questions?
+</div>
+
+::: {.fragment}
+**Contact:**
+
+Ben Brintz  
+Division of Epidemiology  
+University of Utah
+:::
+
+## Technical Appendix {.smaller}
+
+For those interested in more details...
+
+::: {.fragment}
+**Statistical Framework:**
+:::
+
+::: {.fragment}
+- Observed cases $y_t$ at time $t$
+- True infections $I_t$ (latent)
+- Detection probability $p_t$
+:::
+
+::: {.fragment}
+**Model Structure:**
+$$y_t \sim \text{Binomial}(I_t, p_t)$$
+:::
+
+::: {.fragment}
+**Priors allow information sharing:**
+$$p_t \sim \text{Beta}(\alpha, \beta)$$
+where hyperparameters $\alpha, \beta$ are learned from all locations
+:::
+
+## References {.smaller}
+
+::: {.nonincremental}
+1. Brintz et al. (2023). "Estimating COVID-19 Dynamics with Imperfect Detection." *Journal of Epidemiology*
+
+2. Gelman & Hill (2006). *Data Analysis Using Regression and Multilevel/Hierarchical Models*
+
+3. Carpenter et al. (2017). "Stan: A Probabilistic Programming Language." *Journal of Statistical Software*
+:::

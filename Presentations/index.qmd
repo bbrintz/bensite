@@ -35,5 +35,6 @@ a:hover, a:active {
 
 <div class="presentations-list">
   <a href="/Presentations/mmdis/">Measuring and Mitigating Disparity of Decision-Making Tools</a><br>
-  <a href="/Presentations/seir-n-mixture/">SEIR N-mixture Model</a>
+  <a href="/Presentations/seir-n-mixture/">SEIR N-mixture Model</a><br>
+  <a href="/Presentations/va-ideas-bayesian/">Bayesian Models for Imperfect Detection and Spike Analysis</a>
 </div>
