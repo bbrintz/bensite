@@ -352,9 +352,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "\nWelcome\n",
+    "title": "Welcome",
     "section": "",
-    "text": "Welcome\n\nTry ChainLink"
+    "text": "Welcome\n    Try ChainLink\n  \n\n\n\n  About Ben Brintz\n  \n  Welcome to my personal website! I'm a researcher, data scientist, and educator passionate about using statistical methods and data analysis to solve real-world problems. This site showcases my academic work, publications, and various projects.\n  \n  Here you'll find information about my research in biostatistics, epidemiology, and machine learning applications in healthcare. I'm particularly interested in developing fair and equitable algorithms for medical decision-making and understanding health disparities through data-driven approaches.\n  \n  \n    \n      Research Focus\n      My research centers on biostatistics, epidemiological modeling, and the development of fair algorithms for healthcare applications. I work on projects ranging from infectious disease modeling to bias detection in medical AI systems.\n    \n    \n    \n      Publications\n      I've published research in various peer-reviewed journals covering topics in public health, statistics, and medical informatics. You can find my complete publication list in the Publications section.\n    \n    \n    \n      Teaching & Mentoring\n      I'm passionate about education and mentoring the next generation of researchers. I regularly teach courses in statistics, data analysis, and research methods.\n    \n    \n    \n      Creative Projects\n      Beyond research, I enjoy woodworking and creating things with my hands. You can see some of my woodworking projects in the dedicated section of this site.\n    \n  \n  \n  \n    Feel free to explore the different sections of my website to learn more about my work, research, and interests. If you'd like to get in touch, you can find me on GitHub or through my academic affiliations."
   },
   {
     "objectID": "Presentations/index.html",
