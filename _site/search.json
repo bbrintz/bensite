@@ -343,13 +343,6 @@
     "text": "References\n\nChen P, Wu L, Wang L. AI fairness in data management and analytics: A review on challenges, methodologies and applications. Applied Sciences. 2023 Sep 13;13(18):10258.\nMakhlouf K, Zhioua S, Palamidessi C. Machine learning fairness notions: Bridging the gap with real-world applications. Information Processing & Management. 2021 Sep 1;58(5):102642.\nYang J, Soltan AA, Eyre DW, Yang Y, Clifton DA. An adversarial training framework for mitigating algorithmic biases in clinical machine learning. NPJ digital medicine. 2023 Mar 29;6(1):55."
   },
   {
-    "objectID": "sierpinski.html",
-    "href": "sierpinski.html",
-    "title": "Ben Brintz",
-    "section": "",
-    "text": "Interactive Sierpinski Triangle"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "\nWelcome\n",
@@ -357,11 +350,116 @@
     "text": "Welcome\n\nTry ChainLink"
   },
   {
+    "objectID": "sierpinski.html",
+    "href": "sierpinski.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "Interactive Sierpinski Triangle"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
+    "href": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
+    "title": "VA-IDEAS",
+    "section": "Research threads at a glance",
+    "text": "Research threads at a glance\n\n\n\nPrediction and decision support\nFairness-aware evaluation\nBayesian hierarchical modeling\nImperfect detection\nTranslational, domain-driven models\n\n\n\nInfectious disease dynamics (SEIR)\nBehavioral signal detection\nCall volume spike detection\nUncertainty quantification for action\nCommunicating results to stakeholders"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#prediction-fairness",
+    "href": "Presentations/VA-IDEAS/index.html#prediction-fairness",
+    "title": "VA-IDEAS",
+    "section": "Prediction + fairness",
+    "text": "Prediction + fairness\n\nBuild models that perform well and are transparent about trade-offs\nEmphasize calibration, subgroup performance, and equitable utility\nPair algorithmic outputs with decision thresholds that are defensible\n\n\n\n\n\n\n\nNote\n\n\nGoal: decisions that are both accurate and equitable."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#how-i-think-about-modeling-problems",
+    "href": "Presentations/VA-IDEAS/index.html#how-i-think-about-modeling-problems",
+    "title": "VA-IDEAS",
+    "section": "How I think about modeling problems",
+    "text": "How I think about modeling problems\n\nReal-world data are messy, incomplete, and biased\nSystems usually have structure (people, places, time)\nDecisions still have to be made, even when data are imperfect\n\n\n\n\n\n\n\nNote\n\n\nMy focus: building models that respect how data are generated and support better decisions, not just better predictions."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#example-understanding-disease-spread",
+    "href": "Presentations/VA-IDEAS/index.html#example-understanding-disease-spread",
+    "title": "VA-IDEAS",
+    "section": "Example: understanding disease spread",
+    "text": "Example: understanding disease spread\n\nWe want to know: how many people are really getting sick?\nBut we only see reported cases, tests, or hospital visits\nThese depend on access, behavior, and reporting systems\n\n\nModeling goal: separate what is happening from what is being observed."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#key-features-of-the-disease-models",
+    "href": "Presentations/VA-IDEAS/index.html#key-features-of-the-disease-models",
+    "title": "VA-IDEAS",
+    "section": "Key features of the disease models",
+    "text": "Key features of the disease models\n\nDisease dynamics: people move through stages (exposed → infectious → recovered)\nHierarchical transmission: trends can differ by site, but share information\nTime-varying spread: transmission can change with behavior or interventions\n\n\n\n\n\n\n\nNote\n\n\nThis avoids treating each location as either identical or completely independent."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#imperfect-detection-what-we-see-is-not-the-whole-story",
+    "href": "Presentations/VA-IDEAS/index.html#imperfect-detection-what-we-see-is-not-the-whole-story",
+    "title": "VA-IDEAS",
+    "section": "Imperfect detection (what we see is not the whole story)",
+    "text": "Imperfect detection (what we see is not the whole story)\n\nNot everyone who is sick gets tested or seeks care\nReporting changes with access, policies, and system strain\nModels include a detection layer on top of true infections\n\n\n\n\n\n\n\nImportant\n\n\nThis helps distinguish real changes in spread from changes in reporting."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#what-we-gain-from-this-structure",
+    "href": "Presentations/VA-IDEAS/index.html#what-we-gain-from-this-structure",
+    "title": "VA-IDEAS",
+    "section": "What we gain from this structure",
+    "text": "What we gain from this structure\n\nSeparate estimates of transmission and detection\nMore stable estimates when data are sparse or noisy\nUncertainty that reflects both biology and reporting systems\n\n\nThis leads to better situational awareness, not just better curve‑fitting."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#key-features-of-callspike-models",
+    "href": "Presentations/VA-IDEAS/index.html#key-features-of-callspike-models",
+    "title": "VA-IDEAS",
+    "section": "Key features of call‑spike models",
+    "text": "Key features of call‑spike models\n\nBaseline patterns: daily and weekly rhythms in call volume\nAnomaly detection: identifying sudden departures from normal behavior\nTrend shifts: detecting sustained increases over time\n\n\n\n\n\n\n\nNote\n\n\nWe care about both short‑term shocks and longer‑term overload."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#how-monitoring-models-support-action",
+    "href": "Presentations/VA-IDEAS/index.html#how-monitoring-models-support-action",
+    "title": "VA-IDEAS",
+    "section": "How monitoring models support action",
+    "text": "How monitoring models support action\n\nEstimate probability of an anomaly or trend change\nQuantify how large the increase is, not just whether it exists\nCombine evidence to trigger operational responses\n\n\n\n\n\n\n\nImportant\n\n\nThis reduces false alarms while still catching true surges early."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#a-common-approach-across-projects",
+    "href": "Presentations/VA-IDEAS/index.html#a-common-approach-across-projects",
+    "title": "VA-IDEAS",
+    "section": "A common approach across projects",
+    "text": "A common approach across projects\n\nStart from the real-world question\nThink about how the data are actually generated\nBuild models that reflect that process\nCheck whether the model reproduces reality\nPresent results in decision‑relevant terms"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#why-bayesian-and-hierarchical",
+    "href": "Presentations/VA-IDEAS/index.html#why-bayesian-and-hierarchical",
+    "title": "VA-IDEAS",
+    "section": "Why Bayesian and hierarchical?",
+    "text": "Why Bayesian and hierarchical?\n\nNatural way to combine multiple sources of uncertainty\nSupports partial pooling when some areas have little data\nProduces probabilities that map directly to decisions\n\n\n\n\n\n\n\nNote\n\n\nThis is especially valuable when stakes are high and data are limited."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#current-focus-areas",
+    "href": "Presentations/VA-IDEAS/index.html#current-focus-areas",
+    "title": "VA-IDEAS",
+    "section": "Current focus areas",
+    "text": "Current focus areas\n\nSupporting fair and equitable decision tools\nUnderstanding disease dynamics with incomplete data\nMonitoring systems for early warning signals\nTranslating model outputs into operational guidance"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#looking-ahead",
+    "href": "Presentations/VA-IDEAS/index.html#looking-ahead",
+    "title": "VA-IDEAS",
+    "section": "Looking ahead",
+    "text": "Looking ahead\n\nIntegrating causal reasoning with hierarchical prediction\nAdaptive monitoring for rapid response\nDecision support that anticipates equity impacts"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#thank-you",
+    "href": "Presentations/VA-IDEAS/index.html#thank-you",
+    "title": "VA-IDEAS",
+    "section": "Thank you",
+    "text": "Thank you\nQuestions or collaborations welcome — especially where uncertainty + equity matter for real decisions."
+  },
+  {
     "objectID": "Presentations/index.html",
     "href": "Presentations/index.html",
     "title": "Ben Brintz",
     "section": "",
-    "text": "Measuring and Mitigating Disparity of Decision-Making Tools SEIR N-mixture Model"
+    "text": "Measuring and Mitigating Disparity of Decision-Making Tools SEIR N-mixture Model VA-IDEAS"
   },
   {
     "objectID": "mmdis.html",
