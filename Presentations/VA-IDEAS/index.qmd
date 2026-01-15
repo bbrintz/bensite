@@ -46,118 +46,70 @@ format:
 
 ---
 
-## How I think about modeling problems
+## Complex Bayesian hierarchical models
 
-- Real-world data are messy, incomplete, and biased
-- Systems usually have *structure* (people, places, time)
-- Decisions still have to be made, even when data are imperfect
-
-::: {.callout-note}
-**My focus:** building models that respect how data are generated and support better decisions, not just better predictions.
-:::
-
----
-
-## Example: understanding disease spread
-
-- We want to know: *how many people are really getting sick?*
-- But we only see reported cases, tests, or hospital visits
-- These depend on access, behavior, and reporting systems
+- Multi-level structure to share information across sites, groups, and time
+- Partial pooling to stabilize estimates in sparse regimes
+- Rich latent processes for detection, transmission, and reporting
 
 ::: {.fragment}
-**Modeling goal:** separate what is happening from what is being observed.
+**Why it matters:** hierarchical structure turns noisy, incomplete data into actionable signals.
 :::
 
 ---
 
-## Key features of the disease models
+## Imperfect detection: the core challenge
 
-- **Disease dynamics:** people move through stages (exposed → infectious → recovered)
-- **Hierarchical transmission:** trends can differ by site, but share information
-- **Time-varying spread:** transmission can change with behavior or interventions
-
-::: {.callout-note}
-This avoids treating each location as either identical or completely independent.
-:::
-
----
-
-## Imperfect detection (what we see is not the whole story)
-
-- Not everyone who is sick gets tested or seeks care
-- Reporting changes with access, policies, and system strain
-- Models include a *detection layer* on top of true infections
+- Observed data are often a filtered version of the truth
+- Detection depends on resources, behavior, and system delays
+- Models must explicitly separate *process* from *observation*
 
 ::: {.callout-important}
-This helps distinguish real changes in spread from changes in reporting.
+Imperfect detection is not a nuisance—it is the mechanism that shapes what we can observe.
 :::
 
 ---
 
-## What we gain from this structure
+## Application: SEIR models with imperfect detection
 
-- Separate estimates of transmission and detection
-- More stable estimates when data are sparse or noisy
-- Uncertainty that reflects both biology and reporting systems
+- Embed detection sub-models inside compartmental dynamics
+- Jointly infer incidence and observation processes
+- Quantify uncertainty in both transmission and reporting
 
 ::: {.fragment}
-This leads to better situational awareness, not just better curve‑fitting.
+**Outcome:** more realistic forecasts and robust scenario planning.
 :::
 
 ---
 
-## Key features of call‑spike models
+## Application: detecting call spikes
 
-- **Baseline patterns:** daily and weekly rhythms in call volume
-- **Anomaly detection:** identifying sudden departures from normal behavior
-- **Trend shifts:** detecting sustained increases over time
+- Treat call volume as a latent process with observation noise
+- Hierarchical priors borrow strength across regions and time
+- Real-time detection focuses on *signals of change* rather than raw counts
 
-::: {.callout-note}
-We care about both short‑term shocks and longer‑term overload.
+::: {.fragment}
+**Outcome:** faster identification of operational strain and emerging issues.
 :::
 
 ---
 
-## How monitoring models support action
+## Model workflow
 
-- Estimate probability of an anomaly or trend change
-- Quantify how large the increase is, not just whether it exists
-- Combine evidence to trigger operational responses
-
-::: {.callout-important}
-This reduces false alarms while still catching true surges early.
-:::
-
----
-
-## A common approach across projects
-
-1. Start from the real-world question
-2. Think about how the data are actually generated
-3. Build models that reflect that process
-4. Check whether the model reproduces reality
-5. Present results in decision‑relevant terms
-
----
-
-## Why Bayesian and hierarchical?
-
-- Natural way to combine multiple sources of uncertainty
-- Supports partial pooling when some areas have little data
-- Produces probabilities that map directly to decisions
-
-::: {.callout-note}
-This is especially valuable when stakes are high and data are limited.
-:::
+1. Define the scientific question and action thresholds
+2. Build hierarchical structure for stability
+3. Encode detection/measurement processes
+4. Validate with posterior predictive checks
+5. Communicate uncertainty clearly
 
 ---
 
 ## Current focus areas
 
-- Supporting fair and equitable decision tools
-- Understanding disease dynamics with incomplete data
-- Monitoring systems for early warning signals
-- Translating model outputs into operational guidance
+- Fairness-aware evaluation for predictive tools
+- Robust estimation under imperfect detection
+- Forecasting pipelines for infectious disease and operational signals
+- Bridging model outputs to real decisions
 
 ---
 
@@ -171,4 +123,4 @@ This is especially valuable when stakes are high and data are limited.
 
 ## Thank you
 
-Questions or collaborations welcome — especially where uncertainty + equity matter for real decisions.
+Questions or collaborations welcome.

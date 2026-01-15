@@ -371,74 +371,46 @@
     "text": "Prediction + fairness\n\nBuild models that perform well and are transparent about trade-offs\nEmphasize calibration, subgroup performance, and equitable utility\nPair algorithmic outputs with decision thresholds that are defensible\n\n\n\n\n\n\n\nNote\n\n\nGoal: decisions that are both accurate and equitable."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#how-i-think-about-modeling-problems",
-    "href": "Presentations/VA-IDEAS/index.html#how-i-think-about-modeling-problems",
+    "objectID": "Presentations/VA-IDEAS/index.html#complex-bayesian-hierarchical-models",
+    "href": "Presentations/VA-IDEAS/index.html#complex-bayesian-hierarchical-models",
     "title": "VA-IDEAS",
-    "section": "How I think about modeling problems",
-    "text": "How I think about modeling problems\n\nReal-world data are messy, incomplete, and biased\nSystems usually have structure (people, places, time)\nDecisions still have to be made, even when data are imperfect\n\n\n\n\n\n\n\nNote\n\n\nMy focus: building models that respect how data are generated and support better decisions, not just better predictions."
+    "section": "Complex Bayesian hierarchical models",
+    "text": "Complex Bayesian hierarchical models\n\nMulti-level structure to share information across sites, groups, and time\nPartial pooling to stabilize estimates in sparse regimes\nRich latent processes for detection, transmission, and reporting\n\n\nWhy it matters: hierarchical structure turns noisy, incomplete data into actionable signals."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#example-understanding-disease-spread",
-    "href": "Presentations/VA-IDEAS/index.html#example-understanding-disease-spread",
+    "objectID": "Presentations/VA-IDEAS/index.html#imperfect-detection-the-core-challenge",
+    "href": "Presentations/VA-IDEAS/index.html#imperfect-detection-the-core-challenge",
     "title": "VA-IDEAS",
-    "section": "Example: understanding disease spread",
-    "text": "Example: understanding disease spread\n\nWe want to know: how many people are really getting sick?\nBut we only see reported cases, tests, or hospital visits\nThese depend on access, behavior, and reporting systems\n\n\nModeling goal: separate what is happening from what is being observed."
+    "section": "Imperfect detection: the core challenge",
+    "text": "Imperfect detection: the core challenge\n\nObserved data are often a filtered version of the truth\nDetection depends on resources, behavior, and system delays\nModels must explicitly separate process from observation\n\n\n\n\n\n\n\nImportant\n\n\nImperfect detection is not a nuisance—it is the mechanism that shapes what we can observe."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#key-features-of-the-disease-models",
-    "href": "Presentations/VA-IDEAS/index.html#key-features-of-the-disease-models",
+    "objectID": "Presentations/VA-IDEAS/index.html#application-seir-models-with-imperfect-detection",
+    "href": "Presentations/VA-IDEAS/index.html#application-seir-models-with-imperfect-detection",
     "title": "VA-IDEAS",
-    "section": "Key features of the disease models",
-    "text": "Key features of the disease models\n\nDisease dynamics: people move through stages (exposed → infectious → recovered)\nHierarchical transmission: trends can differ by site, but share information\nTime-varying spread: transmission can change with behavior or interventions\n\n\n\n\n\n\n\nNote\n\n\nThis avoids treating each location as either identical or completely independent."
+    "section": "Application: SEIR models with imperfect detection",
+    "text": "Application: SEIR models with imperfect detection\n\nEmbed detection sub-models inside compartmental dynamics\nJointly infer incidence and observation processes\nQuantify uncertainty in both transmission and reporting\n\n\nOutcome: more realistic forecasts and robust scenario planning."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#imperfect-detection-what-we-see-is-not-the-whole-story",
-    "href": "Presentations/VA-IDEAS/index.html#imperfect-detection-what-we-see-is-not-the-whole-story",
+    "objectID": "Presentations/VA-IDEAS/index.html#application-detecting-call-spikes",
+    "href": "Presentations/VA-IDEAS/index.html#application-detecting-call-spikes",
     "title": "VA-IDEAS",
-    "section": "Imperfect detection (what we see is not the whole story)",
-    "text": "Imperfect detection (what we see is not the whole story)\n\nNot everyone who is sick gets tested or seeks care\nReporting changes with access, policies, and system strain\nModels include a detection layer on top of true infections\n\n\n\n\n\n\n\nImportant\n\n\nThis helps distinguish real changes in spread from changes in reporting."
+    "section": "Application: detecting call spikes",
+    "text": "Application: detecting call spikes\n\nTreat call volume as a latent process with observation noise\nHierarchical priors borrow strength across regions and time\nReal-time detection focuses on signals of change rather than raw counts\n\n\nOutcome: faster identification of operational strain and emerging issues."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#what-we-gain-from-this-structure",
-    "href": "Presentations/VA-IDEAS/index.html#what-we-gain-from-this-structure",
+    "objectID": "Presentations/VA-IDEAS/index.html#model-workflow",
+    "href": "Presentations/VA-IDEAS/index.html#model-workflow",
     "title": "VA-IDEAS",
-    "section": "What we gain from this structure",
-    "text": "What we gain from this structure\n\nSeparate estimates of transmission and detection\nMore stable estimates when data are sparse or noisy\nUncertainty that reflects both biology and reporting systems\n\n\nThis leads to better situational awareness, not just better curve‑fitting."
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#key-features-of-callspike-models",
-    "href": "Presentations/VA-IDEAS/index.html#key-features-of-callspike-models",
-    "title": "VA-IDEAS",
-    "section": "Key features of call‑spike models",
-    "text": "Key features of call‑spike models\n\nBaseline patterns: daily and weekly rhythms in call volume\nAnomaly detection: identifying sudden departures from normal behavior\nTrend shifts: detecting sustained increases over time\n\n\n\n\n\n\n\nNote\n\n\nWe care about both short‑term shocks and longer‑term overload."
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#how-monitoring-models-support-action",
-    "href": "Presentations/VA-IDEAS/index.html#how-monitoring-models-support-action",
-    "title": "VA-IDEAS",
-    "section": "How monitoring models support action",
-    "text": "How monitoring models support action\n\nEstimate probability of an anomaly or trend change\nQuantify how large the increase is, not just whether it exists\nCombine evidence to trigger operational responses\n\n\n\n\n\n\n\nImportant\n\n\nThis reduces false alarms while still catching true surges early."
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#a-common-approach-across-projects",
-    "href": "Presentations/VA-IDEAS/index.html#a-common-approach-across-projects",
-    "title": "VA-IDEAS",
-    "section": "A common approach across projects",
-    "text": "A common approach across projects\n\nStart from the real-world question\nThink about how the data are actually generated\nBuild models that reflect that process\nCheck whether the model reproduces reality\nPresent results in decision‑relevant terms"
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#why-bayesian-and-hierarchical",
-    "href": "Presentations/VA-IDEAS/index.html#why-bayesian-and-hierarchical",
-    "title": "VA-IDEAS",
-    "section": "Why Bayesian and hierarchical?",
-    "text": "Why Bayesian and hierarchical?\n\nNatural way to combine multiple sources of uncertainty\nSupports partial pooling when some areas have little data\nProduces probabilities that map directly to decisions\n\n\n\n\n\n\n\nNote\n\n\nThis is especially valuable when stakes are high and data are limited."
+    "section": "Model workflow",
+    "text": "Model workflow\n\nDefine the scientific question and action thresholds\nBuild hierarchical structure for stability\nEncode detection/measurement processes\nValidate with posterior predictive checks\nCommunicate uncertainty clearly"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#current-focus-areas",
     "href": "Presentations/VA-IDEAS/index.html#current-focus-areas",
     "title": "VA-IDEAS",
     "section": "Current focus areas",
-    "text": "Current focus areas\n\nSupporting fair and equitable decision tools\nUnderstanding disease dynamics with incomplete data\nMonitoring systems for early warning signals\nTranslating model outputs into operational guidance"
+    "text": "Current focus areas\n\nFairness-aware evaluation for predictive tools\nRobust estimation under imperfect detection\nForecasting pipelines for infectious disease and operational signals\nBridging model outputs to real decisions"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#looking-ahead",
@@ -452,7 +424,7 @@
     "href": "Presentations/VA-IDEAS/index.html#thank-you",
     "title": "VA-IDEAS",
     "section": "Thank you",
-    "text": "Thank you\nQuestions or collaborations welcome — especially where uncertainty + equity matter for real decisions."
+    "text": "Thank you\nQuestions or collaborations welcome."
   },
   {
     "objectID": "Presentations/index.html",
