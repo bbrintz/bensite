@@ -1,0 +1,22 @@
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  letter-spacing: 0.02em;
+}
+
+.reveal section {
+  font-size: 28px;
+}
+
+.reveal .callout-note,
+.reveal .callout-important {
+  border-left: 4px solid #2563eb;
+  background: #eff6ff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.reveal .callout-important {
+  border-left-color: #dc2626;
+  background: #fef2f2;
+}

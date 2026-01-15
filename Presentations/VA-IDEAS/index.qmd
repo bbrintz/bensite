@@ -1,0 +1,126 @@
+---
+title: "VA-IDEAS"
+subtitle: "Prediction, Fairness, and Complex Bayesian Hierarchical Models"
+author: "Ben Brintz"
+institute: "Research Themes"
+format:
+  revealjs:
+    theme: white
+    transition: fade
+    incremental: true
+    slideNumber: true
+    css: custom.css
+---
+
+## Research threads at a glance
+
+::: {.columns}
+::: {.column width="50%"}
+- Prediction and decision support
+- Fairness-aware evaluation
+- Bayesian hierarchical modeling
+- Imperfect detection
+- Translational, domain-driven models
+:::
+
+::: {.column width="50%"}
+- Infectious disease dynamics (SEIR)
+- Behavioral signal detection
+- Call volume spike detection
+- Uncertainty quantification for action
+- Communicating results to stakeholders
+:::
+:::
+
+---
+
+## Prediction + fairness
+
+- Build models that perform well *and* are transparent about trade-offs
+- Emphasize calibration, subgroup performance, and equitable utility
+- Pair algorithmic outputs with decision thresholds that are defensible
+
+::: {.callout-note}
+**Goal:** decisions that are both accurate and equitable.
+:::
+
+---
+
+## Complex Bayesian hierarchical models
+
+- Multi-level structure to share information across sites, groups, and time
+- Partial pooling to stabilize estimates in sparse regimes
+- Rich latent processes for detection, transmission, and reporting
+
+::: {.fragment}
+**Why it matters:** hierarchical structure turns noisy, incomplete data into actionable signals.
+:::
+
+---
+
+## Imperfect detection: the core challenge
+
+- Observed data are often a filtered version of the truth
+- Detection depends on resources, behavior, and system delays
+- Models must explicitly separate *process* from *observation*
+
+::: {.callout-important}
+Imperfect detection is not a nuisance—it is the mechanism that shapes what we can observe.
+:::
+
+---
+
+## Application: SEIR models with imperfect detection
+
+- Embed detection sub-models inside compartmental dynamics
+- Jointly infer incidence and observation processes
+- Quantify uncertainty in both transmission and reporting
+
+::: {.fragment}
+**Outcome:** more realistic forecasts and robust scenario planning.
+:::
+
+---
+
+## Application: detecting call spikes
+
+- Treat call volume as a latent process with observation noise
+- Hierarchical priors borrow strength across regions and time
+- Real-time detection focuses on *signals of change* rather than raw counts
+
+::: {.fragment}
+**Outcome:** faster identification of operational strain and emerging issues.
+:::
+
+---
+
+## Model workflow
+
+1. Define the scientific question and action thresholds
+2. Build hierarchical structure for stability
+3. Encode detection/measurement processes
+4. Validate with posterior predictive checks
+5. Communicate uncertainty clearly
+
+---
+
+## Current focus areas
+
+- Fairness-aware evaluation for predictive tools
+- Robust estimation under imperfect detection
+- Forecasting pipelines for infectious disease and operational signals
+- Bridging model outputs to real decisions
+
+---
+
+## Looking ahead
+
+- Integrating causal reasoning with hierarchical prediction
+- Adaptive monitoring for rapid response
+- Decision support that anticipates equity impacts
+
+---
+
+## Thank you
+
+Questions or collaborations welcome.
