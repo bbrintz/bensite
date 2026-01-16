@@ -1,12 +1,45 @@
 /* Extracted from index.qmd inline styles */
 *, *::before, *::after { box-sizing: border-box; }
-body {
+
+/* Override Quarto's container restrictions for full width */
+body, html {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make the main Quarto container full width */
+#quarto-content {
+  width: 100vw !important;
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.content {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hero section with video */
+#hero-section {
   position: relative;
-  min-height: 100svh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .overlay-text {
@@ -15,6 +48,7 @@ body {
   left: 10%;
   transform: translateY(-50%);
   color: #fff;
+  z-index: 1;
 }
 
 .overlay-text h1 {
@@ -36,14 +70,31 @@ body {
   background-color: #fff;
 }
 
-#bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+/* Content section */
+#content-section {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 4rem 0;
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  line-height: 1.6;
+}
+
+.content-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.content-container p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: #666;
 }
 
 @media (max-width: 600px) {
@@ -62,5 +113,17 @@ body {
     font-size: clamp(1.8rem, 4vw, 4rem);
     min-height: 44px;
     border-radius: 1.5rem;
+  }
+  
+  .content-container {
+    padding: 0 1rem;
+  }
+  
+  .content-container h2 {
+    font-size: 2rem;
+  }
+  
+  .content-container p {
+    font-size: 1rem;
   }
 }
