@@ -4,17 +4,27 @@ body {
   margin: 0;
   position: relative;
   min-height: 100svh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #0f172a; /* match woodworking/publications grey-blue */
+  color: #ffffff;
+}
+
+/* Hero (replaces background video) */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 3rem 1.25rem;
+  background-color: inherit; /* uses body bg */
+  overflow: hidden;
 }
 
 .overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+  position: relative;
+  left: 0;
+  transform: none;
   color: #fff;
+  max-width: 72ch;
 }
 
 .overlay-text h1 {
@@ -25,32 +35,38 @@ body {
 
 .overlay-text .cta-button {
   display: inline-block;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   color: #000;
   padding: 0.6rem 1.2rem;
   font-size: 1.25rem;
   border-radius: 2rem;
   text-decoration: none;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
 }
 .overlay-text .cta-button:hover {
   background-color: #fff;
 }
 
-#bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+/* White section that becomes visible when scrolling */
+.below-section {
+  background: #ffffff;
+  color: #0f172a;
+  margin-top: -3rem; /* overlap hero slightly so it peeks in */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -12px 30px rgba(15,23,42,0.07);
+  padding: 3rem 1.25rem 6rem 1.25rem;
+}
+.below-inner {
+  max-width: 80ch;
+  margin: 0 auto;
 }
 
 @media (max-width: 600px) {
   .overlay-text {
-    top: 55%;
-    left: 5%;
-    transform: translateY(-50%);
+    padding-left: 6%;
     padding-right: 6%;
   }
   .overlay-text h1 {
@@ -59,7 +75,7 @@ body {
   }
   .overlay-text .cta-button {
     padding: 0.8rem 1.2rem;
-    font-size: clamp(1.8rem, 4vw, 4rem);
+    font-size: 1.05rem;
     min-height: 44px;
     border-radius: 1.5rem;
   }
