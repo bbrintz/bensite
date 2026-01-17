@@ -6,8 +6,16 @@ format:
     css: index.css
 ---
 
+::: {.hero}
+::: {.overlay-text}
+# Welcome
+[Try ChainLink](chain_link.qmd){.cta-button}
+:::
+:::
 
-<div class="overlay-text">
-  <h1>Welcome</h1>
-  <a class="cta-button" href="chain_link.qmd">Try ChainLink</a>
-</div>
+::: {.below-section}
+::: {.below-inner}
+## About
+...Your content here...
+:::
+:::

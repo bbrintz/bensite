@@ -345,9 +345,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "\nWelcome\n",
+    "title": "Welcome",
     "section": "",
-    "text": "Welcome\n\nTry ChainLink"
+    "text": "Try ChainLink"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Welcome",
+    "section": "About",
+    "text": "About\n…Your content here…"
   },
   {
     "objectID": "sierpinski.html",
