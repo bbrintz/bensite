@@ -107,6 +107,9 @@ body {
   <figure class="wood-card">
     <img src="images/project4.jpg" alt="Project 4" loading="lazy">
   </figure>
+  <figure class="wood-card">
+    <img src="images/project5.jpeg" alt="Project 5" loading="lazy">
+  </figure>
 </div>
 <div id="lightbox">
   <img src="" alt="">
