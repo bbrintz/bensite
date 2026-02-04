@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChainLink – Word-Chain Puzzle</title>
+  <style>
+    :root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e2e8f0; --accent:#22c55e; --border:#334155; }
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b1224,var(--bg));color:var(--text);font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{width:min(720px,100%);background:rgba(17,24,39,.9);border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);padding:18px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    h1{margin:0;font-weight:800;letter-spacing:.3px;font-size:22px}
+    .muted{color:var(--muted)}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+    .pill{padding:6px 12px;border-radius:999px;border:1px solid var(--border);font-weight:700;letter-spacing:.5px}
+    .pill.given{background:rgba(129,140,248,.2);border-color:rgba(129,140,248,.4);color:#dbeafe}
+    .pill.revealed{background:rgba(16,185,129,.18);border-color:rgba(16,185,129,.35);color:#d1fae5}
+    .pill.hidden{background:rgba(51,65,85,.6);color:#cbd5e1}
+    .meta{color:#cbd5e1;font-size:14px;margin:6px 0 10px}
+    .actions{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+    .actions .right{margin-left:auto}
+    button{cursor:pointer;appearance:none;border:1px solid var(--border);background:#1f2937;color:var(--text);padding:8px 12px;border-radius:12px;font-weight:600}
+    button:hover{background:#263244}
+    .inputrow{display:flex;gap:10px}
+    input[type=text]{flex:1;background:#0b1220;border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:#fff;outline:none}
+    input[type=text]:focus{border-color:#64748b}
+    .primary{background:#22c55e;border-color:#22c55e;color:#06281a}
+    .primary:hover{filter:brightness(1.05)}
+    ul.hist{list-style:none;margin:10px 0 0;padding:0;max-height:180px;overflow:auto}
+    ul.hist li{display:flex;align-items:center;gap:8px;font-size:14px;margin:4px 0}
+    .chip{border-radius:10px;padding:2px 8px;font-weight:700}
+    .chip.good{background:rgba(16,185,129,.16);color:#86efac}
+    .chip.bad{background:rgba(244,63,94,.16);color:#fecaca}
+    details{margin-top:12px;background:rgba(17,24,39,.6);border:1px solid var(--border);border-radius:14px;padding:10px 12px}
+    summary{cursor:pointer;font-weight:700}
+    footer{text-align:center;color:#94a3b8;font-size:12px;margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>ChainLink</h1>
+        <div class="muted" style="display:flex;gap:12px;align-items:center">
+          <div id="daily-tag" class="muted"></div>
+          <div id="score-tag" class="muted"></div>
+        </div>
+      </header>
+      <div id="root"></div>
+      <footer>Prototype © <span id="year"></span> · For playtesting only</footer>
+    </div>
+  </div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" data-presets="react">
+    const { useMemo, useState, useEffect } = React;
+
+    const CHAINS = [
+      { words:["ICE","CREAM","SODA","POP"], linkTypes:["Compound word","Common phrase (CREAM SODA)","Synonyms (SODA = POP)"] },
+      { words:["COLD","SHOULDER","BLADE","RUNNER"], linkTypes:["Common phrase (COLD SHOULDER)","Compound (SHOULDER BLADE)","Compound / title (BLADE RUNNER)"] },
+      { words:["NIGHT","LIFE","JACKET","POTATO"], linkTypes:["Compound (NIGHTLIFE)","Compound (LIFE JACKET)","Food phrase (JACKET POTATO)"] },
+      { words:["LIGHT","HOUSE","PLANT","BASED"], linkTypes:["Compound (LIGHTHOUSE)","Compound (HOUSEPLANT)","Phrase (PLANT-BASED)"] },
+      { words:["OVER","LAP","TOP","GUN"], linkTypes:["Wordplay / split (OVERLAP)","Compound (LAPTOP)","Title (TOP GUN)"] },
+      { words:["TABLE","SALT","LAKE","HOUSE"], linkTypes:["Phrase (TABLE SALT)","Place (SALT LAKE)","Compound (LAKE HOUSE)"] },
+    ];
+
+    const MAX_GUESSES_PER_LINK = 3;
+
+    function chooseDailyChain(){
+      const today = new Date();
+      const y=today.getFullYear(), m=today.getMonth()+1, d=today.getDate();
+      const seed = y*10000 + m*100 + d;
+      const idx = seed % CHAINS.length;
+      return { idx, chain: CHAINS[idx] };
+    }
+    const normalize = s => s.trim().toUpperCase().replace(/\s+/g,' ');
+
+    const scoreForLink = (attempts) => {
+      const firstCorrectIdx = attempts.findIndex(a => a.correct === true);
+      if (firstCorrectIdx === -1) return 0; // never got it
+      const wrongsBefore = attempts.slice(0, firstCorrectIdx).filter(a => a.correct === false).length;
+      return Math.max(0, 3 - wrongsBefore); // 3/2/1/0
+    };
+
+    const computeTotalScore = (words, history) => {
+      const links = words.length - 1;
+      let total = 0;
+      for (let i=0;i<links;i++) total += scoreForLink(history.filter(h=>h.step===i));
+      return total;
+    };
+
+    function WordPill({label, state}){
+      const cls = 'pill ' + (state==='given'?'given':state==='revealed'?'revealed':'hidden');
+      return <span className={cls}>{label}</span>;
+    }
+
+    function App(){
+      const { idx, chain } = useMemo(chooseDailyChain, []);
+      const words = chain.words;
+
+      const [step,setStep] = useState(0);
+      const [guess,setGuess] = useState('');
+      // history: {step, guess, correct} where correct can be true/false or null (auto-reveal)
+      const [history,setHistory] = useState([]);
+
+      const done = step >= words.length-1;
+      const targetIndex = step+1;
+      const targetWord = words[targetIndex] || '';
+
+      // Header labels
+      useEffect(() => { document.getElementById('daily-tag').textContent = `Daily #${idx+1} (local)`; }, [idx]);
+      useEffect(() => { const t=computeTotalScore(words,history), m=(words.length-1)*3; document.getElementById('score-tag').textContent = `Score: ${t} / ${m}`; }, [history, words]);
+
+      const wrongsForStep = (st) => history.filter(h=>h.step===st && h.correct===false).length;
+
+      function handleSubmit(e){
+        e.preventDefault();
+        if(done) return;
+        const g = normalize(guess);
+        if(!g) return;
+        const correct = g === normalize(targetWord);
+        setHistory(h=>{
+          const next = [...h, {step, guess:g, correct}];
+          if(!correct){
+            const wrongs = next.filter(x=>x.step===step && x.correct===false).length;
+            if(wrongs >= MAX_GUESSES_PER_LINK){ next.push({ step, guess:`→ ${normalize(targetWord)}`, correct: null }); }
+          }
+          return next;
+        });
+        setGuess('');
+        if(correct){ setStep(s=>s+1); }
+        else { const wrongs = wrongsForStep(step) + 1; if(wrongs >= MAX_GUESSES_PER_LINK){ setStep(s=>s+1); } }
+      }
+
+      const remainingLengths = words.slice(1).map(w=>w.length);
+      const wrongsThis = history.filter(h=>h.step===step && h.correct===false).length;
+      const triesLeft = Math.max(0, MAX_GUESSES_PER_LINK - wrongsThis);
+
+      function copyShare(){
+        const tries = history.length;
+        const solved = step >= words.length-1;
+        const perStep = Array.from({length: words.length-1}, (_,i)=>{
+          const attempts = history.filter(h=>h.step===i);
+          const ok = attempts.some(a=>a.correct===true);
+          const wrongs = attempts.filter(a=>a.correct===false).length;
+          return (ok? '🔗':'⛓️') + (wrongs? '❌'.repeat(wrongs):'');
+        }).join(' ');
+        const total = computeTotalScore(words, history);
+        const max = (words.length - 1) * 3;
+        const text = `ChainLink #${idx+1} ${solved? 'Solved':'Unsolved'} in ${tries} guesses\nScore: ${total}/${max}\n${perStep}`;
+        navigator.clipboard.writeText(text).then(()=>alert('Result copied to clipboard!'));
+      }
+
+      return (
+        <div>
+          <div className="pillrow">
+            <WordPill label={words[0]} state="given" />
+            {words.slice(1).map((w,i)=> (
+              <WordPill key={i} label={i < step ? words[i+1] : '•'.repeat(w.length)} state={i < step ? 'revealed' : 'hidden'} />
+            ))}
+          </div>
+
+          <div className="meta">
+            <span className="muted">Next word length: </span>
+            <strong>{words[targetIndex]? words[targetIndex].length : '-'}</strong>
+            <span className="muted"> · Remaining lengths: {remainingLengths.join(' / ')} · </span>
+            <span className="muted">Guesses left: <strong>{triesLeft}</strong> / {MAX_GUESSES_PER_LINK}</span>
+          </div>
+
+          {!done ? (
+            <form onSubmit={handleSubmit} className="inputrow">
+              <input type="text" value={guess} onChange={e=>setGuess(e.target.value)} placeholder="Type the NEXT word…" />
+              <button className="primary" type="submit">Guess</button>
+            </form>
+          ) : (
+            <div style={{color:'#86efac',fontWeight:700,margin:'6px 0'}}>
+              All links solved! Final score: {computeTotalScore(words, history)} / {(words.length-1)*3} 🎉
+            </div>
+          )}
+
+          <ul className="hist">
+            {history.length===0 ? (
+              <li className="muted">No guesses yet. Aim for accuracy, not spam!</li>
+            ) : history.map((h,i)=> (
+              <li key={i}>
+                <span className="muted">Link {h.step+1}:</span>
+                {h.correct===null ? (
+                  <> <span className="chip" style={{background:'rgba(129,140,248,.18)',color:'#c7d2fe',marginLeft:6}}>Out of guesses → {h.guess.replace(/^→ /,'')}</span> </>
+                ) : (
+                  <> <span className={'chip ' + (h.correct? 'good':'bad')} style={{marginLeft:6}}>{h.guess}</span> <span className="muted"> {h.correct? '✓':'×'}</span> </>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="actions" style={{marginTop:12,justifyContent:'space-between'}}>
+            {done ? (
+              <div className="muted">You completed: <strong>{words.join(' → ')}</strong></div>
+            ) : <span className="muted"></span>}
+            <button onClick={copyShare}>Share Result</button>
+          </div>
+
+          <details>
+            <summary>How to play</summary>
+            <ul style={{margin:'8px 0 0 18px'}}>
+              <li>Start from the first word. Guess the <em>next</em> word only.</li>
+              <li>You have <strong>{MAX_GUESSES_PER_LINK} guesses per link</strong>. Run out, and the answer is revealed (0 points).</li>
+              <li>Scoring: 3 points on 1st try, 2 points on 2nd, 1 point on 3rd.</li>
+              <li>Each correct word reveals the next link. Share your spoiler-free pattern once you finish.</li>
+            </ul>
+          </details>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
