@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Ben Brintz">
-  <title>Ben Brintz - VA-IDEAS</title>
+  <title>Ben Brintz - Using Complex Bayesian Hierarchical Models for “Detection” with Count Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,8 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">VA-IDEAS</h1>
-  <p class="subtitle">Prediction, Fairness, and Complex Bayesian Hierarchical Models</p>
+  <h1 class="title">Using Complex Bayesian Hierarchical Models for “Detection” with Count Data</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -336,41 +335,99 @@
 Ben Brintz 
 </div>
         <p class="quarto-title-affiliation">
-            Research Themes
+            IDEAS / VA
           </p>
     </div>
 </div>
 
 </section>
-<section id="research-threads-at-a-glance" class="slide level2">
-<h2>Research threads at a glance</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li class="fragment">Prediction and decision support</li>
-<li class="fragment">Fairness-aware evaluation</li>
-<li class="fragment">Bayesian hierarchical modeling</li>
-<li class="fragment">Imperfect detection</li>
-<li class="fragment">Translational, domain-driven models</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment">Infectious disease dynamics (SEIR)</li>
-<li class="fragment">Behavioral signal detection</li>
-<li class="fragment">Call volume spike detection</li>
-<li class="fragment">Uncertainty quantification for action</li>
-<li class="fragment">Communicating results to stakeholders</li>
-</ul>
+<section id="research-threads-at-a-glance" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Research threads at a glance</h2>
+<div style="height:1em;">
+
+</div>
+<div style="
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 3em;
+  align-items: center;
+  justify-items: center;
+">
+<!-- Top left -->
+<div class="fragment" data-fragment-index="1" style="
+  border:2px solid #333;
+  border-radius:999px;
+  padding:1.2em;
+  background:#f5f7fa;
+  text-align:center;
+  font-weight:700;
+  width: 80%;
+">
+<p>Clinical Prediction &amp;<br>Decision Support</p>
+</div>
+<!-- Top right -->
+<div class="fragment" data-fragment-index="2" style="
+  border:2px solid #333;
+  border-radius:999px;
+  padding:1.2em;
+  background:#f5f7fa;
+  text-align:center;
+  font-weight:700;
+  width: 80%;
+">
+<p>Experimental Design &amp;<br>Evaluation</p>
+</div>
+<!-- Bottom center -->
+<div class="fragment" data-fragment-index="3" style="grid-column: 1 / span 2; width: 100%; text-align: center;">
+<div data-id="bayes-core" style="
+    border:2px solid #333;
+    border-radius:999px;
+    padding:1.4em;
+    background:#f5f7fa;
+    text-align:center;
+    font-weight:800;
+    width: 70%;
+    max-width: 720px;
+    margin: 0 auto;
+  ">
+Bayesian Hierarchical Models<br> for Latent Processes
+</div>
 </div>
 </div>
 </section>
-<section id="prediction-fairness" class="slide level2">
-<h2>Prediction + fairness</h2>
+<section id="two-exemplar-bayesian-hierarchical-models" class="slide level2" data-auto-animate="true" data-visibility="uncounted">
+<h2 data-id="quarto-animate-title">Two exemplar Bayesian hierarchical models</h2>
+<div style="height:1.5em;">
+
+</div>
+<div style="width: 100%; text-align: center;">
+<div data-id="bayes-core" style="
+  border:3px solid #333;
+  border-radius:999px;
+  padding:2em 3em;
+  background:#e8f0ff;
+  text-align:center;
+  font-weight:900;
+  font-size:1.4em;
+  width: 70%;
+  max-width: 720px;
+  margin: 0 auto;
+">
+<p>Bayesian Hierarchical Models<br> for Latent Processes</p>
+</div>
+</div>
+<div class="fragment">
 <ul>
-<li class="fragment">Build models that perform well <em>and</em> are transparent about trade-offs</li>
-<li class="fragment">Emphasize calibration, subgroup performance, and equitable utility</li>
-<li class="fragment">Pair algorithmic outputs with decision thresholds that are defensible</li>
+<li class="fragment">A shared modeling philosophy</li>
+<li class="fragment">Two concrete instantiations of the same modeling core:
+<ul>
+<li class="fragment">Imperfect detection SEIR models</li>
+<li class="fragment">Early detection of call spikes</li>
+</ul></li>
 </ul>
+</div>
+<div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -380,28 +437,52 @@ Ben Brintz
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Goal:</strong> decisions that are both accurate and equitable.</p>
+<p>Everything that follows focuses on two concrete models that illustrate how hierarchical Bayesian thinking enables early detection under uncertainty.</p>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="case-study-1-imperfect-detection-seir-models" class="slide level2">
+<h2>Case study 1: Imperfect detection SEIR models</h2>
+<ul>
+<li class="fragment">Latent disease transmission is never directly observed</li>
+<li class="fragment">Reported cases reflect testing intensity and reporting practices (a noisy fraction of true infections)</li>
+<li class="fragment">The model estimates transmission and a single global detection fraction from the data</li>
+</ul>
+<div class="fragment">
+<p><strong>Key capability:</strong> separates what is happening from what is observed.</p>
 </div>
 </section>
 <section id="complex-bayesian-hierarchical-models" class="slide level2">
 <h2>Complex Bayesian hierarchical models</h2>
 <ul>
-<li class="fragment">Multi-level structure to share information across sites, groups, and time</li>
-<li class="fragment">Partial pooling to stabilize estimates in sparse regimes</li>
-<li class="fragment">Rich latent processes for detection, transmission, and reporting</li>
+<li class="fragment">Latent SEIR compartmental process for true infections</li>
+<li class="fragment">Transmission rate follows a hierarchical AR(1) process over time</li>
+<li class="fragment">Transmission and state transitions vary by region with partial pooling</li>
+<li class="fragment">Detection is modeled as a global process shared across regions</li>
 </ul>
 <div class="fragment">
-<p><strong>Why it matters:</strong> hierarchical structure turns noisy, incomplete data into actionable signals.</p>
+<p><strong>Modeling choice:</strong> smooth temporal evolution captures real transmission dynamics without chasing noise.</p>
+</div>
+</section>
+<section id="modeling-uncertainty-in-infection-dynamics" class="slide level2">
+<h2>Modeling uncertainty in infection dynamics</h2>
+<ul>
+<li class="fragment">Exposure and progression are heterogeneous across populations</li>
+<li class="fragment">Transitions between S→E, E→I, and I→R are overdispersed</li>
+<li class="fragment">Beta–binomial–style overdispersion allows realistic variability in state transitions</li>
+</ul>
+<div class="fragment">
+<p><strong>Capability:</strong> absorbs unmodeled heterogeneity while preserving interpretability.</p>
 </div>
 </section>
 <section id="imperfect-detection-the-core-challenge" class="slide level2">
 <h2>Imperfect detection: the core challenge</h2>
 <ul>
-<li class="fragment">Observed data are often a filtered version of the truth</li>
-<li class="fragment">Detection depends on resources, behavior, and system delays</li>
-<li class="fragment">Models must explicitly separate <em>process</em> from <em>observation</em></li>
+<li class="fragment">Surveillance systems observe cases, not infections</li>
+<li class="fragment">Detection depends on testing capacity and reporting practices</li>
+<li class="fragment">Ignoring detection leads to biased transmission inference</li>
 </ul>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -412,7 +493,7 @@ Ben Brintz
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Imperfect detection is not a nuisance—it is the mechanism that shapes what we can observe.</p>
+<p>Detection is not noise—it is a structured, inferential component of the model.</p>
 </div>
 </div>
 </div>
@@ -420,42 +501,69 @@ Ben Brintz
 <section id="application-seir-models-with-imperfect-detection" class="slide level2">
 <h2>Application: SEIR models with imperfect detection</h2>
 <ul>
-<li class="fragment">Embed detection sub-models inside compartmental dynamics</li>
-<li class="fragment">Jointly infer incidence and observation processes</li>
-<li class="fragment">Quantify uncertainty in both transmission and reporting</li>
+<li class="fragment">Jointly infers transmission, detection, and transition processes</li>
+<li class="fragment">AR(1) structure stabilizes inference during reporting gaps</li>
+<li class="fragment">Remains well-behaved when case counts approach zero</li>
 </ul>
 <div class="fragment">
-<p><strong>Outcome:</strong> more realistic forecasts and robust scenario planning.</p>
+<p><strong>Result:</strong> smoother, more credible early warning signals for emerging outbreaks.</p>
 </div>
 </section>
-<section id="application-detecting-call-spikes" class="slide level2">
-<h2>Application: detecting call spikes</h2>
+<section id="one-modeling-philosophy-different-signals" class="slide level2">
+<h2>One modeling philosophy, different signals</h2>
 <ul>
-<li class="fragment">Treat call volume as a latent process with observation noise</li>
-<li class="fragment">Hierarchical priors borrow strength across regions and time</li>
-<li class="fragment">Real-time detection focuses on <em>signals of change</em> rather than raw counts</li>
+<li class="fragment">Separate latent process from noisy observations</li>
+<li class="fragment">Use hierarchical structure to borrow strength</li>
+<li class="fragment">Target early detection rather than point prediction</li>
+</ul>
+</section>
+<section id="case-study-2-early-detection-of-call-spikes" class="slide level2">
+<h2>Case study 2: Early detection of call spikes</h2>
+<ul>
+<li class="fragment">Call counts follow a zero-inflated negative binomial process</li>
+<li class="fragment">Explicitly separates true zero-demand days from low-volume noise</li>
+<li class="fragment">Overdispersion captures variability beyond simple Poisson assumptions</li>
 </ul>
 <div class="fragment">
-<p><strong>Outcome:</strong> faster identification of operational strain and emerging issues.</p>
+<p><strong>Modeling choice:</strong> distribution matches real call behavior rather than forcing Gaussian assumptions.</p>
 </div>
 </section>
-<section id="model-workflow" class="slide level2">
-<h2>Model workflow</h2>
-<ol type="1">
-<li class="fragment">Define the scientific question and action thresholds</li>
-<li class="fragment">Build hierarchical structure for stability</li>
-<li class="fragment">Encode detection/measurement processes</li>
-<li class="fragment">Validate with posterior predictive checks</li>
-<li class="fragment">Communicate uncertainty clearly</li>
-</ol>
+<section id="hierarchical-modeling-for-early-warning" class="slide level2">
+<h2>Hierarchical modeling for early warning</h2>
+<ul>
+<li class="fragment">Latent call intensity evolves smoothly via an AR(1) process</li>
+<li class="fragment">Seasonal patterns captured with Fourier components</li>
+<li class="fragment">AR(1) structure and regularized effects stabilize estimates across time</li>
+</ul>
+<div class="fragment">
+<p><strong>Capability:</strong> detects change against strong seasonal and weekly structure.</p>
+</div>
+</section>
+<section id="detecting-anomalies-without-hard-thresholds" class="slide level2">
+<h2>Detecting anomalies without hard thresholds</h2>
+<ul>
+<li class="fragment">Smooth change-points modeled as logistic ramps</li>
+<li class="fragment">A horseshoe prior learns how many structural changes are needed</li>
+<li class="fragment">A random shock component captures short-lived anomalies</li>
+</ul>
+<div class="fragment">
+<p><strong>Why this works:</strong> the model adapts complexity to the data instead of fixing it in advance.</p>
+</div>
+</section>
+<section id="what-unifies-this-work" class="slide level2">
+<h2>What unifies this work</h2>
+<ul>
+<li class="fragment">Latent-process Bayesian models with temporal dependence</li>
+<li class="fragment">Flexible distributions matched to real-world data</li>
+<li class="fragment">Early detection through probabilistic change modeling</li>
+</ul>
 </section>
 <section id="current-focus-areas" class="slide level2">
 <h2>Current focus areas</h2>
 <ul>
-<li class="fragment">Fairness-aware evaluation for predictive tools</li>
-<li class="fragment">Robust estimation under imperfect detection</li>
-<li class="fragment">Forecasting pipelines for infectious disease and operational signals</li>
-<li class="fragment">Bridging model outputs to real decisions</li>
+<li class="fragment">Early detection under delayed, zero-inflated, and overdispersed data</li>
+<li class="fragment">Adaptive hierarchical models for evolving systems</li>
+<li class="fragment">Decision-focused uncertainty rather than point predictions</li>
 </ul>
 </section>
 <section id="looking-ahead" class="slide level2">
@@ -503,9 +611,9 @@ Ben Brintz
 'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease",
-'autoAnimateDuration': 1,
-'autoAnimateUnmatched': true,
+'autoAnimateEasing': "ease-in-out",
+'autoAnimateDuration': 0.6,
+'autoAnimateUnmatched': false,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  

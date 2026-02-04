@@ -366,9 +366,9 @@
   {
     "objectID": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
     "href": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Research threads at a glance",
-    "text": "Research threads at a glance\n\n\n\nPrediction and decision support\nFairness-aware evaluation\nBayesian hierarchical modeling\nImperfect detection\nTranslational, domain-driven models\n\n\n\nInfectious disease dynamics (SEIR)\nBehavioral signal detection\nCall volume spike detection\nUncertainty quantification for action\nCommunicating results to stakeholders"
+    "text": "Research threads at a glance\n\n\n\n\n\n\nClinical Prediction &Decision Support\n\n\n\nExperimental Design &Evaluation\n\n\n\n\nBayesian Hierarchical Models for Latent Processes"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#prediction-fairness",
@@ -380,23 +380,23 @@
   {
     "objectID": "Presentations/VA-IDEAS/index.html#complex-bayesian-hierarchical-models",
     "href": "Presentations/VA-IDEAS/index.html#complex-bayesian-hierarchical-models",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Complex Bayesian hierarchical models",
-    "text": "Complex Bayesian hierarchical models\n\nMulti-level structure to share information across sites, groups, and time\nPartial pooling to stabilize estimates in sparse regimes\nRich latent processes for detection, transmission, and reporting\n\n\nWhy it matters: hierarchical structure turns noisy, incomplete data into actionable signals."
+    "text": "Complex Bayesian hierarchical models\n\nLatent SEIR compartmental process for true infections\nTransmission rate follows a hierarchical AR(1) process over time\nTransmission and state transitions vary by region with partial pooling\nDetection is modeled as a global process shared across regions\n\n\nModeling choice: smooth temporal evolution captures real transmission dynamics without chasing noise."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#imperfect-detection-the-core-challenge",
     "href": "Presentations/VA-IDEAS/index.html#imperfect-detection-the-core-challenge",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Imperfect detection: the core challenge",
-    "text": "Imperfect detection: the core challenge\n\nObserved data are often a filtered version of the truth\nDetection depends on resources, behavior, and system delays\nModels must explicitly separate process from observation\n\n\n\n\n\n\n\nImportant\n\n\nImperfect detection is not a nuisance—it is the mechanism that shapes what we can observe."
+    "text": "Imperfect detection: the core challenge\n\nSurveillance systems observe cases, not infections\nDetection depends on testing capacity and reporting practices\nIgnoring detection leads to biased transmission inference\n\n\n\n\n\n\n\nImportant\n\n\nDetection is not noise—it is a structured, inferential component of the model."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#application-seir-models-with-imperfect-detection",
     "href": "Presentations/VA-IDEAS/index.html#application-seir-models-with-imperfect-detection",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Application: SEIR models with imperfect detection",
-    "text": "Application: SEIR models with imperfect detection\n\nEmbed detection sub-models inside compartmental dynamics\nJointly infer incidence and observation processes\nQuantify uncertainty in both transmission and reporting\n\n\nOutcome: more realistic forecasts and robust scenario planning."
+    "text": "Application: SEIR models with imperfect detection\n\nJointly infers transmission, detection, and transition processes\nAR(1) structure stabilizes inference during reporting gaps\nRemains well-behaved when case counts approach zero\n\n\nResult: smoother, more credible early warning signals for emerging outbreaks."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#application-detecting-call-spikes",
@@ -415,21 +415,21 @@
   {
     "objectID": "Presentations/VA-IDEAS/index.html#current-focus-areas",
     "href": "Presentations/VA-IDEAS/index.html#current-focus-areas",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Current focus areas",
-    "text": "Current focus areas\n\nFairness-aware evaluation for predictive tools\nRobust estimation under imperfect detection\nForecasting pipelines for infectious disease and operational signals\nBridging model outputs to real decisions"
+    "text": "Current focus areas\n\nEarly detection under delayed, zero-inflated, and overdispersed data\nAdaptive hierarchical models for evolving systems\nDecision-focused uncertainty rather than point predictions"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#looking-ahead",
     "href": "Presentations/VA-IDEAS/index.html#looking-ahead",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Looking ahead",
     "text": "Looking ahead\n\nIntegrating causal reasoning with hierarchical prediction\nAdaptive monitoring for rapid response\nDecision support that anticipates equity impacts"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#thank-you",
     "href": "Presentations/VA-IDEAS/index.html#thank-you",
-    "title": "VA-IDEAS",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Thank you",
     "text": "Thank you\nQuestions or collaborations welcome."
   },
@@ -460,5 +460,75 @@
     "title": "Ben Brintz",
     "section": "",
     "text": "&lt;figure class=\"wood-card\"&gt;\n&lt;img src=\"images/project5.jpeg\" alt=\"Project 5\" loading=\"lazy\"&gt;"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html",
+    "href": "Presentations/VA-IDEAS/index.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "→\n\n\n→\n\n\n\n\n\nEarly Detection"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#two-exemplar-bayesian-hierarchical-models",
+    "href": "Presentations/VA-IDEAS/index.html#two-exemplar-bayesian-hierarchical-models",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Two exemplar Bayesian hierarchical models",
+    "text": "Two exemplar Bayesian hierarchical models\n\n\n\n\n\nBayesian Hierarchical Models for Latent Processes\n\n\n\n\nA shared modeling philosophy\nTwo concrete instantiations of the same modeling core:\n\nImperfect detection SEIR models\nEarly detection of call spikes\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nEverything that follows focuses on two concrete models that illustrate how hierarchical Bayesian thinking enables early detection under uncertainty."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#case-study-1-imperfect-detection-seir-models",
+    "href": "Presentations/VA-IDEAS/index.html#case-study-1-imperfect-detection-seir-models",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Case study 1: Imperfect detection SEIR models",
+    "text": "Case study 1: Imperfect detection SEIR models\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity and reporting practices (a noisy fraction of true infections)\nThe model estimates transmission and a single global detection fraction from the data\n\n\nKey capability: separates what is happening from what is observed."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#one-modeling-philosophy-different-signals",
+    "href": "Presentations/VA-IDEAS/index.html#one-modeling-philosophy-different-signals",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "One modeling philosophy, different signals",
+    "text": "One modeling philosophy, different signals\n\nSeparate latent process from noisy observations\nUse hierarchical structure to borrow strength\nTarget early detection rather than point prediction"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-early-detection-of-call-spikes",
+    "href": "Presentations/VA-IDEAS/index.html#case-study-2-early-detection-of-call-spikes",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Case study 2: Early detection of call spikes",
+    "text": "Case study 2: Early detection of call spikes\n\nCall counts follow a zero-inflated negative binomial process\nExplicitly separates true zero-demand days from low-volume noise\nOverdispersion captures variability beyond simple Poisson assumptions\n\n\nModeling choice: distribution matches real call behavior rather than forcing Gaussian assumptions."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#hierarchical-modeling-for-early-warning",
+    "href": "Presentations/VA-IDEAS/index.html#hierarchical-modeling-for-early-warning",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Hierarchical modeling for early warning",
+    "text": "Hierarchical modeling for early warning\n\nLatent call intensity evolves smoothly via an AR(1) process\nSeasonal patterns captured with Fourier components\nAR(1) structure and regularized effects stabilize estimates across time\n\n\nCapability: detects change against strong seasonal and weekly structure."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
+    "href": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "What unifies this work",
+    "text": "What unifies this work\n\nLatent-process Bayesian models with temporal dependence\nFlexible distributions matched to real-world data\nEarly detection through probabilistic change modeling"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#modeling-uncertainty-in-infection-dynamics",
+    "href": "Presentations/VA-IDEAS/index.html#modeling-uncertainty-in-infection-dynamics",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Modeling uncertainty in infection dynamics",
+    "text": "Modeling uncertainty in infection dynamics\n\nExposure and progression are heterogeneous across populations\nTransitions between S→E, E→I, and I→R are overdispersed\nBeta–binomial–style overdispersion allows realistic variability in state transitions\n\n\nCapability: absorbs unmodeled heterogeneity while preserving interpretability."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#detecting-anomalies-without-hard-thresholds",
+    "href": "Presentations/VA-IDEAS/index.html#detecting-anomalies-without-hard-thresholds",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Detecting anomalies without hard thresholds",
+    "text": "Detecting anomalies without hard thresholds\n\nSmooth change-points modeled as logistic ramps\nA horseshoe prior learns how many structural changes are needed\nA random shock component captures short-lived anomalies\n\n\nWhy this works: the model adapts complexity to the data instead of fixing it in advance."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#the-modeling-core",
+    "href": "Presentations/VA-IDEAS/index.html#the-modeling-core",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "The modeling core",
+    "text": "The modeling core\n\n\n\n\n\nBayesian Hierarchical Models for Latent Processes\n\n\n\n\nThis modeling framework connects prediction, evaluation, and early detection under imperfect observation."
   }
 ]
