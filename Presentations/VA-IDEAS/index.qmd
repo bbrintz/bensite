@@ -6,8 +6,8 @@ format:
   revealjs:
     theme: white
     transition: fade
-    autoAnimateDuration: 0.6
-    autoAnimateEasing: ease-in-out
+    autoAnimateDuration: 1.25
+    autoAnimateEasing: linear
     auto-animate-unmatched: false
     incremental: true
     slideNumber: true
@@ -50,7 +50,7 @@ Clinical Prediction &<br>Decision Support
   font-weight:700;
   width: 80%;
 ">
-Experimental Design &<br>Evaluation
+Design &<br>Analysis
 </div>
 
 <!-- Bottom center -->
@@ -67,8 +67,8 @@ Experimental Design &<br>Evaluation
     max-width: 720px;
     margin: 0 auto;
   ">
-  Bayesian Hierarchical Models<br>
-  for Latent Processes
+  Complex Bayesian Hierarchical Models<br>
+  
   </div>
 </div>
 
@@ -76,7 +76,7 @@ Experimental Design &<br>Evaluation
 
 ---
 
-## Two exemplar Bayesian hierarchical models {auto-animate=true visibility="uncounted"}
+##  {auto-animate=true visibility="uncounted"}
 
 <div style="height:1.5em;"></div>
 
@@ -94,94 +94,59 @@ Experimental Design &<br>Evaluation
   max-width: 720px;
   margin: 0 auto;
 ">
-Bayesian Hierarchical Models<br>
-for Latent Processes
+Complex Bayesian Hierarchical Models
 </div>
 
 </div>
 
-::: {.fragment}
-- A shared modeling philosophy
-- Two concrete instantiations of the same modeling core:
-  - Imperfect detection SEIR models
-  - Early detection of call spikes
+::: {.fragment fragment-index=2}
+- Two examples of work in progress:
+  - Stochastic SEIR models that incorporate imperfect detection - Covid-19
+  - Early detection of call spikes - United Way 211 Calls (Food Insecurity Resources)
 :::
 
-::: {.fragment}
+::: {.fragment fragment-index=1}
 ::: {.callout-note}
-Everything that follows focuses on two concrete models that illustrate how hierarchical Bayesian thinking enables early detection under uncertainty.
+S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations.
 :::
 :::
 
 
 ---
 
-## Case study 1: Imperfect detection SEIR models
+## Case study 1: Covid-19 is not perfectly reported
 
 - Latent disease transmission is never directly observed
-- Reported cases reflect testing intensity and reporting practices (a noisy fraction of true infections)
-- The model estimates transmission and a single global detection fraction from the data
+- Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
+- Naïve models conflate reporting behavior with transmission dynamics (Identifiability)
 
-::: {.fragment}
+
 **Key capability:** separates what is happening from what is observed.
-:::
+
 
 ---
 
-## Complex Bayesian hierarchical models
+## Why simple SEIR models struggle
+
+- Assume reported cases are a direct proxy for infections
+- Treat transmission as independent across time and regions
+- Underestimate uncertainty when data are sparse or delayed
+
+---
+
+## A hierarchical Bayesian solution
 
 - Latent SEIR compartmental process for true infections
-- Transmission rate follows a hierarchical AR(1) process over time
-- Transmission and state transitions vary by region with partial pooling
-- Detection is modeled as a global process shared across regions
+- Transmission follows a hierarchical AR(1) process over time
+- Overdispersed state transitions capture real population heterogeneity
+- Detection is modeled as a single global reporting fraction
 
 ::: {.fragment}
-**Modeling choice:** smooth temporal evolution captures real transmission dynamics without chasing noise.
+**Modeling strategy:** constrain what should be smooth, allow flexibility where variability is real.
 :::
 
 ---
 
-## Modeling uncertainty in infection dynamics
-
-- Exposure and progression are heterogeneous across populations
-- Transitions between S→E, E→I, and I→R are overdispersed
-- Beta–binomial–style overdispersion allows realistic variability in state transitions
-
-::: {.fragment}
-**Capability:** absorbs unmodeled heterogeneity while preserving interpretability.
-:::
-
----
-
-## Imperfect detection: the core challenge
-
-- Surveillance systems observe cases, not infections
-- Detection depends on testing capacity and reporting practices
-- Ignoring detection leads to biased transmission inference
-
-::: {.callout-important}
-Detection is not noise—it is a structured, inferential component of the model.
-:::
-
----
-
-## Application: SEIR models with imperfect detection
-
-- Jointly infers transmission, detection, and transition processes
-- AR(1) structure stabilizes inference during reporting gaps
-- Remains well-behaved when case counts approach zero
-
-::: {.fragment}
-**Result:** smoother, more credible early warning signals for emerging outbreaks.
-:::
-
----
-
-## One modeling philosophy, different signals
-
-- Separate latent process from noisy observations
-- Use hierarchical structure to borrow strength
-- Target early detection rather than point prediction
 
 ---
 

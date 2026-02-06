@@ -57,3 +57,7 @@
   font-size: 3em;
   line-height: 1.5;
 }
+
+.reveal li {
+  margin-bottom: 1.6em;
+}
