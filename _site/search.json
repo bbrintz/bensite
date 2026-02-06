@@ -399,6 +399,13 @@
     "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\nEstimation allows for different start time across health districts\nTransmission follows a hierarchical AR(1) process over time\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nUse a novel computational solution to estimate these dynamics efficiently in Stan\n\n\n\nModeling strategy: allow flexibility where variability is real."
   },
   {
+    "objectID": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "href": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Estimating an evolving transmission rate using a hierarchical AR(1) process",
+    "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
+  },
+  {
     "objectID": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
     "href": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
