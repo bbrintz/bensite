@@ -1,5 +1,5 @@
 ---
-title: "Using Complex Bayesian Hierarchical Models for \"Detection\" with Count Data"
+title: 'Using Complex Bayesian Hierarchical Models for "Detection" with Count Data'
 author: "Ben Brintz"
 institute: "IDEAS / VA"
 format:
@@ -67,7 +67,7 @@ Design &<br>Analysis
     max-width: 720px;
     margin: 0 auto;
   ">
-  Complex Bayesian Hierarchical Models<br>
+  Complex Bayesian Hierarchical Models in Stan<br>
   
   </div>
 </div>
@@ -94,15 +94,15 @@ Design &<br>Analysis
   max-width: 720px;
   margin: 0 auto;
 ">
-Complex Bayesian Hierarchical Models
+Complex Bayesian Hierarchical Models in Stan 
 </div>
 
 </div>
 
 ::: {.fragment fragment-index=2}
 - Two examples of work in progress:
-  - Stochastic SEIR models that incorporate imperfect detection - Covid-19
-  - Early detection of call spikes - United Way 211 Calls (Food Insecurity Resources)
+  - Stochastic SEIR models that incorporate imperfect **detection** - Covid-19
+  - Early **detection** of call spikes - United Way 211 Calls (Food Insecurity Resources)
 :::
 
 ::: {.fragment fragment-index=1}
@@ -118,34 +118,73 @@ S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartment
 
 - Latent disease transmission is never directly observed
 - Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
-- Naïve models conflate reporting behavior with transmission dynamics (Identifiability)
-
-
-**Key capability:** separates what is happening from what is observed.
+ - Only the sickest got diagnosed with Covid early in the pandemic 
+- **Key capability:** separate what is happening from what is observed.
 
 
 ---
 
-## Why simple SEIR models struggle
+## Various approaches have been developed to estimate clinical detection rates {}
 
-- Assume reported cases are a direct proxy for infections
-- Treat transmission as independent across time and regions
-- Underestimate uncertainty when data are sparse or delayed
+- **Back-calculation methods** estimate the number of infections from hospitalizations and deaths
+- **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
+- **Compartment models** estimate the number of infections from observed cases and the distribution of the incubation period
+    - E.g. SIR (Susceptible-Infectious-Recovered) models
+- **Key Challenge**: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time.
 
 ---
 
-## A hierarchical Bayesian solution
+
+## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
 - Latent SEIR compartmental process for true infections
+- Estimation allows for different start time across health districts
 - Transmission follows a hierarchical AR(1) process over time
-- Overdispersed state transitions capture real population heterogeneity
-- Detection is modeled as a single global reporting fraction
+- Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
+  - Use a novel computational solution to estimate these dynamics efficiently in Stan 
 
 ::: {.fragment}
-**Modeling strategy:** constrain what should be smooth, allow flexibility where variability is real.
+**Modeling strategy:** allow flexibility where variability is real.
 :::
 
 ---
+
+## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+df <- readRDS("betabin_sim.rds")
+colnames(df)[2] = "Binomial Transition"
+colnames(df)[3] = "Beta-Binomial Transition"
+p <- df %>% 
+      mutate(Week = Time) %>% select(-Time) %>%
+      gather(Approach, Infections,-Week) %>%
+      ggplot(aes(x=Week,y=Infections,group=Approach,color=Approach)) +
+        geom_point() + geom_line() +
+        labs(x = "Week", y = "Infections") +
+        theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
+        theme(legend.position = "bottom") +
+        transition_reveal(Week)
+
+anim <- animate(p, nframes = 100, fps = 5)
+
+anim
+```
+
+---
+
+
+
+::: {.fragment .fade-in-then-out}
+![](utah_p_dens_020325.png){height=500px}
+:::
+---
+
+::: {.fragment .fade-in} 
+![](utah_120525_bb.png){height=500px}
+:::
+
 
 
 ---

@@ -368,35 +368,42 @@
     "href": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Research threads at a glance",
-    "text": "Research threads at a glance\n\n\n\n\n\n\nClinical Prediction &Decision Support\n\n\n\nDesign &Analysis\n\n\n\n\nComplex Bayesian Hierarchical Models"
+    "text": "Research threads at a glance\n\n\n\n\n\n\nClinical Prediction &Decision Support\n\n\n\nDesign &Analysis\n\n\n\n\nComplex Bayesian Hierarchical Models in Stan"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#section",
     "href": "Presentations/VA-IDEAS/index.html#section",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "",
-    "text": "Complex Bayesian Hierarchical Models\n\n\n\n\nTwo examples of work in progress:\n\nStochastic SEIR models that incorporate imperfect detection - Covid-19\nEarly detection of call spikes - United Way 211 Calls (Food Insecurity Resources)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nS(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations."
+    "text": "Complex Bayesian Hierarchical Models in Stan\n\n\n\n\nTwo examples of work in progress:\n\nStochastic SEIR models that incorporate imperfect detection - Covid-19\nEarly detection of call spikes - United Way 211 Calls (Food Insecurity Resources)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nS(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#case-study-1-covid-19-is-not-perfectly-reported",
     "href": "Presentations/VA-IDEAS/index.html#case-study-1-covid-19-is-not-perfectly-reported",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Case study 1: Covid-19 is not perfectly reported",
-    "text": "Case study 1: Covid-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\nNaïve models conflate reporting behavior with transmission dynamics (Identifiability)\n\nKey capability: separates what is happening from what is observed."
+    "text": "Case study 1: Covid-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\nOnly the sickest got diagnosed with Covid early in the pandemic\nKey capability: separate what is happening from what is observed."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#why-simple-seir-models-struggle",
-    "href": "Presentations/VA-IDEAS/index.html#why-simple-seir-models-struggle",
+    "objectID": "Presentations/VA-IDEAS/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
+    "href": "Presentations/VA-IDEAS/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Why simple SEIR models struggle",
-    "text": "Why simple SEIR models struggle\n\nAssume reported cases are a direct proxy for infections\nTreat transmission as independent across time and regions\nUnderestimate uncertainty when data are sparse or delayed"
+    "section": "Various approaches have been developed to estimate clinical detection rates",
+    "text": "Various approaches have been developed to estimate clinical detection rates\n\nBack-calculation methods estimate the number of infections from hospitalizations and deaths\nSeroprevalence studies estimate the proportion of the population that has been infected by testing for antibodies\nCompartment models estimate the number of infections from observed cases and the distribution of the incubation period\n\nE.g. SIR (Susceptible-Infectious-Recovered) models\n\nKey Challenge: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#a-hierarchical-bayesian-solution",
-    "href": "Presentations/VA-IDEAS/index.html#a-hierarchical-bayesian-solution",
+    "objectID": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases",
+    "href": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "A hierarchical Bayesian solution",
-    "text": "A hierarchical Bayesian solution\n\nLatent SEIR compartmental process for true infections\nTransmission follows a hierarchical AR(1) process over time\nOverdispersed state transitions capture real population heterogeneity\nDetection is modeled as a single global reporting fraction\n\n\nModeling strategy: constrain what should be smooth, allow flexibility where variability is real."
+    "section": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases",
+    "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\nEstimation allows for different start time across health districts\nTransmission follows a hierarchical AR(1) process over time\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nUse a novel computational solution to estimate these dynamics efficiently in Stan\n\n\n\nModeling strategy: allow flexibility where variability is real."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
+    "href": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Estimating an evolving recovery rate and incubation using beta-binomial transitions",
+    "text": "Estimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-early-detection-of-call-spikes",

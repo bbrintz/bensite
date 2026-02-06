@@ -391,7 +391,7 @@ Ben Brintz
     max-width: 720px;
     margin: 0 auto;
   ">
-<p>Complex Bayesian Hierarchical Models<br></p>
+<p>Complex Bayesian Hierarchical Models in Stan<br></p>
 </div>
 </div>
 </div>
@@ -414,15 +414,15 @@ Ben Brintz
   max-width: 720px;
   margin: 0 auto;
 ">
-<p>Complex Bayesian Hierarchical Models</p>
+<p>Complex Bayesian Hierarchical Models in Stan</p>
 </div>
 </div>
 <div class="fragment" data-fragment-index="2">
 <ul>
 <li class="fragment">Two examples of work in progress:
 <ul>
-<li class="fragment">Stochastic SEIR models that incorporate imperfect detection - Covid-19</li>
-<li class="fragment">Early detection of call spikes - United Way 211 Calls (Food Insecurity Resources)</li>
+<li class="fragment">Stochastic SEIR models that incorporate imperfect <strong>detection</strong> - Covid-19</li>
+<li class="fragment">Early <strong>detection</strong> of call spikes - United Way 211 Calls (Food Insecurity Resources)</li>
 </ul></li>
 </ul>
 </div>
@@ -447,32 +447,52 @@ Ben Brintz
 <ul>
 <li class="fragment">Latent disease transmission is never directly observed</li>
 <li class="fragment">Reported cases reflect testing intensity, reporting practices, and asymptomatic disease</li>
-<li class="fragment">Naïve models conflate reporting behavior with transmission dynamics (Identifiability)</li>
+<li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
+<li class="fragment"><strong>Key capability:</strong> separate what is happening from what is observed.</li>
 </ul>
-<p><strong>Key capability:</strong> separates what is happening from what is observed.</p>
 </section>
-<section id="why-simple-seir-models-struggle" class="slide level2">
-<h2>Why simple SEIR models struggle</h2>
+<section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2">
+<h2>Various approaches have been developed to estimate clinical detection rates</h2>
 <ul>
-<li class="fragment">Assume reported cases are a direct proxy for infections</li>
-<li class="fragment">Treat transmission as independent across time and regions</li>
-<li class="fragment">Underestimate uncertainty when data are sparse or delayed</li>
+<li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
+<li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
+<li class="fragment"><strong>Compartment models</strong> estimate the number of infections from observed cases and the distribution of the incubation period
+<ul>
+<li class="fragment">E.g. SIR (Susceptible-Infectious-Recovered) models</li>
+</ul></li>
+<li class="fragment"><strong>Key Challenge</strong>: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time.</li>
 </ul>
 </section>
-<section id="a-hierarchical-bayesian-solution" class="slide level2">
-<h2>A hierarchical Bayesian solution</h2>
+<section id="we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases" class="slide level2">
+<h2>We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases</h2>
 <ul>
 <li class="fragment">Latent SEIR compartmental process for true infections</li>
+<li class="fragment">Estimation allows for different start time across health districts</li>
 <li class="fragment">Transmission follows a hierarchical AR(1) process over time</li>
-<li class="fragment">Overdispersed state transitions capture real population heterogeneity</li>
-<li class="fragment">Detection is modeled as a single global reporting fraction</li>
+<li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition
+<ul>
+<li class="fragment">Use a novel computational solution to estimate these dynamics efficiently in Stan</li>
+</ul></li>
 </ul>
 <div class="fragment">
-<p><strong>Modeling strategy:</strong> constrain what should be smooth, allow flexibility where variability is real.</p>
+<p><strong>Modeling strategy:</strong> allow flexibility where variability is real.</p>
+</div>
+</section>
+<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
+<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="fragment fade-in-then-out">
+<p><img data-src="utah_p_dens_020325.png" height="500"></p>
 </div>
 </section>
 <section class="slide level2">
 
+<div class="fragment fade-in">
+<p><img data-src="utah_120525_bb.png" height="500"></p>
+</div>
 </section>
 <section id="case-study-2-early-detection-of-call-spikes" class="slide level2">
 <h2>Case study 2: Early detection of call spikes</h2>
@@ -751,6 +771,44 @@ Ben Brintz
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
