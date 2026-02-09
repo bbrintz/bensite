@@ -466,7 +466,10 @@ Ben Brintz
 <section id="we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases" class="slide level2">
 <h2>We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases</h2>
 <ul>
-<li class="fragment">Latent SEIR compartmental process for true infections</li>
+<li class="fragment">Latent SEIR compartmental process for true infections
+<ul>
+<li class="fragment">Approximate observation using a Gaussian process</li>
+</ul></li>
 <li class="fragment">Estimation allows for different start time across health districts</li>
 <li class="fragment">Transmission follows a hierarchical AR(1) process over time</li>
 <li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition
@@ -498,41 +501,56 @@ Ben Brintz
 <h2>Case study 2: Can spikes in 211 calls be detected early?</h2>
 <ul>
 <li class="fragment">211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents</li>
-<li class="fragment">Call counts follow a zero-inflated negative binomial process</li>
-<li class="fragment">Explicitly separates true zero-demand days from low-volume noise</li>
-<li class="fragment">Overdispersion captures variability beyond simple Poisson assumptions</li>
+<li class="fragment">We have call counts from Utah from 2019 - 2025.</li>
+<li class="fragment">Calls are often zero or low volume, but occasionally spike when there are major events (e.g.&nbsp;Covid-19, natural disasters, economic shocks)</li>
+<li class="fragment">Can we capture these spikes early to help with resource allocation and response?</li>
+</ul>
+</section>
+<section id="how-we-model-the-call-data" class="slide level2">
+<h2>How we model the call data</h2>
+<ul>
+<li class="fragment">Zero-inflated negative binomial (ZINB) model for daily call counts</li>
+<li class="fragment">Hurdle component separates structural zeros from low-intensity demand</li>
+<li class="fragment">Negative binomial component handles overdispersion in nonzero counts</li>
+<li class="fragment">Day-of-week effects included in both the hurdle and count components</li>
 </ul>
 <div class="fragment">
-<p><strong>Modeling choice:</strong> distribution matches real call behavior rather than forcing Gaussian assumptions.</p>
+<p><strong>Modeling strategy:</strong> match distributional assumptions to observed call behavior.</p>
 </div>
 </section>
-<section id="hierarchical-modeling-for-early-warning" class="slide level2">
-<h2>Hierarchical modeling for early warning</h2>
+<section id="how-early-warning-works" class="slide level2">
+<h2>How early warning works</h2>
 <ul>
-<li class="fragment">Latent call intensity evolves smoothly via an AR(1) process</li>
-<li class="fragment">Seasonal patterns captured with Fourier components</li>
-<li class="fragment">AR(1) structure and regularized effects stabilize estimates across time</li>
+<li class="fragment">Latent intensity evolves through an AR(1) state process over time</li>
+<li class="fragment">Annual seasonality represented with Fourier harmonics</li>
+<li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts</li>
+<li class="fragment">Daily shock term captures short-lived departures from baseline</li>
 </ul>
 <div class="fragment">
-<p><strong>Capability:</strong> detects change against strong seasonal and weekly structure.</p>
+<p><strong>Capability:</strong> separate expected temporal structure from transient anomalies.</p>
 </div>
 </section>
-<section id="detecting-anomalies-without-hard-thresholds" class="slide level2">
-<h2>Detecting anomalies without hard thresholds</h2>
+<section id="utah-211-call-patterns-example-figure" class="slide level2">
+<h2>Utah 211 call patterns (example figure)</h2>
+<p><img data-src="call_spikes_timeseries_placeholder.png" height="500"></p>
+</section>
+<section id="probabilistic-surge-detection-example-figure" class="slide level2">
+<h2>Probabilistic surge detection (example figure)</h2>
+<p><img data-src="call_spikes_alertprob_placeholder.png" height="500"></p>
+</section>
+<section id="practical-decision-use" class="slide level2">
+<h2>Practical decision use</h2>
 <ul>
-<li class="fragment">Smooth change-points modeled as logistic ramps</li>
-<li class="fragment">A horseshoe prior learns how many structural changes are needed</li>
-<li class="fragment">A random shock component captures short-lived anomalies</li>
+<li class="fragment">Posterior expected calls are compared against latent baseline expectations</li>
+<li class="fragment">Probabilistic surge metrics support threshold-based operational alerting</li>
+<li class="fragment">Thresholds can be tuned using lead-time versus false-alarm tradeoffs</li>
 </ul>
-<div class="fragment">
-<p><strong>Why this works:</strong> the model adapts complexity to the data instead of fixing it in advance.</p>
-</div>
 </section>
 <section id="what-unifies-this-work" class="slide level2">
 <h2>What unifies this work</h2>
 <ul>
 <li class="fragment">Latent-process Bayesian models with temporal dependence</li>
-<li class="fragment">Flexible distributions matched to real-world data</li>
+<li class="fragment">Flexible distributions matched to real-world count data</li>
 <li class="fragment">Early detection through probabilistic change modeling</li>
 </ul>
 </section>

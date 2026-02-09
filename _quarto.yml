@@ -4,12 +4,6 @@ project:
 website:
   title: "Ben Brintz"
   navbar:
-    background-color: "#383838"  # A dark muted gray that will let the artwork shine
-    font:
-      family: "Arial, sans-serif"  # A neutral font that will be easy to read against the dark background
-      color: "#F0F0F0"  # A light gray for good contrast against the dark navbar
-      size: "16px"
-      hover-color: "#DAA520" 
     left:
       - href: index.qmd
         text: Home
@@ -20,10 +14,8 @@ website:
       - href: Presentations/index.qmd
         text: Presentations
     tools:
-      - icon: github        # social icons appear on right
+      - icon: github
         href: https://github.com/bbrintz
-
- # A golden color, inspired by some tones in the image
 
 format:
   html:

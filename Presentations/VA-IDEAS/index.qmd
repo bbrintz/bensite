@@ -116,7 +116,7 @@ S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartment
 
 ## Case study 1: Covid-19 is not perfectly reported
 
-- Latent disease transmission is never directly observed
+- Latent disease transmission is never directly observed 
 - Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
  - Only the sickest got diagnosed with Covid early in the pandemic 
 - **Key capability:** separate what is happening from what is observed.
@@ -138,6 +138,7 @@ S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartment
 ## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
 - Latent SEIR compartmental process for true infections
+  - Approximate observation using a Gaussian process
 - Estimation allows for different start time across health districts
 - Transmission follows a hierarchical AR(1) process over time
 - Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
@@ -219,44 +220,61 @@ anim
 ## Case study 2: Can spikes in 211 calls be detected early? 
 
 - 211 is a nationwide, free public referral system that responds to >20 million requests for help each year from U.S. residents
-- Call counts follow a zero-inflated negative binomial process
-- Explicitly separates true zero-demand days from low-volume noise
-- Overdispersion captures variability beyond simple Poisson assumptions
+- We have call counts from Utah from 2019 - 2025. 
+- Calls are often zero or low volume, but occasionally spike when there are major events (e.g. Covid-19, natural disasters, economic shocks)
+- Can we capture these spikes early to help with resource allocation and response?
+
+---
+
+## How we model the call data
+- Zero-inflated negative binomial (ZINB) model for daily call counts
+- Hurdle component separates structural zeros from low-intensity demand
+- Negative binomial component handles overdispersion in nonzero counts
+- Day-of-week effects included in both the hurdle and count components
 
 ::: {.fragment}
-**Modeling choice:** distribution matches real call behavior rather than forcing Gaussian assumptions.
+**Modeling strategy:** match distributional assumptions to observed call behavior.
 :::
 
 ---
 
-## Hierarchical modeling for early warning
+## How early warning works
 
-- Latent call intensity evolves smoothly via an AR(1) process
-- Seasonal patterns captured with Fourier components
-- AR(1) structure and regularized effects stabilize estimates across time
+- Latent intensity evolves through an AR(1) state process over time
+- Annual seasonality represented with Fourier harmonics
+- Smooth logistic change-point ramps capture medium-term structural shifts
+- Daily shock term captures short-lived departures from baseline
 
 ::: {.fragment}
-**Capability:** detects change against strong seasonal and weekly structure.
+**Capability:** separate expected temporal structure from transient anomalies.
 :::
 
 ---
 
-## Detecting anomalies without hard thresholds
+## Utah 211 call patterns (example figure)
 
-- Smooth change-points modeled as logistic ramps
-- A horseshoe prior learns how many structural changes are needed
-- A random shock component captures short-lived anomalies
+![](call_spikes_timeseries_placeholder.png){height=500px}
 
-::: {.fragment}
-**Why this works:** the model adapts complexity to the data instead of fixing it in advance.
-:::
+---
+
+## Probabilistic surge detection (example figure)
+
+![](call_spikes_alertprob_placeholder.png){height=500px}
+
+---
+
+## Practical decision use
+
+- Posterior expected calls are compared against latent baseline expectations
+- Probabilistic surge metrics support threshold-based operational alerting
+- Thresholds can be tuned using lead-time versus false-alarm tradeoffs
 
 ---
 
 ## What unifies this work
 
 - Latent-process Bayesian models with temporal dependence
-- Flexible distributions matched to real-world data
+- Flexible distributions matched to real-world count data
 - Early detection through probabilistic change modeling
 
 ---

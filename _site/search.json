@@ -345,16 +345,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome",
+    "title": "Ben Brintz",
     "section": "",
-    "text": "Try ChainLink"
+    "text": "Modeling, statistical computing, and scientific communication.\nTry ChainLink"
   },
   {
     "objectID": "index.html#about",
     "href": "index.html#about",
-    "title": "Welcome",
+    "title": "Ben Brintz",
     "section": "About",
-    "text": "About\n…Your content here…"
+    "text": "About\nI build and communicate statistical models for applied research, with work spanning Bayesian methods, simulation, and interactive data products.\n\nPublications Presentations Woodworking"
   },
   {
     "objectID": "sierpinski.html",
@@ -396,7 +396,7 @@
     "href": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases",
-    "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\nEstimation allows for different start time across health districts\nTransmission follows a hierarchical AR(1) process over time\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nUse a novel computational solution to estimate these dynamics efficiently in Stan\n\n\n\nModeling strategy: allow flexibility where variability is real."
+    "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\n\nApproximate observation using a Gaussian process\n\nEstimation allows for different start time across health districts\nTransmission follows a hierarchical AR(1) process over time\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nUse a novel computational solution to estimate these dynamics efficiently in Stan\n\n\n\nModeling strategy: allow flexibility where variability is real."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process",
@@ -417,28 +417,49 @@
     "href": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Case study 2: Can spikes in 211 calls be detected early?",
-    "text": "Case study 2: Can spikes in 211 calls be detected early?\n\n211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents\nCall counts follow a zero-inflated negative binomial process\nExplicitly separates true zero-demand days from low-volume noise\nOverdispersion captures variability beyond simple Poisson assumptions\n\n\nModeling choice: distribution matches real call behavior rather than forcing Gaussian assumptions."
+    "text": "Case study 2: Can spikes in 211 calls be detected early?\n\n211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents\nWe have call counts from Utah from 2019 - 2025.\nCalls are often zero or low volume, but occasionally spike when there are major events (e.g. Covid-19, natural disasters, economic shocks)\nCan we capture these spikes early to help with resource allocation and response?"
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#hierarchical-modeling-for-early-warning",
-    "href": "Presentations/VA-IDEAS/index.html#hierarchical-modeling-for-early-warning",
+    "objectID": "Presentations/VA-IDEAS/index.html#how-we-model-the-call-data",
+    "href": "Presentations/VA-IDEAS/index.html#how-we-model-the-call-data",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Hierarchical modeling for early warning",
-    "text": "Hierarchical modeling for early warning\n\nLatent call intensity evolves smoothly via an AR(1) process\nSeasonal patterns captured with Fourier components\nAR(1) structure and regularized effects stabilize estimates across time\n\n\nCapability: detects change against strong seasonal and weekly structure."
+    "section": "How we model the call data",
+    "text": "How we model the call data\n\nZero-inflated negative binomial (ZINB) model for daily call counts\nHurdle component separates structural zeros from low-intensity demand\nNegative binomial component handles overdispersion in nonzero counts\nDay-of-week effects included in both the hurdle and count components\n\n\nModeling strategy: match distributional assumptions to observed call behavior."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#detecting-anomalies-without-hard-thresholds",
-    "href": "Presentations/VA-IDEAS/index.html#detecting-anomalies-without-hard-thresholds",
+    "objectID": "Presentations/VA-IDEAS/index.html#how-early-warning-works",
+    "href": "Presentations/VA-IDEAS/index.html#how-early-warning-works",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Detecting anomalies without hard thresholds",
-    "text": "Detecting anomalies without hard thresholds\n\nSmooth change-points modeled as logistic ramps\nA horseshoe prior learns how many structural changes are needed\nA random shock component captures short-lived anomalies\n\n\nWhy this works: the model adapts complexity to the data instead of fixing it in advance."
+    "section": "How early warning works",
+    "text": "How early warning works\n\nLatent intensity evolves through an AR(1) state process over time\nAnnual seasonality represented with Fourier harmonics\nSmooth logistic change-point ramps capture medium-term structural shifts\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-example-figure",
+    "href": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-example-figure",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Utah 211 call patterns (example figure)",
+    "text": "Utah 211 call patterns (example figure)"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",
+    "href": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Probabilistic surge detection (example figure)",
+    "text": "Probabilistic surge detection (example figure)"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#practical-decision-use",
+    "href": "Presentations/VA-IDEAS/index.html#practical-decision-use",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Practical decision use",
+    "text": "Practical decision use\n\nPosterior expected calls are compared against latent baseline expectations\nProbabilistic surge metrics support threshold-based operational alerting\nThresholds can be tuned using lead-time versus false-alarm tradeoffs"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
     "href": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "What unifies this work",
-    "text": "What unifies this work\n\nLatent-process Bayesian models with temporal dependence\nFlexible distributions matched to real-world data\nEarly detection through probabilistic change modeling"
+    "text": "What unifies this work\n\nLatent-process Bayesian models with temporal dependence\nFlexible distributions matched to real-world count data\nEarly detection through probabilistic change modeling"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#current-focus-areas",
