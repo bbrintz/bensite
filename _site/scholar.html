@@ -231,69 +231,140 @@ a:hover, a:active {
 }
 .pub-bubble {
   position: relative;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  min-height: 180px;
+  cursor: pointer;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform 220ms ease;
+  outline: none;
+}
+
+.pub-bubble::before,
+.pub-bubble::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(126, 199, 255, 0.28);
+  animation: bubble-pulse 3.2s ease-out infinite;
+}
+
+.pub-bubble::after {
+  inset: -11px;
+  opacity: 0.42;
+  animation-delay: 1.4s;
+}
+
+.pub-bubble:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.pub-bubble:focus-visible {
+  box-shadow: 0 0 0 3px rgba(126, 199, 255, 0.45);
+}
+
+.pub-flip {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform 1000ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.pub-bubble:hover .pub-flip,
+.pub-bubble:focus-within .pub-flip,
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: radial-gradient(circle at 30% 22%, rgba(255,255,255,0.12), rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.02) 100%);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  color: #d9d9d9;
   padding: 18px;
-  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #d9d9d9;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  backface-visibility: hidden;
 }
-/* Slight quirky angles; snap to straight on hover */
 
-.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.85rem; }
+.pub-front {
+  z-index: 2;
+}
 
- .pub-bubble:hover {
-   transform: scale(1.12);
-   background: rgba(255,255,255,0.12);
-   box-shadow: 0 16px 42px rgba(0,0,0,0.55);
-   z-index: 5;                   /* sit above neighbors while zoomed */
-   outline: 1px solid rgba(255,255,255,0.35);
- }
+.pub-back {
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 0.45rem;
+}
 
- .pub-grid { perspective: 1000px; }
- .pub-grid { overflow: visible; }
- .pub-bubble { overflow: visible; }
- .pub-bubble { will-change: transform; transform-origin: center; }
- .pub-bubble { cursor: pointer; }
- .pub-bubble .pub-title { pointer-events: none; }
-
-/* Lightweight JS-driven tooltip */
-.pub-tooltip {
-  position: absolute;
-  z-index: 9999;
-  max-width: 320px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.70);
-  color: #f1f1f1;
-  font-size: 0.92rem;
+.pub-title {
+  font-weight: 600;
   line-height: 1.25;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-  pointer-events: auto; /* allow hovering/clicking links */
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 120ms ease, transform 120ms ease;
+  font-size: 0.85rem;
 }
-.pub-tooltip.show { opacity: 1; transform: translateY(0); }
-.pub-tooltip .tip-actions { margin-top: 8px; }
-.pub-tooltip a { color: #d9d9d9 !important; text-decoration: underline; }
-.pub-tooltip a:hover { color: #ffffff !important; }
 
-/* Link styling inside bubbles */
-.pub-actions { margin-top: 8px; font-size: 0.9rem; }
-.pub-actions a { color: #d9d9d9 !important; text-decoration: underline; }
-.pub-actions a:hover { color: #ffffff !important; }
+.pub-meta {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: #e6eefc;
+}
+
+.pub-open {
+  color: #f4f8ff !important;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.34);
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.24rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pub-open:hover {
+  background: rgba(255,255,255,0.17);
+}
+
+.pub-grid { perspective: 1200px; }
+.pub-grid { overflow: visible; }
+.pub-bubble { will-change: transform; }
+
+@keyframes bubble-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  75% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .pub-bubble, .pub-detail { transition: none; }
-  .pub-bubble { transform: none !important; }
+  .pub-bubble,
+  .pub-flip {
+    transition: none;
+  }
+  .pub-bubble::before,
+  .pub-bubble::after {
+    animation: none;
+  }
+  .pub-bubble .pub-flip {
+    transform: none !important;
+  }
 }
 
 
@@ -303,6 +374,7 @@ a:hover, a:active {
 <script>
   (function(){
     const v = document.getElementById('bg-video');
+    if (!v) return;
     // Fade in when we have enough to play
     v.addEventListener('loadeddata', () => { v.style.opacity = 1; }, { once: true });
     // As a safety, fade in after 1s even if the event is slow
@@ -313,49 +385,193 @@ a:hover, a:active {
 Top Publications
 </h2>
 <div class="pub-grid">
-<div class="pub-bubble" data-venue="PLOS Neglected Tropical Diseases" data-cites="33" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC" role="button" tabindex="0">
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Langenbeck's Archives of Surgery" data-cites="22" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)
+</div>
+<div class="pub-meta">
+Journal: PLOS Neglected Tropical Diseases
+</div>
+<div class="pub-meta">
+Citations: 33
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Journal of Cataract &amp; Refractive Surgery" data-cites="20" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)
+</div>
+<div class="pub-meta">
+Journal: Langenbeck’s Archives of Surgery
+</div>
+<div class="pub-meta">
+Citations: 22
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Elife" data-cites="20" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)
+</div>
+<div class="pub-meta">
+Journal: Journal of Cataract &amp; Refractive Surgery
+</div>
+<div class="pub-meta">
+Citations: 20
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Public Health Reports" data-cites="20" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)
+</div>
+<div class="pub-meta">
+Journal: Elife
+</div>
+<div class="pub-meta">
+Citations: 20
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Contraception" data-cites="19" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)
+</div>
+<div class="pub-meta">
+Journal: Public Health Reports
+</div>
+<div class="pub-meta">
+Citations: 20
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)
 </div>
 </div>
-<div class="pub-bubble" data-venue="Biometrics" data-cites="17" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UeHWp8X0CEIC" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)
+</div>
+<div class="pub-meta">
+Journal: Contraception
+</div>
+<div class="pub-meta">
+Citations: 19
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="An asymptotic approximation to the N-mixture model for the estimation of disease prevalence (2018)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UeHWp8X0CEIC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 An asymptotic approximation to the N-mixture model for the estimation of disease prevalence (2018)
 </div>
 </div>
-<div class="pub-bubble" data-venue="BJC reports" data-cites="16" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:2P1L_qKh6hAC" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+An asymptotic approximation to the N-mixture model for the estimation of disease prevalence (2018)
+</div>
+<div class="pub-meta">
+Journal: Biometrics
+</div>
+<div class="pub-meta">
+Citations: 17
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UeHWp8X0CEIC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Phase II trial of pembrolizumab, ipilimumab, and aspirin in melanoma: clinical outcomes and translational predictors of response (2024)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:2P1L_qKh6hAC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Phase II trial of pembrolizumab, ipilimumab, and aspirin in melanoma: clinical outcomes and translational predictors of response (2024)
 </div>
 </div>
-<div class="pub-bubble" data-venue="JAMA pediatrics" data-cites="16" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC" role="button" tabindex="0">
+<div class="pub-face pub-back">
+<div class="pub-title">
+Phase II trial of pembrolizumab, ipilimumab, and aspirin in melanoma: clinical outcomes and translational predictors of response (2024)
+</div>
+<div class="pub-meta">
+Journal: BJC reports
+</div>
+<div class="pub-meta">
+Citations: 16
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:2P1L_qKh6hAC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-label="Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
 <div class="pub-title">
 Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-title">
+Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial (2022)
+</div>
+<div class="pub-meta">
+Journal: JAMA pediatrics
+</div>
+<div class="pub-meta">
+Citations: 16
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
 </div>
 </div>
 </div>
@@ -363,74 +579,42 @@ Improving antibiotic stewardship for diarrheal disease with probability-based el
 ( function(){
   const grid = document.querySelector('.pub-grid');
   if(!grid) return;
-  let tip = document.createElement('div');
-  tip.className = 'pub-tooltip';
-  document.body.appendChild(tip);
-  let currentEl = null;
 
-  function showTip(el){
-    currentEl = el;
-    const venue = el.getAttribute('data-venue') || '';
-    const cites = el.getAttribute('data-cites') || '';
-    const link  = el.getAttribute('data-link')  || '#';
-    tip.innerHTML = `<div><strong>Journal:</strong> ${venue}</div>`+
-                    `<div><strong>Citations:</strong> ${cites}</div>`+
-                    `<div class="tip-actions"><a href="${link}" target="_blank" rel="noopener" aria-label="Open publication on Google Scholar">↗︎</a></div>`;
-    positionTip(el);
-    tip.classList.add('show');
+  function closeOthers(current){
+    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>{
+      if(el !== current) el.classList.remove('is-flipped');
+    });
   }
 
-  function positionTip(el){
-    const r = el.getBoundingClientRect();
-    const x = r.left + r.width/2; const y = r.top;
-    tip.style.left = Math.max(12, Math.min(window.innerWidth-12-320, x-160)) + 'px';
-    tip.style.top  = (window.scrollY + y - tip.offsetHeight - 12) + 'px';
-  }
+  grid.addEventListener('click', (e)=>{
+    const link = e.target.closest('.pub-open');
+    if(link) return;
+    const bubble = e.target.closest('.pub-bubble');
+    if(!bubble) return;
+    e.preventDefault();
+    const willFlip = !bubble.classList.contains('is-flipped');
+    closeOthers(bubble);
+    bubble.classList.toggle('is-flipped', willFlip);
+  });
 
-  grid.addEventListener('mouseover', e=>{
-    const el = e.target.closest('.pub-bubble');
-    if(!el) return; showTip(el);
-  });
-  grid.addEventListener('mousemove', e=>{
-    if(!tip.classList.contains('show')) return; 
-    const el = e.target.closest('.pub-bubble') || currentEl;
-    if(!el) return; positionTip(el);
-  });
-  grid.addEventListener('mouseout', e=>{
-    const to = e.relatedTarget;
-    if(to && (to === tip || (to.closest && to.closest('.pub-tooltip')))) return; // stay visible when entering tooltip
-    const leavingBubble = e.target.closest && e.target.closest('.pub-bubble');
-    const toBubble = to && to.closest && to.closest('.pub-bubble');
-    if(leavingBubble && toBubble === leavingBubble) return; // moving inside same bubble
-    if(!toBubble) { currentEl = null; hideTip(); }
-  });
-  // Open Scholar on click/Enter
-  grid.addEventListener('click', e=>{
-    const el = e.target.closest('.pub-bubble');
-    if(!el) return; const link = el.getAttribute('data-link');
-    if(link) window.open(link, '_blank', 'noopener');
-  });
-  grid.addEventListener('keydown', e=>{
-    if(e.key === 'Enter' || e.key === ' ') {
-      const el = e.target.closest('.pub-bubble');
-      if(!el) return; const link = el.getAttribute('data-link');
-      if(link) window.open(link, '_blank', 'noopener');
+  grid.addEventListener('keydown', (e)=>{
+    const bubble = e.target.closest('.pub-bubble');
+    if(!bubble) return;
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      const willFlip = !bubble.classList.contains('is-flipped');
+      closeOthers(bubble);
+      bubble.classList.toggle('is-flipped', willFlip);
+    }
+    if(e.key === 'Escape'){
+      bubble.classList.remove('is-flipped');
     }
   });
-  tip.addEventListener('mouseleave', ()=>{ currentEl = null; hideTip(); });
-  tip.addEventListener('mouseenter', ()=>{ /* keep visible */ });
 
-  // Ensure clicks on links inside the tooltip always work
-  tip.addEventListener('click', (e)=>{
-    const a = e.target.closest('a[href]');
-    if(!a) return;
-    e.preventDefault();
-    try { window.open(a.href, '_blank', 'noopener'); }
-    catch(_) { location.href = a.href; }
+  document.addEventListener('click', (e)=>{
+    if(e.target.closest('.pub-bubble')) return;
+    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>el.classList.remove('is-flipped'));
   });
-
-  function hideTip(){ tip.classList.remove('show'); }
-
 })();
 </script>
 

@@ -113,69 +113,140 @@ a:hover, a:active {
 }
 .pub-bubble {
   position: relative;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  min-height: 180px;
+  cursor: pointer;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform 220ms ease;
+  outline: none;
+}
+
+.pub-bubble::before,
+.pub-bubble::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(126, 199, 255, 0.28);
+  animation: bubble-pulse 3.2s ease-out infinite;
+}
+
+.pub-bubble::after {
+  inset: -11px;
+  opacity: 0.42;
+  animation-delay: 1.4s;
+}
+
+.pub-bubble:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.pub-bubble:focus-visible {
+  box-shadow: 0 0 0 3px rgba(126, 199, 255, 0.45);
+}
+
+.pub-flip {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform 1000ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.pub-bubble:hover .pub-flip,
+.pub-bubble:focus-within .pub-flip,
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: radial-gradient(circle at 30% 22%, rgba(255,255,255,0.12), rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.02) 100%);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  color: #d9d9d9;
   padding: 18px;
-  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #d9d9d9;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  backface-visibility: hidden;
 }
-/* Slight quirky angles; snap to straight on hover */
 
-.pub-title { font-weight: 600; line-height: 1.25; font-size: 0.85rem; }
+.pub-front {
+  z-index: 2;
+}
 
- .pub-bubble:hover {
-   transform: scale(1.12);
-   background: rgba(255,255,255,0.12);
-   box-shadow: 0 16px 42px rgba(0,0,0,0.55);
-   z-index: 5;                   /* sit above neighbors while zoomed */
-   outline: 1px solid rgba(255,255,255,0.35);
- }
+.pub-back {
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 0.45rem;
+}
 
- .pub-grid { perspective: 1000px; }
- .pub-grid { overflow: visible; }
- .pub-bubble { overflow: visible; }
- .pub-bubble { will-change: transform; transform-origin: center; }
- .pub-bubble { cursor: pointer; }
- .pub-bubble .pub-title { pointer-events: none; }
-
-/* Lightweight JS-driven tooltip */
-.pub-tooltip {
-  position: absolute;
-  z-index: 9999;
-  max-width: 320px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.70);
-  color: #f1f1f1;
-  font-size: 0.92rem;
+.pub-title {
+  font-weight: 600;
   line-height: 1.25;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-  pointer-events: auto; /* allow hovering/clicking links */
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 120ms ease, transform 120ms ease;
+  font-size: 0.85rem;
 }
-.pub-tooltip.show { opacity: 1; transform: translateY(0); }
-.pub-tooltip .tip-actions { margin-top: 8px; }
-.pub-tooltip a { color: #d9d9d9 !important; text-decoration: underline; }
-.pub-tooltip a:hover { color: #ffffff !important; }
 
-/* Link styling inside bubbles */
-.pub-actions { margin-top: 8px; font-size: 0.9rem; }
-.pub-actions a { color: #d9d9d9 !important; text-decoration: underline; }
-.pub-actions a:hover { color: #ffffff !important; }
+.pub-meta {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: #e6eefc;
+}
+
+.pub-open {
+  color: #f4f8ff !important;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.34);
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.24rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pub-open:hover {
+  background: rgba(255,255,255,0.17);
+}
+
+.pub-grid { perspective: 1200px; }
+.pub-grid { overflow: visible; }
+.pub-bubble { will-change: transform; }
+
+@keyframes bubble-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  75% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .pub-bubble, .pub-detail { transition: none; }
-  .pub-bubble { transform: none !important; }
+  .pub-bubble,
+  .pub-flip {
+    transition: none;
+  }
+  .pub-bubble::before,
+  .pub-bubble::after {
+    animation: none;
+  }
+  .pub-bubble .pub-flip {
+    transform: none !important;
+  }
 }
 
 
@@ -186,6 +257,7 @@ a:hover, a:active {
 <script>
   (function(){
     const v = document.getElementById('bg-video');
+    if (!v) return;
     // Fade in when we have enough to play
     v.addEventListener('loadeddata', () => { v.style.opacity = 1; }, { once: true });
     // As a safety, fade in after 1s even if the event is slow
@@ -235,17 +307,22 @@ if (is.null(pubs) || !nrow(pubs)) {
     venue <- top10$Venue[i]
     cites <- top10$Citations[i]
     link_url <- top10$LinkURL[i]
-    bubble <- htmltools::tags$div(
-      class = 'pub-bubble',
-      `data-venue` = venue,
-      `data-cites` = cites,
-      `data-link`  = link_url,
-      role = 'button', tabindex = 0,
-      htmltools::tags$div(class = 'pub-title', title)
+    bubble_html <- glue(
+      "<div class='pub-bubble' role='button' tabindex='0' aria-label='{htmlEscape(title, attribute = TRUE)}' data-link='{htmlEscape(link_url, attribute = TRUE)}'>",
+      "<div class='pub-flip'>",
+      "<div class='pub-face pub-front'><div class='pub-title'>{htmlEscape(title)}</div></div>",
+      "<div class='pub-face pub-back'>",
+      "<div class='pub-title'>{htmlEscape(title)}</div>",
+      "<div class='pub-meta'>Journal: {htmlEscape(venue)}</div>",
+      "<div class='pub-meta'>Citations: {htmlEscape(as.character(cites))}</div>",
+      "<a class='pub-open' href='{htmlEscape(link_url, attribute = TRUE)}' target='_blank' rel='noopener'>Open Scholar</a>",
+      "</div>",
+      "</div>",
+      "</div>"
     )
-    cat(htmltools::renderTags(bubble)$html)
+    cat(bubble_html, "\n")
   }
   cat("</div>")
-  cat("<script>\n( function(){\n  const grid = document.querySelector('.pub-grid');\n  if(!grid) return;\n  let tip = document.createElement('div');\n  tip.className = 'pub-tooltip';\n  document.body.appendChild(tip);\n  let currentEl = null;\n\n  function showTip(el){\n    currentEl = el;\n    const venue = el.getAttribute('data-venue') || '';\n    const cites = el.getAttribute('data-cites') || '';\n    const link  = el.getAttribute('data-link')  || '#';\n    tip.innerHTML = `<div><strong>Journal:</strong> ${venue}</div>`+\n                    `<div><strong>Citations:</strong> ${cites}</div>`+\n                    `<div class=\"tip-actions\"><a href=\"${link}\" target=\"_blank\" rel=\"noopener\" aria-label=\"Open publication on Google Scholar\">↗︎</a></div>`;\n    positionTip(el);\n    tip.classList.add('show');\n  }\n\n  function positionTip(el){\n    const r = el.getBoundingClientRect();\n    const x = r.left + r.width/2; const y = r.top;\n    tip.style.left = Math.max(12, Math.min(window.innerWidth-12-320, x-160)) + 'px';\n    tip.style.top  = (window.scrollY + y - tip.offsetHeight - 12) + 'px';\n  }\n\n  grid.addEventListener('mouseover', e=>{\n    const el = e.target.closest('.pub-bubble');\n    if(!el) return; showTip(el);\n  });\n  grid.addEventListener('mousemove', e=>{\n    if(!tip.classList.contains('show')) return; \n    const el = e.target.closest('.pub-bubble') || currentEl;\n    if(!el) return; positionTip(el);\n  });\n  grid.addEventListener('mouseout', e=>{\n    const to = e.relatedTarget;\n    if(to && (to === tip || (to.closest && to.closest('.pub-tooltip')))) return; // stay visible when entering tooltip\n    const leavingBubble = e.target.closest && e.target.closest('.pub-bubble');\n    const toBubble = to && to.closest && to.closest('.pub-bubble');\n    if(leavingBubble && toBubble === leavingBubble) return; // moving inside same bubble\n    if(!toBubble) { currentEl = null; hideTip(); }\n  });\n  // Open Scholar on click/Enter\n  grid.addEventListener('click', e=>{\n    const el = e.target.closest('.pub-bubble');\n    if(!el) return; const link = el.getAttribute('data-link');\n    if(link) window.open(link, '_blank', 'noopener');\n  });\n  grid.addEventListener('keydown', e=>{\n    if(e.key === 'Enter' || e.key === ' ') {\n      const el = e.target.closest('.pub-bubble');\n      if(!el) return; const link = el.getAttribute('data-link');\n      if(link) window.open(link, '_blank', 'noopener');\n    }\n  });\n  tip.addEventListener('mouseleave', ()=>{ currentEl = null; hideTip(); });\n  tip.addEventListener('mouseenter', ()=>{ /* keep visible */ });\n\n  // Ensure clicks on links inside the tooltip always work\n  tip.addEventListener('click', (e)=>{\n    const a = e.target.closest('a[href]');\n    if(!a) return;\n    e.preventDefault();\n    try { window.open(a.href, '_blank', 'noopener'); }\n    catch(_) { location.href = a.href; }\n  });\n\n  function hideTip(){ tip.classList.remove('show'); }\n\n})();\n</script>\n")
+  cat("<script>\n( function(){\n  const grid = document.querySelector('.pub-grid');\n  if(!grid) return;\n\n  function closeOthers(current){\n    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>{\n      if(el !== current) el.classList.remove('is-flipped');\n    });\n  }\n\n  grid.addEventListener('click', (e)=>{\n    const link = e.target.closest('.pub-open');\n    if(link) return;\n    const bubble = e.target.closest('.pub-bubble');\n    if(!bubble) return;\n    e.preventDefault();\n    const willFlip = !bubble.classList.contains('is-flipped');\n    closeOthers(bubble);\n    bubble.classList.toggle('is-flipped', willFlip);\n  });\n\n  grid.addEventListener('keydown', (e)=>{\n    const bubble = e.target.closest('.pub-bubble');\n    if(!bubble) return;\n    if(e.key === 'Enter' || e.key === ' '){\n      e.preventDefault();\n      const willFlip = !bubble.classList.contains('is-flipped');\n      closeOthers(bubble);\n      bubble.classList.toggle('is-flipped', willFlip);\n    }\n    if(e.key === 'Escape'){\n      bubble.classList.remove('is-flipped');\n    }\n  });\n\n  document.addEventListener('click', (e)=>{\n    if(e.target.closest('.pub-bubble')) return;\n    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>el.classList.remove('is-flipped'));\n  });\n})();\n</script>\n")
 }
 ```
