@@ -413,11 +413,11 @@
     "text": "Estimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-early-detection-of-call-spikes",
-    "href": "Presentations/VA-IDEAS/index.html#case-study-2-early-detection-of-call-spikes",
+    "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
+    "href": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Case study 2: Early detection of call spikes",
-    "text": "Case study 2: Early detection of call spikes\n\nCall counts follow a zero-inflated negative binomial process\nExplicitly separates true zero-demand days from low-volume noise\nOverdispersion captures variability beyond simple Poisson assumptions\n\n\nModeling choice: distribution matches real call behavior rather than forcing Gaussian assumptions."
+    "section": "Case study 2: Can spikes in 211 calls be detected early?",
+    "text": "Case study 2: Can spikes in 211 calls be detected early?\n\n211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents\nCall counts follow a zero-inflated negative binomial process\nExplicitly separates true zero-demand days from low-volume noise\nOverdispersion captures variability beyond simple Poisson assumptions\n\n\nModeling choice: distribution matches real call behavior rather than forcing Gaussian assumptions."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#hierarchical-modeling-for-early-warning",

@@ -179,6 +179,7 @@ anim
 ---
 
 ## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 library(gganimate)
@@ -203,23 +204,21 @@ anim
 
 ---
 
+##
 
-
-::: {.fragment .fade-in-then-out}
 ![](utah_p_dens_020325.png){height=500px}
-:::
+
 ---
 
-::: {.fragment .fade-in} 
+##
+
 ![](utah_120525_bb.png){height=500px}
-:::
-
-
 
 ---
 
-## Case study 2: Early detection of call spikes
+## Case study 2: Can spikes in 211 calls be detected early? 
 
+- 211 is a nationwide, free public referral system that responds to >20 million requests for help each year from U.S. residents
 - Call counts follow a zero-inflated negative binomial process
 - Explicitly separates true zero-demand days from low-volume noise
 - Overdispersion captures variability beyond simple Poisson assumptions
