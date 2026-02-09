@@ -20,37 +20,26 @@ body {
   margin: 0;
   position: relative;
   min-height: 100svh;
-  background: var(--bg-ink);
+  background-color: var(--bg-ink);
+  background-image:
+    radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.24), transparent 38%),
+    radial-gradient(circle at 22% 22%, rgba(102, 195, 255, 0.24), transparent 34%),
+    linear-gradient(112deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 14, 38, 0.84) 48%, rgba(11, 24, 53, 0.92) 100%);
+  background-repeat: no-repeat;
   color: var(--text-main);
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
 }
 
 .hero {
   min-height: 100svh;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   display: flex;
   align-items: center;
   position: relative;
   padding: 7.5rem 1.25rem 4.5rem 1.25rem;
   overflow: hidden;
-  isolation: isolate;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(112deg, rgba(2, 6, 23, 0.96) 0%, rgba(8, 14, 38, 0.88) 48%, rgba(11, 24, 53, 0.95) 100%);
-  z-index: -2;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.26), transparent 36%),
-    radial-gradient(circle at 22% 18%, rgba(102, 195, 255, 0.24), transparent 32%);
-  z-index: -1;
 }
 
 .overlay-text {

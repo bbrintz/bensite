@@ -15,10 +15,10 @@ header#quarto-header {
   margin: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid rgba(185, 206, 255, 0.22);
-  background: linear-gradient(180deg, rgba(4, 11, 30, 0.62) 0%, rgba(4, 11, 30, 0.42) 100%) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(185, 206, 255, 0.16);
+  background: transparent !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: none;
 }
 
