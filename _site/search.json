@@ -343,6 +343,20 @@
     "text": "References\n\nChen P, Wu L, Wang L. AI fairness in data management and analytics: A review on challenges, methodologies and applications. Applied Sciences. 2023 Sep 13;13(18):10258.\nMakhlouf K, Zhioua S, Palamidessi C. Machine learning fairness notions: Bridging the gap with real-world applications. Information Processing & Management. 2021 Sep 1;58(5):102642.\nYang J, Soltan AA, Eyre DW, Yang Y, Clifton DA. An adversarial training framework for mitigating algorithmic biases in clinical machine learning. NPJ digital medicine. 2023 Mar 29;6(1):55."
   },
   {
+    "objectID": "pub2.html",
+    "href": "pub2.html",
+    "title": "Publication Nebula (Preview)",
+    "section": "",
+    "text": "Pulled 115 Scholar records, deduplicated to 114, filtered to 113 likely full publications, and rendered 113 titles in this interactive preview.\n\n\n\n\n\n\nAI & Clinical Prediction\n\n\n22 pubs\n\n\n\nPhase II trial of pembrolizumab, ipilimum…HistoEM: a pathologist-guided and explain…Development of a prediction model for the…A pipeline for evaluation of machine lear…Evaluating multi-level models to test occ…Predicting IHC staining classes of NF1 us…Modelling climate impacts on paediatric s…Predicting antibiotic resistance in Enter…Complex pain phenotypes: suicidal ideatio…The effects of using a clinical predictio…Automated post-run analysis of arrayed qu…Structured case-based ethics discussion f…Influence of intraocular pressure on clin…Derivation and Internal Validation of a C…Integrating molecular and clinical variab…Integration of population-level data sour…Validation of antibiotic stewardship metr…Mifepristone for miscarriage treatment in…Streamlining Autism Diagnostics: A Machin…The influence of historical eye pressure …Machine Learning Identification Of Transc…GarciaTiffanyFishWildlifeEvaluationMultiL…\n\n\n\n\n\nCOVID & Public Health\n\n\n10 pubs\n\n\n\nCharacterizing the volume of surgery and …Robust testing in outpatient settings to …A double-flipped virtual classroom format…Determining the impact of the Zika pandem…A randomized, double-blinded, placebo-con…Time to identify glaucoma progression giv…The Effect of Presymptomatic Genetic Test…The Moran AMD Genetic Testing Assessment …A pilot intervention to improve the manag…COVID-19 experiences of older female vete…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\n23 pubs\n\n\n\nClinical predictors for etiology of acute…External validation of a mobile clinical …Derivation and external validation of cli…Improving antibiotic stewardship for diar…Staphylococcal scalded skin syndrome: cli…A modular approach to integrating multipl…Clinical and laboratory predictors of 30‐…Clinical Prediction Rule to Guide Diagnos…Incidence and severity of asymptomatic oc…Refractive error in unilateral Duane synd…Weather variables as important clinical p…Derivation and validation of a clinical p…Analysis of readmissions and reoperations…Introduction of an electronic clinical de…Derivation and external validation of a c…Mucosal-associated invariant T (MAIT) cel…Etiologies of bloody diarrhea in children…Development of an AI-enabled predictive m…Assessment and comparison of model estima…Clinical prediction rule to guide diagnos…Identifying weather variables as importan…VALIDATION OF A MOBILE HEALTH TOOL FOR VI…A CLINICAL PREDICTION RULE TO GUIDE DIAGN…\n\n\n\n\n\nOther Applied Research\n\n\n31 pubs\n\n\n\nQuantitative and qualitative impact of on…Skin color representation in teaching pho…Identification, mapping, and self-reporte…Associated factors with patient-reported …Measuring the unmet needs of American mil…Association between specific unmet functi…High value care education in general surg…Elizabeth Dole Center of Excellence for V…Long-term Kinetics of Vibriocidal Antibod…Travel-related behaviors and health outco…The risk information and skin-cancer educ…Sex differences in unmet needs between ma…Trajectories and Transitions in Service U…Identifying unmet needs of high need high…Current Knowledge and Use of Mifepristone…Medial upper eyelid crease incision appro…Social Media Analytics for Post-Disasters…Long-Term Antibody Responses to Vibrio ch…Building Trust in Virtual Immunohistochem…477 Association of baseline medication ex…Indoor tanning is associated with substan…The Epidemiology of the Long-Term Care Ne…Longterm kinetics of vibriocidal antibody…ASSESSING CONFLICT AND REGRET IN DECISION…Neuroimaging Markers of Early Aging in Au…MEASURING UNMET NEEDS OF HIGH-NEED, HIGH-…GERIATRIC AND EXTENDED CARE TRAJECTORIES …Cognitive enhancing supplements and medic…Inflammatory Markers in Gastric Fluids Di…A Novel Luminescence-Based Serum Bacteric…Sharp edge eye syndrome (SEES): A survey …\n\n\n\n\n\nStatistical Methods\n\n\n9 pubs\n\n\n\nAn asymptotic approximation to the N-mixt…A spatially explicit N-mixture model for …Combining antibody markers for serosurvei…Protocol and Statistical Analysis Plan fo…Bayesian modeling to predict long-term vi…Racial/ethnic differences in the prevalen…Combining antibody markers for serosurvei…N-Mixture Models with Application to Dise…A Normal Approximation to N-mixture Model…\n\n\n\n\n\nSurgery & Ophthalmology\n\n\n18 pubs\n\n\n\nEffect of phacoemulsification fluid flow …Effect of longitudinal and torsional ultr…Gender representation among presenters in…Prevention of exposure keratopathy in the…Effect of simulated lenticular debris on …Corneal endothelium protection provided b…Post-Operative Outcomes at One Year of ST…The Effects of Prenatal Carotenoid Supple…Carotenoid Status and Psychological Impac…Follow-up after positive screening for di…Information overload: Quantifying clinica…Follow-up after positive screening for di…The Use of Ologen Collagen Matrix in Comb…Gonioscopy-Assisted Transluminal Trabecul…The Financial Impact of Phenylephrine/Ket…Sharp Edge Eye Syndrome: A Case Report an…Changes in eyelid position with scleral c…Institutional comparison of methods of in…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\nClinical predictors for etiology of acute diarrhea in children in resource-limited settings\n\n\nPLOS Neglected Tropical Diseases2020 · 33 citations\n\nOpen on Scholar\n\nTheme Coverage\n\n\nOther Applied Research (31)\n\n\nDiarrhea & Infectious Disease (23)\n\n\nAI & Clinical Prediction (22)\n\n\nSurgery & Ophthalmology (18)\n\n\nCOVID & Public Health (10)\n\n\nStatistical Methods (9)"
+  },
+  {
+    "objectID": "sierpinski.html",
+    "href": "sierpinski.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "Interactive Sierpinski Triangle"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ben Brintz",
@@ -355,13 +369,6 @@
     "title": "Ben Brintz",
     "section": "About",
     "text": "About\nI build and communicate statistical models for applied research, with work spanning Bayesian methods, simulation, and interactive data products.\n\nPublications Presentations Woodworking"
-  },
-  {
-    "objectID": "sierpinski.html",
-    "href": "sierpinski.html",
-    "title": "Ben Brintz",
-    "section": "",
-    "text": "Interactive Sierpinski Triangle"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#research-threads-at-a-glance",
@@ -424,21 +431,21 @@
     "href": "Presentations/VA-IDEAS/index.html#how-we-model-the-call-data",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "How we model the call data",
-    "text": "How we model the call data\n\nZero-inflated negative binomial (ZINB) model for daily call counts\nHurdle component separates structural zeros from low-intensity demand\nNegative binomial component handles overdispersion in nonzero counts\nDay-of-week effects included in both the hurdle and count components\n\n\nModeling strategy: match distributional assumptions to observed call behavior."
+    "text": "How we model the call data\n\nZero-inflated negative binomial (ZINB) model for daily call counts\nDay-of-week effects included in both the hurdle and count components\nLatent intensity evolves through an AR(1) state process over time\nAnnual seasonality represented with Fourier harmonics\n\n\nModeling strategy: match distributional assumptions to observed call behavior."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#how-early-warning-works",
     "href": "Presentations/VA-IDEAS/index.html#how-early-warning-works",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "How early warning works",
-    "text": "How early warning works\n\nLatent intensity evolves through an AR(1) state process over time\nAnnual seasonality represented with Fourier harmonics\nSmooth logistic change-point ramps capture medium-term structural shifts\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
+    "text": "How early warning works\n\nSmooth logistic change-point ramps capture medium-term structural shifts\n\nPre-specified number but estimated using horshoe priors to allow for flexibility\n\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-example-figure",
-    "href": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-example-figure",
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-covid-example",
+    "href": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-covid-example",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Utah 211 call patterns (example figure)",
-    "text": "Utah 211 call patterns (example figure)"
+    "section": "Utah 211 call patterns (Covid example)",
+    "text": "Utah 211 call patterns (Covid example)"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",

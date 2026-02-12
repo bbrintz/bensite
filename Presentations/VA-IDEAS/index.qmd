@@ -228,9 +228,10 @@ anim
 
 ## How we model the call data
 - Zero-inflated negative binomial (ZINB) model for daily call counts
-- Hurdle component separates structural zeros from low-intensity demand
-- Negative binomial component handles overdispersion in nonzero counts
 - Day-of-week effects included in both the hurdle and count components
+- Latent intensity evolves through an AR(1) state process over time
+- Annual seasonality represented with Fourier harmonics
+
 
 ::: {.fragment}
 **Modeling strategy:** match distributional assumptions to observed call behavior.
@@ -240,9 +241,8 @@ anim
 
 ## How early warning works
 
-- Latent intensity evolves through an AR(1) state process over time
-- Annual seasonality represented with Fourier harmonics
-- Smooth logistic change-point ramps capture medium-term structural shifts
+- Smooth logistic change-point ramps capture medium-term structural shifts 
+  - Pre-specified number but estimated using horshoe priors to allow for flexibility
 - Daily shock term captures short-lived departures from baseline
 
 ::: {.fragment}
@@ -251,9 +251,90 @@ anim
 
 ---
 
-## Utah 211 call patterns (example figure)
+## Utah 211 call patterns (Covid example)
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+dat=readRDS("kappa_tau_yfit_over_dates.rds")
 
-![](call_spikes_timeseries_placeholder.png){height=500px}
+kappas=dat[[1]]
+taus=dat[[2]]
+
+dts=data.frame(date=seq.Date(ymd("2019-01-01"),ymd("2020-04-10"),by="day"),dt=1:466)
+
+ts=seq(1,170,by=10) %>% purrr::map_df(function(x) {
+taus[x:(x+4),]
+}) %>% mutate(id=as.numeric(id))
+
+ls=seq(6,170,by=10) %>% purrr::map_df(function(x) {
+taus[x:(x+4),]
+})%>% mutate(id=as.numeric(id))
+
+ts$strength=ls %>% group_by(id) %>% mutate(strength=mean/max(mean)) %>% pull(strength)
+
+ts=ts %>% mutate(mean=as.integer(mean)) %>%  left_join(dts,by=c("mean"="dt"))
+
+rect_df <- ts %>%
+  #filter(mean >= 153, q5 >= 153) %>%
+  mutate(
+    xmin = dts$date[match(round(q5), dts$dt)],
+    xmax = dts$date[match(round(q95), dts$dt)],
+    ci_width = q95 - q5,
+    vis = scales::rescale(max(ci_width, na.rm = TRUE) - ci_width, to = c(0.05, 0.55))
+  )
+rect_df <- rect_df[seq(5,85,by=5),]
+
+yfit=dat[[3]] %>% mutate(id=as.numeric(id))
+
+y=data.frame(dt=1:466,y=dat[[4]])
+
+yfit=yfit %>% left_join(y)
+
+
+p=yfit %>% filter(date>ymd("2019-09-01")) %>% ggplot(aes(x=date,y=mean, ymin=q5, ymax=q95)) + 
+  geom_line() + geom_ribbon(alpha=0.2) + 
+  geom_point(aes(y=y), color="red", size=1) +
+  labs(title="Posterior Predictive for Call Counts in 84115",y="Call Counts",x="Day") +
+  # vertical shaded interval (q5..q95) per tau
+  #geom_rect(data = ts %>% filter(mean>=367), inherit.aes = FALSE,
+  #          aes(xmin = q5, xmax = q95,fill=id),
+  #          ymin = 0, ymax = Inf, alpha = 0.02) +
+  # mean vertical lines on top
+  #geom_vline(data = ts %>% filter(mean>=153), inherit.aes = FALSE, aes(xintercept = date,color=id,alpha=strength),linetype = "dashed") + 
+  geom_rect(data = rect_df %>% filter(mean >= 245, q5 >= 245), inherit.aes = FALSE,
+            aes(xmin = dts$date[match(round(q5),dts$dt)], xmax = dts$date[match(round(q95),dts$dt)],
+            alpha=vis,group=id), fill="blue",
+            ymin = 0, ymax = Inf) + scale_fill_viridis_d(begin=.2,end=.8) + 
+            scale_alpha_identity() +
+            labs(caption=str_wrap("Red dots are observed call counts. Blue shaded intervals represent 90% credible intervals for change-point timing. Dashed lines indicate mean change-point estimates.", width = 100))  +
+  theme_minimal() + xlab("") + 
+  theme(legend.position = "none",plot.caption = element_text(size = 14)) +
+  transition_states(id, transition_length = 4, state_length = 1, wrap = FALSE) +
+  ease_aes("linear") +
+  shadow_mark(past = F, future = FALSE, alpha = 0.15) #+
+  #enter_null() + exit_null()
+
+#kappas=map2_dfr(1:17,seq.Date(ymd("2020-03-25"),ymd("2020-04-10"),by="days"), function(x,y) {
+#  kappas %>% filter(id==x) %>% mutate(date=seq.Date(ymd("2019-01-01"),y))
+#}) %>% mutate(id=as.numeric(id))
+
+# p=kappas %>% filter(date>ymd("2020-01-01")) %>% ggplot(aes(x=date,y=exp(mean),group=id)) + geom_point() + #+ geom_ribbon(aes(ymin=q5,ymax=q95),alpha=0.25) +
+#   labs(x = "Date", y = "Kappa (structural change)") +
+#   theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
+#   theme(legend.position = "bottom") +
+#   geom_hline(yintercept=1, linetype="dashed", color = "red") +
+#   geom_hline(yintercept=1.1, linetype="dashed", color = "blue") +
+#   geom_hline(yintercept=0.9, linetype="dashed", color = "blue") +
+#   transition_states(id, state_length = 1, transition_length = 3, wrap = FALSE) +
+#   ease_aes("cubic-in-out") +
+#   enter_fade() + exit_fade()
+
+anim <- animate(p, nframes = 100, fps = 5)
+
+anim
+
+
+```
 
 ---
 

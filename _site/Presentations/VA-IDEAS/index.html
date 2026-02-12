@@ -510,9 +510,9 @@ Ben Brintz
 <h2>How we model the call data</h2>
 <ul>
 <li class="fragment">Zero-inflated negative binomial (ZINB) model for daily call counts</li>
-<li class="fragment">Hurdle component separates structural zeros from low-intensity demand</li>
-<li class="fragment">Negative binomial component handles overdispersion in nonzero counts</li>
 <li class="fragment">Day-of-week effects included in both the hurdle and count components</li>
+<li class="fragment">Latent intensity evolves through an AR(1) state process over time</li>
+<li class="fragment">Annual seasonality represented with Fourier harmonics</li>
 </ul>
 <div class="fragment">
 <p><strong>Modeling strategy:</strong> match distributional assumptions to observed call behavior.</p>
@@ -521,19 +521,20 @@ Ben Brintz
 <section id="how-early-warning-works" class="slide level2">
 <h2>How early warning works</h2>
 <ul>
-<li class="fragment">Latent intensity evolves through an AR(1) state process over time</li>
-<li class="fragment">Annual seasonality represented with Fourier harmonics</li>
-<li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts</li>
+<li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts
+<ul>
+<li class="fragment">Pre-specified number but estimated using horshoe priors to allow for flexibility</li>
+</ul></li>
 <li class="fragment">Daily shock term captures short-lived departures from baseline</li>
 </ul>
 <div class="fragment">
 <p><strong>Capability:</strong> separate expected temporal structure from transient anomalies.</p>
 </div>
 </section>
-<section id="utah-211-call-patterns-example-figure" class="slide level2">
-<h2>Utah 211 call patterns (example figure)</h2>
-<p><img data-src="call_spikes_timeseries_placeholder.png" height="500"></p>
-</section>
+<section id="utah-211-call-patterns-covid-example" class="slide level2">
+<h2>Utah 211 call patterns (Covid example)</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"></section>
 <section id="probabilistic-surge-detection-example-figure" class="slide level2">
 <h2>Probabilistic surge detection (example figure)</h2>
 <p><img data-src="call_spikes_alertprob_placeholder.png" height="500"></p>
