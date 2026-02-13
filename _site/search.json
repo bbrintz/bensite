@@ -441,11 +441,11 @@
     "text": "How early warning works\n\nSmooth logistic change-point ramps capture medium-term structural shifts\n\nPre-specified number but estimated using horshoe priors to allow for flexibility\n\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-covid-example",
-    "href": "Presentations/VA-IDEAS/index.html#utah-211-call-patterns-covid-example",
+    "objectID": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-325-to-410-covid-example",
+    "href": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-325-to-410-covid-example",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Utah 211 call patterns (Covid example)",
-    "text": "Utah 211 call patterns (Covid example)"
+    "section": "Prospective Model Fitting from 3/25 to 4/10 (Covid example)",
+    "text": "Prospective Model Fitting from 3/25 to 4/10 (Covid example)\n\nOrange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",

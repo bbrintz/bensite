@@ -251,7 +251,7 @@ anim
 
 ---
 
-## Utah 211 call patterns (Covid example)
+## Prospective Model Fitting from 3/25 to 4/10 (Covid example)
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 library(gganimate)
@@ -289,11 +289,20 @@ yfit=dat[[3]] %>% mutate(id=as.numeric(id))
 y=data.frame(dt=1:466,y=dat[[4]])
 
 yfit=yfit %>% left_join(y)
+y_bar <- yfit %>%
+  filter(date > ymd("2019-09-01")) %>%
+  summarise(v = min(q5, na.rm = TRUE) - 0.08 * (max(q95, na.rm = TRUE) - min(q5, na.rm = TRUE))) %>%
+  pull(v)
+state_dates <- yfit %>%
+  filter(date > ymd("2019-09-01")) %>%
+  group_by(id) %>%
+  summarise(latest_date = max(date, na.rm = TRUE), .groups = "drop") %>%
+  mutate(label = paste0("As of ", format(latest_date, "%b %d, %Y")))
 
 
 p=yfit %>% filter(date>ymd("2019-09-01")) %>% ggplot(aes(x=date,y=mean, ymin=q5, ymax=q95)) + 
-  geom_line() + geom_ribbon(alpha=0.2) + 
-  geom_point(aes(y=y), color="red", size=1) +
+  geom_line(aes(group=1), color="#4D4D4D") + geom_ribbon(aes(group=1), alpha=0.2, fill="#BDBDBD") + 
+  geom_point(aes(y=y,group=1), color="#E69F00", size=1) +
   labs(title="Posterior Predictive for Call Counts in 84115",y="Call Counts",x="Day") +
   # vertical shaded interval (q5..q95) per tau
   #geom_rect(data = ts %>% filter(mean>=367), inherit.aes = FALSE,
@@ -301,14 +310,49 @@ p=yfit %>% filter(date>ymd("2019-09-01")) %>% ggplot(aes(x=date,y=mean, ymin=q5,
   #          ymin = 0, ymax = Inf, alpha = 0.02) +
   # mean vertical lines on top
   #geom_vline(data = ts %>% filter(mean>=153), inherit.aes = FALSE, aes(xintercept = date,color=id,alpha=strength),linetype = "dashed") + 
-  geom_rect(data = rect_df %>% filter(mean >= 245, q5 >= 245), inherit.aes = FALSE,
-            aes(xmin = dts$date[match(round(q5),dts$dt)], xmax = dts$date[match(round(q95),dts$dt)],
-            alpha=vis,group=id), fill="blue",
-            ymin = 0, ymax = Inf) + scale_fill_viridis_d(begin=.2,end=.8) + 
-            scale_alpha_identity() +
-            labs(caption=str_wrap("Red dots are observed call counts. Blue shaded intervals represent 90% credible intervals for change-point timing. Dashed lines indicate mean change-point estimates.", width = 100))  +
+  annotate(
+    "segment",
+    x = min(yfit$date[yfit$date > ymd("2019-09-01")]),
+    xend = max(yfit$date),
+    y = y_bar,
+    yend = y_bar,
+    colour = "grey80",
+    linewidth = 5,
+    lineend = "round"
+  ) +
+  geom_segment(
+    data = rect_df %>% filter(mean >= 245, q5 >= 245),
+    inherit.aes = FALSE,
+    aes(x = xmin, xend = xmax, y = y_bar, yend = y_bar, alpha=.75, group = id),
+    colour = "#009E73",
+    linewidth = 7,
+    lineend = "round"
+  ) +
+  geom_vline(
+    data = state_dates,
+    inherit.aes = FALSE,
+    aes(xintercept = latest_date, group = id),
+    linetype = "dashed",
+    colour = "#0072B2",
+    linewidth = 0.7,
+    alpha = 0.9
+  ) +
+  geom_label(
+    data = state_dates,
+    inherit.aes = FALSE,
+    aes(x = latest_date, y = Inf, label = label, group = id),
+    hjust = 1.02,
+    vjust = 1.6,
+    size = 4.2,
+    fontface = "bold",
+    label.size = 0.2,
+    label.r = grid::unit(0.12, "lines"),
+    fill = "white",
+    colour = "#1F2937"
+  ) +
+  scale_alpha_identity() + expand_limits(y = y_bar) + coord_cartesian(clip = "off") +
   theme_minimal() + xlab("") + 
-  theme(legend.position = "none",plot.caption = element_text(size = 14)) +
+  theme(legend.position = "none",plot.caption = element_text(size = 14),margin=margin(t=15)) +
   transition_states(id, transition_length = 4, state_length = 1, wrap = FALSE) +
   ease_aes("linear") +
   shadow_mark(past = F, future = FALSE, alpha = 0.15) #+
@@ -335,7 +379,7 @@ anim
 
 
 ```
-
+Orange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date.
 ---
 
 ## Probabilistic surge detection (example figure)
