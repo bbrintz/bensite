@@ -32,6 +32,7 @@
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="uofu-theme.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -387,8 +388,9 @@ Ben Brintz
     background:#f5f7fa;
     text-align:center;
     font-weight:800;
-    width: 70%;
-    max-width: 720px;
+    width: 76%;
+    max-width: 820px;
+    white-space: nowrap;
     margin: 0 auto;
   ">
 <p>Complex Bayesian Hierarchical Models in Stan<br></p>
@@ -410,8 +412,9 @@ Ben Brintz
   text-align:center;
   font-weight:900;
   font-size:1.4em;
-  width: 70%;
-  max-width: 720px;
+  width: 76%;
+  max-width: 820px;
+  white-space: nowrap;
   margin: 0 auto;
 ">
 <p>Complex Bayesian Hierarchical Models in Stan</p>
@@ -421,7 +424,7 @@ Ben Brintz
 <ul>
 <li class="fragment">Two examples of work in progress:
 <ul>
-<li class="fragment">Stochastic SEIR models that incorporate imperfect <strong>detection</strong> - Covid-19</li>
+<li class="fragment">Stochastic SEIR models that incorporate imperfect <strong>detection</strong> - COVID-19</li>
 <li class="fragment">Early <strong>detection</strong> of call spikes - United Way 211 Calls (Food Insecurity Resources)</li>
 </ul></li>
 </ul>
@@ -436,18 +439,18 @@ Ben Brintz
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations.</p>
+<p>SEIR models track transitions between susceptible, exposed, infectious, and removed states to represent epidemic dynamics.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <section id="case-study-1-covid-19-is-not-perfectly-reported" class="slide level2">
-<h2>Case study 1: Covid-19 is not perfectly reported</h2>
+<h2>Case study 1: COVID-19 is not perfectly reported</h2>
 <ul>
 <li class="fragment">Latent disease transmission is never directly observed</li>
 <li class="fragment">Reported cases reflect testing intensity, reporting practices, and asymptomatic disease</li>
-<li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
+<li class="fragment">Only the sickest got diagnosed with COVID-19 early in the pandemic</li>
 <li class="fragment"><strong>Key capability:</strong> separate what is happening from what is observed.</li>
 </ul>
 </section>
@@ -489,12 +492,12 @@ Ben Brintz
 <h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.gif" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section id="utah-covid-19-dynamics-posterior-density" class="slide level2">
+<h2>Utah COVID-19 dynamics (posterior density)</h2>
 <p><img data-src="utah_p_dens_020325.png" height="500"></p>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<section id="utah-beta-binomial-transition-fit" class="slide level2">
+<h2>Utah beta-binomial transition fit</h2>
 <p><img data-src="utah_120525_bb.png" height="500"></p>
 </section>
 <section id="case-study-2-can-spikes-in-211-calls-be-detected-early" class="slide level2">
@@ -502,7 +505,7 @@ Ben Brintz
 <ul>
 <li class="fragment">211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents</li>
 <li class="fragment">We have call counts from Utah from 2019 - 2025.</li>
-<li class="fragment">Calls are often zero or low volume, but occasionally spike when there are major events (e.g.&nbsp;Covid-19, natural disasters, economic shocks)</li>
+<li class="fragment">Calls are often zero or low volume, but occasionally spike when there are major events (e.g.&nbsp;COVID-19, natural disasters, economic shocks)</li>
 <li class="fragment">Can we capture these spikes early to help with resource allocation and response?</li>
 </ul>
 </section>
@@ -523,7 +526,7 @@ Ben Brintz
 <ul>
 <li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts
 <ul>
-<li class="fragment">Pre-specified number but estimated using horshoe priors to allow for flexibility</li>
+<li class="fragment">Pre-specified number but estimated using horseshoe priors to allow for flexibility</li>
 </ul></li>
 <li class="fragment">Daily shock term captures short-lived departures from baseline</li>
 </ul>
@@ -531,8 +534,8 @@ Ben Brintz
 <p><strong>Capability:</strong> separate expected temporal structure from transient anomalies.</p>
 </div>
 </section>
-<section id="prospective-model-fitting-from-325-to-410-covid-example" class="slide level2">
-<h2>Prospective Model Fitting from 3/25 to 4/10 (Covid example)</h2>
+<section id="prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example" class="slide level2">
+<h2>Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"><p>Orange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date.</p>
 </section>

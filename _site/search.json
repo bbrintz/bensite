@@ -382,14 +382,14 @@
     "href": "Presentations/VA-IDEAS/index.html#section",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "",
-    "text": "Complex Bayesian Hierarchical Models in Stan\n\n\n\n\nTwo examples of work in progress:\n\nStochastic SEIR models that incorporate imperfect detection - Covid-19\nEarly detection of call spikes - United Way 211 Calls (Food Insecurity Resources)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nS(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations."
+    "text": "Complex Bayesian Hierarchical Models in Stan\n\n\n\n\nTwo examples of work in progress:\n\nStochastic SEIR models that incorporate imperfect detection - COVID-19\nEarly detection of call spikes - United Way 211 Calls (Food Insecurity Resources)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nSEIR models track transitions between susceptible, exposed, infectious, and removed states to represent epidemic dynamics."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#case-study-1-covid-19-is-not-perfectly-reported",
     "href": "Presentations/VA-IDEAS/index.html#case-study-1-covid-19-is-not-perfectly-reported",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Case study 1: Covid-19 is not perfectly reported",
-    "text": "Case study 1: Covid-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\nOnly the sickest got diagnosed with Covid early in the pandemic\nKey capability: separate what is happening from what is observed."
+    "section": "Case study 1: COVID-19 is not perfectly reported",
+    "text": "Case study 1: COVID-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\nOnly the sickest got diagnosed with COVID-19 early in the pandemic\nKey capability: separate what is happening from what is observed."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
@@ -420,11 +420,25 @@
     "text": "Estimating an evolving recovery rate and incubation using beta-binomial transitions"
   },
   {
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-covid-19-dynamics-posterior-density",
+    "href": "Presentations/VA-IDEAS/index.html#utah-covid-19-dynamics-posterior-density",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Utah COVID-19 dynamics (posterior density)",
+    "text": "Utah COVID-19 dynamics (posterior density)"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-beta-binomial-transition-fit",
+    "href": "Presentations/VA-IDEAS/index.html#utah-beta-binomial-transition-fit",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Utah beta-binomial transition fit",
+    "text": "Utah beta-binomial transition fit"
+  },
+  {
     "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
     "href": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Case study 2: Can spikes in 211 calls be detected early?",
-    "text": "Case study 2: Can spikes in 211 calls be detected early?\n\n211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents\nWe have call counts from Utah from 2019 - 2025.\nCalls are often zero or low volume, but occasionally spike when there are major events (e.g. Covid-19, natural disasters, economic shocks)\nCan we capture these spikes early to help with resource allocation and response?"
+    "text": "Case study 2: Can spikes in 211 calls be detected early?\n\n211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents\nWe have call counts from Utah from 2019 - 2025.\nCalls are often zero or low volume, but occasionally spike when there are major events (e.g. COVID-19, natural disasters, economic shocks)\nCan we capture these spikes early to help with resource allocation and response?"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#how-we-model-the-call-data",
@@ -438,14 +452,14 @@
     "href": "Presentations/VA-IDEAS/index.html#how-early-warning-works",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "How early warning works",
-    "text": "How early warning works\n\nSmooth logistic change-point ramps capture medium-term structural shifts\n\nPre-specified number but estimated using horshoe priors to allow for flexibility\n\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
+    "text": "How early warning works\n\nSmooth logistic change-point ramps capture medium-term structural shifts\n\nPre-specified number but estimated using horseshoe priors to allow for flexibility\n\nDaily shock term captures short-lived departures from baseline\n\n\nCapability: separate expected temporal structure from transient anomalies."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-325-to-410-covid-example",
-    "href": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-325-to-410-covid-example",
+    "objectID": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example",
+    "href": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Prospective Model Fitting from 3/25 to 4/10 (Covid example)",
-    "text": "Prospective Model Fitting from 3/25 to 4/10 (Covid example)\n\nOrange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date."
+    "section": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)",
+    "text": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)\n\nOrange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",

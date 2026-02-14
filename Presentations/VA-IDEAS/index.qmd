@@ -11,7 +11,7 @@ format:
     auto-animate-unmatched: false
     incremental: true
     slideNumber: true
-    css: custom.css
+    css: [custom.css, uofu-theme.css]
 ---
 
 ## Research threads at a glance {auto-animate=true}
@@ -63,8 +63,9 @@ Design &<br>Analysis
     background:#f5f7fa;
     text-align:center;
     font-weight:800;
-    width: 70%;
-    max-width: 720px;
+    width: 76%;
+    max-width: 820px;
+    white-space: nowrap;
     margin: 0 auto;
   ">
   Complex Bayesian Hierarchical Models in Stan<br>
@@ -90,8 +91,9 @@ Design &<br>Analysis
   text-align:center;
   font-weight:900;
   font-size:1.4em;
-  width: 70%;
-  max-width: 720px;
+  width: 76%;
+  max-width: 820px;
+  white-space: nowrap;
   margin: 0 auto;
 ">
 Complex Bayesian Hierarchical Models in Stan 
@@ -101,24 +103,24 @@ Complex Bayesian Hierarchical Models in Stan
 
 ::: {.fragment fragment-index=2}
 - Two examples of work in progress:
-  - Stochastic SEIR models that incorporate imperfect **detection** - Covid-19
+  - Stochastic SEIR models that incorporate imperfect **detection** - COVID-19
   - Early **detection** of call spikes - United Way 211 Calls (Food Insecurity Resources)
 :::
 
 ::: {.fragment fragment-index=1}
 ::: {.callout-note}
-S(usceptible) E(xposed) I(nfectious) R(emoved) models are a class of compartmental models used in epidemiology to simulate the spread of infectious diseases through populations.
+SEIR models track transitions between susceptible, exposed, infectious, and removed states to represent epidemic dynamics.
 :::
 :::
 
 
 ---
 
-## Case study 1: Covid-19 is not perfectly reported
+## Case study 1: COVID-19 is not perfectly reported
 
 - Latent disease transmission is never directly observed 
 - Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
- - Only the sickest got diagnosed with Covid early in the pandemic 
+ - Only the sickest got diagnosed with COVID-19 early in the pandemic 
 - **Key capability:** separate what is happening from what is observed.
 
 
@@ -205,13 +207,13 @@ anim
 
 ---
 
-##
+## Utah COVID-19 dynamics (posterior density)
 
 ![](utah_p_dens_020325.png){height=500px}
 
 ---
 
-##
+## Utah beta-binomial transition fit
 
 ![](utah_120525_bb.png){height=500px}
 
@@ -221,7 +223,7 @@ anim
 
 - 211 is a nationwide, free public referral system that responds to >20 million requests for help each year from U.S. residents
 - We have call counts from Utah from 2019 - 2025. 
-- Calls are often zero or low volume, but occasionally spike when there are major events (e.g. Covid-19, natural disasters, economic shocks)
+- Calls are often zero or low volume, but occasionally spike when there are major events (e.g. COVID-19, natural disasters, economic shocks)
 - Can we capture these spikes early to help with resource allocation and response?
 
 ---
@@ -242,7 +244,7 @@ anim
 ## How early warning works
 
 - Smooth logistic change-point ramps capture medium-term structural shifts 
-  - Pre-specified number but estimated using horshoe priors to allow for flexibility
+  - Pre-specified number but estimated using horseshoe priors to allow for flexibility
 - Daily shock term captures short-lived departures from baseline
 
 ::: {.fragment}
@@ -251,7 +253,7 @@ anim
 
 ---
 
-## Prospective Model Fitting from 3/25 to 4/10 (Covid example)
+## Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)
 ```{r,include=T,echo=F,cache=TRUE}
 library(tidyverse)
 library(gganimate)
