@@ -384,9 +384,118 @@ anim
 Orange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date.
 ---
 
-## Probabilistic surge detection (example figure)
+## Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)
 
-![](call_spikes_alertprob_placeholder.png){height=500px}
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+dat <- readRDS("kappa_tau_yfit_over_dates.rds")
+kappas <- dat[[1]]
+yfit <- dat[[3]] %>% mutate(id = as.numeric(id))
+y <- data.frame(dt = 1:466, y = dat[[4]])
+
+kappas <- map2_dfr(
+  1:17,
+  seq.Date(ymd("2020-03-25"), ymd("2020-04-10"), by = "days"),
+  function(i, asof_date) {
+    kappas %>%
+      filter(id == i) %>%
+      mutate(date = seq.Date(ymd("2019-01-01"), asof_date, by = "days"))
+  }
+) %>% mutate(id = as.numeric(id))
+
+yfit_plot <- yfit %>%
+  left_join(y, by = "dt") %>%
+  filter(date > ymd("2020-01-01"))
+
+kappa_plot <- kappas %>%
+  filter(date > ymd("2020-01-01")) %>%
+  transmute(
+    id,
+    date,
+    mean = exp(mean),
+    q5 = NA,
+    q95 = NA,
+    y = as.numeric(NA),
+    panel = "Posterior kappa over time"
+  )
+
+fit_plot <- yfit_plot %>%
+  transmute(
+    id,
+    date,
+    mean,
+    q5,
+    q95,
+    y,
+    panel = "Observed calls and posterior fit"
+  )
+
+plot_dat <- bind_rows(kappa_plot, fit_plot)
+plot_dat$panel <- factor(
+  plot_dat$panel,
+  levels = c("Observed calls and posterior fit", "Posterior kappa over time")
+)
+
+p <- ggplot(plot_dat, aes(x = date, y = mean, ymin = q5, ymax = q95, group = id)) +
+  geom_point(data = plot_dat %>% filter(panel == "Posterior kappa over time"),
+             color = "#0072B2", size = 2.1, alpha = 0.95) +
+  geom_hline(data = tibble(panel = "Posterior kappa over time", yint = c(1.0, 1.1, 0.9)),
+             aes(yintercept = yint), inherit.aes = FALSE,
+             linetype = c("dashed", "dotted", "dotted"),
+             color = c("#D55E00", "grey40", "grey40"), linewidth = 0.6) +
+  geom_ribbon(data = plot_dat %>% filter(panel == "Observed calls and posterior fit"),
+              fill = "grey75", alpha = 0.3) +
+  geom_line(data = plot_dat %>% filter(panel == "Observed calls and posterior fit"),
+            color = "grey25", linewidth = 0.8) +
+  geom_point(data = plot_dat %>% filter(panel == "Observed calls and posterior fit"),
+             aes(y = y), color = "#E69F00", size = 0.9, alpha = 0.85) +
+  geom_blank(
+    data = tibble(
+      panel = factor("Posterior kappa over time", levels = levels(plot_dat$panel)),
+      date = min(plot_dat$date, na.rm = TRUE),
+      mean = c(0.5, 1.5)
+    ),
+    aes(x = date, y = mean),
+    inherit.aes = FALSE
+  ) +
+  geom_label(
+    data = state_dates,
+    inherit.aes = FALSE,
+    aes(x = latest_date, y = Inf, label = label, group = id),
+    hjust = 1.02,
+    vjust = 1.6,
+    size = 4.2,
+    fontface = "bold",
+    label.size = 0.2,
+    label.r = grid::unit(0.12, "lines"),
+    fill = "white",
+    colour = "#1F2937"
+  ) + 
+  geom_vline(
+    data = state_dates,
+    inherit.aes = FALSE,
+    aes(xintercept = latest_date, group = id),
+    linetype = "dashed",
+    colour = "#0072B2",
+    linewidth = 0.7,
+    alpha = 0.9
+  ) +
+  facet_wrap(~panel, ncol = 1, scales = "free_y", axes = "all_x", axis.labels = "all") +
+  labs(x = "Day", y = NULL) +
+  theme_bw(base_size = 13) +
+  theme(legend.position = "none",
+        strip.text = element_text(face = "bold")) +
+  transition_states(id, transition_length = 4, state_length = 1, wrap = FALSE) +
+  ease_aes("linear") +
+  shadow_mark(past = FALSE, future = FALSE, alpha = 0.15)
+
+animate(p, nframes = 100, fps = 5)
+```
+
+Top panel overlays raw calls (orange points) with posterior mean and 90% credible interval.
+Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10% (y-axis fixed to 0.5-1.5).
 
 ---
 

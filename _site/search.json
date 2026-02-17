@@ -462,11 +462,11 @@
     "text": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)\n\nOrange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",
-    "href": "Presentations/VA-IDEAS/index.html#probabilistic-surge-detection-example-figure",
+    "objectID": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example-1",
+    "href": "Presentations/VA-IDEAS/index.html#prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example-1",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Probabilistic surge detection (example figure)",
-    "text": "Probabilistic surge detection (example figure)"
+    "section": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)",
+    "text": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)\n\nTop panel overlays raw calls (orange points) with posterior mean and 90% credible interval. Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10% (y-axis fixed to 0.5-1.5)."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#practical-decision-use",
