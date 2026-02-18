@@ -544,36 +544,20 @@ Ben Brintz
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"><p>Top panel overlays raw calls (orange points) with posterior mean and 90% credible interval. Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10% (y-axis fixed to 0.5-1.5).</p>
 </section>
-<section id="practical-decision-use" class="slide level2">
-<h2>Practical decision use</h2>
+<section id="practical-decision-use-is-still-a-work-in-progress" class="slide level2">
+<h2>Practical decision use is still a work in progress</h2>
 <ul>
 <li class="fragment">Posterior expected calls are compared against latent baseline expectations</li>
-<li class="fragment">Probabilistic surge metrics support threshold-based operational alerting</li>
-<li class="fragment">Thresholds can be tuned using lead-time versus false-alarm tradeoffs</li>
+<li class="fragment">Kappa values above a certain level indicate anomolous behavior, but thresholds for action are still being determined</li>
+<li class="fragment">Tau and ramps can be used to show a systematic shift in call behavior, but how to use this information for decision-making is still being explored</li>
 </ul>
 </section>
 <section id="what-unifies-this-work" class="slide level2">
 <h2>What unifies this work</h2>
 <ul>
-<li class="fragment">Latent-process Bayesian models with temporal dependence</li>
+<li class="fragment">Latent-process Bayesian models on count data with temporal dependence</li>
 <li class="fragment">Flexible distributions matched to real-world count data</li>
 <li class="fragment">Early detection through probabilistic change modeling</li>
-</ul>
-</section>
-<section id="current-focus-areas" class="slide level2">
-<h2>Current focus areas</h2>
-<ul>
-<li class="fragment">Early detection under delayed, zero-inflated, and overdispersed data</li>
-<li class="fragment">Adaptive hierarchical models for evolving systems</li>
-<li class="fragment">Decision-focused uncertainty rather than point predictions</li>
-</ul>
-</section>
-<section id="looking-ahead" class="slide level2">
-<h2>Looking ahead</h2>
-<ul>
-<li class="fragment">Integrating causal reasoning with hierarchical prediction</li>
-<li class="fragment">Adaptive monitoring for rapid response</li>
-<li class="fragment">Decision support that anticipates equity impacts</li>
 </ul>
 </section>
 <section id="thank-you" class="slide level2">
@@ -795,6 +779,58 @@ Ben Brintz
           RevealZoom
         ]
       });
+    </script>
+    <style>
+      .custom-slide-number {
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        z-index: 60;
+        background: rgba(190, 0, 0, 0.9);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.18em 0.55em;
+        font-size: 0.95rem;
+        line-height: 1;
+        font-family: inherit;
+        pointer-events: none;
+      }
+    </style>
+    <script>
+    (function () {
+      function updateCounter() {
+        if (!window.Reveal || !window.__customSlideNumber) return;
+        var current = Reveal.getSlidePastCount() + 1;
+        var total = Reveal.getTotalSlides();
+        window.__customSlideNumber.textContent = current + "/" + total;
+      }
+
+      function initCounter() {
+        if (!window.Reveal) return;
+        if (!window.__customSlideNumber) {
+          var el = document.createElement("div");
+          el.className = "custom-slide-number";
+          document.body.appendChild(el);
+          window.__customSlideNumber = el;
+        }
+        updateCounter();
+        Reveal.on("ready", updateCounter);
+        Reveal.on("slidechanged", updateCounter);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries += 1;
+          if (window.Reveal) {
+            clearInterval(timer);
+            initCounter();
+          } else if (tries > 50) {
+            clearInterval(timer);
+          }
+        }, 100);
+      });
+    })();
     </script>
     
     <script>

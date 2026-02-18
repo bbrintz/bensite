@@ -469,32 +469,18 @@
     "text": "Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)\n\nTop panel overlays raw calls (orange points) with posterior mean and 90% credible interval. Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10% (y-axis fixed to 0.5-1.5)."
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#practical-decision-use",
-    "href": "Presentations/VA-IDEAS/index.html#practical-decision-use",
+    "objectID": "Presentations/VA-IDEAS/index.html#practical-decision-use-is-still-a-work-in-progress",
+    "href": "Presentations/VA-IDEAS/index.html#practical-decision-use-is-still-a-work-in-progress",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Practical decision use",
-    "text": "Practical decision use\n\nPosterior expected calls are compared against latent baseline expectations\nProbabilistic surge metrics support threshold-based operational alerting\nThresholds can be tuned using lead-time versus false-alarm tradeoffs"
+    "section": "Practical decision use is still a work in progress",
+    "text": "Practical decision use is still a work in progress\n\nPosterior expected calls are compared against latent baseline expectations\nKappa values above a certain level indicate anomolous behavior, but thresholds for action are still being determined\nTau and ramps can be used to show a systematic shift in call behavior, but how to use this information for decision-making is still being explored"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
     "href": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "What unifies this work",
-    "text": "What unifies this work\n\nLatent-process Bayesian models with temporal dependence\nFlexible distributions matched to real-world count data\nEarly detection through probabilistic change modeling"
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#current-focus-areas",
-    "href": "Presentations/VA-IDEAS/index.html#current-focus-areas",
-    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Current focus areas",
-    "text": "Current focus areas\n\nEarly detection under delayed, zero-inflated, and overdispersed data\nAdaptive hierarchical models for evolving systems\nDecision-focused uncertainty rather than point predictions"
-  },
-  {
-    "objectID": "Presentations/VA-IDEAS/index.html#looking-ahead",
-    "href": "Presentations/VA-IDEAS/index.html#looking-ahead",
-    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Looking ahead",
-    "text": "Looking ahead\n\nIntegrating causal reasoning with hierarchical prediction\nAdaptive monitoring for rapid response\nDecision support that anticipates equity impacts"
+    "text": "What unifies this work\n\nLatent-process Bayesian models on count data with temporal dependence\nFlexible distributions matched to real-world count data\nEarly detection through probabilistic change modeling"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#thank-you",

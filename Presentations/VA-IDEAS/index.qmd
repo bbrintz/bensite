@@ -11,6 +11,7 @@ format:
     auto-animate-unmatched: false
     incremental: true
     slideNumber: true
+    include-after-body: slide-number-fix.html
     css: [custom.css, uofu-theme.css]
 ---
 
@@ -499,37 +500,20 @@ Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10%
 
 ---
 
-## Practical decision use
+## Practical decision use is still a work in progress
 
 - Posterior expected calls are compared against latent baseline expectations
-- Probabilistic surge metrics support threshold-based operational alerting
-- Thresholds can be tuned using lead-time versus false-alarm tradeoffs
+- Kappa values above a certain level indicate anomolous behavior, but thresholds for action are still being determined
+- Tau and ramps can be used to show a systematic shift in call behavior, but how to use this information for decision-making is still being explored
 
 ---
 
 ## What unifies this work
 
-- Latent-process Bayesian models with temporal dependence
+- Latent-process Bayesian models on count data with temporal dependence
 - Flexible distributions matched to real-world count data
 - Early detection through probabilistic change modeling
 
----
-
-## Current focus areas
-
-- Early detection under delayed, zero-inflated, and overdispersed data
-- Adaptive hierarchical models for evolving systems
-- Decision-focused uncertainty rather than point predictions
-
----
-
-## Looking ahead
-
-- Integrating causal reasoning with hierarchical prediction
-- Adaptive monitoring for rapid response
-- Decision support that anticipates equity impacts
-
----
 
 ## Thank you
 

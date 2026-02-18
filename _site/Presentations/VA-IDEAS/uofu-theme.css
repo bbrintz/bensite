@@ -56,6 +56,12 @@
   color: var(--uofu-white);
   border-radius: 999px;
   padding: 0.18em 0.55em;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 40;
+  right: 14px !important;
+  bottom: 14px !important;
 }
 
 .reveal .progress {
@@ -63,16 +69,24 @@
   height: 5px;
 }
 
-.reveal .callout-note,
-.reveal .callout-important {
-  border-left: 6px solid var(--uofu-red);
-  background: var(--uofu-red-soft);
+.reveal .callout-note {
+  border-left: 4px solid #2563eb;
+  background: #eff6ff;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(17, 17, 17, 0.06);
 }
 
+.reveal .callout-note .callout-title,
+.reveal .callout-note .callout-title strong,
+.reveal .callout-note .callout-icon {
+  color: #2563eb !important;
+}
+
 .reveal .callout-important {
+  border-left: 6px solid var(--uofu-red);
   background: #fde8e8;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(17, 17, 17, 0.06);
 }
 
 .reveal code {
