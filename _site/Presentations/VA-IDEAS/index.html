@@ -471,10 +471,13 @@ Ben Brintz
 <ul>
 <li class="fragment">Latent SEIR compartmental process for true infections
 <ul>
-<li class="fragment">Approximate observation using a Gaussian process</li>
+<li class="fragment">Approximate binomial observation using a Gaussian process</li>
+</ul></li>
+<li class="fragment">Transmission follows a hierarchical AR(1) process over time
+<ul>
+<li class="fragment">Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing gradual changes across districts.</li>
 </ul></li>
 <li class="fragment">Estimation allows for different start time across health districts</li>
-<li class="fragment">Transmission follows a hierarchical AR(1) process over time</li>
 <li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition
 <ul>
 <li class="fragment">Use a novel computational solution to estimate these dynamics efficiently in Stan</li>
@@ -484,12 +487,12 @@ Ben Brintz
 <p><strong>Modeling strategy:</strong> allow flexibility where variability is real.</p>
 </div>
 </section>
-<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
-<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
 <section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
 <h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
+<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
+<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.gif" class="r-stretch"></section>
 <section id="utah-covid-19-dynamics-posterior-density" class="slide level2">
@@ -512,10 +515,22 @@ Ben Brintz
 <section id="how-we-model-the-call-data" class="slide level2">
 <h2>How we model the call data</h2>
 <ul>
-<li class="fragment">Zero-inflated negative binomial (ZINB) model for daily call counts</li>
-<li class="fragment">Day-of-week effects included in both the hurdle and count components</li>
-<li class="fragment">Latent intensity evolves through an AR(1) state process over time</li>
-<li class="fragment">Annual seasonality represented with Fourier harmonics</li>
+<li class="fragment">Zero-inflated negative binomial (ZINB) model for daily call counts
+<ul>
+<li class="fragment">Lay interpretation: some days truly have no demand, while other days vary widely and can spike.</li>
+</ul></li>
+<li class="fragment">Day-of-week effects included in both the hurdle and count components
+<ul>
+<li class="fragment">Lay interpretation: Mondays and weekends can have different baseline call patterns.</li>
+</ul></li>
+<li class="fragment">Latent intensity evolves through an AR(1) state process over time
+<ul>
+<li class="fragment">Lay interpretation: call demand today is related to recent days, not independent day-to-day.</li>
+</ul></li>
+<li class="fragment">Annual seasonality represented with Fourier harmonics
+<ul>
+<li class="fragment">Lay interpretation: recurring yearly patterns are modeled smoothly rather than with hard cutoffs.</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <p><strong>Modeling strategy:</strong> match distributional assumptions to observed call behavior.</p>
@@ -527,8 +542,12 @@ Ben Brintz
 <li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts
 <ul>
 <li class="fragment">Pre-specified number but estimated using horseshoe priors to allow for flexibility</li>
+<li class="fragment">Lay interpretation: the model allows gradual shifts in demand level but avoids overreacting to noise.</li>
 </ul></li>
-<li class="fragment">Daily shock term captures short-lived departures from baseline</li>
+<li class="fragment">Daily shock term captures short-lived departures from baseline
+<ul>
+<li class="fragment">Lay interpretation: unusual surges are flagged when calls jump above expected patterns.</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <p><strong>Capability:</strong> separate expected temporal structure from transient anomalies.</p>

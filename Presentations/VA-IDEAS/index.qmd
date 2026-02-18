@@ -141,9 +141,10 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 ## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
 - Latent SEIR compartmental process for true infections
-  - Approximate observation using a Gaussian process
-- Estimation allows for different start time across health districts
+  - Approximate binomial observation using a Gaussian process
 - Transmission follows a hierarchical AR(1) process over time
+  - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing gradual changes across districts.
+- Estimation allows for different start time across health districts
 - Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
   - Use a novel computational solution to estimate these dynamics efficiently in Stan 
 
@@ -152,6 +153,34 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 :::
 
 ---
+
+
+## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+df <- readRDS("betabin_sim.rds")
+colnames(df)[2] = "Binomial Transition"
+colnames(df)[3] = "Beta-Binomial Transition"
+p <- df %>% 
+      mutate(Week = Time) %>% select(-Time) %>%
+      gather(Approach, Infections,-Week) %>%
+      ggplot(aes(x=Week,y=Infections,group=Approach,color=Approach)) +
+        geom_point() + geom_line() +
+        labs(x = "Week", y = "Infections") +
+        theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
+        theme(legend.position = "bottom") +
+        transition_reveal(Week)
+
+anim <- animate(p, nframes = 100, fps = 5)
+
+anim
+```
+
+---
+
 
 ## Estimating an evolving transmission rate using a hierarchical AR(1) process
 
@@ -182,32 +211,6 @@ anim
 
 ---
 
-## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
-
-```{r,include=T,echo=F,cache=TRUE}
-library(tidyverse)
-library(gganimate)
-
-df <- readRDS("betabin_sim.rds")
-colnames(df)[2] = "Binomial Transition"
-colnames(df)[3] = "Beta-Binomial Transition"
-p <- df %>% 
-      mutate(Week = Time) %>% select(-Time) %>%
-      gather(Approach, Infections,-Week) %>%
-      ggplot(aes(x=Week,y=Infections,group=Approach,color=Approach)) +
-        geom_point() + geom_line() +
-        labs(x = "Week", y = "Infections") +
-        theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
-        theme(legend.position = "bottom") +
-        transition_reveal(Week)
-
-anim <- animate(p, nframes = 100, fps = 5)
-
-anim
-```
-
----
-
 ## Utah COVID-19 dynamics (posterior density)
 
 ![](utah_p_dens_020325.png){height=500px}
@@ -231,9 +234,13 @@ anim
 
 ## How we model the call data
 - Zero-inflated negative binomial (ZINB) model for daily call counts
+  - Lay interpretation: some days truly have no demand, while other days vary widely and can spike.
 - Day-of-week effects included in both the hurdle and count components
+  - Lay interpretation: Mondays and weekends can have different baseline call patterns.
 - Latent intensity evolves through an AR(1) state process over time
+  - Lay interpretation: call demand today is related to recent days, not independent day-to-day.
 - Annual seasonality represented with Fourier harmonics
+  - Lay interpretation: recurring yearly patterns are modeled smoothly rather than with hard cutoffs.
 
 
 ::: {.fragment}
@@ -246,7 +253,9 @@ anim
 
 - Smooth logistic change-point ramps capture medium-term structural shifts 
   - Pre-specified number but estimated using horseshoe priors to allow for flexibility
+  - Lay interpretation: the model allows gradual shifts in demand level but avoids overreacting to noise.
 - Daily shock term captures short-lived departures from baseline
+  - Lay interpretation: unusual surges are flagged when calls jump above expected patterns.
 
 ::: {.fragment}
 **Capability:** separate expected temporal structure from transient anomalies.
