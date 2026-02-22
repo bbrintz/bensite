@@ -1,4 +1,0 @@
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-htmltools::includeHTML("sierpinski_code.html")
-```
