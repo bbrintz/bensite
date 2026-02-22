@@ -121,7 +121,8 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 
 - Latent disease transmission is never directly observed 
 - Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
- - Only the sickest got diagnosed with COVID-19 early in the pandemic 
+  - Only the sickest got diagnosed with COVID-19 early in the pandemic 
+  - “We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”
 - **Key capability:** separate what is happening from what is observed.
 
 
@@ -141,12 +142,13 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 ## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
 - Latent SEIR compartmental process for true infections
-  - Approximate binomial observation using a Gaussian process
+  - Approximate binomial observation using a continuous Gaussian process
 - Transmission follows a hierarchical AR(1) process over time
-  - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing gradual changes across districts.
+  - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.
 - Estimation allows for different start time across health districts
 - Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
-  - Use a novel computational solution to estimate these dynamics efficiently in Stan 
+  - Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.
+- Use a novel computational solution in stan to estimate these dynamics efficiently in Stan with non-informative priors
 
 ::: {.fragment}
 **Modeling strategy:** allow flexibility where variability is real.
@@ -154,6 +156,24 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 
 ---
 
+## Model estimation allows for different start times of infections across health-districts
+
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+TT=30
+N_C=11
+dat=readRDS('raw_dat.rds')
+first=readRDS('first.rds')
+dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),first=rep(first,each=TT-1)) %>% 
+  ggplot(aes(x=date,y=Cases)) + geom_line() + geom_vline(aes(xintercept=first),color="red") + facet_wrap(~County,scales="free_y") + theme_bw() + ylab("New Cases") + xlab("Date")
+
+```
+
+::: {.fragment .callout-note .fade-in fragment-index=2}
+This observed data aren't smooth SEIR curves
+:::
+
+---
 
 ## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
 
@@ -211,13 +231,13 @@ anim
 
 ---
 
-## Utah COVID-19 dynamics (posterior density)
+## Utah COVID-19 clinical detection rate (posterior density)
 
 ![](utah_p_dens_020325.png){height=500px}
 
 ---
 
-## Utah beta-binomial transition fit
+## Utah Estimated True Infections vs Reported Cases 
 
 ![](utah_120525_bb.png){height=500px}
 
@@ -519,9 +539,10 @@ Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10%
 
 ## What unifies this work
 
+- Both projects involve **detection** of latent phenomena (true infections, call spikes) from observed count data.
+- Complexity of these models requires us to take an efficient Bayesian hierarchical approach 
 - Latent-process Bayesian models on count data with temporal dependence
 - Flexible distributions matched to real-world count data
-- Early detection through probabilistic change modeling
 
 
 ## Thank you

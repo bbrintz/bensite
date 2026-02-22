@@ -389,7 +389,7 @@
     "href": "Presentations/VA-IDEAS/index.html#case-study-1-covid-19-is-not-perfectly-reported",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Case study 1: COVID-19 is not perfectly reported",
-    "text": "Case study 1: COVID-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\nOnly the sickest got diagnosed with COVID-19 early in the pandemic\nKey capability: separate what is happening from what is observed."
+    "text": "Case study 1: COVID-19 is not perfectly reported\n\nLatent disease transmission is never directly observed\nReported cases reflect testing intensity, reporting practices, and asymptomatic disease\n\nOnly the sickest got diagnosed with COVID-19 early in the pandemic\n“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”\n\nKey capability: separate what is happening from what is observed."
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#various-approaches-have-been-developed-to-estimate-clinical-detection-rates",
@@ -403,7 +403,14 @@
     "href": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases",
-    "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\n\nApproximate binomial observation using a Gaussian process\n\nTransmission follows a hierarchical AR(1) process over time\n\nLay interpretation: transmission this week tends to resemble recent weeks, while still allowing gradual changes across districts.\n\nEstimation allows for different start time across health districts\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nUse a novel computational solution to estimate these dynamics efficiently in Stan\n\n\n\nModeling strategy: allow flexibility where variability is real."
+    "text": "We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases\n\nLatent SEIR compartmental process for true infections\n\nApproximate binomial observation using a continuous Gaussian process\n\nTransmission follows a hierarchical AR(1) process over time\n\nLay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.\n\nEstimation allows for different start time across health districts\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition\n\nLay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.\n\nUse a novel computational solution in stan to estimate these dynamics efficiently in Stan with non-informative priors\n\n\nModeling strategy: allow flexibility where variability is real."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "href": "Presentations/VA-IDEAS/index.html#model-estimation-allows-for-different-start-times-of-infections-across-health-districts",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "Model estimation allows for different start times of infections across health-districts",
+    "text": "Model estimation allows for different start times of infections across health-districts\n\n\n\n\n\n\n\n\nNote\n\n\nThis observed data aren’t smooth SEIR curves"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions",
@@ -420,18 +427,18 @@
     "text": "Estimating an evolving transmission rate using a hierarchical AR(1) process"
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#utah-covid-19-dynamics-posterior-density",
-    "href": "Presentations/VA-IDEAS/index.html#utah-covid-19-dynamics-posterior-density",
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-covid-19-clinical-detection-rate-posterior-density",
+    "href": "Presentations/VA-IDEAS/index.html#utah-covid-19-clinical-detection-rate-posterior-density",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Utah COVID-19 dynamics (posterior density)",
-    "text": "Utah COVID-19 dynamics (posterior density)"
+    "section": "Utah COVID-19 clinical detection rate (posterior density)",
+    "text": "Utah COVID-19 clinical detection rate (posterior density)"
   },
   {
-    "objectID": "Presentations/VA-IDEAS/index.html#utah-beta-binomial-transition-fit",
-    "href": "Presentations/VA-IDEAS/index.html#utah-beta-binomial-transition-fit",
+    "objectID": "Presentations/VA-IDEAS/index.html#utah-estimated-true-infections-vs-reported-cases",
+    "href": "Presentations/VA-IDEAS/index.html#utah-estimated-true-infections-vs-reported-cases",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
-    "section": "Utah beta-binomial transition fit",
-    "text": "Utah beta-binomial transition fit"
+    "section": "Utah Estimated True Infections vs Reported Cases",
+    "text": "Utah Estimated True Infections vs Reported Cases"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#case-study-2-can-spikes-in-211-calls-be-detected-early",
@@ -480,7 +487,7 @@
     "href": "Presentations/VA-IDEAS/index.html#what-unifies-this-work",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "What unifies this work",
-    "text": "What unifies this work\n\nLatent-process Bayesian models on count data with temporal dependence\nFlexible distributions matched to real-world count data\nEarly detection through probabilistic change modeling"
+    "text": "What unifies this work\n\nBoth projects involve detection of latent phenomena (true infections, call spikes) from observed count data.\nComplexity of these models requires us to take an efficient Bayesian hierarchical approach\nLatent-process Bayesian models on count data with temporal dependence\nFlexible distributions matched to real-world count data"
   },
   {
     "objectID": "Presentations/VA-IDEAS/index.html#thank-you",
