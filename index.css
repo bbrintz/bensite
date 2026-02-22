@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+:root {
+  --bg-ink: #030a1c;
+  --text-main: #f8fbff;
+  --text-subtle: #dbe6ff;
+  --accent-warm: #ff9e44;
+  --accent-cool: #7ec7ff;
+  --card-bg: #ffffff;
+  --card-text: #10213f;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  min-height: 100svh;
+  background-color: var(--bg-ink);
+  background-image:
+    radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.24), transparent 38%),
+    radial-gradient(circle at 22% 22%, rgba(102, 195, 255, 0.24), transparent 34%),
+    linear-gradient(112deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 14, 38, 0.84) 48%, rgba(11, 24, 53, 0.92) 100%);
+  background-repeat: no-repeat;
+  color: var(--text-main);
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+.hero {
+  min-height: 100svh;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 7.5rem 1.25rem 4.5rem 1.25rem;
+  overflow: hidden;
+}
+
+.overlay-text {
+  position: relative;
+  max-width: 68ch;
+  animation: fade-up 0.7s ease-out both;
+}
+
+.overlay-text h1 {
+  margin: 0 0 0.9rem 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.overlay-text p {
+  margin: 0 0 1.4rem 0;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.6;
+  color: var(--text-subtle);
+  max-width: 55ch;
+}
+
+.overlay-text .cta-button {
+  display: inline-block;
+  color: #0b122b;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.78rem 1.45rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffc06b 0%, #ff8e49 45%, #e96f35 100%);
+  box-shadow: 0 12px 28px rgba(233, 111, 53, 0.28);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.overlay-text .cta-button:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.06);
+  box-shadow: 0 16px 34px rgba(233, 111, 53, 0.36);
+}
+
+.overlay-text .cta-button:focus-visible {
+  outline: 2px solid var(--accent-cool);
+  outline-offset: 3px;
+}
+
+.below-section {
+  margin-top: -3.2rem;
+  padding: 0 1.25rem 5.5rem 1.25rem;
+  position: relative;
+}
+
+.below-inner {
+  max-width: 78ch;
+  margin: 0 auto;
+  padding: 2rem 1.6rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  color: var(--card-text);
+  box-shadow: 0 20px 50px rgba(7, 14, 30, 0.15);
+}
+
+.below-inner h2 {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.below-inner p {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+  color: #293e62;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.quick-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #123562;
+  background: #ecf3ff;
+  border: 1px solid #d3e4ff;
+  border-radius: 0.7rem;
+  padding: 0.5rem 0.85rem;
+  font-weight: 500;
+  transition: transform 130ms ease, background-color 130ms ease, border-color 130ms ease;
+}
+
+.quick-link:hover {
+  transform: translateY(-1px);
+  background: #e2eeff;
+  border-color: #bfd8ff;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-text {
+    animation: none;
+  }
+
+  .overlay-text .cta-button,
+  .quick-link {
+    transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding-top: 6.5rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .overlay-text .cta-button {
+    min-height: 44px;
+    padding: 0.8rem 1.25rem;
+  }
+
+  .below-section {
+    margin-top: -2rem;
+  }
+
+  .below-inner {
+    padding: 1.4rem 1.1rem;
+  }
+}

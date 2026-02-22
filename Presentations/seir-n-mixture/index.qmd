@@ -1,0 +1,435 @@
+---
+title: "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR  Model"
+author: "Ben J. Brintz"
+institute: "Division of Epidemiology"
+format: 
+  revealjs:
+    auto-animate-easing: ease-in-out
+    auto-animate-unmatched: false
+    auto-animate-duration: 1
+    revealjs-plugins: 
+    theme: white
+    incremental: true
+    scrollable: true
+    slideNumber: true  # Slide numbers (optional)
+    transition: fade   # Smooth slide transitions
+    title-slide-background: "white" # Ensure title slide background matches your style
+    css: custom.css    # Link to your custom CSS file
+
+---
+
+
+## 
+
+::: {.callout-caution  collapse="true"}
+## This presentation will not include equations 
+
+Statisticians may feel unsettled by the lack of notation to remember 
+:::
+
+
+
+
+## The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance {}
+
+- Case reports undercount true infections due to asymptomatic cases and lack of access to testing
+- Only the sickest got diagnosed with Covid early in the pandemic 
+- "We must rely on data
+from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise
+trends among average Americans by surveying the participants of a marathon"  
+    - Utah Hero Project
+
+
+## Various approaches have been developed to estimate clinical detection rates {}
+
+- **Back-calculation methods** estimate the number of infections from hospitalizations and deaths
+- **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
+- **Compartment models** estimate the number of infections from observed cases and the distribution of the incubation period
+    - E.g. SIR (Susceptible-Infectious-Recovered) models
+
+
+## Covid-19's incubation period requires an extension to the SIR compartment model
+
+- **SIR model** assumes that individuals
+transition directly from susceptible to infectious
+- **SEIR model** adds an exposed compartment to account for the incubation period (e.g. 5 days)
+- **SEIR models** don't directly account for imperfect detection
+
+
+## Our stochastic SEIR  model acounts for imperfect detection 
+- Individuals transition from susceptible to exposed to infectious
+- We fit a model to observed county-level counts of new cases
+- We assume incidence cases (E -> I, we call EI) are imperfectly detected
+    - Currently assumed to be constant across time.
+    - But it does allow all dynamics parameters to vary over time and space 
+
+  
+
+## 
+:::{.fragment .grow .fade-in-then-out .top-right}
+Our study has a number of novelties in the stochastic SEIR model space 
+:::
+
+:::{.fragment .fade-in .top-right}
+Novelty #1 
+:::
+
+## A novel computational solution to estimating dynamics in a discrete transmission model  {auto-animate=true auto-animate-easing="ease-in"}
+
+- We used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)
+-  The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn't allow discrete priors 
+- We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms
+
+
+## A novel computational solution to estimating dynamics in a discrete transmission model  {auto-animate=true auto-animate-easing="ease-in"}
+:::{data-id="box" width="75%" height="75%"} 
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+library(patchwork)
+
+# Parameters
+n <- 2000
+p <- 0.5
+nrep <- 2000
+
+# Set up parameters for the inverse logit approach
+logit_mean <- log(p / (1 - p))
+logit_sd <- sqrt(1 / (n * p * (1 - p)))
+
+# Simulate samples
+set.seed(123)
+normal_samples <- rnorm(nrep, mean = logit_mean, sd = logit_sd)
+invlogit_samples <- plogis(normal_samples)
+#binom_sim <- rbinom(nrep, size = n, prob = p)/n
+
+# Create a frame index so that we can build the densities gradually
+df_normal <- tibble(
+  sample = normal_samples
+
+)
+df_invlogit <- tibble(
+  sample = invlogit_samples,
+
+)
+
+
+df_normal=df_normal %>% mutate(index=row_number()) %>%
+  split(.$index) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "frame") %>% 
+  mutate(frame = as.integer(frame), plt="Normal Distribution")
+
+df_invlogit=df_invlogit%>% mutate(index=row_number()) %>%
+  split(.$index) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "frame") %>% 
+  mutate(frame = as.integer(frame),plt="Inverse Logit of Normal")
+
+df_binom <- data.frame(x=(947:1053)/n,y=dbinom(947:1053, size=n, prob=p)*n,plt="Inverse Logit of Normal")
+
+dat=rbind(df_normal, df_invlogit) %>% #filter(frame==500) %>%
+ mutate(plt=factor(plt,levels=c("Inverse Logit of Normal","Normal Distribution"))) %>%
+ filter(frame>2)
+# Left panel: density of normal samples (logit scale)
+p1 <- ggplot(dat, aes(x = sample)) +
+  geom_histogram(aes(y=..density..)) + facet_wrap(~plt,scale="free") + 
+  geom_line(aes(x=x,y=y),data=df_binom, linetype="dashed") +
+   theme_bw() + scale_fill_viridis_d(begin=.4,end=.6) +
+   xlab("Sampled Value") + ylab("Density") +
+  transition_states(frame) + ease_aes('linear') 
+
+
+
+# Combine the two panels using patchwork:
+
+# Save the animation
+anim <- animate(p1, nframes = 200, fps = 5)
+# Animate
+anim
+
+```
+:::
+
+##
+:::{.fragment .fade-up .top-right}
+Novelty #2
+:::
+
+## Model estimation allows for different start times of infections across health-districts
+:::{.fragment fragment-index=1 .fade-in} 
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+TT=30
+N_C=11
+dat=readRDS('raw_dat.rds')
+first=readRDS('first.rds')
+dat %>% as_tibble %>% gather(County,Cases) %>% mutate(date=rep(1:(TT-1),N_C),first=rep(first,each=TT-1)) %>% 
+  ggplot(aes(x=date,y=Cases)) + geom_line() + geom_vline(aes(xintercept=first),color="red") + facet_wrap(~County,scales="free_y") + theme_bw() + ylab("New Cases") + xlab("Date")
+
+```
+:::
+::: {.fragment .callout-note .fade-in fragment-index=2}
+This observed data aren't smooth SEIR curves
+:::
+##
+:::{.fragment .fade-right .top-right}
+Novelty #3
+:::
+
+## Estimating an evolving transmission rate using a hierarchical AR(1) process
+
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+log_betas_time=readRDS("betas_time.rds")[[1]]
+betas_time=readRDS("betas_time.rds")[[2]]
+p <- ggplot() +
+  geom_line(data = log_betas_time, aes(x = index, y = exp(Val)), size = 1) +
+  geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
+              alpha = 0.25, fill = "grey") +
+  # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
+  geom_point(data = betas_time %>% filter(time==1), aes(x = index, y = Val), size = 2) +
+  labs(x = "Week", y = "Beta (transmission)") +
+  theme_bw() +
+  ylim(0, 5) 
+
+#animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
+
+p
+```
+
+
+
+## Estimating an evolving transmission rate using a hierarchical AR(1) process
+
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+
+
+log_betas_time=readRDS("betas_time.rds")[[1]]
+betas_time=readRDS("betas_time.rds")[[2]] %>% mutate(n2=as.factor(n2))
+p <- ggplot() +
+  geom_line(data = log_betas_time, aes(x = index, y = exp(Val)), size = 1) +
+  geom_ribbon(data = log_betas_time, aes(x = index, ymin = exp(Low), ymax = exp(High)),
+              alpha = 0.25, fill = "grey") +
+  # Use the same transformation for y if desired (here I use exp(Val) so they align with the line)
+  #geom_point(data = betas_time, aes(x = index, y = Val,group=n2,color=n2), size = 2) +
+  geom_line(data = betas_time %>% filter(n2 %in% 2:5), aes(x = index, y = Val,group=n2,color=n2)) + 
+  labs(x = "Week", y = "Beta (transmission)") +
+  theme_bw() +
+  ylim(0, 5) + theme(legend.position = "none") +
+  scale_color_viridis_d(begin=.25,end=.75) +
+  transition_time(time)
+
+anim=animate(p,nframes = 200, fps = 20)
+#animate(p, nframes = 100, fps = 10, renderer = gifski_renderer("density_animation.gif"))
+
+anim
+```
+
+
+##
+:::{.fragment .fade-down .top-right}
+Novelty #4
+:::
+
+## Estimating an evolving recovery rate and incubation using beta-binomial transitions 
+```{r,include=T,echo=F,cache=TRUE}
+library(tidyverse)
+library(gganimate)
+
+df <- readRDS("betabin_sim.rds")
+colnames(df)[2] = "Binomial Transition"
+colnames(df)[3] = "Beta-Binomial Transition"
+p <- df %>% 
+      mutate(Week = Time) %>% select(-Time) %>%
+      gather(Approach, Infections,-Week) %>%
+      ggplot(aes(x=Week,y=Infections,group=Approach,color=Approach)) +
+        geom_point() + geom_line() +
+        labs(x = "Week", y = "Infections") +
+        theme_bw() + scale_color_viridis_d(begin=.25,end=.75) +
+        theme(legend.position = "bottom") +
+        transition_reveal(Week)
+
+anim <- animate(p, nframes = 100, fps = 5)
+
+anim
+```
+
+## 
+:::{.fragment .grow .fade-in-then-out .top-right}
+Some Results 
+:::
+
+:::{.fragment .grow .fade-in-then-out .top-right}
+![](utah_p_dens_020325.png){width=75%,height=75%}
+:::
+
+:::{.fragment .fade-in-then-out}
+![](utah_020325_bb.png){width=50%,height=50%}
+:::
+
+
+## The Team
+:::{.fragment fragment-index=1}
+![](Lisa.jpg){.absolute top=200 left=0 width="300" height="300"}
+
+![](Claudio.jpg){.absolute top=50 right=430 width="250" height="325"}
+
+![](rob.jpg){.absolute bottom=0 right=50 width="300" height="300"}
+:::
+
+:::{.fragment fragment-index=2}
+![](till.png){.absolute top=0 right=100 width="300" height="300"}
+:::
+
+## Questions? 
+
+## Model Formulation {auto-animate="true"}
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+
+
+
+## Model Formulation {auto-animate="true"}
+
+
+**For \(t > f_{i}\):**
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+## Model Formulation {auto-animate="true"}
+$$
+\begin{aligned}
+S_{it} &= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &= 
+  \begin{cases}
+    SE_{it}, & \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, & \text{if } t > f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+## Model Formulation {auto-animate="true"}
+$$
+\begin{aligned}
+    \log{\beta_{it}} &\sim \text{Normal}(B_{it}, \tau^2) \\
+    B_{it} &= \phi B_{i,t-1} + \sigma \epsilon_{it}, t>1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+S_{it} &= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &= 
+  \begin{cases}
+    SE_{it}, & \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, & \text{if } t > f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+
+## Model Formulation {auto-animate="true"}
+
+$$\begin{aligned}
+ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it}, p \Bigr) \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+    \log{\beta_{it}} &\sim \text{Normal}(B_{it}, \tau^2) \\
+    B_{it} &= \phi B_{i,t-1} + \sigma \epsilon_{it}, t>1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+S_{it} &= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &= 
+  \begin{cases}
+    SE_{it}, & \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, & \text{if } t > f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+SE_{it} &\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+I_{if_1} &= c,\\[6pt]
+EI_{if_i} &= I_{if_i},\\[6pt]
+S_{if_i} &= N_i - EI_{if_i}.
+\end{aligned}
+$$
+

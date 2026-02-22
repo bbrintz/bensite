@@ -1,0 +1,32 @@
+project:
+  type: website
+
+website:
+  title: "Ben Brintz"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: scholar.qmd
+        text: Publications
+      - href: woodworking.qmd
+        text: Woodworking
+      - href: Presentations/index.qmd
+        text: Presentations
+    tools:
+      - icon: github
+        href: https://github.com/bbrintz
+
+format:
+  html:
+    theme: "sandstone"
+    toc: false
+    css: 
+      - custom-layout.css
+    
+
+    
+execute:
+  freeze: auto
+
+  #quarto render --to all

@@ -1,0 +1,29 @@
+---
+format:
+  html:
+    meta:
+      viewport: "width=device-width, initial-scale=1"
+    css: index.css
+---
+
+::: {.hero}
+::: {.overlay-text}
+# Ben Brintz
+Modeling, statistical computing, and scientific communication.
+
+[Try ChainLink](chain_link.qmd){.cta-button}
+:::
+:::
+
+::: {.below-section}
+::: {.below-inner}
+## About
+I build and communicate statistical models for applied research, with work spanning Bayesian methods, simulation, and interactive data products.
+
+::: {.quick-links}
+[Publications](scholar.qmd){.quick-link}
+[Presentations](Presentations/index.qmd){.quick-link}
+[Woodworking](woodworking.qmd){.quick-link}
+:::
+:::
+:::
