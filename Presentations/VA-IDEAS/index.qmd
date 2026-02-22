@@ -141,14 +141,12 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 
 ## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
-- Latent SEIR compartmental process for true infections
-  - Approximate binomial observation using a continuous Gaussian process
+- Latent SEIR compartmental process for true infections, approximated using continuous process 
 - Transmission follows a hierarchical AR(1) process over time
   - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.
 - Estimation allows for different start time across health districts
 - Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
   - Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.
-- Use a novel computational solution in stan to estimate these dynamics efficiently in Stan with non-informative priors
 
 ::: {.fragment}
 **Modeling strategy:** allow flexibility where variability is real.
