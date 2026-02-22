@@ -252,7 +252,7 @@ anim
 ## How we model the call data
 - Zero-inflated negative binomial (ZINB) model for daily call counts
   - Lay interpretation: some days truly have no demand, while other days vary widely and can spike.
-- Day-of-week effects included in both the hurdle and count components
+- Day-of-week effects included in both the zero-inflated and NB count components
   - Lay interpretation: Mondays and weekends can have different baseline call patterns.
 - Latent intensity evolves through an AR(1) state process over time
   - Lay interpretation: call demand today is related to recent days, not independent day-to-day.
