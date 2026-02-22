@@ -34,6 +34,13 @@ a:hover, a:active {
     white-space: nowrap;
     max-width: 90vw;
   }
+
+  .presentations-list a.sub-link {
+    margin-top: -0.55rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
 </style>
 :::
 
@@ -42,4 +49,5 @@ a:hover, a:active {
   <a href="/Presentations/mmdis/">Measuring and Mitigating Disparity of Decision-Making Tools</a><br>
   <a href="/Presentations/seir-n-mixture/">SEIR N-mixture Model</a><br>
   <a href="/Presentations/VA-IDEAS/">VA-IDEAS</a>
+  <a class="sub-link" href="/watchtower_demo_v2.html">Call Spike Prototype</a>
 </div>
