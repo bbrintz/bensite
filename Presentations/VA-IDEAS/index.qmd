@@ -15,7 +15,7 @@ format:
     css: [custom.css, uofu-theme.css]
 ---
 
-## Domains of Expertise {auto-animate=true}
+## Domains of Interest as Collaborative Statistician {auto-animate=true}
 
 <div style="height:1em;"></div>
 
@@ -75,6 +75,7 @@ Design &<br>Analysis
 </div>
 
 </div>
+
 
 ---
 
