@@ -134,18 +134,19 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 - **Seroprevalence studies** estimate the proportion of the population that has been infected by testing for antibodies
 - **Compartment models** estimate the number of infections from observed cases and the distribution of the incubation period
     - E.g. SIR (Susceptible-Infectious-Recovered) models
-- **Key Challenge**: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time.
+- **Key Challenge**: identifiability issues arise when trying to estimate both the transmission rate and the detection rate from observed data, especially when testing practices change over time.
 
 ---
 
 
 ## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
 
-- Latent SEIR compartmental process for true infections with a continuous approximation of binomial on observed counts in stan
+- SEIR compartmental process with detection using a continuous approximation of the binomial distribution 
+  - Lay interpretation: we model the true number of infections as a hidden process that generates the observed case counts through a probabilistic detection mechanism.
 - Transmission follows a hierarchical AR(1) process over time
   - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.
 - Estimation allows for different start time across health districts
-- Allows an evolving recovery/incubation rate (E->I and I->R transitions) using beta-binomial transition
+- Allows an evolving recovery/incubation rate (E->I and I->R transitions) using a novel beta-binomial transition
   - Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.
 
 ::: {.fragment}

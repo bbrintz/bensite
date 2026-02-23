@@ -466,19 +466,22 @@ Ben Brintz
 <ul>
 <li class="fragment">E.g. SIR (Susceptible-Infectious-Recovered) models</li>
 </ul></li>
-<li class="fragment"><strong>Key Challenge</strong>: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time.</li>
+<li class="fragment"><strong>Key Challenge</strong>: identifiability issues arise when trying to estimate both the transmission rate and the detection rate from observed data, especially when testing practices change over time.</li>
 </ul>
 </section>
 <section id="we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases" class="slide level2">
 <h2>We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases</h2>
 <ul>
-<li class="fragment">Latent SEIR compartmental process for true infections with a continuous approximation of binomial on observed counts in stan</li>
+<li class="fragment">SEIR compartmental process with detection using a continuous approximation of the binomial distribution
+<ul>
+<li class="fragment">Lay interpretation: we model the true number of infections as a hidden process that generates the observed case counts through a probabilistic detection mechanism.</li>
+</ul></li>
 <li class="fragment">Transmission follows a hierarchical AR(1) process over time
 <ul>
 <li class="fragment">Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.</li>
 </ul></li>
 <li class="fragment">Estimation allows for different start time across health districts</li>
-<li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition
+<li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using a novel beta-binomial transition
 <ul>
 <li class="fragment">Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.</li>
 </ul></li>
