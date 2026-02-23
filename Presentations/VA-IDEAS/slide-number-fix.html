@@ -1,0 +1,52 @@
+<style>
+  .custom-slide-number {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 60;
+    background: rgba(190, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.18em 0.55em;
+    font-size: 0.95rem;
+    line-height: 1;
+    font-family: inherit;
+    pointer-events: none;
+  }
+</style>
+<script>
+(function () {
+  function updateCounter() {
+    if (!window.Reveal || !window.__customSlideNumber) return;
+    var current = Reveal.getSlidePastCount() + 1;
+    var total = Reveal.getTotalSlides();
+    window.__customSlideNumber.textContent = current + "/" + total;
+  }
+
+  function initCounter() {
+    if (!window.Reveal) return;
+    if (!window.__customSlideNumber) {
+      var el = document.createElement("div");
+      el.className = "custom-slide-number";
+      document.body.appendChild(el);
+      window.__customSlideNumber = el;
+    }
+    updateCounter();
+    Reveal.on("ready", updateCounter);
+    Reveal.on("slidechanged", updateCounter);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      if (window.Reveal) {
+        clearInterval(timer);
+        initCounter();
+      } else if (tries > 50) {
+        clearInterval(timer);
+      }
+    }, 100);
+  });
+})();
+</script>

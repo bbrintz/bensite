@@ -1,0 +1,63 @@
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  letter-spacing: 0.02em;
+}
+
+.reveal h1 {
+  font-size: 1.6em;
+}
+
+.reveal section {
+  font-size: 28px;
+}
+
+.reveal .callout-note,
+.reveal .callout-important {
+  border-left: 4px solid #2563eb;
+  background: #eff6ff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.reveal .callout-important {
+  border-left-color: #dc2626;
+  background: #fef2f2;
+}
+
+.box {
+  border: 2px solid #333;
+  border-radius: 999px;      /* makes it oval */
+  padding: 1.2em;
+  margin: 0.8em auto;
+  width: 90%;
+  font-weight: 600;
+  background-color: #f5f7fa;
+}
+
+.highlight-box {
+  border: 2px solid #333;
+  border-radius: 999px;
+  padding: 1.6em;
+  margin: 2em auto;
+  width: 90%;
+  font-size: 1.2em;
+  font-weight: 700;
+  background-color: #e8f0ff;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 3em;
+  line-height: 1.5;
+}
+
+.reveal li {
+  margin-bottom: 1.6em;
+}

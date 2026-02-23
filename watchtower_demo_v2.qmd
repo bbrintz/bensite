@@ -1,0 +1,812 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+    theme: none
+execute:
+  warning: false
+  message: false
+freeze: false
+---
+
+```{=html}
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --panel: #ffffff;
+    --line: #d9d9d4;
+    --ink: #1d232b;
+    --muted: #5a616a;
+    --normal: #5e6b7a;
+    --watch: #b07a24;
+    --warning: #b5532d;
+    --action: #8f2f2d;
+    --zip: #2b5f8a;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #fafaf8 0%, var(--bg) 100%);
+    color: var(--ink);
+    font-family: "Source Sans Pro", "Avenir Next", "Segoe UI", sans-serif;
+  }
+
+  .page {
+    max-width: 1240px;
+    margin: 0.55rem auto 0.8rem auto;
+    padding: 0 0.8rem;
+  }
+
+  .ctrl {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.32rem 0.45rem;
+    display: grid;
+    gap: 0.2rem;
+    width: 210px;
+    margin-top: 0.35rem;
+  }
+
+  .ctrl label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .ctrl select {
+    border: 1px solid #c7d5e5;
+    border-radius: 8px;
+    padding: 0.32rem 0.4rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .top-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.35fr;
+    gap: 0.6rem;
+  }
+
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    padding: 0.62rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  .panel h2 {
+    margin: 0 0 0.45rem 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+    font-family: "Source Serif Pro", Georgia, serif;
+  }
+
+  #utahMap {
+    width: 100%;
+    max-height: 360px;
+    border: 1px solid #ddddda;
+    border-radius: 8px;
+    background: #fcfcfb;
+  }
+
+  .kt-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.35rem;
+    flex-wrap: wrap;
+    border-top: 1px solid #e7eef7;
+    padding-top: 0.35rem;
+  }
+
+  .kt-controls label {
+    font-size: 0.73rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .kt-controls input[type="range"] {
+    width: 300px;
+    accent-color: #5d7b98;
+  }
+
+  .kt-tag {
+    display: inline-block;
+    color: #3f4b58;
+    font-size: 0.82rem;
+    padding: 0.1rem 0.05rem;
+    font-weight: 600;
+  }
+
+  .kt-seq {
+    margin-top: 0.2rem;
+    color: #5a6d82;
+    font-size: 0.73rem;
+  }
+
+  #kappaTauCanvas {
+    width: 100%;
+    max-height: 360px;
+    height: 360px;
+    border: 1px solid #e5e5e0;
+    border-radius: 7px;
+    background: #fdfdfc;
+  }
+
+  .state-outline {
+    fill: #f1f1ee;
+    stroke: #b8bab3;
+    stroke-width: 1.1;
+  }
+
+  .county-mark {
+    fill: #d8dfe8;
+    stroke: #9aa6b4;
+    stroke-width: 0.9;
+    cursor: pointer;
+  }
+
+  .zip-dot {
+    stroke: #fcfcfb;
+    stroke-width: 0.9;
+    cursor: pointer;
+  }
+
+  .legend {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.35rem;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    border: 1px solid #dfdfdb;
+    border-radius: 999px;
+    padding: 0.12rem 0.42rem;
+    color: #5a616a;
+    font-size: 0.73rem;
+    background: #fcfcfb;
+  }
+
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+
+  .info {
+    border: 1px solid #dfdfdb;
+    border-radius: 8px;
+    background: #fcfcfb;
+    padding: 0.5rem;
+    min-height: 136px;
+    font-size: 0.86rem;
+  }
+
+  .info h3 {
+    margin: 0 0 0.24rem 0;
+    color: #2e3640;
+    font-size: 0.9rem;
+    font-family: "Source Serif Pro", Georgia, serif;
+    font-weight: 600;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.18rem;
+  }
+
+  .badge {
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.74rem;
+  }
+
+  .badge.normal { background: var(--normal); }
+  .badge.watch { background: var(--watch); }
+  .badge.warning { background: var(--warning); }
+  .badge.action { background: var(--action); }
+
+  .details-grid {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: 0.95fr 1.35fr;
+    gap: 0.6rem;
+  }
+
+  .table-wrap {
+    border: 1px solid #dfdfdb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 0.3rem 0.34rem;
+    border-bottom: 1px solid #ecece8;
+    text-align: left;
+  }
+
+  th {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: #fafaf8;
+  }
+
+  @media (max-width: 1020px) {
+    .top-grid,
+    .details-grid { grid-template-columns: 1fr; }
+    #utahMap,
+    #kappaTauCanvas { max-height: none; height: auto; }
+  }
+</style>
+
+<div class="page">
+  <section class="top-grid">
+    <div class="panel">
+      <h2>Utah risk map</h2>
+      <svg id="utahMap" viewBox="0 0 620 520" role="img" aria-label="Utah zip risk map">
+        <polygon id="utahOutline" class="state-outline"></polygon>
+        <g id="countyLayer"></g>
+        <g id="zipLayer"></g>
+      </svg>
+      <div class="legend">
+        <span><i class="sw" style="background:#4f6b87"></i>Normal</span>
+        <span><i class="sw" style="background:#c97b00"></i>Watch</span>
+        <span><i class="sw" style="background:#d9480f"></i>Warning</span>
+        <span><i class="sw" style="background:#b42318"></i>Action</span>
+      </div>
+      <div class="ctrl">
+        <label for="mapMode">Geography view</label>
+        <select id="mapMode">
+          <option value="zip" selected>ZIP-level points</option>
+          <option value="county">County summary</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Kappa / Tau tracking</h2>
+      <canvas id="kappaTauCanvas" width="760" height="360" aria-label="Kappa and tau trend panel"></canvas>
+      <div class="kt-controls">
+        <div>
+          <label for="fitSlider">Prospective fit time</label><br>
+          <input id="fitSlider" type="range" min="1" max="17" step="1" value="17" list="fitTicks">
+          <datalist id="fitTicks">
+            <option value="1" label="Mar 25"></option>
+            <option value="8" label="Apr 1"></option>
+            <option value="17" label="Apr 10"></option>
+          </datalist>
+          <div id="fitSeq" class="kt-seq">Sequence: -</div>
+        </div>
+        <span id="fitTag" class="kt-tag">As of: -</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="details-grid">
+    <div class="panel">
+      <h2>Hover details</h2>
+      <div id="hoverInfo" class="info"></div>
+    </div>
+    <div class="panel">
+      <h2>Top areas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Observed</th>
+              <th>Expected</th>
+              <th>Anomaly</th>
+              <th>Risk</th>
+            </tr>
+          </thead>
+          <tbody id="geoRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const els = {
+    mapMode: document.getElementById("mapMode"),
+    utahOutline: document.getElementById("utahOutline"),
+    countyLayer: document.getElementById("countyLayer"),
+    zipLayer: document.getElementById("zipLayer"),
+    hoverInfo: document.getElementById("hoverInfo"),
+    geoRows: document.getElementById("geoRows"),
+    fitSlider: document.getElementById("fitSlider"),
+    fitTag: document.getElementById("fitTag"),
+    fitSeq: document.getElementById("fitSeq"),
+    kappaTauCanvas: document.getElementById("kappaTauCanvas")
+  };
+
+  const bounds = { minLon: -114.2, maxLon: -108.8, minLat: 36.9, maxLat: 42.2 };
+  const dims = { x0: 26, y0: 24, w: 568, h: 472 };
+
+  function proj(lon, lat) {
+    const x = dims.x0 + ((lon - bounds.minLon) / (bounds.maxLon - bounds.minLon)) * dims.w;
+    const y = dims.y0 + (1 - (lat - bounds.minLat) / (bounds.maxLat - bounds.minLat)) * dims.h;
+    return [x, y];
+  }
+
+  const utahBorder = [
+    [-114.05, 42.00], [-111.05, 42.00], [-111.05, 41.00], [-109.05, 41.00],
+    [-109.05, 37.00], [-114.05, 37.00], [-114.05, 42.00]
+  ];
+
+  const countyCentroids = [
+    { county: "Box Elder", lon: -112.3, lat: 41.5 },
+    { county: "Cache", lon: -111.8, lat: 41.7 },
+    { county: "Weber", lon: -111.95, lat: 41.2 },
+    { county: "Davis", lon: -111.88, lat: 40.95 },
+    { county: "Salt Lake", lon: -111.92, lat: 40.67 },
+    { county: "Tooele", lon: -112.45, lat: 40.45 },
+    { county: "Utah", lon: -111.72, lat: 40.28 },
+    { county: "Wasatch", lon: -111.25, lat: 40.45 },
+    { county: "Washington", lon: -113.6, lat: 37.25 },
+    { county: "San Juan", lon: -109.85, lat: 37.85 },
+    { county: "Uintah", lon: -109.6, lat: 40.3 },
+    { county: "Iron", lon: -113.1, lat: 37.8 }
+  ];
+
+  const zipData = [
+    { zip: "84101", city: "Salt Lake City", county: "Salt Lake", lon: -111.90, lat: 40.76 },
+    { zip: "84107", city: "Murray", county: "Salt Lake", lon: -111.89, lat: 40.66 },
+    { zip: "84121", city: "Cottonwood Heights", county: "Salt Lake", lon: -111.82, lat: 40.62 },
+    { zip: "84044", city: "Magna", county: "Salt Lake", lon: -112.05, lat: 40.70 },
+    { zip: "84065", city: "Riverton", county: "Salt Lake", lon: -111.94, lat: 40.51 },
+    { zip: "84070", city: "Sandy", county: "Salt Lake", lon: -111.87, lat: 40.57 },
+    { zip: "84047", city: "Midvale", county: "Salt Lake", lon: -111.89, lat: 40.61 },
+    { zip: "84020", city: "Draper", county: "Salt Lake", lon: -111.86, lat: 40.52 },
+    { zip: "84010", city: "Bountiful", county: "Davis", lon: -111.88, lat: 40.89 },
+    { zip: "84015", city: "Clearfield", county: "Davis", lon: -112.03, lat: 41.11 },
+    { zip: "84025", city: "Farmington", county: "Davis", lon: -111.89, lat: 40.98 },
+    { zip: "84041", city: "Layton", county: "Davis", lon: -111.97, lat: 41.06 },
+    { zip: "84341", city: "Logan", county: "Cache", lon: -111.83, lat: 41.74 },
+    { zip: "84321", city: "Logan", county: "Cache", lon: -111.80, lat: 41.73 },
+    { zip: "84401", city: "Ogden", county: "Weber", lon: -111.97, lat: 41.22 },
+    { zip: "84404", city: "Ogden", county: "Weber", lon: -111.98, lat: 41.29 },
+    { zip: "84302", city: "Brigham City", county: "Box Elder", lon: -112.02, lat: 41.51 },
+    { zip: "84337", city: "Tremonton", county: "Box Elder", lon: -112.17, lat: 41.72 },
+    { zip: "84074", city: "Tooele", county: "Tooele", lon: -112.30, lat: 40.53 },
+    { zip: "84029", city: "Grantsville", county: "Tooele", lon: -112.46, lat: 40.60 },
+    { zip: "84057", city: "Orem", county: "Utah", lon: -111.70, lat: 40.30 },
+    { zip: "84604", city: "Provo", county: "Utah", lon: -111.66, lat: 40.24 },
+    { zip: "84003", city: "American Fork", county: "Utah", lon: -111.80, lat: 40.38 },
+    { zip: "84043", city: "Lehi", county: "Utah", lon: -111.84, lat: 40.39 },
+    { zip: "84660", city: "Spanish Fork", county: "Utah", lon: -111.59, lat: 40.12 },
+    { zip: "84032", city: "Heber City", county: "Wasatch", lon: -111.41, lat: 40.50 },
+    { zip: "84770", city: "St. George", county: "Washington", lon: -113.58, lat: 37.10 },
+    { zip: "84790", city: "St. George", county: "Washington", lon: -113.61, lat: 37.05 },
+    { zip: "84737", city: "Hurricane", county: "Washington", lon: -113.29, lat: 37.18 },
+    { zip: "84720", city: "Cedar City", county: "Iron", lon: -113.06, lat: 37.67 },
+    { zip: "84721", city: "Cedar City", county: "Iron", lon: -113.08, lat: 37.71 },
+    { zip: "84532", city: "Moab", county: "Grand", lon: -109.55, lat: 38.57 },
+    { zip: "84501", city: "Price", county: "Carbon", lon: -110.81, lat: 39.60 },
+    { zip: "84601", city: "Provo", county: "Utah", lon: -111.65, lat: 40.23 },
+    { zip: "84511", city: "Blanding", county: "San Juan", lon: -109.48, lat: 37.62 },
+    { zip: "84535", city: "Monticello", county: "San Juan", lon: -109.34, lat: 37.87 },
+    { zip: "84066", city: "Roosevelt", county: "Duchesne", lon: -110.01, lat: 40.30 },
+    { zip: "84078", city: "Vernal", county: "Uintah", lon: -109.53, lat: 40.45 },
+    { zip: "84095", city: "South Jordan", county: "Salt Lake", lon: -111.90, lat: 40.56 },
+    { zip: "84088", city: "West Jordan", county: "Salt Lake", lon: -111.98, lat: 40.58 },
+    { zip: "84009", city: "South Jordan", county: "Salt Lake", lon: -111.98, lat: 40.55 },
+    { zip: "84042", city: "Lindon", county: "Utah", lon: -111.71, lat: 40.34 },
+    { zip: "84663", city: "Springville", county: "Utah", lon: -111.61, lat: 40.16 },
+    { zip: "84664", city: "Mapleton", county: "Utah", lon: -111.58, lat: 40.13 },
+    { zip: "84335", city: "Paradise", county: "Cache", lon: -111.81, lat: 41.57 }
+  ];
+
+  function levelFrom(prob) {
+    if (prob >= 0.9) return "Action";
+    if (prob >= 0.8) return "Warning";
+    if (prob >= 0.65) return "Watch";
+    return "Normal";
+  }
+
+  function levelColor(level) {
+    if (level === "Action") return "#b42318";
+    if (level === "Warning") return "#d9480f";
+    if (level === "Watch") return "#c97b00";
+    return "#4f6b87";
+  }
+
+  function seeded(idx) {
+    const x = Math.sin(idx * 84.31) * 10000;
+    return x - Math.floor(x);
+  }
+
+  zipData.forEach((z, i) => {
+    const base = 0.42 + (z.county === "Salt Lake" || z.county === "Utah" ? 0.18 : 0) + (z.county === "Washington" ? 0.08 : 0);
+    const anomalyProb = Math.min(0.98, Math.max(0.25, base + (seeded(i + 1) - 0.5) * 0.22));
+    const expected = Math.round(8 + anomalyProb * 52 + seeded(i + 7) * 18);
+    const observed = Math.max(0, Math.round(expected * (0.74 + anomalyProb * 0.78) + (seeded(i + 13) - 0.5) * 8));
+    z.anomalyProb = anomalyProb;
+    z.expected = expected;
+    z.observed = observed;
+    z.level = levelFrom(anomalyProb);
+  });
+
+  function aggregateCounty() {
+    const by = {};
+    zipData.forEach((z) => {
+      if (!by[z.county]) by[z.county] = { county: z.county, observed: 0, expected: 0, p: 0, n: 0, lon: 0, lat: 0 };
+      by[z.county].observed += z.observed;
+      by[z.county].expected += z.expected;
+      by[z.county].p += z.anomalyProb;
+      by[z.county].lon += z.lon;
+      by[z.county].lat += z.lat;
+      by[z.county].n += 1;
+    });
+    return Object.values(by).map((c) => ({
+      ...c,
+      anomalyProb: c.p / c.n,
+      lon: c.lon / c.n,
+      lat: c.lat / c.n,
+      level: levelFrom(c.p / c.n)
+    }));
+  }
+
+  function renderOutline() {
+    els.utahOutline.setAttribute("points", utahBorder.map(([lon, lat]) => {
+      const [x, y] = proj(lon, lat);
+      return `${x},${y}`;
+    }).join(" "));
+  }
+
+  function setInfo(target, isZip) {
+    if (!target) {
+      els.hoverInfo.innerHTML = "<h3>Hover target</h3><div>Hover a ZIP point or county marker for local risk details.</div>";
+      return;
+    }
+    const title = isZip ? `ZIP ${target.zip} (${target.city})` : `${target.county} County`;
+    const subtitle = isZip ? `County: ${target.county}` : "County-level aggregate";
+    els.hoverInfo.innerHTML = `
+      <h3>${title}</h3>
+      <div>${subtitle}</div>
+      <div class="row"><span>Observed calls</span><strong>${target.observed}</strong></div>
+      <div class="row"><span>Expected baseline</span><strong>${target.expected}</strong></div>
+      <div class="row"><span>Anomaly probability</span><strong>${Math.round(target.anomalyProb * 100)}%</strong></div>
+      <div class="row"><span>Risk</span><span class="badge ${target.level.toLowerCase()}">${target.level}</span></div>
+    `;
+  }
+
+  function renderTable(rows, isZip) {
+    els.geoRows.innerHTML = rows
+      .sort((a, b) => b.anomalyProb - a.anomalyProb)
+      .slice(0, 8)
+      .map((r) => `
+        <tr>
+          <td>${isZip ? r.zip : r.county}</td>
+          <td>${r.observed}</td>
+          <td>${r.expected}</td>
+          <td>${Math.round(r.anomalyProb * 100)}%</td>
+          <td>${r.level}</td>
+        </tr>
+      `)
+      .join("");
+  }
+
+  function draw() {
+    const mode = els.mapMode.value;
+    const counties = aggregateCounty();
+    const isZip = mode === "zip";
+
+    els.zipLayer.innerHTML = "";
+    els.countyLayer.innerHTML = "";
+
+    if (isZip) {
+      zipData.forEach((z) => {
+        const [x, y] = proj(z.lon, z.lat);
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("class", "zip-dot");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", 5.4);
+        c.setAttribute("fill", levelColor(z.level));
+        c.addEventListener("mouseenter", () => setInfo(z, true));
+        c.addEventListener("mouseleave", () => setInfo(null, true));
+        els.zipLayer.appendChild(c);
+      });
+      renderTable(zipData, true);
+    } else {
+      counties.forEach((c0) => {
+        const [x, y] = proj(c0.lon, c0.lat);
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("class", "county-mark");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", 10.5);
+        c.setAttribute("fill", levelColor(c0.level));
+        c.addEventListener("mouseenter", () => setInfo(c0, false));
+        c.addEventListener("mouseleave", () => setInfo(null, false));
+        els.countyLayer.appendChild(c);
+      });
+      renderTable(counties, false);
+    }
+  }
+
+  renderOutline();
+  setInfo(null, true);
+  draw();
+  els.mapMode.addEventListener("change", draw);
+
+  function parseDateUTC(s) {
+    const [y, m, d] = s.split("-").map(Number);
+    return Date.UTC(y, m - 1, d);
+  }
+
+  function fmtMDY(s) {
+    const dt = new Date(parseDateUTC(s));
+    return dt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+  }
+
+  function drawKappaTauFrame(payload, idVal) {
+    const ctx = els.kappaTauCanvas.getContext("2d");
+    const w = els.kappaTauCanvas.width;
+    const h = els.kappaTauCanvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const m = { l: 56, r: 22, t: 22, b: 30 };
+    const gap = 14;
+    const topH = Math.floor((h - m.t - m.b - gap) * 0.76);
+    const botY0 = m.t + topH + gap;
+    const botH = h - botY0 - m.b;
+    const plotW = w - m.l - m.r;
+
+    const k = payload.kappa[idVal];
+    const t = payload.tau[idVal];
+    if (!k || !t) return;
+
+    const xMin = parseDateUTC(k.date[0]);
+    const xMax = parseDateUTC(k.date[k.date.length - 1]);
+    const x = (d) => m.l + ((parseDateUTC(d) - xMin) / Math.max(1, (xMax - xMin))) * plotW;
+    const yTop = (v) => m.t + (1 - (v - payload.kappa_ylim[0]) / (payload.kappa_ylim[1] - payload.kappa_ylim[0])) * topH;
+    const yBotCenter = () => botY0 + botH * 0.5;
+
+    ctx.strokeStyle = "#ecece8";
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 3; i++) {
+      const yy = m.t + (i / 3) * topH;
+      ctx.beginPath();
+      ctx.moveTo(m.l, yy);
+      ctx.lineTo(m.l + plotW, yy);
+      ctx.stroke();
+    }
+    for (let i = 0; i <= 1; i++) {
+      const yy = botY0 + i * botH;
+      ctx.beginPath();
+      ctx.moveTo(m.l, yy);
+      ctx.lineTo(m.l + plotW, yy);
+      ctx.stroke();
+    }
+
+    const refs = [1.0, 1.1, 0.9];
+    const refCols = ["#7a2f2d", "#7b8ea3", "#7b8ea3"];
+    refs.forEach((rv, i) => {
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = refCols[i];
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(m.l, yTop(rv));
+      ctx.lineTo(m.l + plotW, yTop(rv));
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    ctx.beginPath();
+    k.date.forEach((d, i) => {
+      const px = x(d);
+      const py = yTop(k.q5[i]);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    for (let i = k.date.length - 1; i >= 0; i--) {
+      ctx.lineTo(x(k.date[i]), yTop(k.q95[i]));
+    }
+    ctx.closePath();
+    ctx.fillStyle = "rgba(168,168,162,0.28)";
+    ctx.fill();
+
+    ctx.fillStyle = "#2f3640";
+    for (let i = 0; i < k.date.length; i++) {
+      const px = x(k.date[i]);
+      const py = yTop(k.mean[i]);
+      ctx.beginPath();
+      ctx.arc(px, py, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const asOf = payload.as_of[idVal];
+    const asOfTime = asOf ? parseDateUTC(asOf) : xMax;
+    const candidates = [];
+    for (let i = 0; i < t.tau_idx.length; i++) {
+      const q5d = parseDateUTC(t.q5_date[i]);
+      const q95d = parseDateUTC(t.q95_date[i]);
+      const md = parseDateUTC(t.mean_date[i]);
+      if (q95d < xMin || q5d > xMax) continue;
+      const inRangeMean = md >= xMin && md <= xMax;
+      candidates.push({ q5d, q95d, md, inRangeMean });
+    }
+    candidates.sort((a, b) => {
+      if (a.inRangeMean !== b.inRangeMean) return a.inRangeMean ? -1 : 1;
+      return Math.abs(a.md - asOfTime) - Math.abs(b.md - asOfTime);
+    });
+    const tauSel = candidates[0];
+    if (tauSel) {
+      const lo = Math.max(tauSel.q5d, xMin);
+      const hi = Math.min(tauSel.q95d, xMax);
+      const yy = yBotCenter();
+      ctx.strokeStyle = "#2a8f79";
+      ctx.lineWidth = 5;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(m.l + ((lo - xMin) / Math.max(1, (xMax - xMin))) * plotW, yy);
+      ctx.lineTo(m.l + ((hi - xMin) / Math.max(1, (xMax - xMin))) * plotW, yy);
+      ctx.stroke();
+      if (tauSel.md >= xMin && tauSel.md <= xMax) {
+        ctx.fillStyle = "#20262d";
+        ctx.beginPath();
+        ctx.arc(m.l + ((tauSel.md - xMin) / Math.max(1, (xMax - xMin))) * plotW, yy, 2.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    if (asOf) {
+      ctx.setLineDash([6, 4]);
+      ctx.strokeStyle = "#5d7b98";
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(x(asOf), m.t);
+      ctx.lineTo(x(asOf), botY0 + botH);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    ctx.fillStyle = "#4f5b68";
+    ctx.font = "11px 'Source Sans Pro', sans-serif";
+    ctx.fillText("Kappa", 12, m.t + 10);
+    ctx.fillText("Tau window", 12, botY0 + 12);
+    ctx.fillText(fmtMDY(k.date[0]), m.l, h - 8);
+    ctx.fillText(fmtMDY(k.date[k.date.length - 1]), m.l + plotW - 72, h - 8);
+
+    const kTicks = [0.5, 0.9, 1.0, 1.1, 1.5];
+    ctx.fillStyle = "#6a737d";
+    ctx.font = "10px 'Source Sans Pro', sans-serif";
+    kTicks.forEach((v) => {
+      const yy = yTop(v);
+      ctx.fillText(v.toFixed(1), 24, yy + 3);
+    });
+  }
+
+  function initKappaTau() {
+    const node = document.getElementById("kappaTauData");
+    if (!node) return;
+    const payload = JSON.parse(node.textContent);
+    const n = payload.ids.length;
+    els.fitSlider.min = 1;
+    els.fitSlider.max = n;
+    els.fitSlider.value = n;
+    const startDate = payload.as_of_seq[0];
+    const endDate = payload.as_of_seq[n - 1];
+    els.fitSeq.textContent = `Sequence: ${fmtMDY(startDate)} \u2192 ${fmtMDY(endDate)}`;
+
+    const renderFrame = () => {
+      const step = Number(els.fitSlider.value);
+      const idx = Math.max(0, Math.min(n - 1, step - 1));
+      const idVal = String(payload.ids[idx]);
+      const asOf = payload.as_of_seq[idx];
+      els.fitTag.textContent = `As of ${fmtMDY(asOf)} \u00b7 ${step}/${n}`;
+      drawKappaTauFrame(payload, idVal);
+    };
+
+    els.fitSlider.addEventListener("input", renderFrame);
+    renderFrame();
+  }
+
+  window.addEventListener("DOMContentLoaded", initKappaTau, { once: true });
+</script>
+```
+
+```{r, include=FALSE}
+library(dplyr)
+library(stringr)
+library(jsonlite)
+
+dat <- readRDS("kappa_tau_yfit_over_dates.rds")
+kappas <- dat[[1]]
+taus <- dat[[2]]
+
+kappa_all <- kappas |>
+  mutate(
+    idx = as.integer(str_extract(variable, "\\d+")),
+    date = as.Date("2019-01-01") + (idx - 1),
+    mean = exp(mean),
+    q5 = exp(q5),
+    q95 = exp(q95)
+  ) |>
+  filter(str_detect(variable, "^kappa\\["), !is.na(idx), date >= as.Date("2020-01-01")) |>
+  select(id, date, mean, q5, q95)
+
+tau_all <- taus |>
+  filter(str_detect(variable, "^tau\\[")) |>
+  mutate(
+    tau_idx = as.integer(str_extract(variable, "\\d+")),
+    mean_date = as.Date("2019-01-01") + round(mean) - 1,
+    q5_date = as.Date("2019-01-01") + round(q5) - 1,
+    q95_date = as.Date("2019-01-01") + round(q95) - 1
+  ) |>
+  select(id, tau_idx, mean_date, q5_date, q95_date)
+
+ids <- sort(as.integer(unique(kappa_all$id)))
+as_of_dates <- seq.Date(as.Date("2020-03-25"), as.Date("2020-04-10"), by = "day")
+as_of_map <- setNames(as.character(as_of_dates[seq_along(ids)]), as.character(ids))
+
+kappa_by_id <- split(kappa_all, kappa_all$id) |>
+  lapply(function(df) {
+    list(
+      date = as.character(df$date),
+      mean = round(df$mean, 6),
+      q5 = round(df$q5, 6),
+      q95 = round(df$q95, 6)
+    )
+  })
+
+tau_by_id <- split(tau_all, tau_all$id) |>
+  lapply(function(df) {
+    list(
+      tau_idx = as.integer(df$tau_idx),
+      mean_date = as.character(df$mean_date),
+      q5_date = as.character(df$q5_date),
+      q95_date = as.character(df$q95_date)
+    )
+  })
+
+payload <- list(
+  ids = as.integer(ids),
+  as_of_seq = as.character(as_of_dates[seq_along(ids)]),
+  as_of = as_of_map,
+  kappa = kappa_by_id,
+  tau = tau_by_id,
+  kappa_ylim = c(0.5, 1.5),
+  tau_n = max(tau_all$tau_idx, na.rm = TRUE)
+)
+```
+
+```{r, echo=FALSE, results='asis'}
+cat(
+  "<script id='kappaTauData' type='application/json'>",
+  toJSON(payload, auto_unbox = TRUE, digits = 8),
+  "</script>",
+  sep = ""
+)
+```
