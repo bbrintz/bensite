@@ -139,14 +139,14 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 ---
 
 
-## We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases
+## We propose a novel hierarchical Bayesian solution fit on observed health district-level counts of new cases
 
-- SEIR compartmental process with detection using a continuous approximation of the binomial distribution 
-  - Lay interpretation: we model the true number of infections as a hidden process that generates the observed case counts through a probabilistic detection mechanism.
-- Transmission follows a hierarchical AR(1) process over time
+- SEIR compartmental process with detection using a continuous approximation of the binomial distribution (no discrete priors in stan)
+  - Lay interpretation: we model the true number of infections as a hidden process that generates the observed case counts through probabilistic detection.
+- Model assumes transmission follows a hierarchical AR(1) process over time
   - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.
-- Estimation allows for different start time across health districts
-- Allows an evolving recovery/incubation rate (E->I and I->R transitions) using a novel beta-binomial transition
+- Model estimation allows for different start times of infections across health-districts
+- Allows an evolving recovery/incubation rate (E->I and I->R transitions) using a novel approximation of a beta-binomial transition
   - Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.
 
 ::: {.fragment}
