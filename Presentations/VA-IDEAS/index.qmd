@@ -140,9 +140,9 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 ---
 
 
-## We propose a novel hierarchical Bayesian solution fit on observed health district-level counts of new cases
+## We propose a novel hierarchical Bayesian SEIR model using reported counts of new cases
 
-- SEIR compartmental process modeling detection with a continuous approximation of the binomial distribution (no discrete priors in stan)
+- We model detection with a continuous approximation of the binomial distribution (no discrete priors in stan)
   - Lay interpretation: we assume we're only observing a proportion of true infections 
 - Model assumes transmission follows a hierarchical AR(1) process over time
   - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.

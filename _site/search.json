@@ -544,5 +544,19 @@
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Domains of Interest as Collaborative Statistician",
     "text": "Domains of Interest as Collaborative Statistician\n\n\n\n\n\n\nClinical Prediction &Decision Support\n\n\n\nDesign &Analysis\n\n\n\n\nComplex Bayesian Hierarchical Models in Stan"
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-using-reported-counts-of-new-cases",
+    "href": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-solution-using-reported-counts-of-new-cases",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "We propose a novel hierarchical Bayesian solution using reported counts of new cases",
+    "text": "We propose a novel hierarchical Bayesian solution using reported counts of new cases\n\nSEIR compartmental process modeling detection with a continuous approximation of the binomial distribution (no discrete priors in stan)\n\nLay interpretation: we assume we’re only observing a proportion of true infections\n\nModel assumes transmission follows a hierarchical AR(1) process over time\n\nLay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.\n\nModel estimation allows for different start times of infections across health-districts\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using a novel approximation of a beta-binomial transition\n\nLay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.\n\n\n\nModeling strategy: allow flexibility where variability is real."
+  },
+  {
+    "objectID": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-seir-model-using-reported-counts-of-new-cases",
+    "href": "Presentations/VA-IDEAS/index.html#we-propose-a-novel-hierarchical-bayesian-seir-model-using-reported-counts-of-new-cases",
+    "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
+    "section": "We propose a novel hierarchical Bayesian SEIR model using reported counts of new cases",
+    "text": "We propose a novel hierarchical Bayesian SEIR model using reported counts of new cases\n\nWe model detection with a continuous approximation of the binomial distribution (no discrete priors in stan)\n\nLay interpretation: we assume we’re only observing a proportion of true infections\n\nModel assumes transmission follows a hierarchical AR(1) process over time\n\nLay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.\n\nModel estimation allows for different start times of infections across health-districts\nAllows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using a novel approximation of a beta-binomial transition\n\nLay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.\n\n\n\nModeling strategy: allow flexibility where variability is real."
   }
 ]
