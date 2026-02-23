@@ -15,7 +15,7 @@ format:
     css: [custom.css, uofu-theme.css]
 ---
 
-## Research threads at a glance {auto-animate=true}
+## Domains of Expertise {auto-animate=true}
 
 <div style="height:1em;"></div>
 
@@ -122,7 +122,7 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 - Latent disease transmission is never directly observed 
 - Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
   - Only the sickest got diagnosed with COVID-19 early in the pandemic 
-  - “We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”
+  - “We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon” - Utah Hero Project
 - **Key capability:** separate what is happening from what is observed.
 
 
@@ -141,8 +141,8 @@ SEIR models track transitions between susceptible, exposed, infectious, and remo
 
 ## We propose a novel hierarchical Bayesian solution fit on observed health district-level counts of new cases
 
-- SEIR compartmental process with detection using a continuous approximation of the binomial distribution (no discrete priors in stan)
-  - Lay interpretation: we model the true number of infections as a hidden process that generates the observed case counts through probabilistic detection.
+- SEIR compartmental process modeling detection with a continuous approximation of the binomial distribution (no discrete priors in stan)
+  - Lay interpretation: we assume we're only observing a proportion of true infections 
 - Model assumes transmission follows a hierarchical AR(1) process over time
   - Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.
 - Model estimation allows for different start times of infections across health-districts
