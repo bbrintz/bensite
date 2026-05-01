@@ -8,6 +8,7 @@ project:
 website:
   title: "Ben Brintz"
   favicon: images/favicon.png
+  search: false
   navbar:
     left:
       - href: index.qmd

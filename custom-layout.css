@@ -53,11 +53,40 @@ header#quarto-header {
   filter: brightness(0) invert(1) !important;
 }
 
-.navbar .navbar-nav {
-  width: 100%;
-  display: flex !important;
-  justify-content: center;
-  gap: 0.35rem;
+@media (min-width: 992px) {
+  #quarto-header #quarto-search {
+    display: none !important;
+  }
+
+  #quarto-header .navbar-container {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) auto minmax(80px, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  #quarto-header .navbar-brand-container {
+    justify-self: start;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #quarto-header #navbarCollapse {
+    justify-self: center;
+  }
+
+  #quarto-header .navbar .navbar-nav {
+    width: auto;
+    display: flex !important;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #quarto-header .quarto-navbar-tools {
+    justify-self: end;
+  }
 }
 
 .gallery img,
