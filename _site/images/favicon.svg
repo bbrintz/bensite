@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ben Brintz favicon">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071126"/>
+      <stop offset="0.62" stop-color="#102047"/>
+      <stop offset="1" stop-color="#030a1c"/>
+    </linearGradient>
+    <linearGradient id="warm" x1="13" y1="50" x2="52" y2="13" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd27a"/>
+      <stop offset="1" stop-color="#ff8e49"/>
+    </linearGradient>
+    <linearGradient id="cool" x1="14" y1="14" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7ec7ff"/>
+      <stop offset="1" stop-color="#9ec1ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <path d="M14 42c9-19 25-28 37-28" fill="none" stroke="url(#cool)" stroke-width="4.2" stroke-linecap="round" opacity="0.88"/>
+  <path d="M14 47c11-12 24-14 37-8" fill="none" stroke="url(#warm)" stroke-width="4.2" stroke-linecap="round" opacity="0.92"/>
+  <circle cx="18" cy="42" r="2.7" fill="#7ec7ff"/>
+  <circle cx="33" cy="29" r="2.7" fill="#dbe6ff"/>
+  <circle cx="49" cy="15" r="2.7" fill="#ffd27a"/>
+  <text x="32" y="39" text-anchor="middle" font-family="Georgia, 'Source Serif 4', serif" font-size="19" font-weight="700" fill="#f8fbff" letter-spacing="-1">BB</text>
+</svg>

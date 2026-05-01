@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<link href="../../images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -10,8 +11,8 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.554">
 
-  <meta name="author" content="Ben J. Brintz">
-  <title>Ben Brintz - Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</title>
+  <meta name="author" content="Ben Brintz">
+  <title>Ben Brintz - Anomaly Detection Model Overview</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,9 +30,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="v5_model_presentation.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -328,328 +394,326 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</h1>
+  <h1 class="title">Anomaly Detection Model Overview</h1>
+  <p class="subtitle">211 call counts and five high-level features</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Ben J. Brintz 
+Ben Brintz 
 </div>
-        <p class="quarto-title-affiliation">
-            Division of Epidemiology
-          </p>
-    </div>
+</div>
 </div>
 
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>This presentation will not include equations</strong></p>
-</div>
-<div class="callout-content">
-<p>Statisticians may feel unsettled by the lack of notation to remember</p>
-</div>
-</div>
-</div>
-</section>
-<section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2">
-<h2>The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance</h2>
+<section id="what-is-211" class="slide level2 compact-slide">
+<h2>What 211 Calls Are</h2>
+<div class="columns">
+<div class="column" style="width:54%;">
+<h3 id="united-way-211">United Way 211</h3>
+<p>United Way 211 is a community referral system that connects people to services and support.</p>
+<p>Examples include:</p>
 <ul>
-<li class="fragment">Case reports undercount true infections due to asymptomatic cases and lack of access to testing</li>
-<li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
-<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”
-<ul>
-<li class="fragment">Utah Hero Project</li>
-</ul></li>
+<li><strong>food insecurity and meal resources</strong></li>
+<li>housing and utility assistance</li>
+<li>mental health and crisis support</li>
+<li>transportation and other basic-needs services</li>
 </ul>
+<h3 id="why-these-calls-matter">Why these calls matter</h3>
+<p>Changes in 211 calls can reflect changing community needs, access problems, or acute events.</p>
+</div><div class="column" style="width:46%;">
+<div class="hero">
+<p>This talk focuses on 211 counts related to food insecurity and meal resources.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2">
-<h2>Various approaches have been developed to estimate clinical detection rates</h2>
+<section id="background" class="slide level2 compact-slide">
+<h2>211 Background</h2>
+<div class="columns">
+<div class="column" style="width:54%;">
+<h3 id="why-211-counts-are-hard-to-interpret-visually">Why 211 counts are hard to interpret visually</h3>
+<p>Daily 211 call counts move for a lot of reasons:</p>
 <ul>
-<li class="fragment"><strong>Back-calculation methods</strong> estimate the number of infections from hospitalizations and deaths</li>
-<li class="fragment"><strong>Seroprevalence studies</strong> estimate the proportion of the population that has been infected by testing for antibodies</li>
-<li class="fragment"><strong>Compartment models</strong> estimate the number of infections from observed cases and the distribution of the incubation period
-<ul>
-<li class="fragment">E.g. SIR (Susceptible-Infectious-Recovered) models</li>
-</ul></li>
+<li>Low call counts</li>
+<li>weekly usage patterns</li>
+<li>seasonality across the year</li>
+<li>gradual changes in underlying demand</li>
+<li>sudden events that create real spikes</li>
 </ul>
+<h3 id="what-we-want">What we want</h3>
+<p>We want to distinguish the expected pattern from signals that may matter operationally.</p>
+</div><div class="column" style="width:46%;">
+<p><img data-src="call_counts_84115_84770.png" style="width:100.0%" alt="Example 211 call count figure"></p>
+</div>
+</div>
 </section>
-<section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2">
-<h2>Covid-19’s incubation period requires an extension to the SIR compartment model</h2>
+<section id="why-model" class="slide level2 compact-slide">
+<h2>Why A Model Is Helpful</h2>
+<div class="hero">
+<p>The goal is not just to find high-count days.</p>
+<p>The goal is to find days that are unusually high after accounting for the normal structure in 211 call counts.</p>
+</div>
+<div class="small-note">
+<p>The next slide is the main navigation slide. Each feature can be clicked to jump into a backup slide, and each backup slide links back here.</p>
+</div>
+</section>
+<section id="hub" class="slide level2 hub-slide">
+<h2>Five High-Level Features</h2>
+<div class="card-grid-five">
+  <div class="card">
+    <p><a href="#feature-1">Zeros and flexible counts</a></p>
+    <p>Sparse series and overdispersed counts.</p>
+  </div>
+  <div class="card">
+    <p><a href="#feature-2">Rate jumps and anomalies</a></p>
+    <p>Rate jumps, ramp selection, and anomalies.</p>
+  </div>
+  <div class="card">
+    <p><a href="#feature-3">Day-of-week effects</a></p>
+    <p>Weekday effects in both counts and zero inflation.</p>
+  </div>
+  <div class="card">
+    <p><a href="#feature-4">Seasonality</a></p>
+    <p>Recurring seasonal patterns across the year.</p>
+  </div>
+  <div class="card">
+    <p><a href="#feature-5">AR(1) correlation</a></p>
+    <p>Nearby days can move together.</p>
+  </div>
+  <div class="card card-future">
+    <p><a href="#feature-6">Future features and issues</a></p>
+    <p>Spatial structure, trend changes, and computation.</p>
+  </div>
+</div>
+<div class="hub-link">
+<p><a href="#/why-stan">Stan (HMC) Implementation</a></p>
+</div>
+</section>
+<section id="feature-1" class="slide level2">
+<h2>Feature 1: Many Zeros And Flexible Count Data</h2>
+<h3 id="main-idea">Main idea</h3>
+<p>211 series can include many zeros in some settings, and count variability can exceed what a simple Poisson model would allow.</p>
+<h3 id="why-that-matters">Why that matters</h3>
 <ul>
-<li class="fragment"><strong>SIR model</strong> assumes that individuals transition directly from susceptible to infectious</li>
-<li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period (e.g.&nbsp;5 days)</li>
-<li class="fragment"><strong>SEIR models</strong> don’t directly account for imperfect detection</li>
+<li>the model can accommodate sparse count series</li>
+<li>it is flexible for overdispersed count data</li>
+<li>this makes the framework more useful across very different call settings</li>
 </ul>
+<div class="nav-row">
+<p><a href="#/feature-1-code">Implementation snippet</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
+</div>
 </section>
-<section id="our-stochastic-seir-model-acounts-for-imperfect-detection" class="slide level2">
-<h2>Our stochastic SEIR model acounts for imperfect detection</h2>
+<section id="feature-1-code" class="slide level2 code-slide">
+<h2>Feature 1 Code: Many Zeros And Flexible Count Data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb1-1"><a></a><span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt;[C] inv_phi;</span>
+<span id="cb1-2"><a></a><span class="dt">vector</span>[C] h0;</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>phi[c] = <span class="dv">1</span> / inv_phi[c];</span>
+<span id="cb1-5"><a></a>logit_zi[c][t] = h0[c] + eta[c][dow[t]];</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="cf">if</span> (y[c, t] == <span class="dv">0</span>) {</span>
+<span id="cb1-8"><a></a>  <span class="kw">target +=</span> log_mix(inv_logit(logit_zi[c][t]),</span>
+<span id="cb1-9"><a></a>                    <span class="dv">0</span>,</span>
+<span id="cb1-10"><a></a>                    neg_binomial_2_log_lpmf(<span class="dv">0</span> | log_lambda[c][t], phi[c]));</span>
+<span id="cb1-11"><a></a>} <span class="cf">else</span> {</span>
+<span id="cb1-12"><a></a>  <span class="kw">target +=</span> bernoulli_logit_lpmf(<span class="dv">0</span> | logit_zi[c][t])</span>
+<span id="cb1-13"><a></a>            + neg_binomial_2_log_lpmf(y[c, t] | log_lambda[c][t], phi[c]);</span>
+<span id="cb1-14"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="feature-2" class="slide level2">
+<h2>Feature 2: Rate Jumps, Ramp Selection, And Anomalies</h2>
+<h3 id="main-idea-1">Main idea</h3>
+<p>The model can represent abrupt changes in the underlying rate, allows multiple smooth ramps, and uses a separate anomaly channel for local departures.</p>
+<h3 id="why-that-matters-1">Why that matters</h3>
 <ul>
-<li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
-<li class="fragment">We fit a model to observed county-level counts of new cases</li>
-<li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected
-<ul>
-<li class="fragment">Currently assumed to be constant across time.</li>
-<li class="fragment">But it does allow all dynamics parameters to vary over time and space</li>
-</ul></li>
+<li>sustained jumps in the rate are not forced into one-day spike terms</li>
+<li>the model can adapt to more than one structural change over time</li>
+<li>local anomalies can still be highlighted after those broader changes are accounted for</li>
 </ul>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<div class="fragment grow fade-in-then-out top-right">
-<p>Our study has a number of novelties in the stochastic SEIR model space</p>
-</div>
-<div class="fragment fade-in top-right">
-<p>Novelty #1</p>
+<div class="nav-row">
+<p><a href="#/feature-2-code">Implementation snippet</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 </div>
 </section>
-<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
-<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
+<section id="feature-2-code" class="slide level2 code-slide">
+<h2>Feature 2 Code: Rate Jumps, Ramp Selection, And Anomalies</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb2-1"><a></a><span class="dt">vector</span>[J] tau_raw = sort_asc(inv_logit(tau_unconstrained[c]));</span>
+<span id="cb2-2"><a></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span>:J) {</span>
+<span id="cb2-3"><a></a>  tau[c][j] = <span class="dv">1</span> + (T - <span class="dv">1</span>) * tau_raw[j];</span>
+<span id="cb2-4"><a></a>  s[c][j]   = exp(log_s[c][j]);</span>
+<span id="cb2-5"><a></a>}</span>
+<span id="cb2-6"><a></a>d[c] = d_raw[c] .* lambda[c] * hs_tau[c];</span>
+<span id="cb2-7"><a></a>kappa[c] = sigma_kappa[c] * kappa_raw[c];</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span>:T) {</span>
+<span id="cb2-10"><a></a>  <span class="dt">real</span> ramps = m0[c];</span>
+<span id="cb2-11"><a></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span>:J) {</span>
+<span id="cb2-12"><a></a>    ramps += d[c][j] * inv_logit((t - tau[c][j]) / s[c][j]);</span>
+<span id="cb2-13"><a></a>  }</span>
+<span id="cb2-14"><a></a>  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];</span>
+<span id="cb2-15"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="feature-3" class="slide level2">
+<h2>Feature 3: Day-Of-Week Effects</h2>
+<h3 id="main-idea-2">Main idea</h3>
+<p>211 activity differs systematically across the week, so the model includes day-of-week effects in both the count part of the model and the zero-inflation part.</p>
+<h3 id="why-that-matters-2">Why that matters</h3>
 <ul>
-<li class="fragment">We used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)</li>
-<li class="fragment">The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</li>
-<li class="fragment">We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</li>
+<li>routine weekday differences are not mistaken for meaningful events</li>
+<li>comparisons across days become fairer</li>
+<li>the chance of observing zeros can also vary by weekday</li>
 </ul>
-</section>
-<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
-<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
-<div data-id="box" width="75%" height="75%">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="nav-row">
+<p><a href="#/feature-3-code">Implementation snippet</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 </div>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<div class="fragment fade-up top-right">
-<p>Novelty #2</p>
+<section id="feature-3-code" class="slide level2 code-slide">
+<h2>Feature 3 Code: Day-Of-Week Effects</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a></a><span class="dt">array</span>[C] <span class="dt">vector</span>[<span class="dv">6</span>] gamma_raw;</span>
+<span id="cb3-2"><a></a><span class="dt">array</span>[C] <span class="dt">vector</span>[<span class="dv">7</span>] gamma;</span>
+<span id="cb3-3"><a></a><span class="dt">array</span>[C] <span class="dt">vector</span>[<span class="dv">6</span>] eta_raw;</span>
+<span id="cb3-4"><a></a><span class="dt">array</span>[C] <span class="dt">vector</span>[<span class="dv">7</span>] eta;</span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a>gamma[c][<span class="dv">1</span>:<span class="dv">6</span>] = gamma_raw[c];</span>
+<span id="cb3-7"><a></a>gamma[c][<span class="dv">7</span>]   = -sum(gamma_raw[c]);</span>
+<span id="cb3-8"><a></a>eta[c][<span class="dv">1</span>:<span class="dv">6</span>] = eta_raw[c];</span>
+<span id="cb3-9"><a></a>eta[c][<span class="dv">7</span>]   = -sum(eta_raw[c]);</span>
+<span id="cb3-10"><a></a></span>
+<span id="cb3-11"><a></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span>:T) {</span>
+<span id="cb3-12"><a></a>  logit_zi[c][t] = h0[c] + eta[c][dow[t]];</span>
+<span id="cb3-13"><a></a>  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];</span>
+<span id="cb3-14"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="feature-4" class="slide level2">
+<h2>Feature 4: Seasonality</h2>
+<h3 id="main-idea-3">Main idea</h3>
+<p>The model includes a seasonal component so recurring patterns across the year aren’t identified as anomalies.</p>
+<h3 id="why-that-matters-3">Why that matters</h3>
+<ul>
+<li>predictable seasonal shifts are absorbed before detection decisions</li>
+<li>anomalies are judged relative to the expected time of year</li>
+<li>this is especially useful when call patterns drift across seasons</li>
+</ul>
+<div class="nav-row">
+<p><a href="#/feature-4-code">Implementation snippet</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 </div>
 </section>
-<section id="model-estimation-allows-for-different-start-times-of-infections-across-health-districts" class="slide level2">
-<h2>Model estimation allows for different start times of infections across health-districts</h2>
-<div class="fragment fade-in" data-fragment-index="1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>This observed data aren’t smooth SEIR curves</p>
-</div>
-</div>
-</div>
+<section id="feature-4-code" class="slide level2 code-slide">
+<h2>Feature 4 Code: Seasonality</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a></a><span class="dt">matrix</span>[T, K] C_fourier;</span>
+<span id="cb4-2"><a></a><span class="dt">matrix</span>[T, K] S_fourier;</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span>:T) {</span>
+<span id="cb4-5"><a></a>  <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span>:K) {</span>
+<span id="cb4-6"><a></a>    <span class="dt">real</span> omega = <span class="dv">2</span> * pi() * k / P;</span>
+<span id="cb4-7"><a></a>    C_fourier[t, k] = cos(omega * t);</span>
+<span id="cb4-8"><a></a>    S_fourier[t, k] = sin(omega * t);</span>
+<span id="cb4-9"><a></a>  }</span>
+<span id="cb4-10"><a></a>}</span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a>season[c] = rep_vector(<span class="dv">0</span>, T);</span>
+<span id="cb4-13"><a></a><span class="cf">if</span> (K &gt; <span class="dv">0</span>) {</span>
+<span id="cb4-14"><a></a>  season[c] = C_fourier * a_cos[c] + S_fourier * b_sin[c];</span>
+<span id="cb4-15"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="feature-5" class="slide level2">
+<h2>Feature 5: AR(1) Correlation</h2>
+<h3 id="main-idea-4">Main idea</h3>
+<p>Nearby days are allowed to be correlated through an AR(1) structure, rather than assuming each day is independent after adjustment.</p>
+<h3 id="why-that-matters-4">Why that matters</h3>
+<ul>
+<li>short runs of elevated or depressed counts are modeled more realistically</li>
+<li>the model is less likely to overreact to small clusters of related days</li>
+<li>residual structure is separated from truly unusual single-day behavior</li>
+</ul>
+<div class="nav-row">
+<p><a href="#/feature-5-code">Implementation snippet</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 </div>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<div class="fragment fade-right top-right">
-<p>Novelty #3</p>
+<section id="feature-5-code" class="slide level2 code-slide">
+<h2>Feature 5 Code: AR(1) Correlation</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb5-1"><a></a><span class="dt">vector</span>&lt;<span class="kw">lower</span>=-<span class="dv">1</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt;[C] rho;</span>
+<span id="cb5-2"><a></a><span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt;[C] sigma_z;</span>
+<span id="cb5-3"><a></a><span class="dt">array</span>[C] <span class="dt">vector</span>[T] eps_z;</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a>z[c][<span class="dv">1</span>] = eps_z[c][<span class="dv">1</span>] * (sigma_z[c] / sqrt(<span class="dv">1</span> - square(rho[c])));</span>
+<span id="cb5-6"><a></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span>:T) {</span>
+<span id="cb5-7"><a></a>  z[c][t] = rho[c] * z[c][t - <span class="dv">1</span>] + sigma_z[c] * eps_z[c][t];</span>
+<span id="cb5-8"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="feature-6" class="slide level2">
+<h2>Future Features And Issues</h2>
+<h3 id="main-idea-5">Main idea</h3>
+<p>Two natural extensions are:</p>
+<ul>
+<li>a spatial component so nearby counties or ZIPs can share information</li>
+<li>more flexible trend changes so the model can represent evolving slopes, not only ramps</li>
+<li>a faster computational strategy for repeated fitting across Utah ZIP codes over time</li>
+</ul>
+<h3 id="why-that-matters-5">Why that matters</h3>
+<ul>
+<li>spatial borrowing could stabilize estimates in sparse areas</li>
+<li>neighboring regions may show related patterns during shared events</li>
+<li>trend-change components could capture gradual accelerations or slowdowns more naturally</li>
+<li>computational time becomes a real issue when fitting many ZIP codes repeatedly across rolling dates</li>
+</ul>
+<div class="nav-row">
+<p><a href="#/feature-6-code">Implementation notes</a></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 </div>
 </section>
-<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
-<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1" class="slide level2">
-<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<div class="fragment fade-down top-right">
-<p>Novelty #4</p>
+<section id="feature-6-code" class="slide level2 code-slide">
+<h2>Notes: Future Features And Issues</h2>
+<p>These are extensions rather than current features.</p>
+<h3 id="possible-directions">Possible directions</h3>
+<ul>
+<li>add a spatial random effect or adjacency-based structure across counties or ZIPs</li>
+<li>replace or augment ramps with components that allow changes in slope over time</li>
+<li>combine those additions with the current anomaly channel rather than replacing it</li>
+<li>reduce runtime for statewide ZIP-level monitoring through approximation, parallelization, or a more scalable model structure</li>
+</ul>
+<p><a href="#/hub">Back to feature overview</a></p>
+</section>
+<section id="why-stan" class="slide level2 compact-slide">
+<h2>Why Stan Is Useful Here</h2>
+<div class="columns">
+<div class="column" style="width:54%;">
+<h3 id="why-implement-this-in-stan">Why implement this in Stan</h3>
+<p>This model combines several pieces at once:</p>
+<ul>
+<li>zero inflation and flexible count likelihoods</li>
+<li>smooth rate changes</li>
+<li>anomaly terms</li>
+<li>day-of-week effects</li>
+<li>seasonality</li>
+<li>AR(1) dependence</li>
+</ul>
+<p>Stan makes it practical to estimate all of these pieces jointly in one coherent model.</p>
+</div><div class="column" style="width:46%;">
+<h3 id="why-that-matters-computationally">Why that matters computationally</h3>
+<ul>
+<li>Hamiltonian Monte Carlo is well suited for a rich continuous-parameter model</li>
+<li>uncertainty is propagated across all components together</li>
+<li>transformed-data tricks, vectorization, and non-centered parameterizations help with efficiency and stability</li>
+</ul>
+<p>This would be much harder to fit well with ad hoc step-by-step estimation or with a frequentist approach.</p>
 </div>
-</section>
-<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
-<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.gif" class="r-stretch"></section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-<div class="fragment grow fade-in-then-out top-right">
-<p>Some Results</p>
 </div>
-<div class="fragment grow fade-in-then-out top-right">
-<p><img data-src="utah_p_dens_020325.png"></p>
-</div>
-<div class="fragment fade-in-then-out">
-<p><img data-src="utah_020325_bb.png"></p>
-</div>
-</section>
-<section id="the-team" class="slide level2">
-<h2>The Team</h2>
-<div class="fragment" data-fragment-index="1">
-<p><img data-src="Lisa.jpg" class="absolute" style="top: 200px; left: 0px; width: 300px; height: 300px; "></p>
-<p><img data-src="Claudio.jpg" class="absolute" style="top: 50px; right: 430px; width: 250px; height: 325px; "></p>
-<p><img data-src="rob.jpg" class="absolute" style="bottom: 0px; right: 50px; width: 300px; height: 300px; "></p>
-</div>
-<div class="fragment" data-fragment-index="2">
-<p><img data-src="till.png" class="absolute" style="top: 0px; right: 100px; width: 300px; height: 300px; "></p>
-</div>
-</section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-</section>
-<section id="model-formulation" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Model Formulation</h2>
-<p><span class="math display">\[
-\begin{aligned}
-I_{if_1} &amp;= c,\\[6pt]
-EI_{if_i} &amp;= I_{if_i},\\[6pt]
-S_{if_i} &amp;= N_i - EI_{if_i}.
-\end{aligned}
-\]</span></p>
-</section>
-<section id="model-formulation-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Model Formulation</h2>
-<p><strong>For (t &gt; f_{i}):</strong></p>
-<p><span class="math display">\[
-\begin{aligned}
-SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
-EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
-IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-I_{if_1} &amp;= c,\\[6pt]
-EI_{if_i} &amp;= I_{if_i},\\[6pt]
-S_{if_i} &amp;= N_i - EI_{if_i}.
-\end{aligned}
-\]</span></p>
-</section>
-<section id="model-formulation-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Model Formulation</h2>
-<p><span class="math display">\[
-\begin{aligned}
-S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
-E_{it} &amp;=
-  \begin{cases}
-    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
-    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
-  \end{cases}\\[6pt]
-I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
-ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
-EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
-IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-I_{if_1} &amp;= c,\\[6pt]
-EI_{if_i} &amp;= I_{if_i},\\[6pt]
-S_{if_i} &amp;= N_i - EI_{if_i}.
-\end{aligned}
-\]</span></p>
-</section>
-<section id="model-formulation-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Model Formulation</h2>
-<p><span class="math display">\[
-\begin{aligned}
-    \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
-    B_{it} &amp;= \phi B_{i,t-1} + \sigma \epsilon_{it}, t&gt;1
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
-E_{it} &amp;=
-  \begin{cases}
-    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
-    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
-  \end{cases}\\[6pt]
-I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
-ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
-EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
-IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-I_{if_1} &amp;= c,\\[6pt]
-EI_{if_i} &amp;= I_{if_i},\\[6pt]
-S_{if_i} &amp;= N_i - EI_{if_i}.
-\end{aligned}
-\]</span></p>
-</section>
-<section id="model-formulation-4" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Model Formulation</h2>
-<p><span class="math display">\[\begin{aligned}
-ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it}, p \Bigr) \\
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-    \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
-    B_{it} &amp;= \phi B_{i,t-1} + \sigma \epsilon_{it}, t&gt;1
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
-E_{it} &amp;=
-  \begin{cases}
-    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
-    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
-  \end{cases}\\[6pt]
-I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
-ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
-EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
-IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-I_{if_1} &amp;= c,\\[6pt]
-EI_{if_i} &amp;= I_{if_i},\\[6pt]
-S_{if_i} &amp;= N_i - EI_{if_i}.
-\end{aligned}
-\]</span></p>
+<p><a href="#/hub">Back to feature overview</a></p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-
+<p>Model Overview</p>
 </div>
 </div>
 </section>
@@ -677,17 +741,17 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
-'previewLinksAuto': false,
+'controlsAuto': false,
+'previewLinksAuto': true,
 'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease-in-out",
+'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
-'autoAnimateUnmatched': false,
+'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -809,7 +873,7 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'fade',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -863,44 +927,6 @@ S_{if_i} &amp;= N_i - EI_{if_i}.
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

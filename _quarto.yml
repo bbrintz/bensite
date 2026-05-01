@@ -2,9 +2,11 @@ project:
   type: website
   resources:
     - images/*.webp
+    - images/favicon.svg
 
 website:
   title: "Ben Brintz"
+  favicon: images/favicon.svg
   navbar:
     left:
       - href: index.qmd

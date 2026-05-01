@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Selected talks, slide decks, and interactive prototypes by Ben Brintz.">
 
 <title>Ben Brintz - Presentations</title>
 <style>
@@ -31,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -98,16 +98,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../woodworking.html"> 
-<span class="menu-text">Woodworking</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../Presentations/index.html" aria-current="page"> 
 <span class="menu-text">Presentations</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../cv.html"> 
-<span class="menu-text">CV</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -130,11 +122,6 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Presentations</h1>
 </div>
 
-<div>
-  <div class="description">
-    Selected talks, slide decks, and interactive prototypes by Ben Brintz.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -151,20 +138,26 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="{=html}">
 <style>
+html {
+  background-color: #030a1c;
+}
+
 body {
   min-height: 100vh;
   background-color: #030a1c;
   background-image:
-    radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.24), transparent 38%),
-    radial-gradient(circle at 22% 22%, rgba(102, 195, 255, 0.24), transparent 34%),
-    linear-gradient(112deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 14, 38, 0.84) 48%, rgba(11, 24, 53, 0.92) 100%);
+    radial-gradient(circle at 78% 70%, rgba(255, 120, 40, 0.24), transparent 42%),
+    radial-gradient(circle at 22% 18%, rgba(102, 195, 255, 0.24), transparent 36%),
+    radial-gradient(circle at 52% 112%, rgba(102, 195, 255, 0.14), transparent 44%),
+    linear-gradient(145deg, #030a1c 0%, #071126 42%, #102047 74%, #061126 100%);
+  background-attachment: fixed;
   background-repeat: no-repeat;
   color: #f8fbff;
 }
 
 h1.title {
   color: #f8fbff;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
 .presentation-intro {
@@ -179,7 +172,7 @@ h1.title {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  margin: 1.5rem 0 3rem;
+  margin: 1.5rem 0 4.5rem;
 }
 
 .presentation-card {
@@ -216,14 +209,14 @@ h1.title {
   color: #9ec1ec;
   font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .presentation-card h2 {
   margin: 0;
   color: #ffffff;
-  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-size: 1.45rem;
   line-height: 1.16;
 }
 
@@ -239,9 +232,63 @@ h1.title {
   font-weight: 700;
 }
 
+.presentation-feature {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.45fr);
+  grid-column: 1 / -1;
+  align-items: stretch;
+}
+
+.presentation-copy {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.presentation-related {
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  border-left: 1px solid rgba(219, 230, 255, 0.22);
+  padding-left: 1rem;
+}
+
+.related-kicker {
+  color: #9ec1ec;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.related-link {
+  display: block;
+  color: #ffd27a !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.related-link:hover,
+.related-link:focus-visible {
+  text-decoration: underline;
+}
+
 @media (max-width: 760px) {
   .presentation-grid {
     grid-template-columns: 1fr;
+  }
+
+  .presentation-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .presentation-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .presentation-related {
+    border-left: 0;
+    border-top: 1px solid rgba(219, 230, 255, 0.22);
+    padding-left: 0;
+    padding-top: 0.75rem;
   }
 }
 </style>
@@ -250,31 +297,37 @@ h1.title {
 <p>Talks and prototypes, collected as a small portfolio rather than a link list. The common thread is making statistical models inspectable enough to argue with.</p>
 </div>
 <div class="presentation-grid">
-<a class="presentation-card" href="mmdis/"> <span class="presentation-meta">Fairness and decision tools</span>
-<h2 class="anchored">
-Measuring and Mitigating Disparity of Decision-Making Tools
-</h2>
-<pre><code>&lt;p&gt;A presentation on evaluating prediction systems when accuracy is not the only thing that matters.&lt;/p&gt;
-&lt;span class="presentation-action"&gt;Open slides&lt;/span&gt;</code></pre>
-</a> <a class="presentation-card" href="seir-n-mixture/"> <span class="presentation-meta">Disease surveillance</span>
-<h2 class="anchored">
-SEIR N-mixture Model
-</h2>
-<pre><code>&lt;p&gt;A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.&lt;/p&gt;
-&lt;span class="presentation-action"&gt;Open slides&lt;/span&gt;</code></pre>
-</a> <a class="presentation-card" href="VA-IDEAS/"> <span class="presentation-meta">Applied modeling</span>
-<h2 class="anchored">
-VA-IDEAS
-</h2>
-<pre><code>&lt;p&gt;Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.&lt;/p&gt;
-&lt;span class="presentation-action"&gt;Open slides&lt;/span&gt;</code></pre>
-</a> <a class="presentation-card" href="../watchtower_demo_v2.html"> <span class="presentation-meta">Interactive prototype</span>
-<h2 class="anchored">
-Call Spike Prototype
-</h2>
-<pre><code>&lt;p&gt;A browser-based prototype for exploring call-volume spikes and operational triage signals.&lt;/p&gt;
-&lt;span class="presentation-action"&gt;Open prototype&lt;/span&gt;</code></pre>
-</a><p><a class="presentation-card" href="../watchtower_demo_v2.html"></a></p>
+  <article class="presentation-card presentation-feature">
+    <div class="presentation-copy">
+      <span class="presentation-meta">211 surveillance modeling</span>
+      <h2 class="anchored">Anomaly Detection Model Overview</h2>
+      <p>A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.</p>
+      <a class="presentation-action" href="211_pres/v5_model_presentation.html">Open slides</a>
+    </div>
+    <div class="presentation-related">
+      <span class="related-kicker">Related prototype</span>
+      <a class="related-link" href="surveillance_dashboard.html">Utah Food-Needs ZIP Map</a>
+      <p>A focused map view for reviewing ZIP-level model signals by run date.</p>
+    </div>
+  </article>
+  <a class="presentation-card" href="mmdis/">
+    <span class="presentation-meta">Fairness and decision tools</span>
+    <h2 class="anchored">Measuring and Mitigating Disparity of Decision-Making Tools</h2>
+    <p>A presentation on evaluating prediction systems when accuracy is not the only thing that matters.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
+  <a class="presentation-card" href="seir-n-mixture/">
+    <span class="presentation-meta">Disease surveillance</span>
+    <h2 class="anchored">SEIR N-mixture Model</h2>
+    <p>A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
+  <a class="presentation-card" href="VA-IDEAS/">
+    <span class="presentation-meta">Applied modeling</span>
+    <h2 class="anchored">Complex Bayesian Models</h2>
+    <p>Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
 </div>
 
 
@@ -287,27 +340,9 @@ Call Spike Prototype
       <a href="mailto:ben.brintz@hsc.utah.edu">Email</a>
       <a href="https://scholar.google.com/citations?user=nYA8PAsAAAAJ">Scholar</a>
       <a href="https://github.com/bbrintz">GitHub</a>
-      <a href="../cv.html" data-site-link="cv.html">CV</a>
     </nav>
   </div>
 </footer>
-<script>
-  (function () {
-    const localRootMarker = "/_site/";
-    const links = document.querySelectorAll("[data-site-link]");
-    links.forEach((link) => {
-      const target = link.getAttribute("data-site-link");
-      if (!target) return;
-      if (window.location.protocol === "file:" && window.location.pathname.includes(localRootMarker)) {
-        const rootPath = window.location.pathname.slice(
-          0,
-          window.location.pathname.indexOf(localRootMarker) + localRootMarker.length
-        );
-        link.href = "file://" + rootPath + target;
-      }
-    });
-  })();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

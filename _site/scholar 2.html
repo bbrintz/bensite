@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ben Brintz - Woodworking</title>
+<title>Ben Brintz - Publications</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -94,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./scholar.html"> 
+    <a class="nav-link active" href="./scholar.html" aria-current="page"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
@@ -119,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Woodworking</h1>
+<h1 class="title">Publications</h1>
 </div>
 
 
@@ -138,11 +137,13 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="{=html}">
 <style>
+.pub-heading {
+  color: white;
+}
 html {
   background-color: #030a1c;
 }
 body {
-  min-height: 100vh;
   background-color: #030a1c;
   background-image:
     radial-gradient(circle at 78% 70%, rgba(255, 120, 40, 0.24), transparent 42%),
@@ -151,202 +152,667 @@ body {
     linear-gradient(145deg, #030a1c 0%, #071126 42%, #102047 74%, #061126 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: #f8fbff;
+}
+a, a:link, a:visited {
+  color: white;
+}
+a:hover, a:active {
+  color: #EEEEEE;
+}
+
+
+/* Ensure Link column doesn't wrap */
+.gt_table td:nth-last-child(1),
+.gt_table th:nth-last-child(1) {
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+/* Force gt table to be transparent on dark backgrounds */
+.gt_table_container { background-color: transparent !important; }
+/* Increase contrast and add text shadow for better readability */
+.gt_table,
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle,
+.gt_table .gt_col_headings,
+.gt_table .gt_table_body,
+.gt_table .gt_row,
+.gt_table .gt_group_heading,
+.gt_table .gt_sourcenotes,
+.gt_table .gt_footnotes,
+.gt_table .gt_stub,
+.gt_table .gt_stub_row_group,
+.gt_table .gt_column_spanner,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_empty_group_heading {
+  background-color: transparent !important;
+  color: #d9d9d9 !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+/* Make gt table headers transparent */
+.gt_table .gt_col_heading,
+.gt_table .gt_column_spanner_outer,
+.gt_table .gt_column_spanner {
+  background-color: transparent !important;
+}
+/* Force column heading text to lighter color and add text shadow */
+.gt_table .gt_col_heading {
+  color: #d9d9d9 !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+/* Reaffirm transparent backgrounds for heading/title/subtitle */
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle {
+  background-color: transparent !important;
+}
+/* Remove zebra striping/gradients if present */
+.gt_table .gt_striped {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* Subtle borders that work on dark mode */
+.gt_table, .gt_table th, .gt_table td {
+  border-color: rgba(255,255,255,0.25) !important;
+}
+/* Style links in gt_table for higher contrast and readability */
+.gt_table a, .gt_table a:link, .gt_table a:visited {
+  color: #d9d9d9 !important;
+  text-decoration: underline;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+.gt_table a:hover, .gt_table a:active {
+  color: #163D6B !important;
+}
+
+/* Highlight table text on hover */
+.gt_table td:hover,
+.gt_table th:hover {
+  color: #ffffff !important; /* brighten text */
+  text-shadow: 0 0 6px rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.05) !important; /* subtle background highlight */
+  transition: all 0.2s ease;
+}
+
+
+
+
+/* --- Playful circular publication badges --- */
+/* --- Playful circular publication badges --- */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 2rem 0 3rem 0;
+}
+.pub-bubble {
+  position: relative;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  min-height: 180px;
+  cursor: pointer;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform 220ms ease;
+  outline: none;
+}
+
+.pub-bubble::before,
+.pub-bubble::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(126, 199, 255, 0.28);
+  animation: bubble-pulse 3.2s ease-out infinite;
+}
+
+.pub-bubble::after {
+  inset: -11px;
+  opacity: 0.42;
+  animation-delay: 1.4s;
+}
+
+.pub-bubble:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.pub-bubble:focus-visible {
+  box-shadow: 0 0 0 3px rgba(126, 199, 255, 0.45);
+}
+
+.pub-flip {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform 1000ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.pub-bubble:hover .pub-flip,
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: radial-gradient(circle at 30% 22%, rgba(255,255,255,0.12), rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.02) 100%);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  color: #d9d9d9;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.pub-front {
+  z-index: 2;
+}
+
+.pub-back {
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.pub-title {
+  font-weight: 600;
+  line-height: 1.25;
+  font-size: 0.85rem;
+}
+
+.pub-meta {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: #e6eefc;
+}
+
+.pub-open {
+  color: #f4f8ff !important;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.34);
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.24rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pub-open:hover {
+  background: rgba(255,255,255,0.17);
+}
+
+.pub-grid { perspective: 1200px; }
+.pub-grid { overflow: visible; }
+.pub-bubble { will-change: transform; }
+
+@keyframes bubble-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  75% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pub-bubble,
+  .pub-flip {
+    transition: none;
+  }
+  .pub-bubble::before,
+  .pub-bubble::after {
+    animation: none;
+  }
+  .pub-bubble .pub-flip {
+    transform: none !important;
+  }
 }
 
 h1.title {
-  color: #f8fbff;
+  color: #f7fbff;
+  letter-spacing: 0;
 }
 
-.wood-intro {
-  max-width: 720px;
+.pub-intro {
+  max-width: 760px;
+  margin: 0 0 1.4rem 0;
   color: #dbe6ff;
+  font-size: 1.02rem;
   line-height: 1.65;
-  font-size: 1.04rem;
 }
 
-.wood-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  margin: 1.6rem 0 3rem;
+.pub-intro p {
+  margin-bottom: 0.8rem;
 }
 
-.wood-card {
-  margin: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
-}
-
-.wood-open {
-  appearance: none;
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: zoom-in;
-}
-
-.wood-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform 180ms ease, filter 180ms ease;
-}
-
-.wood-card:hover img,
-.wood-open:focus-visible img {
-  transform: scale(1.025);
-  filter: saturate(1.05);
-}
-
-.wood-open:focus-visible {
-  outline: 3px solid rgba(126, 199, 255, 0.64);
-  outline-offset: -3px;
-}
-
-.wood-card figcaption {
-  display: grid;
-  gap: 0.18rem;
-  padding: 0.8rem 0.9rem 0.95rem;
-  background: rgba(3, 10, 28, 0.78);
-}
-
-.wood-card figcaption strong {
-  color: #ffffff;
-}
-
-.wood-card figcaption span {
-  color: #c9d8f0;
-  line-height: 1.45;
-  font-size: 0.94rem;
-}
-
-#lightbox[hidden] {
-  display: none;
-}
-
-#lightbox {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 9999;
-  padding: 1.25rem;
-  background: rgba(2, 6, 18, 0.86);
-}
-
-#lightbox img {
-  max-width: min(92vw, 1100px);
-  max-height: 82vh;
-  border-radius: 8px;
-  box-shadow: 0 22px 60px rgba(0,0,0,0.7);
-}
-
-.lightbox-close {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  border: 1px solid rgba(255,255,255,0.28);
+.pub-profile-link {
+  display: inline-block;
+  color: #0b122b !important;
+  text-decoration: none;
+  font-weight: 700;
   border-radius: 999px;
-  padding: 0.45rem 0.78rem;
-  color: #f8fbff;
-  background: rgba(255,255,255,0.08);
+  padding: 0.46rem 0.82rem;
+  background: #ffd27a;
+  text-shadow: none !important;
+}
+
+.pub-heading {
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(219, 230, 255, 0.26);
   font-weight: 700;
 }
 
-@media (max-width: 640px) {
-  .wood-grid {
-    grid-template-columns: 1fr;
+.pub-grid {
+  grid-template-columns: repeat(3, minmax(205px, 1fr));
+  gap: 22px;
+  max-width: 900px;
+}
+
+.pub-bubble {
+  min-height: 0;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.pub-bubble::before,
+.pub-bubble::after {
+  animation: none;
+  opacity: 1;
+}
+
+.pub-bubble::before {
+  inset: -6px;
+  border-color: rgba(126, 199, 255, 0.24);
+}
+
+.pub-bubble::after {
+  inset: -12px;
+  border-color: rgba(255, 210, 122, 0.16);
+}
+
+.pub-bubble:hover {
+  filter: brightness(1.05);
+}
+
+.pub-bubble:hover .pub-flip {
+  transform: none;
+}
+
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-flip {
+  transition-duration: 520ms;
+}
+
+.pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.16), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(18, 48, 86, 0.84), rgba(12, 18, 45, 0.92));
+}
+
+.pub-bubble:nth-child(3n + 2) .pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.15), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(41, 50, 82, 0.9), rgba(17, 24, 48, 0.94));
+}
+
+.pub-bubble:nth-child(3n) .pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.16), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(71, 50, 60, 0.86), rgba(18, 24, 48, 0.94));
+}
+
+.pub-title {
+  font-size: 0.86rem;
+}
+
+.pub-meta {
+  max-width: 82%;
+}
+
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-back {
+  gap: 0.5rem;
+  padding: 24px 20px;
+}
+
+.pub-back .pub-title {
+  display: none;
+}
+
+.pub-back-kicker,
+.pub-meta span {
+  color: #9ec1ec;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pub-back .pub-meta {
+  display: grid;
+  gap: 0.12rem;
+  width: 76%;
+  max-width: 76%;
+  color: #e6eefc;
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+.pub-meta strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #f8fbff;
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.pub-meta.citations strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.pub-back .pub-open {
+  padding: 0.3rem 0.68rem;
+}
+
+@media (max-width: 760px) {
+  .pub-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
   }
 }
+
+@media (max-width: 520px) {
+  .pub-grid {
+    grid-template-columns: 1fr;
+    max-width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
 </style>
 </div>
-<div class="wood-intro">
-<p>A small collection of practical builds: shelves, benches, storage, and other projects where the design is mostly in the joinery and finish.</p>
+<script>
+  (function(){
+    const v = document.getElementById('bg-video');
+    if (!v) return;
+    // Fade in when we have enough to play
+    v.addEventListener('loadeddata', () => { v.style.opacity = 1; }, { once: true });
+    // As a safety, fade in after 1s even if the event is slow
+    setTimeout(() => { if (v.style.opacity === '' || v.style.opacity === '0') v.style.opacity = 1; }, 1000);
+  })();
+</script>
+<div class="pub-intro">
+<p>A compact view of the papers visitors are most likely to recognize first. Click a circle for venue and citation details, or jump to the full profile for the long tail.</p>
+<p><a href="https://scholar.google.com/citations?user=nYA8PAsAAAAJ" class="pub-profile-link">Full Google Scholar profile</a></p>
 </div>
-<div class="wood-grid">
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project1.jpg" aria-label="Open walnut corner shelves image">
-<picture> <source srcset="images/project1.webp" type="image/webp"> <img src="images/project1.jpg" alt="Dark walnut corner shelves mounted beside a colorful painting" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Walnut corner shelves</strong> <span>Compact wall storage with a stepped profile.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project2.jpg" aria-label="Open bench frame in progress image">
-<picture> <source srcset="images/project2.webp" type="image/webp"> <img src="images/project2.jpg" alt="Unfinished wooden bench frame in a workshop" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Bench frame in progress</strong> <span>A shop-stage look at layout, proportion, and structure.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project3.jpg" aria-label="Open entryway bench and coat rail image">
-<picture> <source srcset="images/project3.webp" type="image/webp"> <img src="images/project3.jpg" alt="Entryway bench with coat hooks and hanging jackets" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Entryway bench and rail</strong> <span>Built-in storage for the daily pileup of coats and bags.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project4.jpg" aria-label="Open kitchen shelf image">
-<picture> <source srcset="images/project4.webp" type="image/webp"> <img src="images/project4.jpg" alt="Small wooden kitchen shelf holding glass jars" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Kitchen shelf</strong> <span>A narrow shelf for keeping jars useful and visible.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project5.jpeg" aria-label="Open serving flight board image">
-<picture> <source srcset="images/project5.webp" type="image/webp"> <img src="images/project5.jpeg" alt="Wooden serving board holding several small glasses" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Serving flight board</strong> <span>A small, tactile build for gathering around a table.</span>
-</figcaption>
-</figure>
+<h2 class="pub-heading anchored">
+Top Publications
+</h2>
+<div class="pub-grid">
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Clinical predictors for etiology of acute diarrhea in children in resource-limited settings (2020)
 </div>
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Woodworking project image" hidden="">
-<p><button class="lightbox-close" type="button">Close</button> <img src="" alt=""></p>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>PLOS Neglected Tropical Diseases</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>36</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Elife</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>24</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Characterizing the volume of surgery and post-operative complications during the COVID-19 pandemic (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Langenbeck’s Archives of Surgery</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>23</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:dhFuZR0502QC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Contraception</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>21</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020 (2021)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Public Health Reports</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>21</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering (2023)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering (2023)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Elife</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>20</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Journal of Cataract &amp; Refractive Surgery</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>20</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:hqOjcs7Dif8C" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="Effect of longitudinal and torsional ultrasound on corneal endothelial cells: experimental study in rabbit eyes (2022)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:Se3iqnhoufwC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+Effect of longitudinal and torsional ultrasound on corneal endothelial cells: experimental study in rabbit eyes (2022)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Journal of Cataract &amp; Refractive Surgery</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>20</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
+<div class="pub-bubble" role="button" tabindex="0" aria-pressed="false" aria-label="HistoEM: A pathologist-guided and explainable workflow using histogram embedding for gland classification (2024)" data-link="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:ZHo1McVdvXMC">
+<div class="pub-flip">
+<div class="pub-face pub-front">
+<div class="pub-title">
+HistoEM: A pathologist-guided and explainable workflow using histogram embedding for gland classification (2024)
+</div>
+</div>
+<div class="pub-face pub-back">
+<div class="pub-back-kicker">
+Details
+</div>
+<div class="pub-meta">
+<span>Venue</span><strong>Modern Pathology</strong>
+</div>
+<div class="pub-meta citations">
+<span>Citations</span><strong>17</strong>
+</div>
+<a class="pub-open" href="https://scholar.google.com/citations?view_op=view_citation&amp;user=nYA8PAsAAAAJ&amp;citation_for_view=nYA8PAsAAAAJ:ZHo1McVdvXMC" target="_blank" rel="noopener">Open Scholar</a>
+</div>
+</div>
+</div>
 </div>
 <script>
-  (function () {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
-    const closeButton = lightbox.querySelector(".lightbox-close");
+(function(){
+  const grid = document.querySelector(".pub-grid");
+  if(!grid) return;
 
-    function closeLightbox() {
-      lightbox.hidden = true;
-      lightboxImg.src = "";
-      lightboxImg.alt = "";
+  function setFlipped(bubble, flipped){
+    bubble.classList.toggle("is-flipped", flipped);
+    bubble.setAttribute("aria-pressed", flipped ? "true" : "false");
+  }
+
+  function closeOthers(current){
+    grid.querySelectorAll(".pub-bubble.is-flipped").forEach((el)=>{
+      if(el !== current) setFlipped(el, false);
+    });
+  }
+
+  grid.addEventListener("click", (e)=>{
+    const link = e.target.closest(".pub-open");
+    if(link) return;
+    const bubble = e.target.closest(".pub-bubble");
+    if(!bubble) return;
+    e.preventDefault();
+    const willFlip = !bubble.classList.contains("is-flipped");
+    closeOthers(bubble);
+    setFlipped(bubble, willFlip);
+  });
+
+  grid.addEventListener("keydown", (e)=>{
+    const bubble = e.target.closest(".pub-bubble");
+    if(!bubble) return;
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      const willFlip = !bubble.classList.contains("is-flipped");
+      closeOthers(bubble);
+      setFlipped(bubble, willFlip);
     }
+    if(e.key === "Escape"){
+      setFlipped(bubble, false);
+    }
+  });
 
-    document.querySelectorAll(".wood-open").forEach((button) => {
-      button.addEventListener("click", () => {
-        const img = button.querySelector("img");
-        lightboxImg.src = button.dataset.full || img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.hidden = false;
-        closeButton.focus();
-      });
-    });
-
-    closeButton.addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
-    });
-  })();
+  document.addEventListener("click", (e)=>{
+    if(e.target.closest(".pub-bubble")) return;
+    grid.querySelectorAll(".pub-bubble.is-flipped").forEach((el)=>setFlipped(el, false));
+  });
+})();
 </script>
 
 

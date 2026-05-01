@@ -28,6 +28,160 @@
     "text": "Talks and prototypes, collected as a small portfolio rather than a link list. The common thread is making statistical models inspectable enough to argue with.\n\n\n  \n    \n      211 surveillance modeling\n      Anomaly Detection Model Overview\n      A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.\n      Open slides\n    \n    \n      Related prototype\n      Utah Food-Needs ZIP Map\n      A focused map view for reviewing ZIP-level model signals by run date.\n    \n  \n  \n    Fairness and decision tools\n    Measuring and Mitigating Disparity of Decision-Making Tools\n    A presentation on evaluating prediction systems when accuracy is not the only thing that matters.\n    Open slides\n  \n  \n    Disease surveillance\n    SEIR N-mixture Model\n    A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.\n    Open slides\n  \n  \n    Applied modeling\n    Complex Bayesian Models\n    Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.\n    Open slides"
   },
   {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#what-is-211",
+    "href": "Presentations/211_pres/v5_model_presentation.html#what-is-211",
+    "title": "Anomaly Detection Model Overview",
+    "section": "What 211 Calls Are",
+    "text": "What 211 Calls Are\n\n\nUnited Way 211\nUnited Way 211 is a community referral system that connects people to services and support.\nExamples include:\n\nfood insecurity and meal resources\nhousing and utility assistance\nmental health and crisis support\ntransportation and other basic-needs services\n\nWhy these calls matter\nChanges in 211 calls can reflect changing community needs, access problems, or acute events.\n\n\nThis talk focuses on 211 counts related to food insecurity and meal resources."
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#background",
+    "href": "Presentations/211_pres/v5_model_presentation.html#background",
+    "title": "Anomaly Detection Model Overview",
+    "section": "211 Background",
+    "text": "211 Background\n\n\nWhy 211 counts are hard to interpret visually\nDaily 211 call counts move for a lot of reasons:\n\nLow call counts\nweekly usage patterns\nseasonality across the year\ngradual changes in underlying demand\nsudden events that create real spikes\n\nWhat we want\nWe want to distinguish the expected pattern from signals that may matter operationally."
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#why-model",
+    "href": "Presentations/211_pres/v5_model_presentation.html#why-model",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Why A Model Is Helpful",
+    "text": "Why A Model Is Helpful\n\nThe goal is not just to find high-count days.\nThe goal is to find days that are unusually high after accounting for the normal structure in 211 call counts.\n\n\nThe next slide is the main navigation slide. Each feature can be clicked to jump into a backup slide, and each backup slide links back here."
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#hub",
+    "href": "Presentations/211_pres/v5_model_presentation.html#hub",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Five High-Level Features",
+    "text": "Five High-Level Features\n\n  \n    Zeros and flexible counts\n    Sparse series and overdispersed counts.\n  \n  \n    Rate jumps and anomalies\n    Rate jumps, ramp selection, and anomalies.\n  \n  \n    Day-of-week effects\n    Weekday effects in both counts and zero inflation.\n  \n  \n    Seasonality\n    Recurring seasonal patterns across the year.\n  \n  \n    AR(1) correlation\n    Nearby days can move together.\n  \n  \n    Future features and issues\n    Spatial structure, trend changes, and computation.\n  \n\n\nStan (HMC) Implementation"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-1",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-1",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 1: Many Zeros And Flexible Count Data",
+    "text": "Feature 1: Many Zeros And Flexible Count Data\nMain idea\n211 series can include many zeros in some settings, and count variability can exceed what a simple Poisson model would allow.\nWhy that matters\n\nthe model can accommodate sparse count series\nit is flexible for overdispersed count data\nthis makes the framework more useful across very different call settings\n\n\nImplementation snippet\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-1-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-1-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 1 Code: Many Zeros And Flexible Count Data",
+    "text": "Feature 1 Code: Many Zeros And Flexible Count Data\nvector&lt;lower=0&gt;[C] inv_phi;\nvector[C] h0;\n\nphi[c] = 1 / inv_phi[c];\nlogit_zi[c][t] = h0[c] + eta[c][dow[t]];\n\nif (y[c, t] == 0) {\n  target += log_mix(inv_logit(logit_zi[c][t]),\n                    0,\n                    neg_binomial_2_log_lpmf(0 | log_lambda[c][t], phi[c]));\n} else {\n  target += bernoulli_logit_lpmf(0 | logit_zi[c][t])\n            + neg_binomial_2_log_lpmf(y[c, t] | log_lambda[c][t], phi[c]);\n}\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-2",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-2",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 2: Rate Jumps, Ramp Selection, And Anomalies",
+    "text": "Feature 2: Rate Jumps, Ramp Selection, And Anomalies\nMain idea\nThe model can represent abrupt changes in the underlying rate, allows multiple smooth ramps, and uses a separate anomaly channel for local departures.\nWhy that matters\n\nsustained jumps in the rate are not forced into one-day spike terms\nthe model can adapt to more than one structural change over time\nlocal anomalies can still be highlighted after those broader changes are accounted for\n\n\nImplementation snippet\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-2-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-2-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 2 Code: Rate Jumps, Ramp Selection, And Anomalies",
+    "text": "Feature 2 Code: Rate Jumps, Ramp Selection, And Anomalies\nvector[J] tau_raw = sort_asc(inv_logit(tau_unconstrained[c]));\nfor (j in 1:J) {\n  tau[c][j] = 1 + (T - 1) * tau_raw[j];\n  s[c][j]   = exp(log_s[c][j]);\n}\nd[c] = d_raw[c] .* lambda[c] * hs_tau[c];\nkappa[c] = sigma_kappa[c] * kappa_raw[c];\n\nfor (t in 1:T) {\n  real ramps = m0[c];\n  for (j in 1:J) {\n    ramps += d[c][j] * inv_logit((t - tau[c][j]) / s[c][j]);\n  }\n  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];\n}\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-3",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-3",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 3: Day-Of-Week Effects",
+    "text": "Feature 3: Day-Of-Week Effects\nMain idea\n211 activity differs systematically across the week, so the model includes day-of-week effects in both the count part of the model and the zero-inflation part.\nWhy that matters\n\nroutine weekday differences are not mistaken for meaningful events\ncomparisons across days become fairer\nthe chance of observing zeros can also vary by weekday\n\n\nImplementation snippet\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-3-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-3-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 3 Code: Day-Of-Week Effects",
+    "text": "Feature 3 Code: Day-Of-Week Effects\narray[C] vector[6] gamma_raw;\narray[C] vector[7] gamma;\narray[C] vector[6] eta_raw;\narray[C] vector[7] eta;\n\ngamma[c][1:6] = gamma_raw[c];\ngamma[c][7]   = -sum(gamma_raw[c]);\neta[c][1:6] = eta_raw[c];\neta[c][7]   = -sum(eta_raw[c]);\n\nfor (t in 1:T) {\n  logit_zi[c][t] = h0[c] + eta[c][dow[t]];\n  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];\n}\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-4",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-4",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 4: Seasonality",
+    "text": "Feature 4: Seasonality\nMain idea\nThe model includes a seasonal component so recurring patterns across the year aren’t identified as anomalies.\nWhy that matters\n\npredictable seasonal shifts are absorbed before detection decisions\nanomalies are judged relative to the expected time of year\nthis is especially useful when call patterns drift across seasons\n\n\nImplementation snippet\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-4-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-4-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 4 Code: Seasonality",
+    "text": "Feature 4 Code: Seasonality\nmatrix[T, K] C_fourier;\nmatrix[T, K] S_fourier;\n\nfor (t in 1:T) {\n  for (k in 1:K) {\n    real omega = 2 * pi() * k / P;\n    C_fourier[t, k] = cos(omega * t);\n    S_fourier[t, k] = sin(omega * t);\n  }\n}\n\nseason[c] = rep_vector(0, T);\nif (K &gt; 0) {\n  season[c] = C_fourier * a_cos[c] + S_fourier * b_sin[c];\n}\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-5",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-5",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 5: AR(1) Correlation",
+    "text": "Feature 5: AR(1) Correlation\nMain idea\nNearby days are allowed to be correlated through an AR(1) structure, rather than assuming each day is independent after adjustment.\nWhy that matters\n\nshort runs of elevated or depressed counts are modeled more realistically\nthe model is less likely to overreact to small clusters of related days\nresidual structure is separated from truly unusual single-day behavior\n\n\nImplementation snippet\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-5-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-5-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Feature 5 Code: AR(1) Correlation",
+    "text": "Feature 5 Code: AR(1) Correlation\nvector&lt;lower=-1, upper=1&gt;[C] rho;\nvector&lt;lower=0&gt;[C] sigma_z;\narray[C] vector[T] eps_z;\n\nz[c][1] = eps_z[c][1] * (sigma_z[c] / sqrt(1 - square(rho[c])));\nfor (t in 2:T) {\n  z[c][t] = rho[c] * z[c][t - 1] + sigma_z[c] * eps_z[c][t];\n}\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-6",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-6",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Future Features And Issues",
+    "text": "Future Features And Issues\nMain idea\nTwo natural extensions are:\n\na spatial component so nearby counties or ZIPs can share information\nmore flexible trend changes so the model can represent evolving slopes, not only ramps\na faster computational strategy for repeated fitting across Utah ZIP codes over time\n\nWhy that matters\n\nspatial borrowing could stabilize estimates in sparse areas\nneighboring regions may show related patterns during shared events\ntrend-change components could capture gradual accelerations or slowdowns more naturally\ncomputational time becomes a real issue when fitting many ZIP codes repeatedly across rolling dates\n\n\nImplementation notes\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-6-code",
+    "href": "Presentations/211_pres/v5_model_presentation.html#feature-6-code",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Notes: Future Features And Issues",
+    "text": "Notes: Future Features And Issues\nThese are extensions rather than current features.\nPossible directions\n\nadd a spatial random effect or adjacency-based structure across counties or ZIPs\nreplace or augment ramps with components that allow changes in slope over time\ncombine those additions with the current anomaly channel rather than replacing it\nreduce runtime for statewide ZIP-level monitoring through approximation, parallelization, or a more scalable model structure\n\nBack to feature overview"
+  },
+  {
+    "objectID": "Presentations/211_pres/v5_model_presentation.html#why-stan",
+    "href": "Presentations/211_pres/v5_model_presentation.html#why-stan",
+    "title": "Anomaly Detection Model Overview",
+    "section": "Why Stan Is Useful Here",
+    "text": "Why Stan Is Useful Here\n\n\nWhy implement this in Stan\nThis model combines several pieces at once:\n\nzero inflation and flexible count likelihoods\nsmooth rate changes\nanomaly terms\nday-of-week effects\nseasonality\nAR(1) dependence\n\nStan makes it practical to estimate all of these pieces jointly in one coherent model.\n\nWhy that matters computationally\n\nHamiltonian Monte Carlo is well suited for a rich continuous-parameter model\nuncertainty is propagated across all components together\ntransformed-data tricks, vectorization, and non-centered parameterizations help with efficiency and stability\n\nThis would be much harder to fit well with ad hoc step-by-step estimation or with a frequentist approach.\n\n\nBack to feature overview\n\n\n\nModel Overview"
+  },
+  {
+    "objectID": "Presentations/surveillance_dashboard.html",
+    "href": "Presentations/surveillance_dashboard.html",
+    "title": "Utah ZIP Map",
+    "section": "",
+    "text": "211 food-needs surveillance\n      Utah ZIP Map\n      ZIP-level model signals by prospective run date.\n    \n    Run date: -\n  \n\n  \n    \n      \n        \n        \n          Pr(excess &gt; 2)\n          \n          \n            50%\n            40%\n            30%\n            20%\n            10%\n            0%\n          \n        \n        Run date: -\n      \n\n      \n        Play\n        \n        \n      \n    \n\n    \n      Hovered ZIP\n      ZIP -\n      Run date -\n\n      \n        \n        \n          Pr(any excess)\n          Pr(excess &gt; 2)\n        \n      \n\n      \n        \n          Any excess\n          -\n        \n        \n          Excess &gt;2\n          -\n        \n        \n          Rate &gt;1.10\n          -\n        \n        \n          Mapped ZIPs\n          -\n        \n      \n\n      \n        Anchor-\n        First detection-\n        Any excess p&gt;0.90-\n        Excess &gt;2 p&gt;0.80-\n        Ramp 10% start-\n        Ramp 50% midpoint-\n      \n\n      Timeline shows the available model-run history for the hovered ZIP. The CSV currently includes probability summaries, so this profile uses those signals rather than raw call counts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical Modeling For Applied Research",
+    "section": "",
+    "text": "View selected work"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Statistical Modeling For Applied Research",
+    "section": "About",
+    "text": "About\nI work where statistical methods meet practical decisions: clinical prediction, public health surveillance, Bayesian computation, and research communication.\n\n\nModeling\nTraditional modeling, machine learning and Bayesian methods for applied scientific questions.\n\n\nTools\nInteractive prototypes and data products that make methods easier to use.\n\n\nCommunication\nTalks, writing, and visuals that make technical work easier to inspect."
+  },
+  {
+    "objectID": "sierpinski.html",
+    "href": "sierpinski.html",
+    "title": "Ben Brintz",
+    "section": "",
+    "text": "Interactive Sierpinski Triangle"
+  },
+  {
+    "objectID": "pub2.html",
+    "href": "pub2.html",
+    "title": "Publication Nebula (Preview)",
+    "section": "",
+    "text": "Pulled 123 Scholar records, deduplicated to 122, filtered to 121 likely full publications, and rendered 120 titles in this interactive preview.\n\n\n\n\n\n\nAI & Clinical Prediction\n\n\n25 pubs\n\n\n\nHistoEM: A pathologist-guided and explain…Phase II trial of pembrolizumab, ipilimum…A pipeline for evaluation of machine lear…Development of a prediction model for the…Evaluating multi-level models to test occ…Predicting IHC staining classes of NF1 us…Automated post-run analysis of arrayed qu…Modelling climate impacts on paediatric s…Complex pain phenotypes: suicidal ideatio…Integration of population-level data sour…Predicting antibiotic resistance in Enter…The effects of using a clinical predictio…Structured case-based ethics discussion f…Influence of intraocular pressure on clin…Derivation and internal validation of a c…Integrating molecular and clinical variab…Validation of antibiotic stewardship metr…Mifepristone for miscarriage treatment in…Development and external validation of a …From calls to action: leveraging the 2-1-…Predicting the risk of prostate cancer me…Integrative Clinical-Molecular Modeling I…Streamlining Autism Diagnostics: A Machin…The influence of historical eye pressure …Machine Learning Identification Of Transc…\n\n\n\n\n\nCOVID & Public Health\n\n\n11 pubs\n\n\n\nCharacterizing the volume of surgery and …Robust testing in outpatient settings to …A double-flipped virtual classroom format…Determining the impact of the Zika pandem…A pilot intervention to improve the manag…A randomized, double-blinded, placebo-con…Characterizing the Symptom Clusters of Lo…Time to identify glaucoma progression giv…The Effect of Presymptomatic Genetic Test…The Moran AMD Genetic Testing Assessment …COVID-19 experiences of older female vete…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\n24 pubs\n\n\n\nClinical predictors for etiology of acute…External validation of a mobile clinical …Derivation and external validation of cli…Improving antibiotic stewardship for diar…Staphylococcal scalded skin syndrome: cli…A modular approach to integrating multipl…Clinical and laboratory predictors of 30‐…Incidence and severity of asymptomatic oc…Clinical Prediction Rule to Guide Diagnos…Weather variables as important clinical p…Refractive error in unilateral Duane synd…Derivation and validation of a clinical p…Derivation and external validation of a c…Analysis of readmissions and reoperations…Introduction of an electronic clinical de…Etiologies of bloody diarrhea in children…Mucosal-associated invariant T (MAIT) cel…Predictive Modeling of Childhood Disease …Development of an AI-enabled predictive m…Assessment and comparison of model estima…Clinical prediction rule to guide diagnos…Identifying weather variables as importan…VALIDATION OF A MOBILE HEALTH TOOL FOR VI…A CLINICAL PREDICTION RULE TO GUIDE DIAGN…\n\n\n\n\n\nOther Applied Research\n\n\n33 pubs\n\n\n\nQuantitative and qualitative impact of on…Skin color representation in teaching pho…Association between specific unmet functi…Identification, mapping, and self-reporte…Associated factors with patient-reported …Measuring the unmet needs of American mil…High value care education in general surg…Elizabeth Dole Center of Excellence for V…The risk information and skin-cancer educ…Sex differences in unmet needs between ma…Long-term Kinetics of Vibriocidal Antibod…Travel-related behaviors and health outco…The Epidemiology of the Long-Term Care Ne…Trajectories and transitions in service u…Identifying unmet needs of high need high…Current Knowledge and Use of Mifepristone…Impact of baseline medications on real-wo…Medial upper eyelid crease incision appro…Social Media Analytics for Post-Disasters…Long-Term Antibody Responses to Vibrio ch…Building Trust in Virtual Immunohistochem…477 Association of baseline medication ex…Indoor tanning is associated with substan…Longterm kinetics of vibriocidal antibody…ASSESSING CONFLICT AND REGRET IN DECISION…University of Florida IRB-01 Protocol: IR…Neuroimaging Markers of Early Aging in Au…MEASURING UNMET NEEDS OF HIGH-NEED, HIGH-…GERIATRIC AND EXTENDED CARE TRAJECTORIES …Cognitive enhancing supplements and medic…Inflammatory Markers in Gastric Fluids Di…A Novel Luminescence-Based Serum Bacteric…Sharp edge eye syndrome (SEES): A survey …\n\n\n\n\n\nStatistical Methods\n\n\n9 pubs\n\n\n\nAn asymptotic approximation to the N-mixt…Combining antibody markers for serosurvei…A spatially explicit N-mixture model for …Protocol and statistical analysis plan fo…Bayesian modeling to predict long-term vi…Racial/ethnic differences in the prevalen…Combining antibody markers for serosurvei…N-Mixture Models with Application to Dise…A Normal Approximation to N-mixture Model…\n\n\n\n\n\nSurgery & Ophthalmology\n\n\n18 pubs\n\n\n\nEffect of phacoemulsification fluid flow …Effect of longitudinal and torsional ultr…Gender representation among presenters in…Prevention of exposure keratopathy in the…Effect of simulated lenticular debris on …Corneal endothelium protection provided b…Post-Operative Outcomes at One Year of ST…The Effects of Prenatal Carotenoid Supple…Carotenoid Status and Psychological Impac…Follow-up after positive screening for di…Information overload: Quantifying clinica…Follow-up after positive screening for di…The Use of Ologen Collagen Matrix in Comb…Gonioscopy-Assisted Transluminal Trabecul…The Financial Impact of Phenylephrine/Ket…Sharp Edge Eye Syndrome: A Case Report an…Changes in eyelid position with scleral c…Institutional comparison of methods of in…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\nClinical predictors for etiology of acute diarrhea in children in resource-limited settings\n\n\nPLOS Neglected Tropical Diseases2020 · 36 citations\n\nOpen on Scholar\n\nTheme Coverage\n\n\nOther Applied Research (33)\n\n\nAI & Clinical Prediction (25)\n\n\nDiarrhea & Infectious Disease (24)\n\n\nSurgery & Ophthalmology (18)\n\n\nCOVID & Public Health (11)\n\n\nStatistical Methods (9)"
+  },
+  {
     "objectID": "Presentations/VA-IDEAS/index.html#domains-of-interest-as-collaborative-statistician",
     "href": "Presentations/VA-IDEAS/index.html#domains-of-interest-as-collaborative-statistician",
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
@@ -152,34 +306,6 @@
     "title": "Using Complex Bayesian Hierarchical Models for “Detection” with Count Data",
     "section": "Thank you",
     "text": "Thank you\nQuestions or collaborations welcome."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistical Modeling For Applied Research",
-    "section": "",
-    "text": "View selected work"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Statistical Modeling For Applied Research",
-    "section": "About",
-    "text": "About\nI work where statistical methods meet practical decisions: clinical prediction, public health surveillance, Bayesian computation, and research communication.\n\n\nModeling\nTraditional modeling, machine learning and Bayesian methods for applied scientific questions.\n\n\nTools\nInteractive prototypes and data products that make methods easier to use.\n\n\nCommunication\nTalks, writing, and visuals that make technical work easier to inspect."
-  },
-  {
-    "objectID": "sierpinski.html",
-    "href": "sierpinski.html",
-    "title": "Ben Brintz",
-    "section": "",
-    "text": "Interactive Sierpinski Triangle"
-  },
-  {
-    "objectID": "pub2.html",
-    "href": "pub2.html",
-    "title": "Publication Nebula (Preview)",
-    "section": "",
-    "text": "Pulled 123 Scholar records, deduplicated to 122, filtered to 121 likely full publications, and rendered 120 titles in this interactive preview.\n\n\n\n\n\n\nAI & Clinical Prediction\n\n\n25 pubs\n\n\n\nHistoEM: A pathologist-guided and explain…Phase II trial of pembrolizumab, ipilimum…A pipeline for evaluation of machine lear…Development of a prediction model for the…Evaluating multi-level models to test occ…Predicting IHC staining classes of NF1 us…Automated post-run analysis of arrayed qu…Modelling climate impacts on paediatric s…Complex pain phenotypes: suicidal ideatio…Integration of population-level data sour…Predicting antibiotic resistance in Enter…The effects of using a clinical predictio…Structured case-based ethics discussion f…Influence of intraocular pressure on clin…Derivation and internal validation of a c…Integrating molecular and clinical variab…Validation of antibiotic stewardship metr…Mifepristone for miscarriage treatment in…Development and external validation of a …From calls to action: leveraging the 2-1-…Predicting the risk of prostate cancer me…Integrative Clinical-Molecular Modeling I…Streamlining Autism Diagnostics: A Machin…The influence of historical eye pressure …Machine Learning Identification Of Transc…\n\n\n\n\n\nCOVID & Public Health\n\n\n11 pubs\n\n\n\nCharacterizing the volume of surgery and …Robust testing in outpatient settings to …A double-flipped virtual classroom format…Determining the impact of the Zika pandem…A pilot intervention to improve the manag…A randomized, double-blinded, placebo-con…Characterizing the Symptom Clusters of Lo…Time to identify glaucoma progression giv…The Effect of Presymptomatic Genetic Test…The Moran AMD Genetic Testing Assessment …COVID-19 experiences of older female vete…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\n24 pubs\n\n\n\nClinical predictors for etiology of acute…External validation of a mobile clinical …Derivation and external validation of cli…Improving antibiotic stewardship for diar…Staphylococcal scalded skin syndrome: cli…A modular approach to integrating multipl…Clinical and laboratory predictors of 30‐…Incidence and severity of asymptomatic oc…Clinical Prediction Rule to Guide Diagnos…Weather variables as important clinical p…Refractive error in unilateral Duane synd…Derivation and validation of a clinical p…Derivation and external validation of a c…Analysis of readmissions and reoperations…Introduction of an electronic clinical de…Etiologies of bloody diarrhea in children…Mucosal-associated invariant T (MAIT) cel…Predictive Modeling of Childhood Disease …Development of an AI-enabled predictive m…Assessment and comparison of model estima…Clinical prediction rule to guide diagnos…Identifying weather variables as importan…VALIDATION OF A MOBILE HEALTH TOOL FOR VI…A CLINICAL PREDICTION RULE TO GUIDE DIAGN…\n\n\n\n\n\nOther Applied Research\n\n\n33 pubs\n\n\n\nQuantitative and qualitative impact of on…Skin color representation in teaching pho…Association between specific unmet functi…Identification, mapping, and self-reporte…Associated factors with patient-reported …Measuring the unmet needs of American mil…High value care education in general surg…Elizabeth Dole Center of Excellence for V…The risk information and skin-cancer educ…Sex differences in unmet needs between ma…Long-term Kinetics of Vibriocidal Antibod…Travel-related behaviors and health outco…The Epidemiology of the Long-Term Care Ne…Trajectories and transitions in service u…Identifying unmet needs of high need high…Current Knowledge and Use of Mifepristone…Impact of baseline medications on real-wo…Medial upper eyelid crease incision appro…Social Media Analytics for Post-Disasters…Long-Term Antibody Responses to Vibrio ch…Building Trust in Virtual Immunohistochem…477 Association of baseline medication ex…Indoor tanning is associated with substan…Longterm kinetics of vibriocidal antibody…ASSESSING CONFLICT AND REGRET IN DECISION…University of Florida IRB-01 Protocol: IR…Neuroimaging Markers of Early Aging in Au…MEASURING UNMET NEEDS OF HIGH-NEED, HIGH-…GERIATRIC AND EXTENDED CARE TRAJECTORIES …Cognitive enhancing supplements and medic…Inflammatory Markers in Gastric Fluids Di…A Novel Luminescence-Based Serum Bacteric…Sharp edge eye syndrome (SEES): A survey …\n\n\n\n\n\nStatistical Methods\n\n\n9 pubs\n\n\n\nAn asymptotic approximation to the N-mixt…Combining antibody markers for serosurvei…A spatially explicit N-mixture model for …Protocol and statistical analysis plan fo…Bayesian modeling to predict long-term vi…Racial/ethnic differences in the prevalen…Combining antibody markers for serosurvei…N-Mixture Models with Application to Dise…A Normal Approximation to N-mixture Model…\n\n\n\n\n\nSurgery & Ophthalmology\n\n\n18 pubs\n\n\n\nEffect of phacoemulsification fluid flow …Effect of longitudinal and torsional ultr…Gender representation among presenters in…Prevention of exposure keratopathy in the…Effect of simulated lenticular debris on …Corneal endothelium protection provided b…Post-Operative Outcomes at One Year of ST…The Effects of Prenatal Carotenoid Supple…Carotenoid Status and Psychological Impac…Follow-up after positive screening for di…Information overload: Quantifying clinica…Follow-up after positive screening for di…The Use of Ologen Collagen Matrix in Comb…Gonioscopy-Assisted Transluminal Trabecul…The Financial Impact of Phenylephrine/Ket…Sharp Edge Eye Syndrome: A Case Report an…Changes in eyelid position with scleral c…Institutional comparison of methods of in…\n\n\n\n\n\nDiarrhea & Infectious Disease\n\n\nClinical predictors for etiology of acute diarrhea in children in resource-limited settings\n\n\nPLOS Neglected Tropical Diseases2020 · 36 citations\n\nOpen on Scholar\n\nTheme Coverage\n\n\nOther Applied Research (33)\n\n\nAI & Clinical Prediction (25)\n\n\nDiarrhea & Infectious Disease (24)\n\n\nSurgery & Ophthalmology (18)\n\n\nCOVID & Public Health (11)\n\n\nStatistical Methods (9)"
   },
   {
     "objectID": "Presentations/mmdis/index.html#there-is-some-controversy-surrounding-the-egfr-equation",
@@ -509,131 +635,5 @@
     "title": "Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model",
     "section": "Model Formulation",
     "text": "Model Formulation\n\\[\\begin{aligned}\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it}, p \\Bigr) \\\\\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\n    \\log{\\beta_{it}} &\\sim \\text{Normal}(B_{it}, \\tau^2) \\\\\n    B_{it} &= \\phi B_{i,t-1} + \\sigma \\epsilon_{it}, t&gt;1\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nS_{it} &= S_{it-1} - SE_{it},\\\\[6pt]\nE_{it} &=\n  \\begin{cases}\n    SE_{it}, & \\text{if } t = f_i + 1,\\\\[6pt]\n    E_{it-1} + SE_{it} - EI_{it}, & \\text{if } t &gt; f_i + 1,\n  \\end{cases}\\\\[6pt]\nI_{it} &= I_{it-1} + EI_{it} - IR_{it},\\\\[6pt]\nii_{it} &\\sim \\text{Binomial}\\!\\Bigl(EI_{it},\\,p\\Bigr)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nSE_{it} &\\sim \\text{Binomial}\\!\\Bigl(S_{it-1},\\,1 - \\exp\\!\\Bigl(-\\tfrac{\\beta_{it}I_{it-1}}{N}\\Bigr)\\Bigr),\\\\[6pt]\nEI_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(E_{it-1},\\,1 - \\exp(-\\eta_i),\\,\\rho_{EI}\\Bigr),\\\\[6pt]\nIR_{it} &\\sim \\text{BetaBinomial}\\!\\Bigl(I_{it-1},\\,1 - \\exp(-\\gamma_i),\\,\\rho_{IR}\\Bigr),\\\\[6pt]\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nI_{if_1} &= c,\\\\[6pt]\nEI_{if_i} &= I_{if_i},\\\\[6pt]\nS_{if_i} &= N_i - EI_{if_i}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#what-is-211",
-    "href": "Presentations/211_pres/v5_model_presentation.html#what-is-211",
-    "title": "Anomaly Detection Model Overview",
-    "section": "What 211 Calls Are",
-    "text": "What 211 Calls Are\n\n\nUnited Way 211\nUnited Way 211 is a community referral system that connects people to services and support.\nExamples include:\n\nfood insecurity and meal resources\nhousing and utility assistance\nmental health and crisis support\ntransportation and other basic-needs services\n\nWhy these calls matter\nChanges in 211 calls can reflect changing community needs, access problems, or acute events.\n\n\nThis talk focuses on 211 counts related to food insecurity and meal resources."
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#background",
-    "href": "Presentations/211_pres/v5_model_presentation.html#background",
-    "title": "Anomaly Detection Model Overview",
-    "section": "211 Background",
-    "text": "211 Background\n\n\nWhy 211 counts are hard to interpret visually\nDaily 211 call counts move for a lot of reasons:\n\nLow call counts\nweekly usage patterns\nseasonality across the year\ngradual changes in underlying demand\nsudden events that create real spikes\n\nWhat we want\nWe want to distinguish the expected pattern from signals that may matter operationally."
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#why-model",
-    "href": "Presentations/211_pres/v5_model_presentation.html#why-model",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Why A Model Is Helpful",
-    "text": "Why A Model Is Helpful\n\nThe goal is not just to find high-count days.\nThe goal is to find days that are unusually high after accounting for the normal structure in 211 call counts.\n\n\nThe next slide is the main navigation slide. Each feature can be clicked to jump into a backup slide, and each backup slide links back here."
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#hub",
-    "href": "Presentations/211_pres/v5_model_presentation.html#hub",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Five High-Level Features",
-    "text": "Five High-Level Features\n\n  \n    Zeros and flexible counts\n    Sparse series and overdispersed counts.\n  \n  \n    Rate jumps and anomalies\n    Rate jumps, ramp selection, and anomalies.\n  \n  \n    Day-of-week effects\n    Weekday effects in both counts and zero inflation.\n  \n  \n    Seasonality\n    Recurring seasonal patterns across the year.\n  \n  \n    AR(1) correlation\n    Nearby days can move together.\n  \n  \n    Future features and issues\n    Spatial structure, trend changes, and computation.\n  \n\n\nStan (HMC) Implementation"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-1",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-1",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 1: Many Zeros And Flexible Count Data",
-    "text": "Feature 1: Many Zeros And Flexible Count Data\nMain idea\n211 series can include many zeros in some settings, and count variability can exceed what a simple Poisson model would allow.\nWhy that matters\n\nthe model can accommodate sparse count series\nit is flexible for overdispersed count data\nthis makes the framework more useful across very different call settings\n\n\nImplementation snippet\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-1-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-1-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 1 Code: Many Zeros And Flexible Count Data",
-    "text": "Feature 1 Code: Many Zeros And Flexible Count Data\nvector&lt;lower=0&gt;[C] inv_phi;\nvector[C] h0;\n\nphi[c] = 1 / inv_phi[c];\nlogit_zi[c][t] = h0[c] + eta[c][dow[t]];\n\nif (y[c, t] == 0) {\n  target += log_mix(inv_logit(logit_zi[c][t]),\n                    0,\n                    neg_binomial_2_log_lpmf(0 | log_lambda[c][t], phi[c]));\n} else {\n  target += bernoulli_logit_lpmf(0 | logit_zi[c][t])\n            + neg_binomial_2_log_lpmf(y[c, t] | log_lambda[c][t], phi[c]);\n}\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-2",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-2",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 2: Rate Jumps, Ramp Selection, And Anomalies",
-    "text": "Feature 2: Rate Jumps, Ramp Selection, And Anomalies\nMain idea\nThe model can represent abrupt changes in the underlying rate, allows multiple smooth ramps, and uses a separate anomaly channel for local departures.\nWhy that matters\n\nsustained jumps in the rate are not forced into one-day spike terms\nthe model can adapt to more than one structural change over time\nlocal anomalies can still be highlighted after those broader changes are accounted for\n\n\nImplementation snippet\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-2-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-2-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 2 Code: Rate Jumps, Ramp Selection, And Anomalies",
-    "text": "Feature 2 Code: Rate Jumps, Ramp Selection, And Anomalies\nvector[J] tau_raw = sort_asc(inv_logit(tau_unconstrained[c]));\nfor (j in 1:J) {\n  tau[c][j] = 1 + (T - 1) * tau_raw[j];\n  s[c][j]   = exp(log_s[c][j]);\n}\nd[c] = d_raw[c] .* lambda[c] * hs_tau[c];\nkappa[c] = sigma_kappa[c] * kappa_raw[c];\n\nfor (t in 1:T) {\n  real ramps = m0[c];\n  for (j in 1:J) {\n    ramps += d[c][j] * inv_logit((t - tau[c][j]) / s[c][j]);\n  }\n  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];\n}\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-3",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-3",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 3: Day-Of-Week Effects",
-    "text": "Feature 3: Day-Of-Week Effects\nMain idea\n211 activity differs systematically across the week, so the model includes day-of-week effects in both the count part of the model and the zero-inflation part.\nWhy that matters\n\nroutine weekday differences are not mistaken for meaningful events\ncomparisons across days become fairer\nthe chance of observing zeros can also vary by weekday\n\n\nImplementation snippet\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-3-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-3-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 3 Code: Day-Of-Week Effects",
-    "text": "Feature 3 Code: Day-Of-Week Effects\narray[C] vector[6] gamma_raw;\narray[C] vector[7] gamma;\narray[C] vector[6] eta_raw;\narray[C] vector[7] eta;\n\ngamma[c][1:6] = gamma_raw[c];\ngamma[c][7]   = -sum(gamma_raw[c]);\neta[c][1:6] = eta_raw[c];\neta[c][7]   = -sum(eta_raw[c]);\n\nfor (t in 1:T) {\n  logit_zi[c][t] = h0[c] + eta[c][dow[t]];\n  log_lambda[c][t] = ramps + gamma[c][dow[t]] + z[c][t] + kappa[c][t] + season[c][t];\n}\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-4",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-4",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 4: Seasonality",
-    "text": "Feature 4: Seasonality\nMain idea\nThe model includes a seasonal component so recurring patterns across the year aren’t identified as anomalies.\nWhy that matters\n\npredictable seasonal shifts are absorbed before detection decisions\nanomalies are judged relative to the expected time of year\nthis is especially useful when call patterns drift across seasons\n\n\nImplementation snippet\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-4-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-4-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 4 Code: Seasonality",
-    "text": "Feature 4 Code: Seasonality\nmatrix[T, K] C_fourier;\nmatrix[T, K] S_fourier;\n\nfor (t in 1:T) {\n  for (k in 1:K) {\n    real omega = 2 * pi() * k / P;\n    C_fourier[t, k] = cos(omega * t);\n    S_fourier[t, k] = sin(omega * t);\n  }\n}\n\nseason[c] = rep_vector(0, T);\nif (K &gt; 0) {\n  season[c] = C_fourier * a_cos[c] + S_fourier * b_sin[c];\n}\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-5",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-5",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 5: AR(1) Correlation",
-    "text": "Feature 5: AR(1) Correlation\nMain idea\nNearby days are allowed to be correlated through an AR(1) structure, rather than assuming each day is independent after adjustment.\nWhy that matters\n\nshort runs of elevated or depressed counts are modeled more realistically\nthe model is less likely to overreact to small clusters of related days\nresidual structure is separated from truly unusual single-day behavior\n\n\nImplementation snippet\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-5-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-5-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Feature 5 Code: AR(1) Correlation",
-    "text": "Feature 5 Code: AR(1) Correlation\nvector&lt;lower=-1, upper=1&gt;[C] rho;\nvector&lt;lower=0&gt;[C] sigma_z;\narray[C] vector[T] eps_z;\n\nz[c][1] = eps_z[c][1] * (sigma_z[c] / sqrt(1 - square(rho[c])));\nfor (t in 2:T) {\n  z[c][t] = rho[c] * z[c][t - 1] + sigma_z[c] * eps_z[c][t];\n}\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-6",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-6",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Future Features And Issues",
-    "text": "Future Features And Issues\nMain idea\nTwo natural extensions are:\n\na spatial component so nearby counties or ZIPs can share information\nmore flexible trend changes so the model can represent evolving slopes, not only ramps\na faster computational strategy for repeated fitting across Utah ZIP codes over time\n\nWhy that matters\n\nspatial borrowing could stabilize estimates in sparse areas\nneighboring regions may show related patterns during shared events\ntrend-change components could capture gradual accelerations or slowdowns more naturally\ncomputational time becomes a real issue when fitting many ZIP codes repeatedly across rolling dates\n\n\nImplementation notes\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#feature-6-code",
-    "href": "Presentations/211_pres/v5_model_presentation.html#feature-6-code",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Notes: Future Features And Issues",
-    "text": "Notes: Future Features And Issues\nThese are extensions rather than current features.\nPossible directions\n\nadd a spatial random effect or adjacency-based structure across counties or ZIPs\nreplace or augment ramps with components that allow changes in slope over time\ncombine those additions with the current anomaly channel rather than replacing it\nreduce runtime for statewide ZIP-level monitoring through approximation, parallelization, or a more scalable model structure\n\nBack to feature overview"
-  },
-  {
-    "objectID": "Presentations/211_pres/v5_model_presentation.html#why-stan",
-    "href": "Presentations/211_pres/v5_model_presentation.html#why-stan",
-    "title": "Anomaly Detection Model Overview",
-    "section": "Why Stan Is Useful Here",
-    "text": "Why Stan Is Useful Here\n\n\nWhy implement this in Stan\nThis model combines several pieces at once:\n\nzero inflation and flexible count likelihoods\nsmooth rate changes\nanomaly terms\nday-of-week effects\nseasonality\nAR(1) dependence\n\nStan makes it practical to estimate all of these pieces jointly in one coherent model.\n\nWhy that matters computationally\n\nHamiltonian Monte Carlo is well suited for a rich continuous-parameter model\nuncertainty is propagated across all components together\ntransformed-data tricks, vectorization, and non-centered parameterizations help with efficiency and stability\n\nThis would be much harder to fit well with ad hoc step-by-step estimation or with a frequentist approach.\n\n\nBack to feature overview\n\n\n\nModel Overview"
-  },
-  {
-    "objectID": "Presentations/surveillance_dashboard.html",
-    "href": "Presentations/surveillance_dashboard.html",
-    "title": "Utah ZIP Map",
-    "section": "",
-    "text": "211 food-needs surveillance\n      Utah ZIP Map\n      ZIP-level model signals by prospective run date.\n    \n    Run date: -\n  \n\n  \n    \n      \n        \n        \n          Pr(excess &gt; 2)\n          \n          \n            50%\n            40%\n            30%\n            20%\n            10%\n            0%\n          \n        \n        Run date: -\n      \n\n      \n        Play\n        \n        \n      \n    \n\n    \n      Hovered ZIP\n      ZIP -\n      Run date -\n\n      \n        \n        \n          Pr(any excess)\n          Pr(excess &gt; 2)\n        \n      \n\n      \n        \n          Any excess\n          -\n        \n        \n          Excess &gt;2\n          -\n        \n        \n          Rate &gt;1.10\n          -\n        \n        \n          Mapped ZIPs\n          -\n        \n      \n\n      \n        Anchor-\n        First detection-\n        Any excess p&gt;0.90-\n        Excess &gt;2 p&gt;0.80-\n        Ramp 10% start-\n        Ramp 50% midpoint-\n      \n\n      Timeline shows the available model-run history for the hovered ZIP. The CSV currently includes probability summaries, so this profile uses those signals rather than raw call counts."
   }
 ]

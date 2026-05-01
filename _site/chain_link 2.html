@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ben Brintz - Woodworking</title>
+<title>Ben Brintz - ChainLink</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -119,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Woodworking</h1>
+<h1 class="title">ChainLink</h1>
 </div>
 
 
@@ -145,12 +144,11 @@ body {
   min-height: 100vh;
   background-color: #030a1c;
   background-image:
-    radial-gradient(circle at 78% 70%, rgba(255, 120, 40, 0.24), transparent 42%),
-    radial-gradient(circle at 22% 18%, rgba(102, 195, 255, 0.24), transparent 36%),
-    radial-gradient(circle at 52% 112%, rgba(102, 195, 255, 0.14), transparent 44%),
+    radial-gradient(circle at 78% 70%, rgba(255, 120, 40, 0.18), transparent 42%),
+    radial-gradient(circle at 22% 18%, rgba(102, 195, 255, 0.18), transparent 36%),
+    radial-gradient(circle at 52% 112%, rgba(102, 195, 255, 0.12), transparent 44%),
     linear-gradient(145deg, #030a1c 0%, #071126 42%, #102047 74%, #061126 100%);
   background-attachment: fixed;
-  background-repeat: no-repeat;
   color: #f8fbff;
 }
 
@@ -158,196 +156,35 @@ h1.title {
   color: #f8fbff;
 }
 
-.wood-intro {
-  max-width: 720px;
+.chainlink-intro {
+  max-width: 760px;
   color: #dbe6ff;
   line-height: 1.65;
-  font-size: 1.04rem;
+  margin-bottom: 1.2rem;
 }
 
-.wood-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  margin: 1.6rem 0 3rem;
-}
-
-.wood-card {
-  margin: 0;
+.chainlink-frame {
   overflow: hidden;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+  border: 1px solid rgba(185, 206, 255, 0.24);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.28);
 }
 
-.wood-open {
-  appearance: none;
+iframe#fullpage {
   display: block;
   width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: zoom-in;
-}
-
-.wood-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform 180ms ease, filter 180ms ease;
-}
-
-.wood-card:hover img,
-.wood-open:focus-visible img {
-  transform: scale(1.025);
-  filter: saturate(1.05);
-}
-
-.wood-open:focus-visible {
-  outline: 3px solid rgba(126, 199, 255, 0.64);
-  outline-offset: -3px;
-}
-
-.wood-card figcaption {
-  display: grid;
-  gap: 0.18rem;
-  padding: 0.8rem 0.9rem 0.95rem;
-  background: rgba(3, 10, 28, 0.78);
-}
-
-.wood-card figcaption strong {
-  color: #ffffff;
-}
-
-.wood-card figcaption span {
-  color: #c9d8f0;
-  line-height: 1.45;
-  font-size: 0.94rem;
-}
-
-#lightbox[hidden] {
-  display: none;
-}
-
-#lightbox {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 9999;
-  padding: 1.25rem;
-  background: rgba(2, 6, 18, 0.86);
-}
-
-#lightbox img {
-  max-width: min(92vw, 1100px);
-  max-height: 82vh;
-  border-radius: 8px;
-  box-shadow: 0 22px 60px rgba(0,0,0,0.7);
-}
-
-.lightbox-close {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  border: 1px solid rgba(255,255,255,0.28);
-  border-radius: 999px;
-  padding: 0.45rem 0.78rem;
-  color: #f8fbff;
-  background: rgba(255,255,255,0.08);
-  font-weight: 700;
-}
-
-@media (max-width: 640px) {
-  .wood-grid {
-    grid-template-columns: 1fr;
-  }
+  min-height: min(720px, 78svh);
+  border: none;
 }
 </style>
 </div>
-<div class="wood-intro">
-<p>A small collection of practical builds: shelves, benches, storage, and other projects where the design is mostly in the joinery and finish.</p>
+<div class="chainlink-intro">
+<p>A daily word-chain prototype: start from the clue word, make a sequence of constrained guesses, and try to land the full chain cleanly.</p>
 </div>
-<div class="wood-grid">
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project1.jpg" aria-label="Open walnut corner shelves image">
-<picture> <source srcset="images/project1.webp" type="image/webp"> <img src="images/project1.jpg" alt="Dark walnut corner shelves mounted beside a colorful painting" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Walnut corner shelves</strong> <span>Compact wall storage with a stepped profile.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project2.jpg" aria-label="Open bench frame in progress image">
-<picture> <source srcset="images/project2.webp" type="image/webp"> <img src="images/project2.jpg" alt="Unfinished wooden bench frame in a workshop" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Bench frame in progress</strong> <span>A shop-stage look at layout, proportion, and structure.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project3.jpg" aria-label="Open entryway bench and coat rail image">
-<picture> <source srcset="images/project3.webp" type="image/webp"> <img src="images/project3.jpg" alt="Entryway bench with coat hooks and hanging jackets" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Entryway bench and rail</strong> <span>Built-in storage for the daily pileup of coats and bags.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project4.jpg" aria-label="Open kitchen shelf image">
-<picture> <source srcset="images/project4.webp" type="image/webp"> <img src="images/project4.jpg" alt="Small wooden kitchen shelf holding glass jars" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Kitchen shelf</strong> <span>A narrow shelf for keeping jars useful and visible.</span>
-</figcaption>
-</figure>
-<figure class="wood-card figure">
-<button class="wood-open" type="button" data-full="images/project5.jpeg" aria-label="Open serving flight board image">
-<picture> <source srcset="images/project5.webp" type="image/webp"> <img src="images/project5.jpeg" alt="Wooden serving board holding several small glasses" loading="lazy" class="figure-img"> </picture>
-</button>
-<figcaption>
-<strong>Serving flight board</strong> <span>A small, tactile build for gathering around a table.</span>
-</figcaption>
-</figure>
+<div class="chainlink-frame">
+<p><iframe id="fullpage" title="ChainLink game" src="cl.html"> </iframe></p>
 </div>
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Woodworking project image" hidden="">
-<p><button class="lightbox-close" type="button">Close</button> <img src="" alt=""></p>
-</div>
-<script>
-  (function () {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
-    const closeButton = lightbox.querySelector(".lightbox-close");
-
-    function closeLightbox() {
-      lightbox.hidden = true;
-      lightboxImg.src = "";
-      lightboxImg.alt = "";
-    }
-
-    document.querySelectorAll(".wood-open").forEach((button) => {
-      button.addEventListener("click", () => {
-        const img = button.querySelector("img");
-        lightboxImg.src = button.dataset.full || img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.hidden = false;
-        closeButton.focus();
-      });
-    });
-
-    closeButton.addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
-    });
-  })();
-</script>
 
 
 
