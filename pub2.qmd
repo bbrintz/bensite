@@ -22,14 +22,19 @@ format:
     --cool: rgba(122, 193, 255, 0.22);
   }
 
+  html {
+    background-color: var(--bg-ink);
+  }
+
   body {
     min-height: 100vh;
     color: var(--text-main);
     background-color: var(--bg-ink);
     background-image:
       radial-gradient(circle at 14% 18%, var(--cool), transparent 36%),
-      radial-gradient(circle at 82% 82%, var(--warm), transparent 40%),
-      linear-gradient(120deg, #050d20 0%, #0a1731 48%, #0c1f40 100%);
+      radial-gradient(circle at 82% 70%, var(--warm), transparent 42%),
+      radial-gradient(circle at 52% 112%, rgba(122, 193, 255, 0.14), transparent 44%),
+      linear-gradient(145deg, #050d20 0%, #0a1731 42%, #102047 74%, #061126 100%);
     background-attachment: fixed;
   }
 

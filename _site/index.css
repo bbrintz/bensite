@@ -16,15 +16,21 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: var(--bg-ink);
+}
+
 body {
   margin: 0;
   position: relative;
   min-height: 100svh;
   background-color: var(--bg-ink);
   background-image:
-    radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.24), transparent 38%),
-    radial-gradient(circle at 22% 22%, rgba(102, 195, 255, 0.24), transparent 34%),
-    linear-gradient(112deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 14, 38, 0.84) 48%, rgba(11, 24, 53, 0.92) 100%);
+    radial-gradient(circle at 78% 70%, rgba(255, 120, 40, 0.24), transparent 42%),
+    radial-gradient(circle at 22% 18%, rgba(102, 195, 255, 0.24), transparent 36%),
+    radial-gradient(circle at 52% 112%, rgba(102, 195, 255, 0.14), transparent 44%),
+    linear-gradient(145deg, #030a1c 0%, #071126 42%, #102047 74%, #061126 100%);
+  background-attachment: fixed;
   background-repeat: no-repeat;
   color: var(--text-main);
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
