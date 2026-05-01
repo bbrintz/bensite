@@ -1,22 +1,24 @@
 ---
-title: ""
+title: "CV"
+search: false
 format:
   html:
+    meta:
+      description: "Education and selected professional background for Ben Brintz."
     css: cv_styles.css
 ---
 
-**_Ben J. Brintz_**  
-ben.brintz@hsc.utah.edu
+::: {.cv-card}
+**Ben J. Brintz**  
+[ben.brintz@hsc.utah.edu](mailto:ben.brintz@hsc.utah.edu)
 
-**_EDUCATION_**
+## Education
 
 **PhD in Statistics**, Oregon State, Corvallis, OR, March 2018  
-- Dissertation: A Normal Approximation to N-Mixture Models with Applications in Large Abundance Estimation and Disease Surveillance
+Dissertation: A Normal Approximation to N-Mixture Models with Applications in Large Abundance Estimation and Disease Surveillance
 
 **MS in Statistics**, Oregon State, Corvallis, OR, June 2014  
-- Conducted Unit/Sub-unit sample size study on second growth forest tree harvest effect on the Oregon Slender Salamander  
-- Used simulation and Just Another Gibbs Sampler in R to implement multilevel logistic regression model for estimation and precision analysis across various settings
+Conducted simulation work and hierarchical modeling for ecological sampling and precision analysis.
 
-**BA in Mathematics/Statistics**, Grinnell College, Grinnell, IA, May 2010  
-
-
+**BA in Mathematics/Statistics**, Grinnell College, Grinnell, IA, May 2010
+:::

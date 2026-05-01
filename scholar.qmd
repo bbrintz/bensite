@@ -1,6 +1,9 @@
 ---
+title: "Publications"
 format:
   html:
+    meta:
+      description: "Selected publications and Google Scholar records from Ben Brintz."
     toc: false
     code-fold: false
 freeze: auto
@@ -157,7 +160,6 @@ a:hover, a:active {
 }
 
 .pub-bubble:hover .pub-flip,
-.pub-bubble:focus-within .pub-flip,
 .pub-bubble.is-flipped .pub-flip {
   transform: rotateY(180deg);
 }
@@ -249,6 +251,178 @@ a:hover, a:active {
   }
 }
 
+h1.title {
+  color: #f7fbff;
+  letter-spacing: 0;
+}
+
+.pub-intro {
+  max-width: 760px;
+  margin: 0 0 1.4rem 0;
+  color: #dbe6ff;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.pub-intro p {
+  margin-bottom: 0.8rem;
+}
+
+.pub-profile-link {
+  display: inline-block;
+  color: #0b122b !important;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.46rem 0.82rem;
+  background: #ffd27a;
+  text-shadow: none !important;
+}
+
+.pub-heading {
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(219, 230, 255, 0.26);
+  font-weight: 700;
+}
+
+.pub-grid {
+  grid-template-columns: repeat(3, minmax(205px, 1fr));
+  gap: 22px;
+  max-width: 900px;
+}
+
+.pub-bubble {
+  min-height: 0;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.pub-bubble::before,
+.pub-bubble::after {
+  animation: none;
+  opacity: 1;
+}
+
+.pub-bubble::before {
+  inset: -6px;
+  border-color: rgba(126, 199, 255, 0.24);
+}
+
+.pub-bubble::after {
+  inset: -12px;
+  border-color: rgba(255, 210, 122, 0.16);
+}
+
+.pub-bubble:hover {
+  filter: brightness(1.05);
+}
+
+.pub-bubble:hover .pub-flip {
+  transform: none;
+}
+
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-flip {
+  transition-duration: 520ms;
+}
+
+.pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.16), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(18, 48, 86, 0.84), rgba(12, 18, 45, 0.92));
+}
+
+.pub-bubble:nth-child(3n + 2) .pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.15), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(41, 50, 82, 0.9), rgba(17, 24, 48, 0.94));
+}
+
+.pub-bubble:nth-child(3n) .pub-face {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.16), rgba(255,255,255,0.05) 44%, rgba(255,255,255,0.025) 100%),
+    linear-gradient(145deg, rgba(71, 50, 60, 0.86), rgba(18, 24, 48, 0.94));
+}
+
+.pub-title {
+  font-size: 0.86rem;
+}
+
+.pub-meta {
+  max-width: 82%;
+}
+
+.pub-bubble.is-flipped .pub-flip {
+  transform: rotateY(180deg);
+}
+
+.pub-back {
+  gap: 0.5rem;
+  padding: 24px 20px;
+}
+
+.pub-back .pub-title {
+  display: none;
+}
+
+.pub-back-kicker,
+.pub-meta span {
+  color: #9ec1ec;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pub-back .pub-meta {
+  display: grid;
+  gap: 0.12rem;
+  width: 76%;
+  max-width: 76%;
+  color: #e6eefc;
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+.pub-meta strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #f8fbff;
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.pub-meta.citations strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.pub-back .pub-open {
+  padding: 0.3rem 0.68rem;
+}
+
+@media (max-width: 760px) {
+  .pub-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .pub-grid {
+    grid-template-columns: 1fr;
+    max-width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 
 </style>
@@ -265,6 +439,11 @@ a:hover, a:active {
   })();
 </script>
 
+::: {.pub-intro}
+A compact view of the papers visitors are most likely to recognize first. Click a circle for venue and citation details, or jump to the full profile for the long tail.
+
+[Full Google Scholar profile](https://scholar.google.com/citations?user=nYA8PAsAAAAJ){.pub-profile-link}
+:::
 
 ```{r, include=TRUE, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 # install.packages("scholar") # run once
@@ -308,13 +487,13 @@ if (is.null(pubs) || !nrow(pubs)) {
     cites <- top10$Citations[i]
     link_url <- top10$LinkURL[i]
     bubble_html <- glue(
-      "<div class='pub-bubble' role='button' tabindex='0' aria-label='{htmlEscape(title, attribute = TRUE)}' data-link='{htmlEscape(link_url, attribute = TRUE)}'>",
+      "<div class='pub-bubble' role='button' tabindex='0' aria-pressed='false' aria-label='{htmlEscape(title, attribute = TRUE)}' data-link='{htmlEscape(link_url, attribute = TRUE)}'>",
       "<div class='pub-flip'>",
       "<div class='pub-face pub-front'><div class='pub-title'>{htmlEscape(title)}</div></div>",
       "<div class='pub-face pub-back'>",
-      "<div class='pub-title'>{htmlEscape(title)}</div>",
-      "<div class='pub-meta'>Journal: {htmlEscape(venue)}</div>",
-      "<div class='pub-meta'>Citations: {htmlEscape(as.character(cites))}</div>",
+      "<div class='pub-back-kicker'>Details</div>",
+      "<div class='pub-meta'><span>Venue</span><strong>{htmlEscape(venue)}</strong></div>",
+      "<div class='pub-meta citations'><span>Citations</span><strong>{htmlEscape(as.character(cites))}</strong></div>",
       "<a class='pub-open' href='{htmlEscape(link_url, attribute = TRUE)}' target='_blank' rel='noopener'>Open Scholar</a>",
       "</div>",
       "</div>",
@@ -323,6 +502,54 @@ if (is.null(pubs) || !nrow(pubs)) {
     cat(bubble_html, "\n")
   }
   cat("</div>")
-  cat("<script>\n( function(){\n  const grid = document.querySelector('.pub-grid');\n  if(!grid) return;\n\n  function closeOthers(current){\n    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>{\n      if(el !== current) el.classList.remove('is-flipped');\n    });\n  }\n\n  grid.addEventListener('click', (e)=>{\n    const link = e.target.closest('.pub-open');\n    if(link) return;\n    const bubble = e.target.closest('.pub-bubble');\n    if(!bubble) return;\n    e.preventDefault();\n    const willFlip = !bubble.classList.contains('is-flipped');\n    closeOthers(bubble);\n    bubble.classList.toggle('is-flipped', willFlip);\n  });\n\n  grid.addEventListener('keydown', (e)=>{\n    const bubble = e.target.closest('.pub-bubble');\n    if(!bubble) return;\n    if(e.key === 'Enter' || e.key === ' '){\n      e.preventDefault();\n      const willFlip = !bubble.classList.contains('is-flipped');\n      closeOthers(bubble);\n      bubble.classList.toggle('is-flipped', willFlip);\n    }\n    if(e.key === 'Escape'){\n      bubble.classList.remove('is-flipped');\n    }\n  });\n\n  document.addEventListener('click', (e)=>{\n    if(e.target.closest('.pub-bubble')) return;\n    grid.querySelectorAll('.pub-bubble.is-flipped').forEach((el)=>el.classList.remove('is-flipped'));\n  });\n})();\n</script>\n")
+  cat('
+<script>
+(function(){
+  const grid = document.querySelector(".pub-grid");
+  if(!grid) return;
+
+  function setFlipped(bubble, flipped){
+    bubble.classList.toggle("is-flipped", flipped);
+    bubble.setAttribute("aria-pressed", flipped ? "true" : "false");
+  }
+
+  function closeOthers(current){
+    grid.querySelectorAll(".pub-bubble.is-flipped").forEach((el)=>{
+      if(el !== current) setFlipped(el, false);
+    });
+  }
+
+  grid.addEventListener("click", (e)=>{
+    const link = e.target.closest(".pub-open");
+    if(link) return;
+    const bubble = e.target.closest(".pub-bubble");
+    if(!bubble) return;
+    e.preventDefault();
+    const willFlip = !bubble.classList.contains("is-flipped");
+    closeOthers(bubble);
+    setFlipped(bubble, willFlip);
+  });
+
+  grid.addEventListener("keydown", (e)=>{
+    const bubble = e.target.closest(".pub-bubble");
+    if(!bubble) return;
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      const willFlip = !bubble.classList.contains("is-flipped");
+      closeOthers(bubble);
+      setFlipped(bubble, willFlip);
+    }
+    if(e.key === "Escape"){
+      setFlipped(bubble, false);
+    }
+  });
+
+  document.addEventListener("click", (e)=>{
+    if(e.target.closest(".pub-bubble")) return;
+    grid.querySelectorAll(".pub-bubble.is-flipped").forEach((el)=>setFlipped(el, false));
+  });
+})();
+</script>
+')
 }
 ```

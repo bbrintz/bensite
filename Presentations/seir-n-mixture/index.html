@@ -10,8 +10,8 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.554">
 
-  <meta name="author" content="Ben Brintz">
-  <title>Ben Brintz - Using Complex Bayesian Hierarchical Models for “Detection” with Count Data</title>
+  <meta name="author" content="Ben J. Brintz">
+  <title>Ben Brintz - Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,6 @@
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
-  <link rel="stylesheet" href="uofu-theme.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -246,6 +245,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -328,133 +328,45 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Using Complex Bayesian Hierarchical Models for “Detection” with Count Data</h1>
+  <h1 class="title">Estimating Covid-19 Dynamics and Clinical Detection Rate using an Approximation to the Discrete Stochastic SEIR Model</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Ben Brintz 
+Ben J. Brintz 
 </div>
         <p class="quarto-title-affiliation">
-            IDEAS / VA
+            Division of Epidemiology
           </p>
     </div>
 </div>
 
 </section>
-<section id="research-threads-at-a-glance" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Research threads at a glance</h2>
-<div style="height:1em;">
-
-</div>
-<div style="
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 3em;
-  align-items: center;
-  justify-items: center;
-">
-<!-- Top left -->
-<div class="fragment" data-fragment-index="1" style="
-  border:2px solid #333;
-  border-radius:999px;
-  padding:1.2em;
-  background:#f5f7fa;
-  text-align:center;
-  font-weight:700;
-  width: 80%;
-">
-<p>Clinical Prediction &amp;<br>Decision Support</p>
-</div>
-<!-- Top right -->
-<div class="fragment" data-fragment-index="2" style="
-  border:2px solid #333;
-  border-radius:999px;
-  padding:1.2em;
-  background:#f5f7fa;
-  text-align:center;
-  font-weight:700;
-  width: 80%;
-">
-<p>Design &amp;<br>Analysis</p>
-</div>
-<!-- Bottom center -->
-<div class="fragment" data-fragment-index="3" style="grid-column: 1 / span 2; width: 100%; text-align: center;">
-<div data-id="bayes-core" style="
-    border:2px solid #333;
-    border-radius:999px;
-    padding:1.4em;
-    background:#f5f7fa;
-    text-align:center;
-    font-weight:800;
-    width: 76%;
-    max-width: 820px;
-    white-space: nowrap;
-    margin: 0 auto;
-  ">
-<p>Complex Bayesian Hierarchical Models in Stan<br></p>
-</div>
-</div>
-</div>
-</section>
-<section id="section" class="slide level2" data-auto-animate="true" data-visibility="uncounted">
-<h2 data-id="quarto-animate-title"></h2>
-<div style="height:1.5em;">
-
-</div>
-<div style="width: 100%; text-align: center;">
-<div data-id="bayes-core" style="
-  border:3px solid #333;
-  border-radius:999px;
-  padding:2em 3em;
-  background:#e8f0ff;
-  text-align:center;
-  font-weight:900;
-  font-size:1.4em;
-  width: 76%;
-  max-width: 820px;
-  white-space: nowrap;
-  margin: 0 auto;
-">
-<p>Complex Bayesian Hierarchical Models in Stan</p>
-</div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<ul>
-<li class="fragment">Two examples of work in progress:
-<ul>
-<li class="fragment">Stochastic SEIR models that incorporate imperfect <strong>detection</strong> - COVID-19</li>
-<li class="fragment">Early <strong>detection</strong> of call spikes - United Way 211 Calls (Food Insecurity Resources)</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>This presentation will not include equations</strong></p>
 </div>
 <div class="callout-content">
-<p>SEIR models track transitions between susceptible, exposed, infectious, and removed states to represent epidemic dynamics.</p>
-</div>
+<p>Statisticians may feel unsettled by the lack of notation to remember</p>
 </div>
 </div>
 </div>
 </section>
-<section id="case-study-1-covid-19-is-not-perfectly-reported" class="slide level2">
-<h2>Case study 1: COVID-19 is not perfectly reported</h2>
+<section id="the-covid-19-pandemic-highlighted-the-challenge-of-imperfect-detection-in-disease-surveillance" class="slide level2">
+<h2>The Covid-19 pandemic highlighted the challenge of imperfect detection in disease surveillance</h2>
 <ul>
-<li class="fragment">Latent disease transmission is never directly observed</li>
-<li class="fragment">Reported cases reflect testing intensity, reporting practices, and asymptomatic disease
+<li class="fragment">Case reports undercount true infections due to asymptomatic cases and lack of access to testing</li>
+<li class="fragment">Only the sickest got diagnosed with Covid early in the pandemic</li>
+<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”
 <ul>
-<li class="fragment">Only the sickest got diagnosed with COVID-19 early in the pandemic</li>
-<li class="fragment">“We must rely on data from people who are sick enough to get themselves tested, which is a bit like trying to understand exercise trends among average Americans by surveying the participants of a marathon”</li>
+<li class="fragment">Utah Hero Project</li>
 </ul></li>
-<li class="fragment"><strong>Key capability:</strong> separate what is happening from what is observed.</li>
 </ul>
 </section>
 <section id="various-approaches-have-been-developed-to-estimate-clinical-detection-rates" class="slide level2">
@@ -466,31 +378,79 @@ Ben Brintz
 <ul>
 <li class="fragment">E.g. SIR (Susceptible-Infectious-Recovered) models</li>
 </ul></li>
-<li class="fragment"><strong>Key Challenge</strong>: identifiability issues arise when trying to estimate both the true number of infections and the detection rate from observed data, especially when testing practices change over time.</li>
 </ul>
 </section>
-<section id="we-propose-a-novel-hierarchical-bayesian-solution-fit-on-observed-county-level-counts-of-new-cases" class="slide level2">
-<h2>We propose a novel hierarchical Bayesian solution fit on observed county-level counts of new cases</h2>
+<section id="covid-19s-incubation-period-requires-an-extension-to-the-sir-compartment-model" class="slide level2">
+<h2>Covid-19’s incubation period requires an extension to the SIR compartment model</h2>
 <ul>
-<li class="fragment">Latent SEIR compartmental process for true infections with a continuous approximation of binomial on observed counts in stan</li>
-<li class="fragment">Transmission follows a hierarchical AR(1) process over time
+<li class="fragment"><strong>SIR model</strong> assumes that individuals transition directly from susceptible to infectious</li>
+<li class="fragment"><strong>SEIR model</strong> adds an exposed compartment to account for the incubation period (e.g.&nbsp;5 days)</li>
+<li class="fragment"><strong>SEIR models</strong> don’t directly account for imperfect detection</li>
+</ul>
+</section>
+<section id="our-stochastic-seir-model-acounts-for-imperfect-detection" class="slide level2">
+<h2>Our stochastic SEIR model acounts for imperfect detection</h2>
 <ul>
-<li class="fragment">Lay interpretation: transmission this week tends to resemble recent weeks, while still allowing small differences between districts.</li>
-</ul></li>
-<li class="fragment">Estimation allows for different start time across health districts</li>
-<li class="fragment">Allows an evolving recovery/incubation rate (E-&gt;I and I-&gt;R transitions) using beta-binomial transition
+<li class="fragment">Individuals transition from susceptible to exposed to infectious</li>
+<li class="fragment">We fit a model to observed county-level counts of new cases</li>
+<li class="fragment">We assume incidence cases (E -&gt; I, we call EI) are imperfectly detected
 <ul>
-<li class="fragment">Lay interpretation: the time it takes for people to become infectious/recover can change over time, and we model this flexibility directly rather than assuming it is constant.</li>
+<li class="fragment">Currently assumed to be constant across time.</li>
+<li class="fragment">But it does allow all dynamics parameters to vary over time and space</li>
 </ul></li>
 </ul>
-<div class="fragment">
-<p><strong>Modeling strategy:</strong> allow flexibility where variability is real.</p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="fragment grow fade-in-then-out top-right">
+<p>Our study has a number of novelties in the stochastic SEIR model space</p>
+</div>
+<div class="fragment fade-in top-right">
+<p>Novelty #1</p>
+</div>
+</section>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
+<ul>
+<li class="fragment">We used a continuous approximation in STAN with non-informative priors (Bayesian Hamiltonian Monte Carlo)</li>
+<li class="fragment">The binomial distribution is a reasonable way to describe dynamics between compartments but STAN doesn’t allow discrete priors</li>
+<li class="fragment">We approximate the binomial distribution with the inverse logit of a normal distribution to sample more efficiently and leverage the strength of gradient-based algorithms</li>
+</ul>
+</section>
+<section id="a-novel-computational-solution-to-estimating-dynamics-in-a-discrete-transmission-model-1" class="slide level2" data-auto-animate="true" data-auto-animate-easing="ease-in">
+<h2 data-id="quarto-animate-title">A novel computational solution to estimating dynamics in a discrete transmission model</h2>
+<div data-id="box" width="75%" height="75%">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="fragment fade-up top-right">
+<p>Novelty #2</p>
 </div>
 </section>
 <section id="model-estimation-allows-for-different-start-times-of-infections-across-health-districts" class="slide level2">
 <h2>Model estimation allows for different start times of infections across health-districts</h2>
-
-<img data-src="index_files/figure-revealjs/betabin_trans-1.png" width="960" class="r-stretch"><div class="fragment fade-in" data-fragment-index="2">
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -506,102 +466,186 @@ Ben Brintz
 </div>
 </div>
 </section>
-<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
-<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
-
-<img data-src="index_files/figure-revealjs/ar1_trans-1.gif" class="r-stretch"></section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="fragment fade-right top-right">
+<p>Novelty #3</p>
+</div>
+</section>
 <section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process" class="slide level2">
 <h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
-<section id="utah-covid-19-clinical-detection-rate-posterior-density" class="slide level2">
-<h2>Utah COVID-19 clinical detection rate (posterior density)</h2>
-<p><img data-src="utah_p_dens_020325.png" height="500"></p>
-</section>
-<section id="utah-estimated-true-infections-vs-reported-cases" class="slide level2">
-<h2>Utah Estimated True Infections vs Reported Cases</h2>
-<p><img data-src="utah_120525_bb.png" height="500"></p>
-</section>
-<section id="case-study-2-can-spikes-in-211-calls-be-detected-early" class="slide level2">
-<h2>Case study 2: Can spikes in 211 calls be detected early?</h2>
-<ul>
-<li class="fragment">211 is a nationwide, free public referral system that responds to &gt;20 million requests for help each year from U.S. residents</li>
-<li class="fragment">We have call counts from Utah from 2019 - 2025.</li>
-<li class="fragment">Calls are often zero or low volume, but occasionally spike when there are major events (e.g.&nbsp;COVID-19, natural disasters, economic shocks)</li>
-<li class="fragment">Can we capture these spikes early to help with resource allocation and response?</li>
-</ul>
-</section>
-<section id="how-we-model-the-call-data" class="slide level2">
-<h2>How we model the call data</h2>
-<ul>
-<li class="fragment">Zero-inflated negative binomial (ZINB) model for daily call counts
-<ul>
-<li class="fragment">Lay interpretation: some days truly have no demand, while other days vary widely and can spike.</li>
-</ul></li>
-<li class="fragment">Day-of-week effects included in both the zero-inflated and NB count components
-<ul>
-<li class="fragment">Lay interpretation: Mondays and weekends can have different baseline call patterns.</li>
-</ul></li>
-<li class="fragment">Latent intensity evolves through an AR(1) state process over time
-<ul>
-<li class="fragment">Lay interpretation: call demand today is related to recent days, not independent day-to-day.</li>
-</ul></li>
-<li class="fragment">Annual seasonality represented with Fourier harmonics
-<ul>
-<li class="fragment">Lay interpretation: recurring yearly patterns are modeled smoothly rather than with hard cutoffs.</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<p><strong>Modeling strategy:</strong> match distributional assumptions to observed call behavior.</p>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="estimating-an-evolving-transmission-rate-using-a-hierarchical-ar1-process-1" class="slide level2">
+<h2>Estimating an evolving transmission rate using a hierarchical AR(1) process</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="fragment fade-down top-right">
+<p>Novelty #4</p>
 </div>
 </section>
-<section id="how-early-warning-works" class="slide level2">
-<h2>How early warning works</h2>
-<ul>
-<li class="fragment">Smooth logistic change-point ramps capture medium-term structural shifts
-<ul>
-<li class="fragment">Pre-specified number but estimated using horseshoe priors to allow for flexibility</li>
-<li class="fragment">Lay interpretation: the model allows gradual shifts in demand level but avoids overreacting to noise.</li>
-</ul></li>
-<li class="fragment">Daily shock term captures short-lived departures from baseline
-<ul>
-<li class="fragment">Lay interpretation: unusual surges are flagged when calls jump above expected patterns.</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<p><strong>Capability:</strong> separate expected temporal structure from transient anomalies.</p>
+<section id="estimating-an-evolving-recovery-rate-and-incubation-using-beta-binomial-transitions" class="slide level2">
+<h2>Estimating an evolving recovery rate and incubation using beta-binomial transitions</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.gif" class="r-stretch"></section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="fragment grow fade-in-then-out top-right">
+<p>Some Results</p>
+</div>
+<div class="fragment grow fade-in-then-out top-right">
+<p><img data-src="utah_p_dens_020325.png"></p>
+</div>
+<div class="fragment fade-in-then-out">
+<p><img data-src="utah_020325_bb.png"></p>
 </div>
 </section>
-<section id="prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example" class="slide level2">
-<h2>Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.gif" class="r-stretch"><p>Orange dots are observed call counts. Dark grey line and light grey shade are model fit with posterior credible intervals. Green bar near the x-axis represents 90% credible intervals for change-point timing, and the dashed blue line marks the current date.</p>
+<section id="the-team" class="slide level2">
+<h2>The Team</h2>
+<div class="fragment" data-fragment-index="1">
+<p><img data-src="Lisa.jpg" class="absolute" style="top: 200px; left: 0px; width: 300px; height: 300px; "></p>
+<p><img data-src="Claudio.jpg" class="absolute" style="top: 50px; right: 430px; width: 250px; height: 325px; "></p>
+<p><img data-src="rob.jpg" class="absolute" style="bottom: 0px; right: 50px; width: 300px; height: 300px; "></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><img data-src="till.png" class="absolute" style="top: 0px; right: 100px; width: 300px; height: 300px; "></p>
+</div>
 </section>
-<section id="prospective-model-fitting-from-mar-25-to-apr-10-2020-covid-19-example-1" class="slide level2">
-<h2>Prospective model fitting from Mar 25 to Apr 10, 2020 (COVID-19 example)</h2>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.gif" class="r-stretch"><p>Top panel overlays raw calls (orange points) with posterior mean and 90% credible interval. Bottom panel shows posterior kappa points with reference lines at 1.0 and +/-10% (y-axis fixed to 0.5-1.5).</p>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
 </section>
-<section id="practical-decision-use-is-still-a-work-in-progress" class="slide level2">
-<h2>Practical decision use is still a work in progress</h2>
-<ul>
-<li class="fragment">Posterior expected calls are compared against latent baseline expectations</li>
-<li class="fragment">Kappa values above a certain level indicate anomolous behavior, but thresholds for action are still being determined</li>
-<li class="fragment">Tau and ramps can be used to show a systematic shift in call behavior, but how to use this information for decision-making is still being explored</li>
-</ul>
+<section id="model-formulation" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
 </section>
-<section id="what-unifies-this-work" class="slide level2">
-<h2>What unifies this work</h2>
-<ul>
-<li class="fragment">Both projects involve <strong>detection</strong> of latent phenomena (true infections, call spikes) from observed count data.</li>
-<li class="fragment">Complexity of these models requires us to take an efficient Bayesian hierarchical approach</li>
-<li class="fragment">Latent-process Bayesian models on count data with temporal dependence</li>
-<li class="fragment">Flexible distributions matched to real-world count data</li>
-</ul>
+<section id="model-formulation-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><strong>For (t &gt; f_{i}):</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
 </section>
-<section id="thank-you" class="slide level2">
-<h2>Thank you</h2>
-<p>Questions or collaborations welcome.</p>
+<section id="model-formulation-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &amp;=
+  \begin{cases}
+    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="model-formulation-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+    \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
+    B_{it} &amp;= \phi B_{i,t-1} + \sigma \epsilon_{it}, t&gt;1
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &amp;=
+  \begin{cases}
+    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="model-formulation-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Model Formulation</h2>
+<p><span class="math display">\[\begin{aligned}
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it}, p \Bigr) \\
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+    \log{\beta_{it}} &amp;\sim \text{Normal}(B_{it}, \tau^2) \\
+    B_{it} &amp;= \phi B_{i,t-1} + \sigma \epsilon_{it}, t&gt;1
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+S_{it} &amp;= S_{it-1} - SE_{it},\\[6pt]
+E_{it} &amp;=
+  \begin{cases}
+    SE_{it}, &amp; \text{if } t = f_i + 1,\\[6pt]
+    E_{it-1} + SE_{it} - EI_{it}, &amp; \text{if } t &gt; f_i + 1,
+  \end{cases}\\[6pt]
+I_{it} &amp;= I_{it-1} + EI_{it} - IR_{it},\\[6pt]
+ii_{it} &amp;\sim \text{Binomial}\!\Bigl(EI_{it},\,p\Bigr)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+SE_{it} &amp;\sim \text{Binomial}\!\Bigl(S_{it-1},\,1 - \exp\!\Bigl(-\tfrac{\beta_{it}I_{it-1}}{N}\Bigr)\Bigr),\\[6pt]
+EI_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(E_{it-1},\,1 - \exp(-\eta_i),\,\rho_{EI}\Bigr),\\[6pt]
+IR_{it} &amp;\sim \text{BetaBinomial}\!\Bigl(I_{it-1},\,1 - \exp(-\gamma_i),\,\rho_{IR}\Bigr),\\[6pt]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+I_{if_1} &amp;= c,\\[6pt]
+EI_{if_i} &amp;= I_{if_i},\\[6pt]
+S_{if_i} &amp;= N_i - EI_{if_i}.
+\end{aligned}
+\]</span></p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -636,8 +680,8 @@ Ben Brintz
 'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
-'autoAnimateEasing': "linear",
-'autoAnimateDuration': 1.25,
+'autoAnimateEasing': "ease-in-out",
+'autoAnimateDuration': 1,
 'autoAnimateUnmatched': false,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
@@ -818,58 +862,6 @@ Ben Brintz
           RevealZoom
         ]
       });
-    </script>
-    <style>
-      .custom-slide-number {
-        position: fixed;
-        right: 14px;
-        bottom: 14px;
-        z-index: 60;
-        background: rgba(190, 0, 0, 0.9);
-        color: #fff;
-        border-radius: 999px;
-        padding: 0.18em 0.55em;
-        font-size: 0.95rem;
-        line-height: 1;
-        font-family: inherit;
-        pointer-events: none;
-      }
-    </style>
-    <script>
-    (function () {
-      function updateCounter() {
-        if (!window.Reveal || !window.__customSlideNumber) return;
-        var current = Reveal.getSlidePastCount() + 1;
-        var total = Reveal.getTotalSlides();
-        window.__customSlideNumber.textContent = current + "/" + total;
-      }
-
-      function initCounter() {
-        if (!window.Reveal) return;
-        if (!window.__customSlideNumber) {
-          var el = document.createElement("div");
-          el.className = "custom-slide-number";
-          document.body.appendChild(el);
-          window.__customSlideNumber = el;
-        }
-        updateCounter();
-        Reveal.on("ready", updateCounter);
-        Reveal.on("slidechanged", updateCounter);
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        var tries = 0;
-        var timer = setInterval(function () {
-          tries += 1;
-          if (window.Reveal) {
-            clearInterval(timer);
-            initCounter();
-          } else if (tries > 50) {
-            clearInterval(timer);
-          }
-        }, 100);
-      });
-    })();
     </script>
     
     <script>

@@ -1,7 +1,9 @@
 ---
-title: ""
+title: "Call Spike Prototype"
 format:
   html:
+    meta:
+      description: "Interactive prototype for exploring call-volume spikes and public-health signal detection."
     toc: false
     theme: none
 execute:

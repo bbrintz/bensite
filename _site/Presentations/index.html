@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ben Brintz</title>
+<title>Ben Brintz - Presentations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -97,10 +97,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../woodworking.html"> 
-<span class="menu-text">Woodworking</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../Presentations/index.html" aria-current="page"> 
 <span class="menu-text">Presentations</span></a>
   </li>  
@@ -120,57 +116,226 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Presentations</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <div class="{=html}">
 <style>
 body {
+  min-height: 100vh;
   background-color: #030a1c;
   background-image:
     radial-gradient(circle at 78% 82%, rgba(255, 120, 40, 0.24), transparent 38%),
     radial-gradient(circle at 22% 22%, rgba(102, 195, 255, 0.24), transparent 34%),
     linear-gradient(112deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 14, 38, 0.84) 48%, rgba(11, 24, 53, 0.92) 100%);
   background-repeat: no-repeat;
-}
-a, a:link, a:visited {
-  color: white;
-}
-a:hover, a:active {
-  color: #EEEEEE;
+  color: #f8fbff;
 }
 
+h1.title {
+  color: #f8fbff;
+  letter-spacing: 0;
+}
 
-  .presentations-list {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  .presentations-list a {
-    display: block;
-    margin: 1rem 0;
-    font-size: 1.25rem;
-    white-space: nowrap;
-    max-width: 90vw;
+.presentation-intro {
+  max-width: 740px;
+  margin-bottom: 1.4rem;
+  color: #dbe6ff;
+  font-size: 1.04rem;
+  line-height: 1.65;
+}
+
+.presentation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 3rem;
+}
+
+.presentation-card {
+  display: grid;
+  gap: 0.7rem;
+  min-height: 210px;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(185, 206, 255, 0.2);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(126, 199, 255, 0.12), transparent 38%),
+    rgba(255, 255, 255, 0.045);
+  color: #f8fbff !important;
+  text-decoration: none;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.presentation-card:nth-child(2n) {
+  background:
+    radial-gradient(circle at 80% 12%, rgba(255, 158, 68, 0.12), transparent 36%),
+    rgba(255, 255, 255, 0.045);
+}
+
+.presentation-card:hover,
+.presentation-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 210, 122, 0.46);
+  background-color: rgba(255, 255, 255, 0.07);
+  outline: none;
+}
+
+.presentation-meta {
+  color: #9ec1ec;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.presentation-card h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.45rem;
+  line-height: 1.16;
+}
+
+.presentation-card p {
+  margin: 0;
+  color: #dbe6ff;
+  line-height: 1.55;
+}
+
+.presentation-action {
+  align-self: end;
+  color: #ffd27a;
+  font-weight: 700;
+}
+
+.presentation-feature {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.45fr);
+  grid-column: 1 / -1;
+  align-items: stretch;
+}
+
+.presentation-copy {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.presentation-related {
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  border-left: 1px solid rgba(219, 230, 255, 0.22);
+  padding-left: 1rem;
+}
+
+.related-kicker {
+  color: #9ec1ec;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.related-link {
+  display: block;
+  color: #ffd27a !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.related-link:hover,
+.related-link:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .presentation-grid {
+    grid-template-columns: 1fr;
   }
 
-  .presentations-list a.sub-link {
-    margin-top: -0.55rem;
-    margin-bottom: 0.85rem;
-    font-size: 0.95rem;
-    opacity: 0.9;
+  .presentation-card h2 {
+    font-size: 1.2rem;
   }
+
+  .presentation-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .presentation-related {
+    border-left: 0;
+    border-top: 1px solid rgba(219, 230, 255, 0.22);
+    padding-left: 0;
+    padding-top: 0.75rem;
+  }
+}
 </style>
 </div>
-<div class="presentations-list">
-<p><a href="../Presentations/mmdis/">Measuring and Mitigating Disparity of Decision-Making Tools</a><br> <a href="../Presentations/seir-n-mixture/">SEIR N-mixture Model</a><br> <a href="../Presentations/VA-IDEAS/">VA-IDEAS</a> <a class="sub-link" href="../watchtower_demo_v2.html">Call Spike Prototype</a></p>
+<div class="presentation-intro">
+<p>Talks and prototypes, collected as a small portfolio rather than a link list. The common thread is making statistical models inspectable enough to argue with.</p>
+</div>
+<div class="presentation-grid">
+  <article class="presentation-card presentation-feature">
+    <div class="presentation-copy">
+      <span class="presentation-meta">211 surveillance modeling</span>
+      <h2 class="anchored">Anomaly Detection Model Overview</h2>
+      <p>A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.</p>
+      <a class="presentation-action" href="211_pres/v5_model_presentation.html">Open slides</a>
+    </div>
+    <div class="presentation-related">
+      <span class="related-kicker">Related prototype</span>
+      <a class="related-link" href="surveillance_dashboard.html">Utah Food-Needs ZIP Map</a>
+      <p>A focused map view for reviewing ZIP-level model signals by run date.</p>
+    </div>
+  </article>
+  <a class="presentation-card" href="mmdis/">
+    <span class="presentation-meta">Fairness and decision tools</span>
+    <h2 class="anchored">Measuring and Mitigating Disparity of Decision-Making Tools</h2>
+    <p>A presentation on evaluating prediction systems when accuracy is not the only thing that matters.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
+  <a class="presentation-card" href="seir-n-mixture/">
+    <span class="presentation-meta">Disease surveillance</span>
+    <h2 class="anchored">SEIR N-mixture Model</h2>
+    <p>A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
+  <a class="presentation-card" href="VA-IDEAS/">
+    <span class="presentation-meta">Applied modeling</span>
+    <h2 class="anchored">Complex Bayesian Models</h2>
+    <p>Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.</p>
+    <span class="presentation-action">Open slides</span>
+  </a>
 </div>
 
 
 
 </main> <!-- /main -->
+<footer class="site-footer" aria-label="Site footer">
+  <div class="site-footer-inner">
+    <p class="footer-name">Ben Brintz</p>
+    <nav class="footer-links" aria-label="Contact and profiles">
+      <a href="mailto:ben.brintz@hsc.utah.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=nYA8PAsAAAAJ">Scholar</a>
+      <a href="https://github.com/bbrintz">GitHub</a>
+    </nav>
+  </div>
+</footer>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

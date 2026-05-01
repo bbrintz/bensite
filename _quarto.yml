@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - images/*.webp
 
 website:
   title: "Ben Brintz"
@@ -9,8 +11,6 @@ website:
         text: Home
       - href: scholar.qmd
         text: Publications
-      - href: woodworking.qmd
-        text: Woodworking
       - href: Presentations/index.qmd
         text: Presentations
     tools:
@@ -21,6 +21,7 @@ format:
   html:
     theme: "sandstone"
     toc: false
+    include-after-body: footer.html
     css: 
       - custom-layout.css
     

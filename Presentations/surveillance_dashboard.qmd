@@ -1,0 +1,1007 @@
+---
+title: "Utah ZIP Map"
+format:
+  html:
+    toc: false
+    page-layout: full
+execute:
+  echo: false
+  warning: false
+  message: false
+freeze: false
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+library(jsonlite)
+library(scales)
+
+excess_alert_threshold <- 0.80
+ramp_alert_threshold <- 0.90
+svg_width <- 1000
+svg_height <- 720
+svg_margin <- 18
+
+as_date_safe <- function(x) {
+  if (inherits(x, "Date")) return(x)
+  if (inherits(x, "POSIXt")) return(as.Date(x))
+
+  parsed <- suppressWarnings(lubridate::parse_date_time(
+    as.character(x),
+    orders = c("ymd", "mdy", "Ymd", "mdY", "ymd HMS", "mdy HMS"),
+    tz = "UTC",
+    exact = FALSE
+  ))
+
+  as.Date(parsed)
+}
+
+ensure_cols <- function(x, cols) {
+  for (nm in setdiff(cols, names(x))) x[[nm]] <- NA
+  x
+}
+
+read_surveillance <- function() {
+  candidates <- c(
+    "surveillance dashboard.csv",
+    "surveillance_dashboard.csv",
+    "surv_csv.csv",
+    "surv_csv2.csv"
+  )
+
+  for (path in candidates) {
+    if (file.exists(path)) {
+      return(readr::read_csv(path, show_col_types = FALSE))
+    }
+  }
+
+  tibble()
+}
+
+required_cols <- c(
+  "zip", "end_date", "outbreak_id", "outbreak_label", "anchor_date",
+  "first_detection_date", "latest_pr_excess_gt0", "latest_pr_excess_gt1",
+  "latest_pr_excess_gt2", "max_pr_excess_gt0_last7",
+  "max_pr_excess_gt1_last7", "max_pr_excess_gt2_last7",
+  "max_pr_rate_mult_gt_1_10", "max_pr_rate_mult_gt_1_25",
+  "first_excess_gt0_90_date_last7", "first_excess_gt2_80_date_last7",
+  "earliest_supported_ramp_10_date", "earliest_supported_ramp_50_date",
+  "n_divergent", "n_tree_max"
+)
+
+date_cols <- c(
+  "end_date", "anchor_date", "first_detection_date",
+  "first_excess_gt0_90_date_last7", "first_excess_gt2_80_date_last7",
+  "earliest_supported_ramp_10_date", "earliest_supported_ramp_50_date"
+)
+
+prob_cols <- c(
+  "latest_pr_excess_gt0", "latest_pr_excess_gt1", "latest_pr_excess_gt2",
+  "max_pr_excess_gt0_last7", "max_pr_excess_gt1_last7",
+  "max_pr_excess_gt2_last7", "max_pr_rate_mult_gt_1_10",
+  "max_pr_rate_mult_gt_1_25"
+)
+
+surv_raw <- read_surveillance() %>%
+  ensure_cols(required_cols)
+
+surv <- if (nrow(surv_raw) == 0) {
+  tibble()
+} else {
+  surv_raw %>%
+    mutate(
+      zip = str_pad(as.character(zip), width = 5, side = "left", pad = "0"),
+      across(any_of(date_cols), as_date_safe),
+      across(any_of(prob_cols), as.numeric),
+      n_divergent = as.numeric(n_divergent),
+      n_tree_max = as.numeric(n_tree_max),
+      end_date_label = format(end_date, "%Y-%m-%d"),
+      signal_score = pmax(
+        coalesce(max_pr_excess_gt2_last7, 0),
+        coalesce(max_pr_rate_mult_gt_1_10, 0),
+        coalesce(latest_pr_excess_gt2, 0)
+      ),
+      alert_class = case_when(
+        max_pr_excess_gt2_last7 >= excess_alert_threshold ~ "High excess",
+        max_pr_rate_mult_gt_1_10 >= ramp_alert_threshold ~ "Supported ramp",
+        max_pr_excess_gt0_last7 >= 0.90 ~ "Any excess",
+        TRUE ~ "Watch"
+      )
+    ) %>%
+    arrange(end_date, zip)
+}
+
+fmt_pct <- function(x) percent(x, accuracy = 1)
+
+fmt_date_chr <- function(x) {
+  ifelse(is.na(x), NA_character_, format(x, "%Y-%m-%d"))
+}
+
+zip_meta <- tibble(
+  zip = character(),
+  major_city = character(),
+  county = character(),
+  lat = numeric(),
+  lng = numeric()
+)
+
+if (requireNamespace("zipcodeR", quietly = TRUE)) {
+  data("zip_code_db", package = "zipcodeR")
+  zip_meta <- zip_code_db %>%
+    transmute(
+      zip = as.character(zipcode),
+      major_city,
+      county,
+      state,
+      lat = as.numeric(lat),
+      lng = as.numeric(lng)
+    ) %>%
+    filter(state == "UT") %>%
+    select(zip, major_city, county, lat, lng)
+}
+
+shape_path <- "utah_zcta_geometry.rds"
+
+make_fallback_shapes <- function() {
+  if (nrow(zip_meta) == 0) {
+    return(tibble(zip = character(), path = character()))
+  }
+
+  bbox <- c(xmin = -114.12, xmax = -108.95, ymin = 36.95, ymax = 42.05)
+  project <- function(lon, lat) {
+    tibble(
+      x = svg_margin + ((lon - bbox[["xmin"]]) / (bbox[["xmax"]] - bbox[["xmin"]])) * (svg_width - 2 * svg_margin),
+      y = svg_margin + (1 - ((lat - bbox[["ymin"]]) / (bbox[["ymax"]] - bbox[["ymin"]]))) * (svg_height - 2 * svg_margin)
+    )
+  }
+
+  zip_meta %>%
+    filter(!is.na(lat), !is.na(lng)) %>%
+    mutate(
+      path = pmap_chr(list(lng, lat), function(lon, lat) {
+        p <- project(lon, lat)
+        r <- 7
+        paste0(
+          "M ", round(p$x - r, 2), " ", round(p$y, 2),
+          " a ", r, " ", r, " 0 1 0 ", 2 * r, " 0",
+          " a ", r, " ", r, " 0 1 0 -", 2 * r, " 0"
+        )
+      })
+    ) %>%
+    select(zip, path)
+}
+
+make_svg_shapes <- function(geo) {
+  zip_col <- intersect(c("ZCTA5CE20", "GEOID20", "ZCTA5CE10", "GEOID10", "zip"), names(geo))[1]
+  if (is.na(zip_col)) return(make_fallback_shapes())
+
+  geo <- geo %>%
+    mutate(zip = str_pad(as.character(.data[[zip_col]]), width = 5, side = "left", pad = "0")) %>%
+    st_transform(4326) %>%
+    st_make_valid()
+
+  geo_simple <- suppressWarnings(
+    geo %>%
+      st_transform(26912) %>%
+      st_simplify(dTolerance = 450, preserveTopology = TRUE) %>%
+      st_transform(4326)
+  )
+
+  bbox <- st_bbox(geo_simple)
+  project_matrix <- function(mat) {
+    tibble(
+      x = svg_margin + ((mat[, 1] - bbox[["xmin"]]) / (bbox[["xmax"]] - bbox[["xmin"]])) * (svg_width - 2 * svg_margin),
+      y = svg_margin + (1 - ((mat[, 2] - bbox[["ymin"]]) / (bbox[["ymax"]] - bbox[["ymin"]]))) * (svg_height - 2 * svg_margin)
+    )
+  }
+
+  ring_path <- function(mat) {
+    pts <- project_matrix(mat)
+    paste0(
+      "M ", paste(round(pts$x, 2), round(pts$y, 2), sep = " ", collapse = " L "),
+      " Z"
+    )
+  }
+
+  geom_path <- function(g) {
+    if (inherits(g, "POLYGON")) {
+      return(paste(vapply(unclass(g), ring_path, character(1)), collapse = " "))
+    }
+
+    if (inherits(g, "MULTIPOLYGON")) {
+      return(paste(unlist(lapply(unclass(g), function(poly) {
+        vapply(poly, ring_path, character(1))
+      })), collapse = " "))
+    }
+
+    ""
+  }
+
+  tibble(
+    zip = geo_simple$zip,
+    path = vapply(st_geometry(geo_simple), geom_path, character(1))
+  ) %>%
+    filter(path != "") %>%
+    distinct(zip, .keep_all = TRUE)
+}
+
+shape_tbl <- if (file.exists(shape_path)) {
+  make_svg_shapes(readRDS(shape_path))
+} else {
+  make_fallback_shapes()
+}
+
+dates <- if (nrow(surv) > 0) sort(unique(surv$end_date)) else as.Date(character())
+default_date <- if (length(dates) > 0) min(dates) else as.Date(NA)
+default_zip <- if ("84020" %in% surv$zip) "84020" else if (nrow(surv) > 0) surv$zip[[1]] else NA_character_
+
+mapped_zips_by_date <- surv %>%
+  semi_join(shape_tbl, by = "zip") %>%
+  count(end_date, name = "mapped_zips") %>%
+  mutate(end_date = fmt_date_chr(end_date))
+
+data_rows <- surv %>%
+  left_join(zip_meta, by = "zip") %>%
+  mutate(
+    end_date = fmt_date_chr(end_date),
+    anchor_date = fmt_date_chr(anchor_date),
+    first_detection_date = fmt_date_chr(first_detection_date),
+    first_excess_gt0_90_date_last7 = fmt_date_chr(first_excess_gt0_90_date_last7),
+    first_excess_gt2_80_date_last7 = fmt_date_chr(first_excess_gt2_80_date_last7),
+    earliest_supported_ramp_10_date = fmt_date_chr(earliest_supported_ramp_10_date),
+    earliest_supported_ramp_50_date = fmt_date_chr(earliest_supported_ramp_50_date)
+  ) %>%
+  select(
+    zip, end_date, outbreak_label, anchor_date, first_detection_date,
+    major_city, county,
+    latest_pr_excess_gt0, latest_pr_excess_gt1, latest_pr_excess_gt2,
+    max_pr_excess_gt0_last7, max_pr_excess_gt1_last7, max_pr_excess_gt2_last7,
+    max_pr_rate_mult_gt_1_10, max_pr_rate_mult_gt_1_25,
+    first_excess_gt0_90_date_last7, first_excess_gt2_80_date_last7,
+    earliest_supported_ramp_10_date, earliest_supported_ramp_50_date,
+    n_divergent, n_tree_max, signal_score, alert_class
+  )
+
+unmatched_zips <- setdiff(sort(unique(surv$zip)), shape_tbl$zip)
+
+payload <- list(
+  viewBox = list(width = svg_width, height = svg_height),
+  shapes = shape_tbl,
+  rows = data_rows,
+  dates = fmt_date_chr(dates),
+  mappedByDate = mapped_zips_by_date,
+  defaultZip = default_zip,
+  defaultDate = fmt_date_chr(default_date),
+  unmatchedZips = unmatched_zips
+)
+```
+
+```{=html}
+<style>
+body {
+  background: #f5f6f6;
+  color: #26323a;
+}
+
+#title-block-header {
+  display: none;
+}
+
+main.content {
+  max-width: none;
+  padding: 0;
+}
+
+.surv-app {
+  min-height: calc(100vh - 58px);
+  background: #f5f6f6;
+  font-family: "Source Sans 3", "Source Sans Pro", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.surv-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.72rem 1.05rem 0.82rem;
+  border-bottom: 1px solid #d7dde1;
+  background: #ffffff;
+}
+
+.surv-kicker,
+.metric-label,
+.detail-kicker {
+  color: #677580;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.surv-header h1 {
+  margin: 0.1rem 0 0;
+  color: #253039;
+  font-size: clamp(1.35rem, 2vw, 2.05rem);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.surv-subtitle {
+  margin: 0.28rem 0 0;
+  color: #667480;
+  font-size: 0.94rem;
+}
+
+.surv-status {
+  color: #64727c;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.surv-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.map-stage,
+.detail-panel {
+  border: 1px solid #d4dadd;
+  background: #ffffff;
+}
+
+.map-stage {
+  position: relative;
+  min-height: 740px;
+  overflow: hidden;
+}
+
+.map-frame {
+  position: relative;
+  height: 672px;
+}
+
+#zipMap {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.zip-area {
+  fill: #cdd6db;
+  fill-rule: evenodd;
+  stroke: #aebbc2;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 120ms ease, opacity 120ms ease, stroke 120ms ease;
+}
+
+.zip-area.has-data:hover,
+.zip-area.selected {
+  stroke: #27333b;
+  stroke-width: 1.5;
+}
+
+.zip-area.no-data {
+  fill: #dce2e5;
+  opacity: 0.68;
+  cursor: default;
+}
+
+.map-empty {
+  padding: 2rem;
+  color: #5d6b75;
+}
+
+.colorbar {
+  position: absolute;
+  right: 5.6rem;
+  top: 5.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.38rem;
+  align-items: center;
+  color: #33404a;
+  font-size: 0.82rem;
+}
+
+.colorbar-title {
+  grid-column: 1 / span 2;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.colorbar-strip {
+  width: 14px;
+  height: 142px;
+  border: 1px solid #8c979e;
+  background: linear-gradient(to top, #440154, #31688e, #35b779, #fde725);
+}
+
+.colorbar-ticks {
+  display: flex;
+  height: 142px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.run-date-watermark {
+  position: absolute;
+  right: 8rem;
+  bottom: 2.1rem;
+  color: rgba(66, 75, 82, 0.28);
+  font-size: 1.35rem;
+  letter-spacing: 0;
+}
+
+.map-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 0.7rem 0.8rem;
+  border-top: 1px solid #d9e0e4;
+}
+
+.play-button {
+  min-width: 54px;
+  border: 1px solid #bcc8d2;
+  border-radius: 6px;
+  background: #f9fbfc;
+  color: #2e3a43;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.54rem 0.7rem;
+}
+
+.date-slider {
+  width: 100%;
+  accent-color: #8aa4c5;
+}
+
+.date-ticks {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  color: #3f4a52;
+  font-size: 0.78rem;
+}
+
+.detail-panel {
+  padding: 1.05rem 1.15rem;
+  min-height: 740px;
+}
+
+.detail-panel h2 {
+  margin: 1.25rem 0 1.1rem;
+  color: #243038;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.detail-subtitle {
+  color: #677681;
+  font-size: 0.94rem;
+}
+
+.chart-wrap {
+  margin: 1.6rem 0 1.2rem;
+}
+
+#zipProfile {
+  display: block;
+  width: 100%;
+  height: 230px;
+}
+
+.legend-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.35rem;
+  color: #41515d;
+  font-size: 0.78rem;
+}
+
+.legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+}
+
+.legend-key::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--key);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 0.85rem;
+  margin-top: 1rem;
+}
+
+.metric {
+  border-top: 1px solid #d8e0e5;
+  padding-top: 0.52rem;
+}
+
+.metric-value {
+  margin-top: 0.25rem;
+  color: #243038;
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.date-list {
+  margin: 1.2rem 0 0;
+  border-top: 1px solid #d8e0e5;
+  padding-top: 0.75rem;
+}
+
+.date-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #667580;
+  line-height: 1.5;
+}
+
+.date-list strong {
+  color: #394854;
+}
+
+.detail-note,
+.unmatched-note {
+  color: #52626e;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.detail-note {
+  margin-top: 1.1rem;
+}
+
+.unmatched-note {
+  margin-top: 1.2rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1050px) {
+  .surv-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-panel,
+  .map-stage {
+    min-height: auto;
+  }
+
+  .map-frame {
+    height: 560px;
+  }
+}
+
+@media (max-width: 680px) {
+  .surv-header,
+  .surv-layout {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+
+  .surv-header {
+    display: block;
+  }
+
+  .surv-status {
+    margin-top: 0.5rem;
+  }
+
+  .map-frame {
+    height: 480px;
+  }
+
+  .colorbar {
+    right: 0.8rem;
+    top: 1rem;
+  }
+
+  .run-date-watermark {
+    right: 1rem;
+    bottom: 1.2rem;
+    font-size: 1rem;
+  }
+}
+</style>
+```
+
+```{r, results='asis'}
+cat(
+  "<script id=\"survPayload\" type=\"application/json\">",
+  toJSON(payload, dataframe = "rows", auto_unbox = TRUE, na = "null", digits = 7),
+  "</script>",
+  sep = ""
+)
+```
+
+```{=html}
+<div class="surv-app">
+  <header class="surv-header">
+    <div>
+      <div class="surv-kicker">211 food-needs surveillance</div>
+      <h1>Utah ZIP Map</h1>
+      <p class="surv-subtitle">ZIP-level model signals by prospective run date.</p>
+    </div>
+    <div class="surv-status" id="survStatus">Run date: -</div>
+  </header>
+
+  <div class="surv-layout">
+    <section class="map-stage" aria-label="Utah ZIP map">
+      <div class="map-frame">
+        <svg id="zipMap" role="img" aria-label="Utah ZIP polygons"></svg>
+        <div class="colorbar" aria-hidden="true">
+          <div class="colorbar-title">Pr(excess &gt; 2)</div>
+          <div class="colorbar-strip"></div>
+          <div class="colorbar-ticks">
+            <span>50%</span>
+            <span>40%</span>
+            <span>30%</span>
+            <span>20%</span>
+            <span>10%</span>
+            <span>0%</span>
+          </div>
+        </div>
+        <div class="run-date-watermark" id="runDateWatermark">Run date: -</div>
+      </div>
+
+      <div class="map-controls">
+        <button class="play-button" id="playButton" type="button">Play</button>
+        <input class="date-slider" id="dateSlider" type="range" min="0" max="0" step="1" value="0" aria-label="Run date">
+        <div class="date-ticks" id="dateTicks"></div>
+      </div>
+    </section>
+
+    <aside class="detail-panel" aria-label="Hovered ZIP details">
+      <div class="detail-kicker">Hovered ZIP</div>
+      <h2 id="zipTitle">ZIP -</h2>
+      <div class="detail-subtitle" id="zipSubtitle">Run date -</div>
+
+      <div class="chart-wrap">
+        <svg id="zipProfile" role="img" aria-label="ZIP signal time profile"></svg>
+        <div class="legend-row">
+          <span class="legend-key" style="--key:#57748a">Pr(any excess)</span>
+          <span class="legend-key" style="--key:#d73c2c">Pr(excess &gt; 2)</span>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Any excess</div>
+          <div class="metric-value" id="metricAny">-</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Excess &gt;2</div>
+          <div class="metric-value" id="metricExcess">-</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Rate &gt;1.10</div>
+          <div class="metric-value" id="metricRate">-</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Mapped ZIPs</div>
+          <div class="metric-value" id="metricMapped">-</div>
+        </div>
+      </div>
+
+      <div class="date-list">
+        <div><span>Anchor</span><strong id="dateAnchor">-</strong></div>
+        <div><span>First detection</span><strong id="dateDetection">-</strong></div>
+        <div><span>Any excess p&gt;0.90</span><strong id="dateAny">-</strong></div>
+        <div><span>Excess &gt;2 p&gt;0.80</span><strong id="dateExcess">-</strong></div>
+        <div><span>Ramp 10% start</span><strong id="dateRamp10">-</strong></div>
+        <div><span>Ramp 50% midpoint</span><strong id="dateRamp50">-</strong></div>
+      </div>
+
+      <p class="detail-note">Timeline shows the available model-run history for the hovered ZIP. The CSV currently includes probability summaries, so this profile uses those signals rather than raw call counts.</p>
+      <p class="unmatched-note" id="unmatchedNote"></p>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function() {
+  const payloadNode = document.getElementById("survPayload");
+  if (!payloadNode) return;
+
+  const payload = JSON.parse(payloadNode.textContent);
+  const shapes = payload.shapes || [];
+  const rows = payload.rows || [];
+  const dates = (payload.dates || []).filter(Boolean);
+  const mappedRows = payload.mappedByDate || [];
+  const svg = document.getElementById("zipMap");
+  const slider = document.getElementById("dateSlider");
+  const playButton = document.getElementById("playButton");
+  const status = document.getElementById("survStatus");
+  const watermark = document.getElementById("runDateWatermark");
+  const ticks = document.getElementById("dateTicks");
+  const profileSvg = document.getElementById("zipProfile");
+
+  const els = {
+    zipTitle: document.getElementById("zipTitle"),
+    zipSubtitle: document.getElementById("zipSubtitle"),
+    metricAny: document.getElementById("metricAny"),
+    metricExcess: document.getElementById("metricExcess"),
+    metricRate: document.getElementById("metricRate"),
+    metricMapped: document.getElementById("metricMapped"),
+    dateAnchor: document.getElementById("dateAnchor"),
+    dateDetection: document.getElementById("dateDetection"),
+    dateAny: document.getElementById("dateAny"),
+    dateExcess: document.getElementById("dateExcess"),
+    dateRamp10: document.getElementById("dateRamp10"),
+    dateRamp50: document.getElementById("dateRamp50"),
+    unmatchedNote: document.getElementById("unmatchedNote")
+  };
+
+  const dateIndex = new Map(dates.map((d, i) => [d, i]));
+  const rowsByDate = new Map();
+  const rowsByZip = new Map();
+  const mappedByDate = new Map(mappedRows.map((r) => [r.end_date, Number(r.mapped_zips || 0)]));
+  const pathByZip = new Map();
+  let currentIndex = Math.max(0, dateIndex.get(payload.defaultDate) || 0);
+  let selectedZip = payload.defaultZip || (rows[0] ? rows[0].zip : null);
+  let timer = null;
+
+  rows.forEach((row) => {
+    if (!rowsByDate.has(row.end_date)) rowsByDate.set(row.end_date, new Map());
+    rowsByDate.get(row.end_date).set(row.zip, row);
+    if (!rowsByZip.has(row.zip)) rowsByZip.set(row.zip, []);
+    rowsByZip.get(row.zip).push(row);
+  });
+
+  rowsByZip.forEach((value) => value.sort((a, b) => (dateIndex.get(a.end_date) || 0) - (dateIndex.get(b.end_date) || 0)));
+
+  function fmtDate(date) {
+    if (!date) return "n/a";
+    const parsed = new Date(date + "T00:00:00Z");
+    if (Number.isNaN(parsed.getTime())) return date;
+    return parsed.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric", timeZone: "UTC" });
+  }
+
+  function fmtIso(date) {
+    return date || "n/a";
+  }
+
+  function pct(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return "n/a";
+    return Math.round(num * 100) + "%";
+  }
+
+  function metric(row, field, fallback) {
+    if (!row) return null;
+    const primary = Number(row[field]);
+    if (Number.isFinite(primary)) return primary;
+    const secondary = Number(row[fallback]);
+    return Number.isFinite(secondary) ? secondary : null;
+  }
+
+  function colorFor(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return "#dce2e5";
+    const stops = [
+      [0.00, [68, 1, 84]],
+      [0.10, [72, 40, 120]],
+      [0.20, [49, 104, 142]],
+      [0.30, [53, 183, 121]],
+      [0.50, [253, 231, 37]]
+    ];
+    const v = Math.max(0, Math.min(0.5, num));
+    let lo = stops[0];
+    let hi = stops[stops.length - 1];
+    for (let i = 0; i < stops.length - 1; i++) {
+      if (v >= stops[i][0] && v <= stops[i + 1][0]) {
+        lo = stops[i];
+        hi = stops[i + 1];
+        break;
+      }
+    }
+    const span = Math.max(0.0001, hi[0] - lo[0]);
+    const t = (v - lo[0]) / span;
+    const rgb = lo[1].map((c, i) => Math.round(c + (hi[1][i] - c) * t));
+    return "rgb(" + rgb.join(",") + ")";
+  }
+
+  function currentDate() {
+    return dates[currentIndex] || null;
+  }
+
+  function currentRow(zip) {
+    const date = currentDate();
+    const exact = rowsByDate.get(date);
+    if (exact && exact.has(zip)) return exact.get(zip);
+    const profile = rowsByZip.get(zip) || [];
+    const prior = profile.filter((r) => (dateIndex.get(r.end_date) || 0) <= currentIndex);
+    return prior[prior.length - 1] || profile[0] || null;
+  }
+
+  function initMap() {
+    if (!dates.length || !shapes.length) {
+      document.querySelector(".map-frame").innerHTML = "<div class='map-empty'>No surveillance data or Utah ZIP geometry was found.</div>";
+      return;
+    }
+
+    svg.setAttribute("viewBox", "0 0 " + payload.viewBox.width + " " + payload.viewBox.height);
+    shapes.forEach((shape) => {
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", shape.path);
+      path.setAttribute("data-zip", shape.zip);
+      path.setAttribute("tabindex", rowsByZip.has(shape.zip) ? "0" : "-1");
+      path.classList.add("zip-area");
+      if (!rowsByZip.has(shape.zip)) path.classList.add("no-data");
+      path.addEventListener("mouseenter", () => selectZip(shape.zip));
+      path.addEventListener("focus", () => selectZip(shape.zip));
+      path.addEventListener("click", () => selectZip(shape.zip));
+      svg.appendChild(path);
+      pathByZip.set(shape.zip, path);
+    });
+  }
+
+  function renderTicks() {
+    if (!dates.length) return;
+    const count = Math.min(6, dates.length);
+    const labels = [];
+    for (let i = 0; i < count; i++) {
+      const idx = Math.round((i / Math.max(1, count - 1)) * (dates.length - 1));
+      labels.push("<span>" + dates[idx] + "</span>");
+    }
+    ticks.innerHTML = labels.join("");
+  }
+
+  function renderMap() {
+    const date = currentDate();
+    const byZip = rowsByDate.get(date) || new Map();
+    status.textContent = "Run date: " + (date || "-");
+    watermark.textContent = "Run date: " + (date || "-");
+    slider.value = String(currentIndex);
+
+    pathByZip.forEach((path, zip) => {
+      const row = byZip.get(zip);
+      const val = metric(row, "max_pr_excess_gt2_last7", "latest_pr_excess_gt2");
+      path.style.fill = colorFor(val);
+      path.classList.toggle("has-data", Boolean(row));
+      path.classList.toggle("no-data", !row);
+      path.classList.toggle("selected", zip === selectedZip);
+    });
+  }
+
+  function selectZip(zip) {
+    if (!rowsByZip.has(zip)) return;
+    selectedZip = zip;
+    renderAll();
+  }
+
+  function renderDetails() {
+    const row = currentRow(selectedZip);
+    if (!row) return;
+    const date = row.end_date;
+    const place = [row.major_city, row.county].filter(Boolean).join(", ");
+    els.zipTitle.textContent = "ZIP " + row.zip;
+    els.zipSubtitle.textContent = "Run date " + date + (row.outbreak_label ? " / " + row.outbreak_label : "") + (place ? " / " + place : "");
+    els.metricAny.textContent = pct(metric(row, "max_pr_excess_gt0_last7", "latest_pr_excess_gt0"));
+    els.metricExcess.textContent = pct(metric(row, "max_pr_excess_gt2_last7", "latest_pr_excess_gt2"));
+    els.metricRate.textContent = pct(metric(row, "max_pr_rate_mult_gt_1_10", null));
+    els.metricMapped.textContent = String(mappedByDate.get(currentDate()) || "-");
+    els.dateAnchor.textContent = fmtIso(row.anchor_date);
+    els.dateDetection.textContent = fmtIso(row.first_detection_date);
+    els.dateAny.textContent = fmtIso(row.first_excess_gt0_90_date_last7);
+    els.dateExcess.textContent = fmtIso(row.first_excess_gt2_80_date_last7);
+    els.dateRamp10.textContent = fmtIso(row.earliest_supported_ramp_10_date);
+    els.dateRamp50.textContent = fmtIso(row.earliest_supported_ramp_50_date);
+
+    const unmatched = Array.isArray(payload.unmatchedZips)
+      ? payload.unmatchedZips
+      : (payload.unmatchedZips ? [payload.unmatchedZips] : []);
+    els.unmatchedNote.textContent = unmatched.length ? "Unmatched ZIPs: " + unmatched.join(", ") : "";
+  }
+
+  function svgEl(name, attrs) {
+    const node = document.createElementNS("http://www.w3.org/2000/svg", name);
+    Object.entries(attrs || {}).forEach(([key, value]) => node.setAttribute(key, value));
+    return node;
+  }
+
+  function drawChart() {
+    const profile = rowsByZip.get(selectedZip) || [];
+    const width = 390;
+    const height = 230;
+    const m = { left: 42, right: 14, top: 12, bottom: 34 };
+    const plotW = width - m.left - m.right;
+    const plotH = height - m.top - m.bottom;
+    profileSvg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    profileSvg.innerHTML = "";
+    if (!profile.length) return;
+
+    const x = (date) => {
+      const idx = dateIndex.get(date) || 0;
+      return m.left + (idx / Math.max(1, dates.length - 1)) * plotW;
+    };
+    const y = (value) => m.top + (1 - Math.max(0, Math.min(1, value))) * plotH;
+
+    [0, 0.5, 1].forEach((tick) => {
+      const yy = y(tick);
+      profileSvg.appendChild(svgEl("line", { x1: m.left, y1: yy, x2: width - m.right, y2: yy, stroke: "#e6ecef", "stroke-width": 1 }));
+      const label = svgEl("text", { x: 4, y: yy + 4, fill: "#687782", "font-size": 11 });
+      label.textContent = Math.round(tick * 100) + "%";
+      profileSvg.appendChild(label);
+    });
+
+    profileSvg.appendChild(svgEl("line", { x1: m.left, y1: m.top, x2: m.left, y2: height - m.bottom, stroke: "#aab5bc", "stroke-width": 1 }));
+    profileSvg.appendChild(svgEl("line", { x1: m.left, y1: height - m.bottom, x2: width - m.right, y2: height - m.bottom, stroke: "#aab5bc", "stroke-width": 1 }));
+
+    function drawLine(field, fallback, color) {
+      const points = profile
+        .map((row) => {
+          const value = metric(row, field, fallback);
+          return Number.isFinite(value) ? [x(row.end_date), y(value)] : null;
+        })
+        .filter(Boolean);
+      if (!points.length) return;
+      const d = points.map((p, i) => (i ? "L " : "M ") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+      profileSvg.appendChild(svgEl("path", { d, fill: "none", stroke: color, "stroke-width": 2.4 }));
+      points.forEach((p) => profileSvg.appendChild(svgEl("circle", { cx: p[0], cy: p[1], r: 2.2, fill: color })));
+    }
+
+    drawLine("max_pr_excess_gt0_last7", "latest_pr_excess_gt0", "#57748a");
+    drawLine("max_pr_excess_gt2_last7", "latest_pr_excess_gt2", "#d73c2c");
+
+    const markerX = x(currentDate());
+    profileSvg.appendChild(svgEl("line", { x1: markerX, y1: m.top, x2: markerX, y2: height - m.bottom, stroke: "#243038", "stroke-width": 1.1 }));
+
+    const dateLabels = [dates[0], dates[Math.floor((dates.length - 1) / 2)], dates[dates.length - 1]].filter(Boolean);
+    dateLabels.forEach((date, i) => {
+      const label = svgEl("text", { x: x(date), y: height - 9, fill: "#596873", "font-size": 11, "text-anchor": i === 0 ? "start" : i === dateLabels.length - 1 ? "end" : "middle" });
+      label.textContent = fmtDate(date).replace(", 2020", "");
+      profileSvg.appendChild(label);
+    });
+  }
+
+  function renderAll() {
+    renderMap();
+    renderDetails();
+    drawChart();
+  }
+
+  if (dates.length) {
+    slider.max = String(dates.length - 1);
+    slider.value = String(currentIndex);
+    slider.addEventListener("input", () => {
+      currentIndex = Number(slider.value);
+      renderAll();
+    });
+    playButton.addEventListener("click", () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+        playButton.textContent = "Play";
+        return;
+      }
+      playButton.textContent = "Pause";
+      timer = window.setInterval(() => {
+        currentIndex = (currentIndex + 1) % dates.length;
+        renderAll();
+      }, 700);
+    });
+  }
+
+  initMap();
+  renderTicks();
+  renderAll();
+})();
+</script>
+```

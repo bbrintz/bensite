@@ -3,27 +3,41 @@ format:
   html:
     meta:
       viewport: "width=device-width, initial-scale=1"
+      description: "Statistical modeling, simulation, and interactive data tools for applied research."
     css: index.css
 ---
 
 ::: {.hero}
 ::: {.overlay-text}
-# Ben Brintz
-Modeling, statistical computing, and scientific communication.
+# Statistical Modeling For Applied Research
+I build models, simulations, and data tools for practical scientific decisions.
 
-[Try ChainLink](chain_link.qmd){.cta-button}
+::: {.cta-row}
+[View selected work](scholar.qmd){.cta-button}
+:::
 :::
 :::
 
 ::: {.below-section}
 ::: {.below-inner}
 ## About
-I build and communicate statistical models for applied research, with work spanning Bayesian methods, simulation, and interactive data products.
+I work where statistical methods meet practical decisions: clinical prediction, public health surveillance, Bayesian computation, and research communication.
 
-::: {.quick-links}
-[Publications](scholar.qmd){.quick-link}
-[Presentations](Presentations/index.qmd){.quick-link}
-[Woodworking](woodworking.qmd){.quick-link}
+::: {.work-strands}
+::: {.work-strand}
+**Modeling**  
+Bayesian and simulation-based methods for applied scientific questions.
+:::
+
+::: {.work-strand}
+**Tools**  
+Interactive prototypes and data products that make methods easier to use.
+:::
+
+::: {.work-strand}
+**Communication**  
+Talks, writing, and visuals that make technical work easier to inspect.
+:::
 :::
 :::
 :::
