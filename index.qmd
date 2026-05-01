@@ -26,7 +26,7 @@ I work where statistical methods meet practical decisions: clinical prediction, 
 ::: {.work-strands}
 ::: {.work-strand}
 **Modeling**  
-Bayesian and simulation-based methods for applied scientific questions.
+Traditional modeling, machine learning and Bayesian methods for applied scientific questions.
 :::
 
 ::: {.work-strand}
