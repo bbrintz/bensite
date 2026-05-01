@@ -10,7 +10,7 @@ format:
 ::: {.hero}
 ::: {.overlay-text}
 # Statistical Modeling For Applied Research
-I build models, simulations, and data tools for practical scientific decisions.
+
 
 ::: {.cta-row}
 [View selected work](scholar.qmd){.cta-button}
