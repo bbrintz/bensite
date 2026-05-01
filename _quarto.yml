@@ -3,10 +3,11 @@ project:
   resources:
     - images/*.webp
     - images/favicon.svg
+    - images/favicon.png
 
 website:
   title: "Ben Brintz"
-  favicon: images/favicon.svg
+  favicon: images/favicon.png
   navbar:
     left:
       - href: index.qmd
