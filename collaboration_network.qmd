@@ -1,0 +1,1012 @@
+---
+title: "Collaboration Network"
+format:
+  html:
+    toc: false
+    page-layout: full
+    code-fold: false
+    meta:
+      description: "Standalone prototype collaboration network for Ben Brintz publication coauthors."
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r, results='asis'}
+payload <- readChar(
+  "data/collaboration_network_openalex.json",
+  file.info("data/collaboration_network_openalex.json")$size
+)
+cat('<script id="collabPayload" type="application/json">')
+cat(payload)
+cat('</script>')
+```
+
+```{=html}
+<style>
+  :root {
+    --network-bg: #030a1c;
+    --network-panel: rgba(7, 18, 42, 0.72);
+    --network-panel-strong: rgba(9, 22, 50, 0.9);
+    --network-line: rgba(176, 203, 244, 0.18);
+    --network-line-hot: rgba(255, 201, 117, 0.82);
+    --network-text: #f4f8ff;
+    --network-muted: #b8cae6;
+    --network-soft: #d7e6fb;
+    --network-gold: #ffd37d;
+    --network-cyan: #81d4ff;
+    --network-green: #8de0bd;
+    --network-pink: #f0a6c7;
+  }
+
+  html,
+  body {
+    background-color: var(--network-bg);
+  }
+
+  body {
+    min-height: 100vh;
+    color: var(--network-text);
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(108, 189, 255, 0.22), transparent 34%),
+      radial-gradient(circle at 84% 64%, rgba(255, 149, 82, 0.2), transparent 38%),
+      radial-gradient(circle at 52% 108%, rgba(137, 225, 190, 0.12), transparent 42%),
+      linear-gradient(145deg, #030a1c 0%, #071329 44%, #101f45 76%, #061126 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  .quarto-title-block {
+    display: none;
+  }
+
+  #quarto-content {
+    padding: 0;
+  }
+
+  main.content {
+    max-width: none;
+    padding: 0;
+  }
+
+  .network-page {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: clamp(0.8rem, 1.4vw, 1.35rem);
+  }
+
+  .network-hero {
+    width: min(1320px, 100%);
+    margin: 0 auto 0.75rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .network-kicker {
+    color: var(--network-cyan);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .network-hero h1 {
+    color: var(--network-text);
+    font-size: clamp(1.7rem, 3.4vw, 3.15rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .network-hero p {
+    max-width: 680px;
+    color: var(--network-muted);
+    font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+    line-height: 1.4;
+    margin: 0.45rem 0 0 0;
+  }
+
+  .network-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .network-button {
+    border: 1px solid rgba(200, 223, 255, 0.24);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--network-text);
+    border-radius: 999px;
+    padding: 0.48rem 0.82rem;
+    font-size: 0.9rem;
+    line-height: 1;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  }
+
+  .network-button:hover,
+  .network-button:focus-visible {
+    border-color: rgba(255, 211, 125, 0.58);
+    background: rgba(255, 211, 125, 0.13);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .network-legend {
+    width: min(1320px, 100%);
+    margin: 0 auto 0.8rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    border: 1px solid rgba(200, 223, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--network-soft);
+    padding: 0.26rem 0.58rem;
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+
+  .legend-swatch {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+  }
+
+  .network-shell {
+    width: min(1320px, 100%);
+    margin: 0 auto 2.2rem auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .network-stage,
+  .network-panel {
+    border: 1px solid var(--network-line);
+    background:
+      radial-gradient(circle at 24% 20%, rgba(129, 212, 255, 0.12), transparent 36%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+      var(--network-panel);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  }
+
+  .network-stage {
+    position: relative;
+    height: clamp(540px, calc(100vh - 210px), 680px);
+    min-height: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .network-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at center, black 0%, black 58%, transparent 96%);
+  }
+
+  .network-svg {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .network-guide {
+    fill: none;
+    stroke: rgba(200, 223, 255, 0.11);
+    stroke-width: 1;
+    stroke-dasharray: 4 8;
+  }
+
+  .network-spoke {
+    stroke: rgba(200, 223, 255, 0.09);
+    stroke-width: 1;
+    stroke-linecap: round;
+    transition: opacity 140ms ease, stroke 140ms ease, stroke-width 140ms ease;
+  }
+
+  .network-spoke.is-active {
+    stroke: rgba(129, 212, 255, 0.5);
+    stroke-width: 1.4;
+  }
+
+  .network-edge {
+    stroke: rgba(192, 213, 244, 0.13);
+    stroke-linecap: round;
+    opacity: 0.72;
+    transition: stroke 140ms ease, opacity 140ms ease, stroke-width 140ms ease;
+  }
+
+  .network-edge.is-active {
+    stroke: var(--network-line-hot);
+    opacity: 0.92;
+  }
+
+  .network-edge.is-muted {
+    opacity: 0.08;
+  }
+
+  .network-node {
+    cursor: pointer;
+    transition: opacity 140ms ease, filter 140ms ease;
+  }
+
+  .network-node circle {
+    stroke: rgba(255, 255, 255, 0.76);
+    stroke-width: 1.1;
+    filter: drop-shadow(0 7px 13px rgba(0, 0, 0, 0.38));
+  }
+
+  .network-node text {
+    fill: #f7fbff;
+    font-weight: 700;
+    letter-spacing: 0;
+    paint-order: stroke;
+    stroke: rgba(2, 7, 18, 0.86);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    user-select: none;
+  }
+
+  .network-node.is-muted {
+    opacity: 0.22;
+  }
+
+  .network-node.is-active circle {
+    stroke: #ffffff;
+    stroke-width: 2.2;
+    filter: drop-shadow(0 0 18px rgba(255, 211, 125, 0.34));
+  }
+
+  .network-node.is-active text {
+    fill: var(--network-gold);
+  }
+
+  .network-node.is-selected circle {
+    stroke: var(--network-gold);
+    stroke-width: 2;
+  }
+
+  .network-node.is-selected text {
+    fill: var(--network-gold);
+  }
+
+  .network-hub circle {
+    fill: rgba(8, 19, 44, 0.92);
+    stroke: rgba(255, 211, 125, 0.72);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 0 20px rgba(255, 211, 125, 0.2));
+  }
+
+  .network-hub .hub-ring {
+    fill: none;
+    stroke: rgba(129, 212, 255, 0.22);
+    stroke-width: 1;
+  }
+
+  .network-hub text {
+    fill: var(--network-text);
+    font-weight: 800;
+    letter-spacing: 0;
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: rgba(2, 7, 18, 0.86);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+
+  .network-hub .hub-subtitle {
+    fill: var(--network-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .network-panel {
+    border-radius: 8px;
+    padding: 1rem;
+    height: clamp(540px, calc(100vh - 210px), 680px);
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background:
+      radial-gradient(circle at 82% 8%, rgba(255, 211, 125, 0.13), transparent 32%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+      var(--network-panel-strong);
+    scrollbar-color: rgba(200, 223, 255, 0.35) rgba(255, 255, 255, 0.05);
+    scrollbar-width: thin;
+  }
+
+  .panel-eyebrow {
+    color: var(--network-cyan);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .panel-name {
+    color: var(--network-text);
+    font-size: clamp(1.55rem, 3vw, 2.25rem);
+    line-height: 1.04;
+    margin: 0.35rem 0 0.9rem 0;
+  }
+
+  .area-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    color: var(--network-soft);
+    border: 1px solid rgba(200, 223, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.28rem 0.58rem;
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+
+  .area-badge::before {
+    content: "";
+    width: 0.68rem;
+    height: 0.68rem;
+    border-radius: 999px;
+    background: var(--area-color, var(--network-cyan));
+    border: 1px solid rgba(255, 255, 255, 0.72);
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin: 1rem 0;
+  }
+
+  .metric {
+    border: 1px solid rgba(197, 218, 250, 0.16);
+    border-radius: 8px;
+    padding: 0.65rem;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .metric-value {
+    display: block;
+    color: var(--network-text);
+    font-weight: 800;
+    font-size: 1.28rem;
+    line-height: 1;
+  }
+
+  .metric-label {
+    display: block;
+    color: var(--network-muted);
+    font-size: 0.74rem;
+    line-height: 1.25;
+    margin-top: 0.32rem;
+  }
+
+  .neighbor-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.7rem 0 1rem 0;
+  }
+
+  .neighbor-pill {
+    border: 1px solid rgba(200, 223, 255, 0.18);
+    border-radius: 999px;
+    padding: 0.22rem 0.52rem;
+    color: var(--network-soft);
+    background: rgba(255, 255, 255, 0.045);
+    font-size: 0.78rem;
+  }
+
+  .panel-section-title {
+    color: var(--network-soft);
+    font-weight: 800;
+    font-size: 0.86rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 1.05rem 0 0.55rem 0;
+  }
+
+  .paper-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.55rem;
+  }
+
+  .paper-link {
+    display: block;
+    color: var(--network-text);
+    text-decoration: none;
+    border-top: 1px solid rgba(200, 223, 255, 0.15);
+    padding-top: 0.62rem;
+  }
+
+  .paper-link:hover,
+  .paper-link:focus-visible {
+    color: var(--network-gold);
+  }
+
+  .paper-title {
+    display: block;
+    font-size: 0.91rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .paper-meta {
+    display: block;
+    color: var(--network-muted);
+    font-size: 0.76rem;
+    line-height: 1.35;
+    margin-top: 0.28rem;
+  }
+
+  .network-meta {
+    width: min(1320px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    color: var(--network-muted);
+  }
+
+  .meta-chip {
+    border: 1px solid rgba(200, 223, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.32rem 0.68rem;
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 1060px) {
+    .network-hero {
+      display: block;
+    }
+
+    .network-actions {
+      justify-content: flex-start;
+      margin-top: 1rem;
+    }
+
+    .network-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .network-stage,
+    .network-panel {
+      height: auto;
+      min-height: auto;
+    }
+
+    .network-stage,
+    .network-svg {
+      min-height: 520px;
+    }
+
+    .network-panel {
+      max-height: none;
+      overflow-y: visible;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .network-page {
+      padding: 0.85rem;
+    }
+
+    .network-stage {
+      height: 500px;
+    }
+
+    .network-svg {
+      min-height: 0;
+    }
+
+    .metric-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="network-page">
+  <section class="network-hero" aria-labelledby="network-title">
+    <div>
+      <h1 id="network-title">Collaboration Network</h1>
+      <p>Top shared coauthors arranged by article count and collaboration overlap. Circle size reflects shared articles; color marks broad collaboration area.</p>
+    </div>
+    <div class="network-actions">
+      <button class="network-button" id="motionToggle" type="button">Pause Motion</button>
+      <button class="network-button" id="resetNetwork" type="button">Reset</button>
+    </div>
+  </section>
+
+  <div class="network-legend" id="networkLegend" aria-label="Collaboration area color legend"></div>
+
+  <section class="network-shell">
+    <div class="network-stage">
+      <svg class="network-svg" id="networkSvg" viewBox="0 0 1080 720" preserveAspectRatio="xMidYMin meet" role="img" aria-labelledby="network-title"></svg>
+    </div>
+    <aside class="network-panel" id="networkPanel" aria-live="polite"></aside>
+  </section>
+
+  <div class="network-meta" id="networkMeta"></div>
+</div>
+
+<script>
+(() => {
+  const payload = JSON.parse(document.getElementById("collabPayload").textContent);
+  const svg = document.getElementById("networkSvg");
+  const panel = document.getElementById("networkPanel");
+  const meta = document.getElementById("networkMeta");
+  const legend = document.getElementById("networkLegend");
+  const motionToggle = document.getElementById("motionToggle");
+  const resetNetwork = document.getElementById("resetNetwork");
+  const width = 1080;
+  const height = 720;
+  const center = { x: width / 2, y: height / 2 };
+  const nodes = payload.nodes.map((node, index) => ({ ...node, index, phase: index * 0.77, x: 0, y: 0, vx: 0, vy: 0 }));
+  const links = payload.links.map(link => ({ ...link }));
+  const nodeById = new Map(nodes.map(node => [node.id, node]));
+  const neighbors = new Map(nodes.map(node => [node.id, new Set()]));
+  const linkByPair = new Map();
+  const palette = ["#81d4ff", "#ffd37d", "#8de0bd", "#f0a6c7", "#aeb7ff", "#ffb18b"];
+
+  links.forEach(link => {
+    neighbors.get(link.source)?.add(link.target);
+    neighbors.get(link.target)?.add(link.source);
+    linkByPair.set([link.source, link.target].sort().join("|"), link);
+  });
+
+  const maxScore = Math.max(...nodes.map(node => node.radius_score || 1));
+  const minScore = Math.min(...nodes.map(node => node.radius_score || 1));
+  const scoreSpan = Math.max(1, maxScore - minScore);
+  const maxPapers = Math.max(...nodes.map(node => node.papers || 1));
+  const minPapers = Math.min(...nodes.map(node => node.papers || 1));
+  const paperSpan = Math.max(1, maxPapers - minPapers);
+  const maxWeight = Math.max(...links.map(link => link.weight || 1));
+
+  let selectedId = nodes[0]?.id;
+  let hoverId = null;
+  let motionEnabled = true;
+  let motionClock = 0;
+  let lastFrame = performance.now();
+  let dragging = null;
+  const areaStyles = {
+    "Global Health & Infectious Disease": { color: "#76d2ff", order: 1 },
+    "VA & Health Services": { color: "#8de0bd", order: 2 },
+    "Ophthalmology": { color: "#aeb7ff", order: 3 },
+    "Reproductive Health": { color: "#ffae8a", order: 4 },
+    "Public Health & Surveillance": { color: "#ffd37d", order: 5 },
+    "Other Collaborations": { color: "#c9d3e6", order: 6 }
+  };
+
+  function paperScale(node) {
+    return ((node.papers || minPapers) - minPapers) / paperSpan;
+  }
+
+  function scaleRadius(node) {
+    return 12 + Math.pow(paperScale(node), 0.72) * 38;
+  }
+
+  function scaleFont(node) {
+    return 9.5 + Math.pow(paperScale(node), 0.72) * 6.4;
+  }
+
+  function colorFor(node) {
+    return areaStyles[node.area]?.color || palette[node.index % palette.length];
+  }
+
+  function areaColor(area) {
+    return areaStyles[area]?.color || "#c9d3e6";
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char]));
+  }
+
+  function initializeLayout() {
+    const sorted = [...nodes].sort((a, b) => (b.radius_score || 0) - (a.radius_score || 0));
+    const rings = [
+      { nodes: sorted.slice(0, 8), rx: 260, ry: 170, offset: -Math.PI / 2 },
+      { nodes: sorted.slice(8), rx: 430, ry: 285, offset: -Math.PI / 2 + Math.PI / 12 }
+    ];
+
+    rings.forEach(ring => {
+      ring.nodes.forEach((node, index) => {
+        const theta = ring.offset + (index / ring.nodes.length) * Math.PI * 2;
+        node.x = center.x + Math.cos(theta) * ring.rx;
+        node.y = center.y + Math.sin(theta) * ring.ry;
+      });
+    });
+
+    sorted.forEach(node => {
+      node.vx = 0;
+      node.vy = 0;
+    });
+  }
+
+  function motionOffset(node) {
+    if (!motionEnabled || dragging === node.id) return { x: 0, y: 0 };
+    const isHover = hoverId === node.id;
+    const amplitude = isHover ? 8 : 2.6;
+    return {
+      x: Math.cos(motionClock * 0.0012 + node.phase) * amplitude * 0.46,
+      y: Math.sin(motionClock * 0.00145 + node.phase) * amplitude
+    };
+  }
+
+  function projectPoint(node) {
+    const offset = motionOffset(node);
+    return { x: node.x + offset.x, y: node.y + offset.y };
+  }
+
+  function activeNodeId() {
+    return hoverId || dragging;
+  }
+
+  function isConnectedToActive(id) {
+    const active = activeNodeId();
+    return id === active || neighbors.get(active)?.has(id);
+  }
+
+  function isActiveLink(link) {
+    const active = activeNodeId();
+    return link.source === active || link.target === active;
+  }
+
+  function render() {
+    const active = activeNodeId();
+    const hasActive = Boolean(active);
+    const defaultLinkThreshold = 4;
+    svg.innerHTML = "";
+
+    const guideGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const spokeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const edgeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const hubGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const nodeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    [
+      { rx: 260, ry: 170 },
+      { rx: 430, ry: 285 }
+    ].forEach(ring => {
+      const ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+      ellipse.setAttribute("cx", center.x);
+      ellipse.setAttribute("cy", center.y);
+      ellipse.setAttribute("rx", ring.rx);
+      ellipse.setAttribute("ry", ring.ry);
+      ellipse.classList.add("network-guide");
+      guideGroup.appendChild(ellipse);
+    });
+
+    nodes.forEach(node => {
+      const point = projectPoint(node);
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", center.x);
+      line.setAttribute("y1", center.y);
+      line.setAttribute("x2", point.x);
+      line.setAttribute("y2", point.y);
+      line.classList.add("network-spoke");
+      if (node.id === active || node.id === selectedId) line.classList.add("is-active");
+      spokeGroup.appendChild(line);
+    });
+
+    links.forEach(link => {
+      const activeLink = hasActive && isActiveLink(link);
+      if (!activeLink && link.weight < defaultLinkThreshold) return;
+      const source = nodeById.get(link.source);
+      const target = nodeById.get(link.target);
+      if (!source || !target) return;
+      const a = projectPoint(source);
+      const b = projectPoint(target);
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", a.x);
+      line.setAttribute("y1", a.y);
+      line.setAttribute("x2", b.x);
+      line.setAttribute("y2", b.y);
+      line.setAttribute("stroke-width", 0.65 + (link.weight / maxWeight) * 3.2);
+      line.classList.add("network-edge");
+      if (activeLink) line.classList.add("is-active");
+      if (hasActive && !activeLink) line.classList.add("is-muted");
+      edgeGroup.appendChild(line);
+    });
+
+    const hubRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const hubCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const hubName = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    const hubSubtitle = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    hubGroup.classList.add("network-hub");
+    hubRing.classList.add("hub-ring");
+    hubRing.setAttribute("cx", center.x);
+    hubRing.setAttribute("cy", center.y);
+    hubRing.setAttribute("r", 76);
+    hubCircle.setAttribute("cx", center.x);
+    hubCircle.setAttribute("cy", center.y);
+    hubCircle.setAttribute("r", 54);
+    hubName.setAttribute("x", center.x);
+    hubName.setAttribute("y", center.y - 3);
+    hubName.setAttribute("font-size", "19");
+    hubName.textContent = "Ben Brintz";
+    hubSubtitle.classList.add("hub-subtitle");
+    hubSubtitle.setAttribute("x", center.x);
+    hubSubtitle.setAttribute("y", center.y + 18);
+    hubSubtitle.textContent = "shared coauthors";
+    hubGroup.appendChild(hubRing);
+    hubGroup.appendChild(hubCircle);
+    hubGroup.appendChild(hubName);
+    hubGroup.appendChild(hubSubtitle);
+
+    [...nodes].sort((a, b) => scaleRadius(a) - scaleRadius(b)).forEach(node => {
+      const point = projectPoint(node);
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      const radius = scaleRadius(node);
+      const theta = Math.atan2(point.y - center.y, point.x - center.x);
+      const labelDistance = radius + 14;
+      let labelX = point.x + Math.cos(theta) * labelDistance;
+      let labelY = point.y + Math.sin(theta) * labelDistance + 4;
+      let labelAnchor = "middle";
+
+      group.classList.add("network-node");
+      group.setAttribute("tabindex", "0");
+      group.setAttribute("role", "button");
+      group.setAttribute("aria-label", node.name);
+      group.dataset.id = node.id;
+      if (node.id === selectedId) group.classList.add("is-selected");
+      if (hasActive && isConnectedToActive(node.id)) group.classList.add("is-active");
+      if (hasActive && !isConnectedToActive(node.id)) group.classList.add("is-muted");
+
+      if (Math.cos(theta) > 0.24) labelAnchor = "start";
+      if (Math.cos(theta) < -0.24) labelAnchor = "end";
+      if (labelX < 70) {
+        labelX = 70;
+        labelAnchor = "start";
+      }
+      if (labelX > width - 70) {
+        labelX = width - 70;
+        labelAnchor = "end";
+      }
+      labelY = Math.max(52, Math.min(height - 42, labelY));
+
+      circle.setAttribute("cx", point.x);
+      circle.setAttribute("cy", point.y);
+      circle.setAttribute("r", radius);
+      circle.setAttribute("fill", colorFor(node));
+
+      text.setAttribute("x", labelX);
+      text.setAttribute("y", labelY);
+      text.setAttribute("text-anchor", labelAnchor);
+      text.setAttribute("font-size", scaleFont(node).toFixed(1));
+      text.textContent = node.name;
+
+      group.appendChild(circle);
+      group.appendChild(text);
+      nodeGroup.appendChild(group);
+    });
+
+    svg.appendChild(guideGroup);
+    svg.appendChild(spokeGroup);
+    svg.appendChild(edgeGroup);
+    svg.appendChild(hubGroup);
+    svg.appendChild(nodeGroup);
+  }
+
+  function paperMarkup(publications = []) {
+    return publications.slice(0, 5).map(paper => {
+      const year = paper.year || "n.d.";
+      const cites = Number.isFinite(paper.cites) ? `${paper.cites} cites` : "citations unavailable";
+      const journal = paper.journal ? `${escapeHtml(paper.journal)} · ` : "";
+      const url = paper.url || "#";
+      return `
+        <a class="paper-link" href="${escapeHtml(url)}" target="_blank" rel="noopener">
+          <span class="paper-title">${escapeHtml(paper.title)}</span>
+          <span class="paper-meta">${journal}${year} · ${cites}</span>
+        </a>
+      `;
+    }).join("");
+  }
+
+  function updatePanel() {
+    const node = nodeById.get(selectedId) || nodes[0];
+    if (!node) return;
+    const neighborRows = [...(neighbors.get(node.id) || [])]
+      .map(id => {
+        const other = nodeById.get(id);
+        const link = linkByPair.get([node.id, id].sort().join("|"));
+        return { other, weight: link?.weight || 0 };
+      })
+      .filter(row => row.other)
+      .sort((a, b) => b.weight - a.weight || a.other.name.localeCompare(b.other.name))
+      .slice(0, 10);
+
+    const yearSpan = node.first_year && node.last_year
+      ? (node.first_year === node.last_year ? node.first_year : `${node.first_year}-${node.last_year}`)
+      : "n.d.";
+
+    panel.innerHTML = `
+      <div class="panel-eyebrow">Selected Collaborator</div>
+      <h2 class="panel-name">${escapeHtml(node.name)}</h2>
+      <div class="area-badge" style="--area-color: ${areaColor(node.area)}">${escapeHtml(node.area || "Other Collaborations")}</div>
+      <div class="metric-grid">
+        <div class="metric">
+          <span class="metric-value">${node.papers}</span>
+          <span class="metric-label">Shared articles</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">${node.weighted_degree}</span>
+          <span class="metric-label">Connection weight</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">${node.degree}</span>
+          <span class="metric-label">Top-coauthor links</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">${yearSpan}</span>
+          <span class="metric-label">Publication span</span>
+        </div>
+      </div>
+      <div class="panel-section-title">Nearest Coauthors</div>
+      <div class="neighbor-list">
+        ${neighborRows.map(row => `<span class="neighbor-pill">${escapeHtml(row.other.name)} · ${row.weight}</span>`).join("") || '<span class="neighbor-pill">No top-network links</span>'}
+      </div>
+      <div class="panel-section-title">Representative Papers</div>
+      <div class="paper-list">${paperMarkup(node.publications)}</div>
+    `;
+  }
+
+  function updateMeta() {
+    const generated = payload.generated_at ? payload.generated_at.replace(/:[0-9]{2} /, " ") : "recently";
+    meta.innerHTML = `
+      <span class="meta-chip">${nodes.length} collaborators</span>
+      <span class="meta-chip">${links.length} coauthor links</span>
+      <span class="meta-chip">${payload.publication_count} article records</span>
+      <span class="meta-chip">Built ${generated}</span>
+    `;
+  }
+
+  function updateLegend() {
+    const areas = [...new Set(nodes.map(node => node.area || "Other Collaborations"))]
+      .sort((a, b) => (areaStyles[a]?.order || 99) - (areaStyles[b]?.order || 99) || a.localeCompare(b));
+
+    legend.innerHTML = areas.map(area => `
+      <span class="legend-item">
+        <span class="legend-swatch" style="background: ${areaColor(area)}"></span>
+        ${escapeHtml(area)}
+      </span>
+    `).join("");
+  }
+
+  function svgPointFromEvent(event) {
+    const point = svg.createSVGPoint();
+    point.x = event.clientX;
+    point.y = event.clientY;
+    return point.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  svg.addEventListener("pointerdown", event => {
+    const group = event.target.closest(".network-node");
+    if (!group) return;
+    selectedId = group.dataset.id;
+    hoverId = selectedId;
+    dragging = group.dataset.id;
+    svg.setPointerCapture(event.pointerId);
+    updatePanel();
+    render();
+  });
+
+  svg.addEventListener("pointermove", event => {
+    const group = event.target.closest(".network-node");
+    hoverId = group?.dataset.id || (dragging ? dragging : null);
+
+    if (dragging) {
+      const node = nodeById.get(dragging);
+      const raw = svgPointFromEvent(event);
+      node.x = Math.max(70, Math.min(width - 70, raw.x));
+      node.y = Math.max(70, Math.min(height - 82, raw.y));
+    }
+
+    render();
+  });
+
+  svg.addEventListener("pointerup", event => {
+    dragging = null;
+    hoverId = null;
+    if (svg.hasPointerCapture(event.pointerId)) svg.releasePointerCapture(event.pointerId);
+    render();
+  });
+
+  svg.addEventListener("pointerleave", () => {
+    if (!dragging) {
+      hoverId = null;
+      render();
+    }
+  });
+
+  svg.addEventListener("click", event => {
+    const group = event.target.closest(".network-node");
+    if (!group) return;
+    selectedId = group.dataset.id;
+    hoverId = null;
+    updatePanel();
+    render();
+  });
+
+  svg.addEventListener("keydown", event => {
+    const group = event.target.closest(".network-node");
+    if (!group || !["Enter", " "].includes(event.key)) return;
+    event.preventDefault();
+    selectedId = group.dataset.id;
+    hoverId = null;
+    updatePanel();
+    render();
+  });
+
+  motionToggle.addEventListener("click", () => {
+    motionEnabled = !motionEnabled;
+    motionToggle.textContent = motionEnabled ? "Pause Motion" : "Start Motion";
+    render();
+  });
+
+  resetNetwork.addEventListener("click", () => {
+    selectedId = nodes[0]?.id;
+    hoverId = null;
+    dragging = null;
+    motionEnabled = true;
+    motionClock = 0;
+    motionToggle.textContent = "Pause Motion";
+    initializeLayout();
+    updatePanel();
+    render();
+  });
+
+  function animate(now) {
+    const elapsed = now - lastFrame;
+    lastFrame = now;
+    if (motionEnabled && !dragging) {
+      motionClock += elapsed;
+      render();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  initializeLayout();
+  updatePanel();
+  updateLegend();
+  updateMeta();
+  render();
+  requestAnimationFrame(animate);
+})();
+</script>
+```

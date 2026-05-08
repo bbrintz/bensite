@@ -1,0 +1,1528 @@
+{
+  "generated_at": "2026-05-01 16:11:48 MDT",
+  "source": "Google Scholar via R package scholar",
+  "scholar_id": "nYA8PAsAAAAJ",
+  "publication_count": 123,
+  "author_records": 1086,
+  "nodes": [
+    {
+      "id": "danieltleung",
+      "name": "Daniel T Leung",
+      "papers": 33,
+      "degree": 7,
+      "weighted_degree": 48,
+      "total_cites": 220,
+      "first_year": 2020,
+      "last_year": 2026,
+      "radius_score": 81,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLOS Neglected Tropical Diseases",
+          "year": 2020,
+          "cites": 36,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali",
+          "journal": "Elife",
+          "year": 2022,
+          "cites": 24,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C"
+        },
+        {
+          "title": "Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020",
+          "journal": "Public Health Reports",
+          "year": 2021,
+          "cites": 21,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial",
+          "journal": "JAMA pediatrics",
+          "year": 2022,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Clinical and laboratory predictors of 30‐day mortality in severe acute malnourished children with severe pneumonia",
+          "journal": "Tropical Medicine & International Health",
+          "year": 2020,
+          "cites": 12,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:Y0pCki6q_DkC"
+        },
+        {
+          "title": "Development of a prediction model for the acquisition of extended spectrum beta-lactam-resistant organisms in US international travellers",
+          "journal": "Journal of Travel Medicine",
+          "year": 2023,
+          "cites": 11,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:j3f4tGmQtD8C"
+        }
+      ]
+    },
+    {
+      "id": "benjaminbrintz",
+      "name": "Benjamin Brintz",
+      "papers": 21,
+      "degree": 14,
+      "weighted_degree": 31,
+      "total_cites": 59,
+      "first_year": 2016,
+      "last_year": 2026,
+      "radius_score": 52,
+      "publications": [
+        {
+          "title": "Quantitative and qualitative impact of one key question on primary care providers’ contraceptive counseling at routine preventive health visits",
+          "journal": "Contraception",
+          "year": 2022,
+          "cites": 21,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3fE2CSJIrl8C"
+        },
+        {
+          "title": "Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020",
+          "journal": "Public Health Reports",
+          "year": 2021,
+          "cites": 21,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC"
+        },
+        {
+          "title": "Clinical and laboratory predictors of 30‐day mortality in severe acute malnourished children with severe pneumonia",
+          "journal": "Tropical Medicine & International Health",
+          "year": 2020,
+          "cites": 12,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:Y0pCki6q_DkC"
+        },
+        {
+          "title": "Determining the impact of the Zika pandemic on primary care providers’ contraceptive counseling of non-pregnant patients in the US: a mixed methods study",
+          "journal": "BMC Health Services Research",
+          "year": 2021,
+          "cites": 2,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:8k81kl-MbHgC"
+        },
+        {
+          "title": "A pilot intervention to improve the management of urinary tract infections in outpatient settings",
+          "journal": "Antimicrobial Stewardship & Healthcare Epidemiology",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:vRqMK49ujn8C"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "Social Media Analytics for Post-Disasters Disease Detection in the Philippines",
+          "journal": "Online Journal of Public Health Informatics",
+          "year": 2016,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:2osOgNQ5qMEC"
+        },
+        {
+          "title": "Predicting the risk of prostate cancer metastasis at diagnosis in the VA Health Care System from H&E slides of the prostate needle biopsies.",
+          "journal": "Journal of Clinical Oncology",
+          "year": 2026,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:LPZeul_q3PIC"
+        }
+      ]
+    },
+    {
+      "id": "jamesaplattsmills",
+      "name": "James A Platts-Mills",
+      "papers": 12,
+      "degree": 6,
+      "weighted_degree": 31,
+      "total_cites": 119,
+      "first_year": 2020,
+      "last_year": 2025,
+      "radius_score": 43,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLOS Neglected Tropical Diseases",
+          "year": 2020,
+          "cites": 36,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:zYLM7Y9cAGgC"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali",
+          "journal": "Elife",
+          "year": 2022,
+          "cites": 24,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for Shigellosis and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open forum infectious diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HDshCWvjkbEC"
+        },
+        {
+          "title": "Weather variables as important clinical predictors of bacterial diarrhoea among international travellers",
+          "journal": "Journal of Travel Medicine",
+          "year": 2022,
+          "cites": 7,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:Zph67rFs4hoC"
+        },
+        {
+          "title": "Automated post-run analysis of arrayed quantitative PCR amplification curves using machine learning",
+          "journal": "Gates Open Research",
+          "year": 2025,
+          "cites": 5,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4OULZ7Gr8RgC"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prediction model for viral diarrhea etiology in Bangladesh",
+          "journal": "Open forum infectious diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:isC4tDSrTZIC"
+        }
+      ]
+    },
+    {
+      "id": "shariamahmed",
+      "name": "Sharia M Ahmed",
+      "papers": 11,
+      "degree": 6,
+      "weighted_degree": 30,
+      "total_cites": 100,
+      "first_year": 2021,
+      "last_year": 2024,
+      "radius_score": 41,
+      "publications": [
+        {
+          "title": "Robust testing in outpatient settings to explore COVID-19 epidemiology: disparities in race/ethnicity and age, Salt Lake County, Utah, 2020",
+          "journal": "Public Health Reports",
+          "year": 2021,
+          "cites": 21,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:WF5omc3nYNoC"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial",
+          "journal": "JAMA pediatrics",
+          "year": 2022,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for Shigellosis and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open forum infectious diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HDshCWvjkbEC"
+        },
+        {
+          "title": "Identification, mapping, and self-reported practice patterns of village doctors in Sitakunda subdistrict, Bangladesh",
+          "journal": "Journal of global health",
+          "year": 2024,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:zA6iFVUQeVQC"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prediction model for viral diarrhea etiology in Bangladesh",
+          "journal": "Open forum infectious diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:isC4tDSrTZIC"
+        },
+        {
+          "title": "The effects of using a clinical prediction rule to prioritize diagnostic testing on transmission and hospital burden: A modeling example of early severe acute respiratory …",
+          "journal": "Clinical Infectious Diseases",
+          "year": 2021,
+          "cites": 4,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:ufrVoPGSRksC"
+        }
+      ]
+    },
+    {
+      "id": "jaredhansen",
+      "name": "Jared Hansen",
+      "papers": 9,
+      "degree": 9,
+      "weighted_degree": 49,
+      "total_cites": 23,
+      "first_year": 2022,
+      "last_year": 2025,
+      "radius_score": 58,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of clinical medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:CHSYGLWDkRkC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        },
+        {
+          "title": "GERIATRIC AND EXTENDED CARE TRAJECTORIES AND TRANSITIONS AMONG VETERANS WITH LONG-TERM CARE NEEDS",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:GnPB-g6toBAC"
+        }
+      ]
+    },
+    {
+      "id": "maryjopugh",
+      "name": "Mary Jo Pugh",
+      "papers": 9,
+      "degree": 9,
+      "weighted_degree": 42,
+      "total_cites": 27,
+      "first_year": 2022,
+      "last_year": 2026,
+      "radius_score": 51,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Complex pain phenotypes: suicidal ideation and attempt through latent multimorbidity",
+          "journal": "Plos one",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:M3ejUd6NZC8C"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "Characterizing the Symptom Clusters of Long COVID Among US Veterans",
+          "journal": "",
+          "year": 2026,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:VOx2b1Wkg3QC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        }
+      ]
+    },
+    {
+      "id": "ericjnelson",
+      "name": "Eric J Nelson",
+      "papers": 9,
+      "degree": 5,
+      "weighted_degree": 24,
+      "total_cites": 87,
+      "first_year": 2021,
+      "last_year": 2026,
+      "radius_score": 33,
+      "publications": [
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali",
+          "journal": "Elife",
+          "year": 2022,
+          "cites": 24,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial",
+          "journal": "JAMA pediatrics",
+          "year": 2022,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Identification, mapping, and self-reported practice patterns of village doctors in Sitakunda subdistrict, Bangladesh",
+          "journal": "Journal of global health",
+          "year": 2024,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:zA6iFVUQeVQC"
+        },
+        {
+          "title": "Introduction of an electronic clinical decision support tool to inform prescribing for pediatric diarrhea in Bangladesh and Mali: do provider expectations predict experiences?",
+          "journal": "The American Journal of Tropical Medicine and Hygiene",
+          "year": 2022,
+          "cites": 4,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:QIV2ME_5wuYC"
+        },
+        {
+          "title": "Predictive Modeling of Childhood Disease Severity in a Telemedicine Service: Evidence from the INACT Studies in Haiti",
+          "journal": "The Journal of Pediatrics",
+          "year": 2026,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:8AbLer7MMksC"
+        },
+        {
+          "title": "Development of an AI-enabled predictive model to identify the ‘sick child’at a pediatric telemedicine and medication delivery service in Haiti",
+          "journal": "medRxiv",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:P5F9QuxV20EC"
+        }
+      ]
+    },
+    {
+      "id": "ornaintrator",
+      "name": "Orna Intrator",
+      "papers": 8,
+      "degree": 9,
+      "weighted_degree": 44,
+      "total_cites": 14,
+      "first_year": 2022,
+      "last_year": 2025,
+      "radius_score": 52,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of clinical medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:CHSYGLWDkRkC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        },
+        {
+          "title": "GERIATRIC AND EXTENDED CARE TRAJECTORIES AND TRANSITIONS AMONG VETERANS WITH LONG-TERM CARE NEEDS",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:GnPB-g6toBAC"
+        },
+        {
+          "title": "MEASURING UNMET NEEDS OF HIGH-NEED, HIGH-RISK AMERICAN VETERANS AND THEIR CAREGIVERS USING A PROSPECTIVE SURVEY",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:O3NaXMp0MMsC"
+        }
+      ]
+    },
+    {
+      "id": "stutidang",
+      "name": "Stuti Dang",
+      "papers": 8,
+      "degree": 9,
+      "weighted_degree": 44,
+      "total_cites": 23,
+      "first_year": 2022,
+      "last_year": 2025,
+      "radius_score": 52,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of clinical medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:CHSYGLWDkRkC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        },
+        {
+          "title": "MEASURING UNMET NEEDS OF HIGH-NEED, HIGH-RISK AMERICAN VETERANS AND THEIR CAREGIVERS USING A PROSPECTIVE SURVEY",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:O3NaXMp0MMsC"
+        }
+      ]
+    },
+    {
+      "id": "brucekinosian",
+      "name": "Bruce Kinosian",
+      "papers": 6,
+      "degree": 9,
+      "weighted_degree": 37,
+      "total_cites": 13,
+      "first_year": 2022,
+      "last_year": 2024,
+      "radius_score": 43,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        },
+        {
+          "title": "GERIATRIC AND EXTENDED CARE TRAJECTORIES AND TRANSITIONS AMONG VETERANS WITH LONG-TERM CARE NEEDS",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:GnPB-g6toBAC"
+        }
+      ]
+    },
+    {
+      "id": "karenlkotloff",
+      "name": "Karen L Kotloff",
+      "papers": 6,
+      "degree": 6,
+      "weighted_degree": 25,
+      "total_cites": 84,
+      "first_year": 2021,
+      "last_year": 2023,
+      "radius_score": 31,
+      "publications": [
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali",
+          "journal": "Elife",
+          "year": 2022,
+          "cites": 24,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial",
+          "journal": "JAMA pediatrics",
+          "year": 2022,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for Shigellosis and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open forum infectious diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HDshCWvjkbEC"
+        },
+        {
+          "title": "A CLINICAL PREDICTION RULE TO GUIDE DIAGNOSTIC TESTING IN CHILDREN UNDER-FIVE PRESENTING WITH DIARRHEA IN LOW AND MIDDLE INCOME COUNTRIES",
+          "journal": "AMERICAN JOURNAL OF TROPICAL MEDICINE AND HYGIENE",
+          "year": 2021,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:qxL8FJ1GzNcC"
+        }
+      ]
+    },
+    {
+      "id": "adamclevine",
+      "name": "Adam C Levine",
+      "papers": 6,
+      "degree": 5,
+      "weighted_degree": 21,
+      "total_cites": 80,
+      "first_year": 2021,
+      "last_year": 2024,
+      "radius_score": 27,
+      "publications": [
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: a multicenter study in Bangladesh and Mali",
+          "journal": "Elife",
+          "year": 2022,
+          "cites": 24,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:UebtZRa9Y70C"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "Elife",
+          "year": 2023,
+          "cites": 20,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:_kc_bZDykSQC"
+        },
+        {
+          "title": "Improving antibiotic stewardship for diarrheal disease with probability-based electronic clinical decision support: a randomized crossover trial",
+          "journal": "JAMA pediatrics",
+          "year": 2022,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:IWHjjKOFINEC"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "Elife",
+          "year": 2021,
+          "cites": 14,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:eQOLeE2rZwMC"
+        },
+        {
+          "title": "Modelling climate impacts on paediatric sepsis incidence and severity in Bangladesh",
+          "journal": "Journal of Global Health",
+          "year": 2024,
+          "cites": 5,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:SeFeTyx0c_EC"
+        },
+        {
+          "title": "VALIDATION OF A MOBILE HEALTH TOOL FOR VIRAL DIARRHEA ETIOLOGY PREDICTION IN YOUNG CHILDREN: A PROSPECTIVE MULTICENTER STUDY IN BANGLADESH AND MALI",
+          "journal": "AMERICAN JOURNAL OF TROPICAL MEDICINE AND HYGIENE",
+          "year": 2021,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4DMP91E08xMC"
+        }
+      ]
+    },
+    {
+      "id": "rachelhess",
+      "name": "Rachel Hess",
+      "papers": 6,
+      "degree": 3,
+      "weighted_degree": 11,
+      "total_cites": 1,
+      "first_year": 2023,
+      "last_year": 2026,
+      "radius_score": 17,
+      "publications": [
+        {
+          "title": "Influence of intraocular pressure on clinical decision-making in glaucoma management",
+          "journal": "JAMA ophthalmology",
+          "year": 2026,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:B3FOqHPlNUQC"
+        },
+        {
+          "title": "From calls to action: leveraging the 2-1-1 system to intervene on food insecurity",
+          "journal": "Health Affairs Scholar",
+          "year": 2026,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:fQNAKQ3IYiAC"
+        },
+        {
+          "title": "Information overload: Quantifying clinical data burden in glaucoma care",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:uWQEDVKXjbEC"
+        },
+        {
+          "title": "Time to identify glaucoma progression given real-world visual field testing frequencies in a US nationwide insured population",
+          "journal": "Ophthalmology Glaucoma",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:tOudhMTPpwUC"
+        },
+        {
+          "title": "The influence of historical eye pressure cutoff on current clinical decision making",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2024,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:ldfaerwXgEUC"
+        },
+        {
+          "title": "Bayesian modeling to predict long-term visual field test variability in patients with glaucoma",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:k_IJM867U9cC"
+        }
+      ]
+    },
+    {
+      "id": "benjaminjbrintz",
+      "name": "Benjamin J Brintz",
+      "papers": 6,
+      "degree": 7,
+      "weighted_degree": 7,
+      "total_cites": 34,
+      "first_year": 2018,
+      "last_year": 2024,
+      "radius_score": 13,
+      "publications": [
+        {
+          "title": "HistoEM: A pathologist-guided and explainable workflow using histogram embedding for gland classification",
+          "journal": "Modern Pathology",
+          "year": 2024,
+          "cites": 17,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:ZHo1McVdvXMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "High value care education in general surgery residency programs: a multi-institutional needs assessment",
+          "journal": "The American Journal of Surgery",
+          "year": 2021,
+          "cites": 7,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:Tyk-4Ss8FVUC"
+        },
+        {
+          "title": "A randomized, double-blinded, placebo-controlled clinical trial of sterile filtered human amniotic fluid for treatment of COVID-19",
+          "journal": "BMC Infectious Diseases",
+          "year": 2023,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:RGFaLdJalmkC"
+        },
+        {
+          "title": "Mifepristone for miscarriage treatment in Utah: A survey of clinician knowledge and assessment of an educational video on future use",
+          "journal": "AEM Education and Training",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:TQgYirikUcIC"
+        },
+        {
+          "title": "A Normal Approximation to N-mixture Models with Applications in Large Abundance Estimation and Disease Surveillance",
+          "journal": "",
+          "year": 2018,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:qjMakFHDy7sC"
+        }
+      ]
+    },
+    {
+      "id": "randallrupper",
+      "name": "Randall Rupper",
+      "papers": 5,
+      "degree": 8,
+      "weighted_degree": 30,
+      "total_cites": 13,
+      "first_year": 2022,
+      "last_year": 2024,
+      "radius_score": 35,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "Identifying unmet needs of high need high risk high risk older veterans and their caregivers using a prospective survey",
+          "journal": "",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:738O_yMBCRsC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        },
+        {
+          "title": "GERIATRIC AND EXTENDED CARE TRAJECTORIES AND TRANSITIONS AMONG VETERANS WITH LONG-TERM CARE NEEDS",
+          "journal": "Innovation in Aging",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:GnPB-g6toBAC"
+        }
+      ]
+    },
+    {
+      "id": "sandragarciadavis",
+      "name": "Sandra Garcia-Davis",
+      "papers": 5,
+      "degree": 9,
+      "weighted_degree": 30,
+      "total_cites": 21,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 35,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of clinical medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:CHSYGLWDkRkC"
+        },
+        {
+          "title": "COVID-19 experiences of older female veterans and gender differences using the prospective hero care survey data",
+          "journal": "",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:cFHS6HbyZ2cC"
+        }
+      ]
+    },
+    {
+      "id": "erindbouldin",
+      "name": "Erin D Bouldin",
+      "papers": 5,
+      "degree": 8,
+      "weighted_degree": 28,
+      "total_cites": 22,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 33,
+      "publications": [
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:4JMBOYKVnBMC"
+        },
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the HERO CARE survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:BqipwSGYUEgC"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of women & aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:HoB7MX3m0LUC"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of clinical medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:CHSYGLWDkRkC"
+        },
+        {
+          "title": "Trajectories and transitions in service use among older veterans at high risk of long-term institutional care",
+          "journal": "Medical care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:3s1wT3WcHBgC"
+        }
+      ]
+    },
+    {
+      "id": "joshuadstein",
+      "name": "Joshua D Stein",
+      "papers": 5,
+      "degree": 3,
+      "weighted_degree": 11,
+      "total_cites": 1,
+      "first_year": 2023,
+      "last_year": 2026,
+      "radius_score": 16,
+      "publications": [
+        {
+          "title": "Influence of intraocular pressure on clinical decision-making in glaucoma management",
+          "journal": "JAMA ophthalmology",
+          "year": 2026,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:B3FOqHPlNUQC"
+        },
+        {
+          "title": "Information overload: Quantifying clinical data burden in glaucoma care",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:uWQEDVKXjbEC"
+        },
+        {
+          "title": "Time to identify glaucoma progression given real-world visual field testing frequencies in a US nationwide insured population",
+          "journal": "Ophthalmology Glaucoma",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:tOudhMTPpwUC"
+        },
+        {
+          "title": "The influence of historical eye pressure cutoff on current clinical decision making",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2024,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:ldfaerwXgEUC"
+        },
+        {
+          "title": "Bayesian modeling to predict long-term visual field test variability in patients with glaucoma",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:k_IJM867U9cC"
+        }
+      ]
+    },
+    {
+      "id": "kensakukawamoto",
+      "name": "Kensaku Kawamoto",
+      "papers": 5,
+      "degree": 3,
+      "weighted_degree": 11,
+      "total_cites": 1,
+      "first_year": 2023,
+      "last_year": 2026,
+      "radius_score": 16,
+      "publications": [
+        {
+          "title": "Influence of intraocular pressure on clinical decision-making in glaucoma management",
+          "journal": "JAMA ophthalmology",
+          "year": 2026,
+          "cites": 1,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:B3FOqHPlNUQC"
+        },
+        {
+          "title": "Information overload: Quantifying clinical data burden in glaucoma care",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:uWQEDVKXjbEC"
+        },
+        {
+          "title": "Time to identify glaucoma progression given real-world visual field testing frequencies in a US nationwide insured population",
+          "journal": "Ophthalmology Glaucoma",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:tOudhMTPpwUC"
+        },
+        {
+          "title": "The influence of historical eye pressure cutoff on current clinical decision making",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2024,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:ldfaerwXgEUC"
+        },
+        {
+          "title": "Bayesian modeling to predict long-term visual field test variability in patients with glaucoma",
+          "journal": "Investigative Ophthalmology & Visual Science",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:k_IJM867U9cC"
+        }
+      ]
+    },
+    {
+      "id": "andrewsazman",
+      "name": "Andrew S Azman",
+      "papers": 4,
+      "degree": 1,
+      "weighted_degree": 4,
+      "total_cites": 4,
+      "first_year": 2021,
+      "last_year": 2025,
+      "radius_score": 8,
+      "publications": [
+        {
+          "title": "Combining antibody markers for serosurveillance of SARS-CoV-2 to estimate seroprevalence and time-since-infection",
+          "journal": "Epidemiology & Infection",
+          "year": 2022,
+          "cites": 4,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:0EnyYjriUFMC"
+        },
+        {
+          "title": "Long-Term Antibody Responses to Vibrio cholerae Across Natural Infection, Vaccination, and Challenge: A Systematic Review",
+          "journal": "medRxiv",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:08ZZubdj9fEC"
+        },
+        {
+          "title": "Combining antibody markers for serosurveillance of SARS-CoV-2 to estimate seroprevalence and time-since-infection–CORRIGENDUM",
+          "journal": "Epidemiology & Infection",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:mB3voiENLucC"
+        },
+        {
+          "title": "A Novel Luminescence-Based Serum Bactericidal Assay for Vibrio cholerae Reduces Assay Variation, Is Time-and Cost-Effective, and Directly Measures Continuous Titer Values",
+          "journal": "The American Journal of Tropical Medicine and Hygiene",
+          "year": 2021,
+          "cites": 0,
+          "url": "https://scholar.google.com/citations?view_op=view_citation&user=nYA8PAsAAAAJ&citation_for_view=nYA8PAsAAAAJ:LkGwnXOMwfcC"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "adamclevine",
+      "target": "danieltleung",
+      "weight": 5
+    },
+    {
+      "source": "adamclevine",
+      "target": "ericjnelson",
+      "weight": 5
+    },
+    {
+      "source": "adamclevine",
+      "target": "jamesaplattsmills",
+      "weight": 4
+    },
+    {
+      "source": "adamclevine",
+      "target": "karenlkotloff",
+      "weight": 4
+    },
+    {
+      "source": "adamclevine",
+      "target": "shariamahmed",
+      "weight": 3
+    },
+    {
+      "source": "andrewsazman",
+      "target": "danieltleung",
+      "weight": 4
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "brucekinosian",
+      "weight": 3
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "danieltleung",
+      "weight": 3
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "jamesaplattsmills",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "jaredhansen",
+      "weight": 4
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "joshuadstein",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "karenlkotloff",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "kensakukawamoto",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "maryjopugh",
+      "weight": 3
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "ornaintrator",
+      "weight": 4
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "rachelhess",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "randallrupper",
+      "weight": 3
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "sandragarciadavis",
+      "weight": 1
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "shariamahmed",
+      "weight": 2
+    },
+    {
+      "source": "benjaminbrintz",
+      "target": "stutidang",
+      "weight": 3
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "brucekinosian",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "erindbouldin",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "jaredhansen",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "maryjopugh",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "ornaintrator",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "sandragarciadavis",
+      "weight": 1
+    },
+    {
+      "source": "benjaminjbrintz",
+      "target": "stutidang",
+      "weight": 1
+    },
+    {
+      "source": "brucekinosian",
+      "target": "erindbouldin",
+      "weight": 3
+    },
+    {
+      "source": "brucekinosian",
+      "target": "jaredhansen",
+      "weight": 6
+    },
+    {
+      "source": "brucekinosian",
+      "target": "maryjopugh",
+      "weight": 6
+    },
+    {
+      "source": "brucekinosian",
+      "target": "ornaintrator",
+      "weight": 6
+    },
+    {
+      "source": "brucekinosian",
+      "target": "randallrupper",
+      "weight": 4
+    },
+    {
+      "source": "brucekinosian",
+      "target": "sandragarciadavis",
+      "weight": 3
+    },
+    {
+      "source": "brucekinosian",
+      "target": "stutidang",
+      "weight": 5
+    },
+    {
+      "source": "danieltleung",
+      "target": "ericjnelson",
+      "weight": 7
+    },
+    {
+      "source": "danieltleung",
+      "target": "jamesaplattsmills",
+      "weight": 12
+    },
+    {
+      "source": "danieltleung",
+      "target": "karenlkotloff",
+      "weight": 6
+    },
+    {
+      "source": "danieltleung",
+      "target": "shariamahmed",
+      "weight": 11
+    },
+    {
+      "source": "ericjnelson",
+      "target": "jamesaplattsmills",
+      "weight": 4
+    },
+    {
+      "source": "ericjnelson",
+      "target": "karenlkotloff",
+      "weight": 4
+    },
+    {
+      "source": "ericjnelson",
+      "target": "shariamahmed",
+      "weight": 4
+    },
+    {
+      "source": "erindbouldin",
+      "target": "jaredhansen",
+      "weight": 5
+    },
+    {
+      "source": "erindbouldin",
+      "target": "maryjopugh",
+      "weight": 4
+    },
+    {
+      "source": "erindbouldin",
+      "target": "ornaintrator",
+      "weight": 4
+    },
+    {
+      "source": "erindbouldin",
+      "target": "randallrupper",
+      "weight": 2
+    },
+    {
+      "source": "erindbouldin",
+      "target": "sandragarciadavis",
+      "weight": 4
+    },
+    {
+      "source": "erindbouldin",
+      "target": "stutidang",
+      "weight": 5
+    },
+    {
+      "source": "jamesaplattsmills",
+      "target": "karenlkotloff",
+      "weight": 5
+    },
+    {
+      "source": "jamesaplattsmills",
+      "target": "shariamahmed",
+      "weight": 5
+    },
+    {
+      "source": "jaredhansen",
+      "target": "maryjopugh",
+      "weight": 7
+    },
+    {
+      "source": "jaredhansen",
+      "target": "ornaintrator",
+      "weight": 8
+    },
+    {
+      "source": "jaredhansen",
+      "target": "randallrupper",
+      "weight": 5
+    },
+    {
+      "source": "jaredhansen",
+      "target": "sandragarciadavis",
+      "weight": 5
+    },
+    {
+      "source": "jaredhansen",
+      "target": "stutidang",
+      "weight": 8
+    },
+    {
+      "source": "joshuadstein",
+      "target": "kensakukawamoto",
+      "weight": 5
+    },
+    {
+      "source": "joshuadstein",
+      "target": "rachelhess",
+      "weight": 5
+    },
+    {
+      "source": "karenlkotloff",
+      "target": "shariamahmed",
+      "weight": 5
+    },
+    {
+      "source": "kensakukawamoto",
+      "target": "rachelhess",
+      "weight": 5
+    },
+    {
+      "source": "maryjopugh",
+      "target": "ornaintrator",
+      "weight": 6
+    },
+    {
+      "source": "maryjopugh",
+      "target": "randallrupper",
+      "weight": 5
+    },
+    {
+      "source": "maryjopugh",
+      "target": "sandragarciadavis",
+      "weight": 4
+    },
+    {
+      "source": "maryjopugh",
+      "target": "stutidang",
+      "weight": 6
+    },
+    {
+      "source": "ornaintrator",
+      "target": "randallrupper",
+      "weight": 4
+    },
+    {
+      "source": "ornaintrator",
+      "target": "sandragarciadavis",
+      "weight": 4
+    },
+    {
+      "source": "ornaintrator",
+      "target": "stutidang",
+      "weight": 7
+    },
+    {
+      "source": "randallrupper",
+      "target": "sandragarciadavis",
+      "weight": 3
+    },
+    {
+      "source": "randallrupper",
+      "target": "stutidang",
+      "weight": 4
+    },
+    {
+      "source": "sandragarciadavis",
+      "target": "stutidang",
+      "weight": 5
+    }
+  ]
+}

@@ -1,0 +1,1282 @@
+{
+  "generated_at": "2026-05-08 10:27:20 MDT",
+  "source": "OpenAlex works API",
+  "source_note": "Counts use OpenAlex records filtered to article-type works, excluding preprints, errata, paratext, peer-review/author-response records, and other duplicate-like publication versions.",
+  "openalex_author_id": "A5008421168",
+  "openalex_record_count": 117,
+  "publication_count": 90,
+  "author_records": 858,
+  "nodes": [
+    {
+      "id": "A5021293063",
+      "name": "Daniel T. Leung",
+      "area": "Global Health & Infectious Disease",
+      "papers": 30,
+      "degree": 9,
+      "weighted_degree": 54,
+      "total_cites": 167,
+      "first_year": 2020,
+      "last_year": 2026,
+      "radius_score": 84,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: A multicenter study in Bangladesh and Mali",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 23,
+          "url": "https://doi.org/10.7554/elife.72294"
+        },
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "Development of a prediction model for the acquisition of extended spectrum beta-lactam-resistant organisms in U.S. international travellers",
+          "journal": "Journal of Travel Medicine",
+          "year": 2023,
+          "cites": 12,
+          "url": "https://doi.org/10.1093/jtm/taad028"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Clinical and laboratory predictors of 30‐day mortality in severe acute malnourished children with severe pneumonia",
+          "journal": "Tropical Medicine & International Health",
+          "year": 2020,
+          "cites": 11,
+          "url": "https://doi.org/10.1111/tmi.13484"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for<i>Shigellosis<\/i>and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://doi.org/10.1093/ofid/ofad119"
+        },
+        {
+          "title": "Weather variables as important clinical predictors of bacterial diarrhoea among international travellers",
+          "journal": "Journal of Travel Medicine",
+          "year": 2022,
+          "cites": 8,
+          "url": "https://doi.org/10.1093/jtm/taac012"
+        }
+      ]
+    },
+    {
+      "id": "A5066253280",
+      "name": "Sharia M. Ahmed",
+      "area": "Global Health & Infectious Disease",
+      "papers": 11,
+      "degree": 9,
+      "weighted_degree": 39,
+      "total_cites": 68,
+      "first_year": 2021,
+      "last_year": 2024,
+      "radius_score": 50,
+      "publications": [
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for<i>Shigellosis<\/i>and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://doi.org/10.1093/ofid/ofad119"
+        },
+        {
+          "title": "Robust Testing in Outpatient Settings to Explore COVID-19 Epidemiology: Disparities in Race/Ethnicity and Age, Salt Lake County, Utah, 2020",
+          "journal": "Public Health Reports",
+          "year": 2021,
+          "cites": 8,
+          "url": "https://doi.org/10.1177/0033354920988612"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prognostic model identifying children at risk of death following presentation for diarrheal care",
+          "journal": "PLOS Global Public Health",
+          "year": 2023,
+          "cites": 7,
+          "url": "https://doi.org/10.1371/journal.pgph.0001937"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.7554/elife.78491"
+        },
+        {
+          "title": "Identification, mapping, and self-reported practice patterns of village doctors in Sitakunda subdistrict, Bangladesh",
+          "journal": "Journal of Global Health",
+          "year": 2024,
+          "cites": 4,
+          "url": "https://doi.org/10.7189/jogh.14.04185"
+        },
+        {
+          "title": "Derivation and External Validation of a Clinical Prediction Model for Viral Diarrhea Etiology in Bangladesh",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://doi.org/10.1093/ofid/ofad295"
+        }
+      ]
+    },
+    {
+      "id": "A5051818098",
+      "name": "James A Platts-Mills",
+      "area": "Global Health & Infectious Disease",
+      "papers": 10,
+      "degree": 8,
+      "weighted_degree": 37,
+      "total_cites": 98,
+      "first_year": 2020,
+      "last_year": 2024,
+      "radius_score": 47,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: A multicenter study in Bangladesh and Mali",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 23,
+          "url": "https://doi.org/10.7554/elife.72294"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for<i>Shigellosis<\/i>and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://doi.org/10.1093/ofid/ofad119"
+        },
+        {
+          "title": "Weather variables as important clinical predictors of bacterial diarrhoea among international travellers",
+          "journal": "Journal of Travel Medicine",
+          "year": 2022,
+          "cites": 8,
+          "url": "https://doi.org/10.1093/jtm/taac012"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prognostic model identifying children at risk of death following presentation for diarrheal care",
+          "journal": "PLOS Global Public Health",
+          "year": 2023,
+          "cites": 7,
+          "url": "https://doi.org/10.1371/journal.pgph.0001937"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.7554/elife.78491"
+        },
+        {
+          "title": "Derivation and External Validation of a Clinical Prediction Model for Viral Diarrhea Etiology in Bangladesh",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://doi.org/10.1093/ofid/ofad295"
+        }
+      ]
+    },
+    {
+      "id": "A5077317216",
+      "name": "Eric J. Nelson",
+      "area": "Global Health & Infectious Disease",
+      "papers": 9,
+      "degree": 8,
+      "weighted_degree": 37,
+      "total_cites": 100,
+      "first_year": 2020,
+      "last_year": 2026,
+      "radius_score": 46,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: A multicenter study in Bangladesh and Mali",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 23,
+          "url": "https://doi.org/10.7554/elife.72294"
+        },
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prognostic model identifying children at risk of death following presentation for diarrheal care",
+          "journal": "PLOS Global Public Health",
+          "year": 2023,
+          "cites": 7,
+          "url": "https://doi.org/10.1371/journal.pgph.0001937"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.7554/elife.78491"
+        },
+        {
+          "title": "Identification, mapping, and self-reported practice patterns of village doctors in Sitakunda subdistrict, Bangladesh",
+          "journal": "Journal of Global Health",
+          "year": 2024,
+          "cites": 4,
+          "url": "https://doi.org/10.7189/jogh.14.04185"
+        },
+        {
+          "title": "Introduction of an Electronic Clinical Decision Support Tool to Inform Prescribing for Pediatric Diarrhea in Bangladesh and Mali: Do Provider Expectations Predict Experiences?",
+          "journal": "American Journal of Tropical Medicine and Hygiene",
+          "year": 2022,
+          "cites": 3,
+          "url": "https://doi.org/10.4269/ajtmh.21-1248"
+        }
+      ]
+    },
+    {
+      "id": "A5004897644",
+      "name": "Adam C. Levine",
+      "area": "Global Health & Infectious Disease",
+      "papers": 7,
+      "degree": 8,
+      "weighted_degree": 31,
+      "total_cites": 95,
+      "first_year": 2020,
+      "last_year": 2024,
+      "radius_score": 38,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: A multicenter study in Bangladesh and Mali",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 23,
+          "url": "https://doi.org/10.7554/elife.72294"
+        },
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prognostic model identifying children at risk of death following presentation for diarrheal care",
+          "journal": "PLOS Global Public Health",
+          "year": 2023,
+          "cites": 7,
+          "url": "https://doi.org/10.1371/journal.pgph.0001937"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.7554/elife.78491"
+        },
+        {
+          "title": "Modelling climate impacts on paediatric sepsis incidence and severity in Bangladesh",
+          "journal": "Journal of Global Health",
+          "year": 2024,
+          "cites": 2,
+          "url": "https://doi.org/10.7189/jogh.14.04107"
+        }
+      ]
+    },
+    {
+      "id": "A5025149327",
+      "name": "Karen L. Kotloff",
+      "area": "Global Health & Infectious Disease",
+      "papers": 6,
+      "degree": 7,
+      "weighted_degree": 30,
+      "total_cites": 86,
+      "first_year": 2020,
+      "last_year": 2023,
+      "radius_score": 36,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "External validation of a mobile clinical decision support system for diarrhea etiology prediction in children: A multicenter study in Bangladesh and Mali",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 23,
+          "url": "https://doi.org/10.7554/elife.72294"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for<i>Shigellosis<\/i>and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://doi.org/10.1093/ofid/ofad119"
+        },
+        {
+          "title": "Derivation and external validation of a clinical prognostic model identifying children at risk of death following presentation for diarrheal care",
+          "journal": "PLOS Global Public Health",
+          "year": 2023,
+          "cites": 7,
+          "url": "https://doi.org/10.1371/journal.pgph.0001937"
+        },
+        {
+          "title": "Derivation and external validation of clinical prediction rules identifying children at risk of linear growth faltering",
+          "journal": "eLife",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.7554/elife.78491"
+        }
+      ]
+    },
+    {
+      "id": "A5006065422",
+      "name": "Ashraful Islam Khan",
+      "area": "Global Health & Infectious Disease",
+      "papers": 5,
+      "degree": 8,
+      "weighted_degree": 23,
+      "total_cites": 44,
+      "first_year": 2021,
+      "last_year": 2023,
+      "radius_score": 28,
+      "publications": [
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Clinical Prediction Rule to Guide Diagnostic Testing for<i>Shigellosis<\/i>and Improve Antibiotic Stewardship for Pediatric Diarrhea",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 9,
+          "url": "https://doi.org/10.1093/ofid/ofad119"
+        },
+        {
+          "title": "Derivation and External Validation of a Clinical Prediction Model for Viral Diarrhea Etiology in Bangladesh",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://doi.org/10.1093/ofid/ofad295"
+        },
+        {
+          "title": "Introduction of an Electronic Clinical Decision Support Tool to Inform Prescribing for Pediatric Diarrhea in Bangladesh and Mali: Do Provider Expectations Predict Experiences?",
+          "journal": "American Journal of Tropical Medicine and Hygiene",
+          "year": 2022,
+          "cites": 3,
+          "url": "https://doi.org/10.4269/ajtmh.21-1248"
+        }
+      ]
+    },
+    {
+      "id": "A5080129667",
+      "name": "Erin D. Bouldin",
+      "area": "VA & Health Services",
+      "papers": 5,
+      "degree": 4,
+      "weighted_degree": 18,
+      "total_cites": 18,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 23,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the <i>HERO CARE<\/i> survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://doi.org/10.1111/jgs.18577"
+        },
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 5,
+          "url": "https://doi.org/10.1111/jgs.18307"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of Women & Aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://doi.org/10.1080/08952841.2024.2375480"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of Clinical Medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://doi.org/10.3390/jcm14124219"
+        },
+        {
+          "title": "Trajectories and Transitions in Service Use Among Older Veterans at High Risk of Long-Term Institutional Care",
+          "journal": "Medical Care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://doi.org/10.1097/mlr.0000000000002051"
+        }
+      ]
+    },
+    {
+      "id": "A5082748676",
+      "name": "Jared Hansen",
+      "area": "VA & Health Services",
+      "papers": 5,
+      "degree": 4,
+      "weighted_degree": 18,
+      "total_cites": 18,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 23,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the <i>HERO CARE<\/i> survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://doi.org/10.1111/jgs.18577"
+        },
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 5,
+          "url": "https://doi.org/10.1111/jgs.18307"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of Women & Aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://doi.org/10.1080/08952841.2024.2375480"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of Clinical Medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://doi.org/10.3390/jcm14124219"
+        },
+        {
+          "title": "Trajectories and Transitions in Service Use Among Older Veterans at High Risk of Long-Term Institutional Care",
+          "journal": "Medical Care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://doi.org/10.1097/mlr.0000000000002051"
+        }
+      ]
+    },
+    {
+      "id": "A5036542874",
+      "name": "Stuti Dang",
+      "area": "VA & Health Services",
+      "papers": 5,
+      "degree": 4,
+      "weighted_degree": 18,
+      "total_cites": 18,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 23,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the <i>HERO CARE<\/i> survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://doi.org/10.1111/jgs.18577"
+        },
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 5,
+          "url": "https://doi.org/10.1111/jgs.18307"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of Women & Aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://doi.org/10.1080/08952841.2024.2375480"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of Clinical Medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://doi.org/10.3390/jcm14124219"
+        },
+        {
+          "title": "Trajectories and Transitions in Service Use Among Older Veterans at High Risk of Long-Term Institutional Care",
+          "journal": "Medical Care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://doi.org/10.1097/mlr.0000000000002051"
+        }
+      ]
+    },
+    {
+      "id": "A5053589763",
+      "name": "Mary Jo Pugh",
+      "area": "VA & Health Services",
+      "papers": 5,
+      "degree": 4,
+      "weighted_degree": 15,
+      "total_cites": 22,
+      "first_year": 2022,
+      "last_year": 2024,
+      "radius_score": 20,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the <i>HERO CARE<\/i> survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://doi.org/10.1111/jgs.18577"
+        },
+        {
+          "title": "Association between specific unmet functional needs and desire to institutionalize among caregivers of older veterans",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 5,
+          "url": "https://doi.org/10.1111/jgs.18307"
+        },
+        {
+          "title": "Complex pain phenotypes: Suicidal ideation and attempt through latent multimorbidity",
+          "journal": "PLoS ONE",
+          "year": 2022,
+          "cites": 5,
+          "url": "https://doi.org/10.1371/journal.pone.0267844"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of Women & Aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://doi.org/10.1080/08952841.2024.2375480"
+        },
+        {
+          "title": "Trajectories and Transitions in Service Use Among Older Veterans at High Risk of Long-Term Institutional Care",
+          "journal": "Medical Care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://doi.org/10.1097/mlr.0000000000002051"
+        }
+      ]
+    },
+    {
+      "id": "A5078072232",
+      "name": "Matthew H. Samore",
+      "area": "VA & Health Services",
+      "papers": 5,
+      "degree": 2,
+      "weighted_degree": 2,
+      "total_cites": 15,
+      "first_year": 2021,
+      "last_year": 2024,
+      "radius_score": 7,
+      "publications": [
+        {
+          "title": "Robust Testing in Outpatient Settings to Explore COVID-19 Epidemiology: Disparities in Race/Ethnicity and Age, Salt Lake County, Utah, 2020",
+          "journal": "Public Health Reports",
+          "year": 2021,
+          "cites": 8,
+          "url": "https://doi.org/10.1177/0033354920988612"
+        },
+        {
+          "title": "Predicting antibiotic resistance in Enterobacterales to support optimal empiric treatment of urinary tract infections in outpatient veterans",
+          "journal": "Antimicrobial Stewardship & Healthcare Epidemiology",
+          "year": 2024,
+          "cites": 5,
+          "url": "https://doi.org/10.1017/ash.2024.377"
+        },
+        {
+          "title": "Validation of antibiotic stewardship metrics for genitourinary infection management in Veterans Affairs outpatient settings",
+          "journal": "Antimicrobial Stewardship & Healthcare Epidemiology",
+          "year": 2023,
+          "cites": 1,
+          "url": "https://doi.org/10.1017/ash.2023.264"
+        },
+        {
+          "title": "Tier-based antimicrobial stewardship metrics for genitourinary-related antibiotic use in Veterans’ Affairs outpatient settings",
+          "journal": "Antimicrobial Stewardship & Healthcare Epidemiology",
+          "year": 2022,
+          "cites": 1,
+          "url": "https://doi.org/10.1017/ash.2022.64"
+        },
+        {
+          "title": "Using machine learning to predict antibiotic resistance to support optimal empiric treatment of urinary tract infections",
+          "journal": "Antimicrobial Stewardship & Healthcare Epidemiology",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://doi.org/10.1017/ash.2022.190"
+        }
+      ]
+    },
+    {
+      "id": "A5053636003",
+      "name": "Md Taufiqul Islam",
+      "area": "Global Health & Infectious Disease",
+      "papers": 4,
+      "degree": 6,
+      "weighted_degree": 15,
+      "total_cites": 27,
+      "first_year": 2022,
+      "last_year": 2024,
+      "radius_score": 19,
+      "publications": [
+        {
+          "title": "Improving Antibiotic Stewardship for Diarrheal Disease With Probability-Based Electronic Clinical Decision Support",
+          "journal": "JAMA Pediatrics",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1001/jamapediatrics.2022.2535"
+        },
+        {
+          "title": "Identification, mapping, and self-reported practice patterns of village doctors in Sitakunda subdistrict, Bangladesh",
+          "journal": "Journal of Global Health",
+          "year": 2024,
+          "cites": 4,
+          "url": "https://doi.org/10.7189/jogh.14.04185"
+        },
+        {
+          "title": "Derivation and External Validation of a Clinical Prediction Model for Viral Diarrhea Etiology in Bangladesh",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2023,
+          "cites": 4,
+          "url": "https://doi.org/10.1093/ofid/ofad295"
+        },
+        {
+          "title": "Introduction of an Electronic Clinical Decision Support Tool to Inform Prescribing for Pediatric Diarrhea in Bangladesh and Mali: Do Provider Expectations Predict Experiences?",
+          "journal": "American Journal of Tropical Medicine and Hygiene",
+          "year": 2022,
+          "cites": 3,
+          "url": "https://doi.org/10.4269/ajtmh.21-1248"
+        }
+      ]
+    },
+    {
+      "id": "A5009249802",
+      "name": "Orna Intrator",
+      "area": "VA & Health Services",
+      "papers": 4,
+      "degree": 4,
+      "weighted_degree": 15,
+      "total_cites": 13,
+      "first_year": 2023,
+      "last_year": 2025,
+      "radius_score": 19,
+      "publications": [
+        {
+          "title": "Measuring the unmet needs of American military Veterans and their caregivers: Survey protocol of the <i>HERO CARE<\/i> survey",
+          "journal": "Journal of the American Geriatrics Society",
+          "year": 2023,
+          "cites": 8,
+          "url": "https://doi.org/10.1111/jgs.18577"
+        },
+        {
+          "title": "Sex differences in unmet needs between male and female older Veterans",
+          "journal": "Journal of Women & Aging",
+          "year": 2024,
+          "cites": 3,
+          "url": "https://doi.org/10.1080/08952841.2024.2375480"
+        },
+        {
+          "title": "The Epidemiology of the Long-Term Care Needs and Unmet Needs of Older Veterans in the United States",
+          "journal": "Journal of Clinical Medicine",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://doi.org/10.3390/jcm14124219"
+        },
+        {
+          "title": "Trajectories and Transitions in Service Use Among Older Veterans at High Risk of Long-Term Institutional Care",
+          "journal": "Medical Care",
+          "year": 2024,
+          "cites": 1,
+          "url": "https://doi.org/10.1097/mlr.0000000000002051"
+        }
+      ]
+    },
+    {
+      "id": "A5050519796",
+      "name": "Benjamin Haaland",
+      "area": "Global Health & Infectious Disease",
+      "papers": 4,
+      "degree": 7,
+      "weighted_degree": 14,
+      "total_cites": 42,
+      "first_year": 2020,
+      "last_year": 2024,
+      "radius_score": 18,
+      "publications": [
+        {
+          "title": "Clinical predictors for etiology of acute diarrhea in children in resource-limited settings",
+          "journal": "PLoS neglected tropical diseases",
+          "year": 2020,
+          "cites": 30,
+          "url": "https://doi.org/10.1371/journal.pntd.0008677"
+        },
+        {
+          "title": "A modular approach to integrating multiple data sources into real-time clinical prediction for pediatric diarrhea",
+          "journal": "eLife",
+          "year": 2021,
+          "cites": 12,
+          "url": "https://doi.org/10.7554/elife.63009"
+        },
+        {
+          "title": "Etiologies of Bloody Diarrhea in Children Presenting With Acute Gastroenteritis to US Emergency Departments",
+          "journal": "Open Forum Infectious Diseases",
+          "year": 2024,
+          "cites": 0,
+          "url": "https://doi.org/10.1093/ofid/ofae692"
+        },
+        {
+          "title": "Machine Learning Identification Of Transcriptomics And Clinical Characteristics Associated With Myocardial Recovery In Heart Failure Patients Undergoing Mechanical Circulatory Support",
+          "journal": "Journal of Cardiac Failure",
+          "year": 2023,
+          "cites": 0,
+          "url": "https://doi.org/10.1016/j.cardfail.2022.10.005"
+        }
+      ]
+    },
+    {
+      "id": "A5042491895",
+      "name": "David K. Turok",
+      "area": "Reproductive Health",
+      "papers": 4,
+      "degree": 1,
+      "weighted_degree": 4,
+      "total_cites": 19,
+      "first_year": 2021,
+      "last_year": 2022,
+      "radius_score": 8,
+      "publications": [
+        {
+          "title": "Quantitative and qualitative impact of One Key Question on primary care providers’ contraceptive counseling at routine preventive health visits",
+          "journal": "Contraception",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1016/j.contraception.2022.01.004"
+        },
+        {
+          "title": "Mifepristone for miscarriage treatment in Utah: A survey of clinician knowledge and assessment of an educational video on future use",
+          "journal": "AEM Education and Training",
+          "year": 2022,
+          "cites": 2,
+          "url": "https://doi.org/10.1002/aet2.10834"
+        },
+        {
+          "title": "Determining the impact of the Zika pandemic on primary care providers’ contraceptive counseling of non-pregnant patients in the US: a mixed methods study",
+          "journal": "BMC Health Services Research",
+          "year": 2021,
+          "cites": 1,
+          "url": "https://doi.org/10.1186/s12913-021-07170-0"
+        },
+        {
+          "title": "Current Knowledge and Use of Mifepristone for Miscarriage in Utah and the Impact of An Educational Video On Future Use [A292]",
+          "journal": "Obstetrics and Gynecology",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://doi.org/10.1097/01.aog.0000825728.94972.6d"
+        }
+      ]
+    },
+    {
+      "id": "A5058988472",
+      "name": "Emilie L. Ungricht",
+      "area": "Ophthalmology",
+      "papers": 4,
+      "degree": 1,
+      "weighted_degree": 4,
+      "total_cites": 47,
+      "first_year": 2021,
+      "last_year": 2022,
+      "radius_score": 8,
+      "publications": [
+        {
+          "title": "Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2021,
+          "cites": 17,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000000768"
+        },
+        {
+          "title": "Effect of longitudinal and torsional ultrasound on corneal endothelial cells: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2021,
+          "cites": 16,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000000737"
+        },
+        {
+          "title": "Effect of simulated lenticular debris on corneal endothelial cells: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2022,
+          "cites": 8,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000001032"
+        },
+        {
+          "title": "Corneal endothelium protection provided by ophthalmic viscosurgical devices during phacoemulsification: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2022,
+          "cites": 6,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000001052"
+        }
+      ]
+    },
+    {
+      "id": "A5046598620",
+      "name": "Jennifer E. Kaiser",
+      "area": "Reproductive Health",
+      "papers": 4,
+      "degree": 1,
+      "weighted_degree": 4,
+      "total_cites": 19,
+      "first_year": 2021,
+      "last_year": 2022,
+      "radius_score": 8,
+      "publications": [
+        {
+          "title": "Quantitative and qualitative impact of One Key Question on primary care providers’ contraceptive counseling at routine preventive health visits",
+          "journal": "Contraception",
+          "year": 2022,
+          "cites": 16,
+          "url": "https://doi.org/10.1016/j.contraception.2022.01.004"
+        },
+        {
+          "title": "Mifepristone for miscarriage treatment in Utah: A survey of clinician knowledge and assessment of an educational video on future use",
+          "journal": "AEM Education and Training",
+          "year": 2022,
+          "cites": 2,
+          "url": "https://doi.org/10.1002/aet2.10834"
+        },
+        {
+          "title": "Determining the impact of the Zika pandemic on primary care providers’ contraceptive counseling of non-pregnant patients in the US: a mixed methods study",
+          "journal": "BMC Health Services Research",
+          "year": 2021,
+          "cites": 1,
+          "url": "https://doi.org/10.1186/s12913-021-07170-0"
+        },
+        {
+          "title": "Current Knowledge and Use of Mifepristone for Miscarriage in Utah and the Impact of An Educational Video On Future Use [A292]",
+          "journal": "Obstetrics and Gynecology",
+          "year": 2022,
+          "cites": 0,
+          "url": "https://doi.org/10.1097/01.aog.0000825728.94972.6d"
+        }
+      ]
+    },
+    {
+      "id": "A5053240974",
+      "name": "Randall J. Olson",
+      "area": "Ophthalmology",
+      "papers": 4,
+      "degree": 1,
+      "weighted_degree": 4,
+      "total_cites": 47,
+      "first_year": 2021,
+      "last_year": 2022,
+      "radius_score": 8,
+      "publications": [
+        {
+          "title": "Effect of phacoemulsification fluid flow on the corneal endothelium: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2021,
+          "cites": 17,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000000768"
+        },
+        {
+          "title": "Effect of longitudinal and torsional ultrasound on corneal endothelial cells: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2021,
+          "cites": 16,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000000737"
+        },
+        {
+          "title": "Effect of simulated lenticular debris on corneal endothelial cells: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2022,
+          "cites": 8,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000001032"
+        },
+        {
+          "title": "Corneal endothelium protection provided by ophthalmic viscosurgical devices during phacoemulsification: experimental study in rabbit eyes",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2022,
+          "cites": 6,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000001052"
+        }
+      ]
+    },
+    {
+      "id": "A5056100022",
+      "name": "Brian C. Stagg",
+      "area": "Ophthalmology",
+      "papers": 4,
+      "degree": 0,
+      "weighted_degree": 0,
+      "total_cites": 3,
+      "first_year": 2025,
+      "last_year": 2026,
+      "radius_score": 4,
+      "publications": [
+        {
+          "title": "Influence of Intraocular Pressure on Clinical Decision-Making in Glaucoma Management",
+          "journal": "JAMA Ophthalmology",
+          "year": 2026,
+          "cites": 2,
+          "url": "https://doi.org/10.1001/jamaophthalmol.2025.5593"
+        },
+        {
+          "title": "Time to Identify Glaucoma Progression Given Typical Visual Field Testing Frequencies in a US Nationwide Insured Population",
+          "journal": "Ophthalmology Glaucoma",
+          "year": 2025,
+          "cites": 1,
+          "url": "https://doi.org/10.1016/j.ogla.2025.11.004"
+        },
+        {
+          "title": "Institutional comparison of methods of intraoperative cataract surgery complication reporting",
+          "journal": "Journal of Cataract & Refractive Surgery",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://doi.org/10.1097/j.jcrs.0000000000001769"
+        },
+        {
+          "title": "The Use of Ologen Collagen Matrix in Combination with XEN45 Microstent for the Treatment of Glaucoma: A Retrospective Chart Review",
+          "journal": "Journal of Clinical & Translational Ophthalmology",
+          "year": 2025,
+          "cites": 0,
+          "url": "https://doi.org/10.3390/jcto3020009"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "A5004897644",
+      "target": "A5006065422",
+      "weight": 2
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5021293063",
+      "weight": 6
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5025149327",
+      "weight": 5
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5050519796",
+      "weight": 2
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5051818098",
+      "weight": 5
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5053636003",
+      "weight": 1
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5066253280",
+      "weight": 4
+    },
+    {
+      "source": "A5004897644",
+      "target": "A5077317216",
+      "weight": 6
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5021293063",
+      "weight": 5
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5025149327",
+      "weight": 2
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5050519796",
+      "weight": 1
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5051818098",
+      "weight": 3
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5053636003",
+      "weight": 3
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5066253280",
+      "weight": 4
+    },
+    {
+      "source": "A5006065422",
+      "target": "A5077317216",
+      "weight": 3
+    },
+    {
+      "source": "A5009249802",
+      "target": "A5036542874",
+      "weight": 4
+    },
+    {
+      "source": "A5009249802",
+      "target": "A5053589763",
+      "weight": 3
+    },
+    {
+      "source": "A5009249802",
+      "target": "A5080129667",
+      "weight": 4
+    },
+    {
+      "source": "A5009249802",
+      "target": "A5082748676",
+      "weight": 4
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5025149327",
+      "weight": 6
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5050519796",
+      "weight": 3
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5051818098",
+      "weight": 10
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5053636003",
+      "weight": 4
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5066253280",
+      "weight": 11
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5077317216",
+      "weight": 8
+    },
+    {
+      "source": "A5021293063",
+      "target": "A5078072232",
+      "weight": 1
+    },
+    {
+      "source": "A5025149327",
+      "target": "A5050519796",
+      "weight": 2
+    },
+    {
+      "source": "A5025149327",
+      "target": "A5051818098",
+      "weight": 6
+    },
+    {
+      "source": "A5025149327",
+      "target": "A5066253280",
+      "weight": 4
+    },
+    {
+      "source": "A5025149327",
+      "target": "A5077317216",
+      "weight": 5
+    },
+    {
+      "source": "A5036542874",
+      "target": "A5053589763",
+      "weight": 4
+    },
+    {
+      "source": "A5036542874",
+      "target": "A5080129667",
+      "weight": 5
+    },
+    {
+      "source": "A5036542874",
+      "target": "A5082748676",
+      "weight": 5
+    },
+    {
+      "source": "A5042491895",
+      "target": "A5046598620",
+      "weight": 4
+    },
+    {
+      "source": "A5050519796",
+      "target": "A5051818098",
+      "weight": 2
+    },
+    {
+      "source": "A5050519796",
+      "target": "A5066253280",
+      "weight": 2
+    },
+    {
+      "source": "A5050519796",
+      "target": "A5077317216",
+      "weight": 2
+    },
+    {
+      "source": "A5051818098",
+      "target": "A5053636003",
+      "weight": 1
+    },
+    {
+      "source": "A5051818098",
+      "target": "A5066253280",
+      "weight": 5
+    },
+    {
+      "source": "A5051818098",
+      "target": "A5077317216",
+      "weight": 5
+    },
+    {
+      "source": "A5053240974",
+      "target": "A5058988472",
+      "weight": 4
+    },
+    {
+      "source": "A5053589763",
+      "target": "A5080129667",
+      "weight": 4
+    },
+    {
+      "source": "A5053589763",
+      "target": "A5082748676",
+      "weight": 4
+    },
+    {
+      "source": "A5053636003",
+      "target": "A5066253280",
+      "weight": 3
+    },
+    {
+      "source": "A5053636003",
+      "target": "A5077317216",
+      "weight": 3
+    },
+    {
+      "source": "A5066253280",
+      "target": "A5077317216",
+      "weight": 5
+    },
+    {
+      "source": "A5066253280",
+      "target": "A5078072232",
+      "weight": 1
+    },
+    {
+      "source": "A5080129667",
+      "target": "A5082748676",
+      "weight": 5
+    }
+  ]
+}
