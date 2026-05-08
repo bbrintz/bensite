@@ -6,7 +6,7 @@ format:
     page-layout: full
     code-fold: false
     meta:
-      description: "Standalone prototype collaboration network for Ben Brintz publication coauthors."
+      description: "Interactive collaboration network for Ben Brintz publication coauthors."
 execute:
   echo: false
   warning: false
@@ -537,7 +537,7 @@ cat('</script>')
   <section class="network-hero" aria-labelledby="network-title">
     <div>
       <h1 id="network-title">Collaboration Network</h1>
-      <p>Top shared coauthors arranged by article count and collaboration overlap. Circle size reflects shared articles; color marks broad collaboration area.</p>
+      <p>Collaborators with at least four shared articles, arranged by article count and collaboration overlap. Circle size reflects shared articles; color marks broad collaboration area.</p>
     </div>
     <div class="network-actions">
       <button class="network-button" id="motionToggle" type="button">Pause Motion</button>
@@ -596,6 +596,7 @@ cat('</script>')
   let motionClock = 0;
   let lastFrame = performance.now();
   let dragging = null;
+  let layoutRings = [];
   const areaStyles = {
     "Global Health & Infectious Disease": { color: "#76d2ff", order: 1 },
     "VA & Health Services": { color: "#8de0bd", order: 2 },
@@ -637,12 +638,18 @@ cat('</script>')
 
   function initializeLayout() {
     const sorted = [...nodes].sort((a, b) => (b.radius_score || 0) - (a.radius_score || 0));
-    const rings = [
-      { nodes: sorted.slice(0, 8), rx: 260, ry: 170, offset: -Math.PI / 2 },
-      { nodes: sorted.slice(8), rx: 430, ry: 285, offset: -Math.PI / 2 + Math.PI / 12 }
-    ];
+    layoutRings = nodes.length > 24
+      ? [
+          { nodes: sorted.slice(0, 6), rx: 210, ry: 135, offset: -Math.PI / 2 },
+          { nodes: sorted.slice(6, 16), rx: 330, ry: 215, offset: -Math.PI / 2 + Math.PI / 10 },
+          { nodes: sorted.slice(16), rx: 455, ry: 295, offset: -Math.PI / 2 + Math.PI / 15 }
+        ]
+      : [
+          { nodes: sorted.slice(0, 8), rx: 260, ry: 170, offset: -Math.PI / 2 },
+          { nodes: sorted.slice(8), rx: 430, ry: 285, offset: -Math.PI / 2 + Math.PI / 12 }
+        ];
 
-    rings.forEach(ring => {
+    layoutRings.forEach(ring => {
       ring.nodes.forEach((node, index) => {
         const theta = ring.offset + (index / ring.nodes.length) * Math.PI * 2;
         node.x = center.x + Math.cos(theta) * ring.rx;
@@ -697,10 +704,7 @@ cat('</script>')
     const hubGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
     const nodeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-    [
-      { rx: 260, ry: 170 },
-      { rx: 430, ry: 285 }
-    ].forEach(ring => {
+    layoutRings.forEach(ring => {
       const ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
       ellipse.setAttribute("cx", center.x);
       ellipse.setAttribute("cy", center.y);
@@ -888,8 +892,9 @@ cat('</script>')
 
   function updateMeta() {
     const generated = payload.generated_at ? payload.generated_at.replace(/:[0-9]{2} /, " ") : "recently";
+    const threshold = payload.min_shared_articles || 4;
     meta.innerHTML = `
-      <span class="meta-chip">${nodes.length} collaborators</span>
+      <span class="meta-chip">${nodes.length} collaborators with ${threshold}+ shared articles</span>
       <span class="meta-chip">${links.length} coauthor links</span>
       <span class="meta-chip">${payload.publication_count} article records</span>
       <span class="meta-chip">Built ${generated}</span>

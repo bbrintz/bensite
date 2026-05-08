@@ -7,6 +7,7 @@ library(tidyr)
 
 openalex_author_id <- "A5008421168"
 output_path <- "data/collaboration_network_openalex.json"
+min_shared_articles <- 4
 
 `%||%` <- function(x, y) {
   if (is.null(x) || length(x) == 0 || all(is.na(x))) y else x
@@ -119,7 +120,7 @@ display_names <- author_publications |>
 top_authors <- author_publications |>
   distinct(key, work_index) |>
   count(key, name = "papers_with_ben", sort = TRUE) |>
-  slice_head(n = 20) |>
+  filter(papers_with_ben >= min_shared_articles) |>
   left_join(display_names, by = "key")
 
 top_keys <- top_authors$key
@@ -231,6 +232,7 @@ payload <- list(
   openalex_author_id = openalex_author_id,
   openalex_record_count = length(works),
   publication_count = length(included_work_indexes),
+  min_shared_articles = min_shared_articles,
   author_records = nrow(author_publications),
   nodes = nodes,
   links = links
