@@ -37,14 +37,14 @@ body {
 }
 
 .hero {
-  min-height: min(58svh, 560px);
+  min-height: min(48svh, 470px);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   display: flex;
   align-items: flex-start;
   position: relative;
-  padding: 7.5rem 1.25rem 4.75rem 1.25rem;
+  padding: 6.35rem 1.25rem 3.8rem 1.25rem;
   overflow: hidden;
 }
 
@@ -111,7 +111,7 @@ body {
 }
 
 .below-section {
-  margin-top: -2.75rem;
+  margin-top: -2.1rem;
   padding: 0 1.25rem 5.5rem 1.25rem;
   position: relative;
 }
@@ -171,6 +171,36 @@ body {
   color: #10213f;
 }
 
+.collab-callout {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid #dde6f3;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(255, 158, 68, 0.14), transparent 36%),
+    linear-gradient(135deg, #f7fbff 0%, #eef6ff 100%);
+}
+
+.collab-callout p {
+  margin-bottom: 0;
+}
+
+.collab-link {
+  justify-self: start;
+  color: #10213f;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid #ff9e44;
+}
+
+.collab-link:hover,
+.collab-link:focus-visible {
+  color: #163d6b;
+  border-bottom-color: #7ec7ff;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -190,9 +220,9 @@ body {
 
 @media (max-width: 700px) {
   .hero {
-    min-height: 64svh;
-    padding-top: 6.2rem;
-    padding-bottom: 4.5rem;
+    min-height: 56svh;
+    padding-top: 5.7rem;
+    padding-bottom: 3.7rem;
   }
 
   .overlay-text h1 {

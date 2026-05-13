@@ -173,7 +173,7 @@ Talks and prototypes, collected as a small portfolio rather than a link list. Th
   <article class="presentation-card presentation-feature">
     <div class="presentation-copy">
       <span class="presentation-meta">211 surveillance modeling</span>
-      <h2>Anomaly Detection Model Overview</h2>
+      <h2>211 Food-Needs Surveillance Model</h2>
       <p>A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.</p>
       <a class="presentation-action" href="211_pres/v5_model_presentation.html">Open slides</a>
     </div>

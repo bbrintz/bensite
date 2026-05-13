@@ -25,7 +25,7 @@
     "href": "Presentations/index.html",
     "title": "Presentations",
     "section": "",
-    "text": "Talks and prototypes, collected as a small portfolio rather than a link list. The common thread is making statistical models inspectable enough to argue with.\n\n\n  \n    \n      211 surveillance modeling\n      Anomaly Detection Model Overview\n      A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.\n      Open slides\n    \n    \n      Related prototype\n      Utah Food-Needs ZIP Map\n      A focused map view for reviewing ZIP-level model signals by run date.\n    \n  \n  \n    Fairness and decision tools\n    Measuring and Mitigating Disparity of Decision-Making Tools\n    A presentation on evaluating prediction systems when accuracy is not the only thing that matters.\n    Open slides\n  \n  \n    Disease surveillance\n    SEIR N-mixture Model\n    A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.\n    Open slides\n  \n  \n    Applied modeling\n    Complex Bayesian Models\n    Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.\n    Open slides"
+    "text": "Talks and prototypes, collected as a small portfolio rather than a link list. The common thread is making statistical models inspectable enough to argue with.\n\n\n  \n    \n      211 surveillance modeling\n      211 Food-Needs Surveillance Model\n      A slide deck explaining the food-needs 211 model, including zero inflation, rate jumps, day-of-week effects, seasonality, and AR(1) dependence.\n      Open slides\n    \n    \n      Related prototype\n      Utah Food-Needs ZIP Map\n      A focused map view for reviewing ZIP-level model signals by run date.\n    \n  \n  \n    Fairness and decision tools\n    Measuring and Mitigating Disparity of Decision-Making Tools\n    A presentation on evaluating prediction systems when accuracy is not the only thing that matters.\n    Open slides\n  \n  \n    Disease surveillance\n    SEIR N-mixture Model\n    A modeling talk about epidemic dynamics, observation error, and what surveillance data can and cannot tell us.\n    Open slides\n  \n  \n    Applied modeling\n    Complex Bayesian Models\n    Slides for an applied modeling workflow built around simulation, uncertainty, and public-health signal detection.\n    Open slides"
   },
   {
     "objectID": "Presentations/211_pres/v5_model_presentation.html#what-is-211",
@@ -158,14 +158,14 @@
     "href": "index.html",
     "title": "Statistical Modeling For Applied Research",
     "section": "",
-    "text": "View selected work"
+    "text": "View selected work Explore collaborations"
   },
   {
     "objectID": "index.html#about",
     "href": "index.html#about",
     "title": "Statistical Modeling For Applied Research",
     "section": "About",
-    "text": "About\nI work where statistical methods meet practical decisions: clinical prediction, public health surveillance, Bayesian computation, and research communication.\n\n\nModeling\nTraditional modeling, machine learning, and Bayesian methods for applied scientific questions.\n\n\nTools\nInteractive prototypes and data products that make methods easier to use.\n\n\nCommunication\nTalks, writing, and visuals that make technical work easier to inspect."
+    "text": "About\nI work where statistical methods meet practical decisions: clinical prediction, public health surveillance, Bayesian computation, and research communication.\n\n\nModeling\nTraditional modeling, machine learning, and Bayesian methods for applied scientific questions.\n\n\nTools\nInteractive prototypes and data products that make methods easier to use.\n\n\nCommunication\nTalks, writing, and visuals that make technical work easier to inspect.\n\n\n\nCollaboration map\nA network view of recurring coauthors across article records, grouped by research area and sized by shared publications.\nExplore the collaboration network"
   },
   {
     "objectID": "sierpinski.html",
