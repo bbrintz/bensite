@@ -2555,7 +2555,7 @@ ul.task-list li input[type="checkbox"] {
   function motionOffset(node) {
     if (!motionEnabled || dragging === node.id) return { x: 0, y: 0 };
     const isHover = hoverId === node.id;
-    const amplitude = isHover ? 8 : 2.6;
+    const amplitude = isHover ? 5.5 : 1.4;
     return {
       x: Math.cos(motionClock * 0.0012 + node.phase) * amplitude * 0.46,
       y: Math.sin(motionClock * 0.00145 + node.phase) * amplitude
@@ -2666,10 +2666,10 @@ ul.task-list li input[type="checkbox"] {
       const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
       const radius = scaleRadius(node);
-      const theta = Math.atan2(point.y - center.y, point.x - center.x);
+      const theta = Math.atan2(node.y - center.y, node.x - center.x);
       const labelDistance = radius + 14;
-      let labelX = point.x + Math.cos(theta) * labelDistance;
-      let labelY = point.y + Math.sin(theta) * labelDistance + 4;
+      let labelX = node.x + Math.cos(theta) * labelDistance;
+      let labelY = node.y + Math.sin(theta) * labelDistance + 4;
       let labelAnchor = "middle";
 
       group.classList.add("network-node");
