@@ -51,6 +51,7 @@ body {
 .overlay-text {
   position: relative;
   max-width: 62ch;
+  margin-inline: auto;
 }
 
 .overlay-text h1 {
