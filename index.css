@@ -43,6 +43,7 @@ body {
   margin-right: calc(50% - 50vw);
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   position: relative;
   padding: 6.35rem 1.25rem 3.8rem 1.25rem;
   overflow: hidden;
@@ -50,8 +51,9 @@ body {
 
 .overlay-text {
   position: relative;
-  max-width: 62ch;
-  margin-inline: auto;
+  width: min(44.5rem, 100%);
+  max-width: none;
+  padding-inline: 1.6rem;
 }
 
 .overlay-text h1 {
@@ -228,6 +230,10 @@ body {
 
   .overlay-text h1 {
     font-size: 2.35rem;
+  }
+
+  .overlay-text {
+    padding-inline: 1.1rem;
   }
 
   .overlay-text p {

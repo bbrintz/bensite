@@ -97,12 +97,26 @@ header#quarto-header {
 }
 
 .site-footer {
-  width: 100%;
-  border-top: 1px solid rgba(185, 206, 255, 0.16);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  border-top: 1px solid rgba(185, 206, 255, 0.08);
   background:
-    radial-gradient(circle at 12% 0%, rgba(126, 199, 255, 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(3, 10, 28, 0.78), rgba(3, 10, 28, 0.96));
+    radial-gradient(circle at 12% 0%, rgba(126, 199, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(3, 10, 28, 0.54), rgba(3, 10, 28, 0.9));
   color: #dbe6ff;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 2.25rem;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(3, 10, 28, 0), rgba(3, 10, 28, 0.42));
 }
 
 .site-footer-inner {
